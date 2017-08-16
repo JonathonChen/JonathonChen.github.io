@@ -54,13 +54,13 @@
                 
                     <a class="main-nav-link" href="/.">Home</a>
                 
-                    <a class="main-nav-link" href="/Archives">Archives</a>
+                    <a class="main-nav-link" href="/archives">Archives</a>
                 
-                    <a class="main-nav-link" href="/Categories">Categories</a>
+                    <a class="main-nav-link" href="/categories">Categories</a>
                 
-                    <a class="main-nav-link" href="/Tags">Tags</a>
+                    <a class="main-nav-link" href="/tags">Tags</a>
                 
-                    <a class="main-nav-link" href="/About">About</a>
+                    <a class="main-nav-link" href="/about">About</a>
                 
             </nav>
             
@@ -119,13 +119,13 @@
                 
                     <td><a class="main-nav-link" href="/.">Home</a></td>
                 
-                    <td><a class="main-nav-link" href="/Archives">Archives</a></td>
+                    <td><a class="main-nav-link" href="/archives">Archives</a></td>
                 
-                    <td><a class="main-nav-link" href="/Categories">Categories</a></td>
+                    <td><a class="main-nav-link" href="/categories">Categories</a></td>
                 
-                    <td><a class="main-nav-link" href="/Tags">Tags</a></td>
+                    <td><a class="main-nav-link" href="/tags">Tags</a></td>
                 
-                    <td><a class="main-nav-link" href="/About">About</a></td>
+                    <td><a class="main-nav-link" href="/about">About</a></td>
                 
                 <td>
                     
@@ -147,10 +147,10 @@
     <div class="inner profile-inner">
         <div class="base-info profile-block">
             <img id="avatar" src="/css/images/avatar.png" />
-            <h2 id="name">Jon</h2>
+            <h2 id="name">PPOffice</h2>
             <h3 id="title">Web Developer &amp; Designer</h3>
-            <span id="location"><i class="fa fa-map-marker"></i>Fujina, China</span>
-            <a id="follow" target="_blank" href="https://github.com/JonathonChen">关注我</a>
+            <span id="location"><i class="fa fa-map-marker"></i>Harbin, China</span>
+            <a id="follow" target="_blank" href="https://github.com/ppoffice/">关注我</a>
         </div>
         <div class="article-info profile-block">
             <div class="article-info-block">
@@ -321,24 +321,18 @@
 </footer>
         
     
-    
-    <!-- 来必力City版安装代码 -->
-    <script type="text/javascript">
-     (function(d, s) {
-         var j, e = d.getElementsByTagName(s)[0];
-
-         if (typeof LivereTower === 'function') { return; }
-
-         j = d.createElement(s);
-         j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
-         j.async = true;
-
-         e.parentNode.insertBefore(j, e);
-     })(document, 'script');
-    </script>
-  <noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
-  <!-- City版安装代码已完成 -->
-
+    <script>
+    var disqus_config = function () {
+        
+        this.page.identifier = '';
+    };
+    (function() { 
+        var d = document, s = d.createElement('script');  
+        s.src = '//' + 'hexo-theme-icarus' + '.disqus.com/count.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
 
 
 
