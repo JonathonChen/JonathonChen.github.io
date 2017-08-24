@@ -3,21 +3,19 @@
 <head>
     <meta charset="utf-8">
     
-    <title>vue loading加载动画组件 | 博客</title>
+    <title>懒加载原理 | 博客</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta name="description" content="实现效果实现了加载是颜色的变化以及进度条的变化 下面是代码实现  html页面测试  123456789101112131415161718192021222324252627282930313233343536373839404142434445&amp;lt;!DOCTYPE html&amp;gt;&amp;lt;html&amp;gt;&amp;lt;style&amp;gt;  .spinner &amp;#123;    transfor">
+    <meta name="description" content="懒加载的原理 原理：先将img标签中的src链接设为同一张图片（空白图片），将其真正的图片地址存储再img标签的自定义属性中（比如data-src）。当js监听到该图片元素进入可视窗口时，即将自定义属性中的地址存储到src属性中，达到懒加载的效果。    这样做能防止页面一次性向服务器响应大量请求导致服务器响应慢，页面卡顿或崩溃等问题。 代码实现  既然懒加载的原理是基于判断元素是否出现在窗口可视">
 <meta property="og:type" content="article">
-<meta property="og:title" content="vue loading加载动画组件">
-<meta property="og:url" content="https://jonathonchen.github.io/2017/08/19/vue loading组件/index.html">
+<meta property="og:title" content="懒加载原理">
+<meta property="og:url" content="https://jonathonchen.github.io/2017/08/24/懒加载/index.html">
 <meta property="og:site_name" content="博客">
-<meta property="og:description" content="实现效果实现了加载是颜色的变化以及进度条的变化 下面是代码实现  html页面测试  123456789101112131415161718192021222324252627282930313233343536373839404142434445&amp;lt;!DOCTYPE html&amp;gt;&amp;lt;html&amp;gt;&amp;lt;style&amp;gt;  .spinner &amp;#123;    transfor">
+<meta property="og:description" content="懒加载的原理 原理：先将img标签中的src链接设为同一张图片（空白图片），将其真正的图片地址存储再img标签的自定义属性中（比如data-src）。当js监听到该图片元素进入可视窗口时，即将自定义属性中的地址存储到src属性中，达到懒加载的效果。    这样做能防止页面一次性向服务器响应大量请求导致服务器响应慢，页面卡顿或崩溃等问题。 代码实现  既然懒加载的原理是基于判断元素是否出现在窗口可视">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://jonathonchen.github.io/2017/08/19/imgs/Video_2017-08-19_213646.gif">
-<meta property="og:updated_time" content="2017-08-19T13:59:15.000Z">
+<meta property="og:updated_time" content="2017-08-24T03:17:58.128Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="vue loading加载动画组件">
-<meta name="twitter:description" content="实现效果实现了加载是颜色的变化以及进度条的变化 下面是代码实现  html页面测试  123456789101112131415161718192021222324252627282930313233343536373839404142434445&amp;lt;!DOCTYPE html&amp;gt;&amp;lt;html&amp;gt;&amp;lt;style&amp;gt;  .spinner &amp;#123;    transfor">
-<meta name="twitter:image" content="https://jonathonchen.github.io/2017/08/19/imgs/Video_2017-08-19_213646.gif">
+<meta name="twitter:title" content="懒加载原理">
+<meta name="twitter:description" content="懒加载的原理 原理：先将img标签中的src链接设为同一张图片（空白图片），将其真正的图片地址存储再img标签的自定义属性中（比如data-src）。当js监听到该图片元素进入可视窗口时，即将自定义属性中的地址存储到src属性中，达到懒加载的效果。    这样做能防止页面一次性向服务器响应大量请求导致服务器响应慢，页面卡顿或崩溃等问题。 代码实现  既然懒加载的原理是基于判断元素是否出现在窗口可视">
     
 
     
@@ -212,7 +210,7 @@
 </aside>
 
             
-            <section id="main"><article id="post-vue loading组件" class="article article-type-post" itemscope itemprop="blogPost">
+            <section id="main"><article id="post-懒加载" class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
         
@@ -220,7 +218,7 @@
                 
     
         <h1 class="article-title" itemprop="name">
-            vue loading加载动画组件
+            懒加载原理
         </h1>
     
 
@@ -229,8 +227,8 @@
                         
     <div class="article-date">
         <i class="fa fa-calendar"></i>
-        <a href="/2017/08/19/vue loading组件/">
-            <time datetime="2017-08-19T13:09:14.515Z" itemprop="datePublished">2017-08-19</time>
+        <a href="/2017/08/24/懒加载/">
+            <time datetime="2017-08-24T03:16:18.150Z" itemprop="datePublished">2017-08-24</time>
         </a>
     </div>
 
@@ -245,20 +243,16 @@
         <div class="article-entry" itemprop="articleBody">
         
             
-            <blockquote>
-<h2 id="实现效果"><a href="#实现效果" class="headerlink" title="实现效果"></a>实现效果</h2><pre><code>实现了加载是颜色的变化以及进度条的变化
-</code></pre><p>下面是代码实现</p>
-<ol>
-<li>html页面测试</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div></pre></td><td class="code"><pre><div class="line">&lt;!DOCTYPE html&gt;</div><div class="line">&lt;html&gt;</div><div class="line">&lt;style&gt;</div><div class="line">  .spinner &#123;</div><div class="line">    transform-origin: center;</div><div class="line">    animation: rotator 6s linear infinite;</div><div class="line">	background-color:#cccccc;</div><div class="line">	width:150px;</div><div class="line">	height:150px;</div><div class="line">  &#125;</div><div class="line">  @keyframes rotator &#123;</div><div class="line">    0% &#123; transform: rotate(0deg); &#125;</div><div class="line">    100% &#123; transform: rotate(270deg); &#125;</div><div class="line">  &#125;</div><div class="line">  .path &#123;</div><div class="line">    stroke-dasharray: 187;</div><div class="line">    stroke-dashoffset: 0;</div><div class="line">    transform-origin: center;</div><div class="line">    animation: dash 2s ease-in-out infinite, colors 4s ease-in-out infinite;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  @keyframes colors &#123;</div><div class="line">    0% &#123; stroke: #4285F4; &#125;</div><div class="line">    25% &#123; stroke: #DE3E35; &#125;</div><div class="line">    50% &#123; stroke: #F7C223; &#125;</div><div class="line">    75% &#123; stroke: #1B9A59; &#125;</div><div class="line">    100% &#123; stroke: #4285F4; &#125;</div><div class="line">  &#125;</div><div class="line">  @keyframes dash &#123;</div><div class="line">    0% &#123; stroke-dashoffset: 187; &#125;</div><div class="line">    50% &#123;</div><div class="line">      stroke-dashoffset: 93.5;</div><div class="line">    &#125;</div><div class="line">    100% &#123;</div><div class="line">      stroke-dashoffset: 0;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&lt;/style&gt;</div><div class="line">&lt;body&gt;</div><div class="line"> &lt;svg class=&quot;spinner&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot;&gt;</div><div class="line">      &lt;circle class=&quot;path&quot;  stroke=&quot;red&quot; fill=&quot;none&quot; stroke-width=&quot;6&quot;  cx=&quot;75&quot; cy=&quot;75&quot; r=&quot;30&quot;&gt;&lt;/circle&gt;</div><div class="line"> &lt;/svg&gt;</div><div class="line"> </div><div class="line">&lt;/body&gt;</div><div class="line">&lt;/html&gt;</div></pre></td></tr></table></figure>
+            <h1 id="懒加载的原理"><a href="#懒加载的原理" class="headerlink" title="懒加载的原理"></a>懒加载的原理</h1><blockquote>
+<p>原理：先将img标签中的src链接设为同一张图片（空白图片），将其真正的图片地址存储再img标签的自定义属性中（比如data-src）。当js监听到该图片元素进入可视窗口时，即将自定义属性中的地址存储到src属性中，达到懒加载的效果。<br>    这样做能防止页面一次性向服务器响应大量请求导致服务器响应慢，页面卡顿或崩溃等问题。</p>
+<p>代码实现</p>
 </blockquote>
-<p><img src="../imgs/Video_2017-08-19_213646.gif"></p>
-<blockquote>
-<ol>
-<li>vue Loading组件</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div></pre></td><td class="code"><pre><div class="line">&lt;template&gt;</div><div class="line">  &lt;div class=&quot;loading-component&quot;&gt;</div><div class="line">    &lt;svg class=&quot;spinner&quot; :style=&quot;loadingSize&quot; viewBox=&quot;0 0 66 66&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot;&gt;</div><div class="line">      &lt;circle class=&quot;path&quot; :style=&quot;loadingColor&quot; fill=&quot;none&quot; :stroke-width=&quot;stroke&quot;  cx=&quot;33&quot; cy=&quot;33&quot; r=&quot;30&quot;&gt;&lt;/circle&gt;</div><div class="line">    &lt;/svg&gt;</div><div class="line">  &lt;/div&gt;</div><div class="line">&lt;/template&gt;</div><div class="line"></div><div class="line">&lt;script type=&quot;text/ecmascript-6&quot;&gt;</div><div class="line">  export default &#123;</div><div class="line">    props: &#123;</div><div class="line">      size: &#123;</div><div class="line">        type: Number,</div><div class="line">        default: 50</div><div class="line">      &#125;,</div><div class="line">      stroke: &#123;</div><div class="line">        type: Number,</div><div class="line">        default: 3.5</div><div class="line">      &#125;,</div><div class="line">      color: &#123;</div><div class="line">        type: String,</div><div class="line">        default: &apos;#ed424b&apos;</div><div class="line">      &#125;</div><div class="line">    &#125;,</div><div class="line">    computed: &#123;</div><div class="line">      loadingSize() &#123;</div><div class="line">        const newSize = this.size + &apos;px&apos;</div><div class="line">        return &#123;</div><div class="line">          width: newSize,</div><div class="line">          height: newSize</div><div class="line">        &#125;</div><div class="line">      &#125;,</div><div class="line">      loadingColor() &#123;</div><div class="line">        return &#123;</div><div class="line">          stroke: this.color</div><div class="line">        &#125;</div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&lt;/script&gt;</div><div class="line"></div><div class="line">&lt;style lang=&quot;less&quot; type=&quot;text/less&quot;&gt;</div><div class="line"></div><div class="line">  .loading-component &#123;</div><div class="line">    display: inline-block;</div><div class="line">    pointer-events: none;</div><div class="line">    will-change: transform, opacity;</div><div class="line">    position: fixed;</div><div class="line">    left: 50%;</div><div class="line">    top: 50%;</div><div class="line">    transform: translate(-50%, -50%);</div><div class="line">  &#125;</div><div class="line">  //2 * pi * r = 188.4</div><div class="line">  @offset: 187;</div><div class="line">  @duration: 1.4s;</div><div class="line">  //设置外层旋转形成加载的效果</div><div class="line">  .spinner &#123;</div><div class="line">    transform-origin: center;</div><div class="line">    animation: rotator @duration linear infinite;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  @keyframes rotator &#123;</div><div class="line">    0% &#123; transform: rotate(0deg); &#125;</div><div class="line">    100% &#123; transform: rotate(270deg); &#125;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  .path &#123;</div><div class="line">    stroke-dasharray: @offset;</div><div class="line">    stroke-dashoffset: 0;</div><div class="line">    transform-origin: center;</div><div class="line">    // 设置颜色变化以及dash长度的变化</div><div class="line">    animation: dash @duration ease-in-out infinite, colors @duration ease-in-out infinite;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  @keyframes colors &#123;</div><div class="line">    0% &#123; stroke: #4285F4; &#125;</div><div class="line">    25% &#123; stroke: #DE3E35; &#125;</div><div class="line">    50% &#123; stroke: #F7C223; &#125;</div><div class="line">    75% &#123; stroke: #1B9A59; &#125;</div><div class="line">    100% &#123; stroke: #4285F4; &#125;</div><div class="line">  &#125;</div><div class="line"> //让空白部分慢慢减少</div><div class="line">  @keyframes dash &#123;</div><div class="line">    0% &#123; stroke-dashoffset: @offset; &#125;</div><div class="line">    50% &#123;</div><div class="line">      stroke-dashoffset: @offset/4;</div><div class="line">    &#125;</div><div class="line">    100% &#123;</div><div class="line">      stroke-dashoffset: @offset;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&lt;/style&gt;</div></pre></td></tr></table></figure></blockquote>
+<pre><code>既然懒加载的原理是基于判断元素是否出现在窗口可视范围内，首先我们写一个函数判断元素是否出现在可视范围内：
+</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">function isVisible($node)&#123;</div><div class="line">    var winH = $(window).height(),</div><div class="line">        scrollTop = $(window).scrollTop(),</div><div class="line">        offSetTop = $(window).offSet().top;</div><div class="line">    if (offSetTop &lt; winH + scrollTop) &#123;</div><div class="line">        return true;</div><div class="line">    &#125; else &#123;</div><div class="line">        return false;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<pre><code>再添加上浏览器的事件监听函数，让浏览器每次滚动就检查元素是否出现在窗口可视范围内：
+</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">$(window).on(&quot;scroll&quot;, function&#123;</div><div class="line">    if (isVisible($node))&#123;</div><div class="line">        console.log(true);</div><div class="line">    &#125;</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<pre><code>我们已经很接近了，现在我们要做的是，让元素只在第一次被检查到时打印true，之后就不再打印了
+</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">var hasShowed = false;</div><div class="line">$(window).on(&quot;sroll&quot;,function&#123;</div><div class="line">    if (hasShowed) &#123;</div><div class="line">        return;</div><div class="line">    &#125; else &#123;</div><div class="line">        if (isVisible($node)) &#123;</div><div class="line">            hasShowed = !hasShowed;</div><div class="line">            console.log(true);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
 
         
         </div>
@@ -269,7 +263,7 @@
 
 </div>
 
-    <a data-url="https://jonathonchen.github.io/2017/08/19/vue loading组件/" data-id="cj6ptk76h0002p4wq38mv576h" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://jonathonchen.github.io/2017/08/24/懒加载/" data-id="cj6pvmkoh0001cswqm5f3weye" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -337,7 +331,7 @@
 
             
     
-        <a href="https://jonathonchen.github.io/2017/08/19/vue loading组件/#comments" class="article-comment-link">评论</a>
+        <a href="https://jonathonchen.github.io/2017/08/24/懒加载/#comments" class="article-comment-link">评论</a>
     
 
         </footer>
@@ -346,19 +340,19 @@
         
 <nav id="article-nav">
     
-        <a href="/2017/08/24/闭包/" id="article-nav-newer" class="article-nav-link-wrap">
+        <a href="/2017/08/24/vue.生命周期/" id="article-nav-newer" class="article-nav-link-wrap">
             <strong class="article-nav-caption">上一篇</strong>
             <div class="article-nav-title">
                 
-                    JavaScript深入之闭包(转)
+                    vue 生命周期
                 
             </div>
         </a>
     
     
-        <a href="/2017/08/17/v-model/" id="article-nav-older" class="article-nav-link-wrap">
+        <a href="/2017/08/24/闭包/" id="article-nav-older" class="article-nav-link-wrap">
             <strong class="article-nav-caption">下一篇</strong>
-            <div class="article-nav-title">v-model本质（以底部导航切换为例子）</div>
+            <div class="article-nav-title">JavaScript深入之闭包(转)</div>
         </a>
     
 </nav>
