@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <meta charset="utf-8">
+    
+    <title>CSS兼容 | 博客</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="一、基本的css兼容：1.hack 可能很多人喜欢用css hack的形式去兼容ie浏览器，但是我自己用起来感觉其实不好使 。ie7-就不考虑了，问题在哪呢，就在ie8的甑别上，你怎么让样式只对ie8起作用。1234.selector &amp;#123;　　color: #ff0\0;/*ie8*/　　color: #f00\9\0;/*ie9+*/&amp;#125;  （这个hack是可以区分ie8和ie9">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CSS兼容">
+<meta property="og:url" content="https://jonathonchen.github.io/2017/08/24/css兼容/index.html">
+<meta property="og:site_name" content="博客">
+<meta property="og:description" content="一、基本的css兼容：1.hack 可能很多人喜欢用css hack的形式去兼容ie浏览器，但是我自己用起来感觉其实不好使 。ie7-就不考虑了，问题在哪呢，就在ie8的甑别上，你怎么让样式只对ie8起作用。1234.selector &amp;#123;　　color: #ff0\0;/*ie8*/　　color: #f00\9\0;/*ie9+*/&amp;#125;  （这个hack是可以区分ie8和ie9">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2017-08-24T09:51:43.948Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="CSS兼容">
+<meta name="twitter:description" content="一、基本的css兼容：1.hack 可能很多人喜欢用css hack的形式去兼容ie浏览器，但是我自己用起来感觉其实不好使 。ie7-就不考虑了，问题在哪呢，就在ie8的甑别上，你怎么让样式只对ie8起作用。1234.selector &amp;#123;　　color: #ff0\0;/*ie8*/　　color: #f00\9\0;/*ie9+*/&amp;#125;  （这个hack是可以区分ie8和ie9">
+    
+
+    
+        <link rel="alternate" href="/" title="博客" type="application/atom+xml" />
+    
+
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/open-sans/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/2.1.3/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+    
+    
+
+
+</head>
+
+<body>
+    <div id="container">
+        <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="/" id="logo">
+                <i class="logo"></i>
+                <span class="site-title">博客</span>
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="/.">首页</a>
+                
+                    <a class="main-nav-link" href="/archives">归档</a>
+                
+                    <a class="main-nav-link" href="/categories">目录</a>
+                
+                    <a class="main-nav-link" href="/tags">标签</a>
+                
+                    <a class="main-nav-link" href="/about">关于</a>
+                
+            </nav>
+            
+                
+                <nav id="sub-nav">
+                    <div class="profile" id="profile-nav">
+                        <a id="profile-anchor" href="javascript:;">
+                            <img class="avatar" src="/css/images/avatar.png" />
+                            <i class="fa fa-caret-down"></i>
+                        </a>
+                    </div>
+                </nav>
+            
+            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="想要查找什么..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="/.">首页</a></td>
+                
+                    <td><a class="main-nav-link" href="/archives">归档</a></td>
+                
+                    <td><a class="main-nav-link" href="/categories">目录</a></td>
+                
+                    <td><a class="main-nav-link" href="/tags">标签</a></td>
+                
+                    <td><a class="main-nav-link" href="/about">关于</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</header>
+
+        <div class="outer">
+            
+                
+
+<aside id="profile">
+    <div class="inner profile-inner">
+        <div class="base-info profile-block">
+            <img id="avatar" src="/css/images/avatar.png" />
+            <h2 id="name">Jonathon Chen</h2>
+            <h3 id="title">A FEE enthusiastic for technology.</h3>
+            <span id="location"><i class="fa fa-map-marker"></i>Fujian, China</span>
+            <a id="follow" target="_blank" href="https://github.com/JonathonChen">关注我</a>
+        </div>
+        <div class="article-info profile-block">
+            <div class="article-info-block">
+                13
+                <span>文章</span>
+            </div>
+            <div class="article-info-block">
+                0
+                <span>标签</span>
+            </div>
+        </div>
+        
+        <div class="profile-block social-links">
+            <table>
+                <tr>
+                    
+                    
+                    <td>
+                        <a href="https://github.com/JonathonChen" target="_blank" title="github" class=tooltip>
+                            <i class="fa fa-github"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/" target="_blank" title="twitter" class=tooltip>
+                            <i class="fa fa-twitter"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/" target="_blank" title="facebook" class=tooltip>
+                            <i class="fa fa-facebook"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/" target="_blank" title="dribbble" class=tooltip>
+                            <i class="fa fa-dribbble"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/" target="_blank" title="rss" class=tooltip>
+                            <i class="fa fa-rss"></i>
+                        </a>
+                    </td>
+                    
+                </tr>
+            </table>
+        </div>
+        
+    </div>
+</aside>
+
+            
+            <section id="main"><article id="post-css兼容" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+            CSS兼容
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2017/08/24/css兼容/">
+            <time datetime="2017-08-24T09:33:45.774Z" itemprop="datePublished">2017-08-24</time>
+        </a>
+    </div>
+
+
+                        
+                        
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <h1 id="一、基本的css兼容："><a href="#一、基本的css兼容：" class="headerlink" title="一、基本的css兼容："></a>一、基本的css兼容：</h1><h2 id="1-hack"><a href="#1-hack" class="headerlink" title="1.hack"></a>1.hack</h2><blockquote>
+<p>可能很多人喜欢用css hack的形式去兼容ie浏览器，但是我自己用起来感觉其实不好使 。ie7-就不考虑了，问题在哪呢，就在ie8的甑别上，你怎么让样式只对ie8起作用。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">.selector &#123;</div><div class="line">　　color: #ff0\0;/*ie8*/</div><div class="line">　　color: #f00\9\0;/*ie9+*/</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+</blockquote>
+<p>（这个hack是可以区分ie8和ie9的，之前由于未知原因导致浏览器测试不成功，重装系统后发现是可用的，后来又在多台机器上测试过，证明是正确的。很抱歉误导了大家，特此修正，仍然建议用文档注释的方式去独立写hack，当然最好是可以优雅降级，避免使用css hack。）</p>
+<h2 id="２．注释"><a href="#２．注释" class="headerlink" title="２．注释"></a>２．注释</h2><blockquote>
+<p>更好用的是什么呢，是用ie浏览器独有的文档注释的方式。像这样：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&lt;!DOCTYPE html&gt;</div><div class="line">&lt;!--[if IE 8 ]&gt; &lt;html class=&quot;ie8&quot; lang=&quot;en&quot;&gt; &lt;![endif]--&gt;</div><div class="line">&lt;!--[if IE 9 ]&gt; &lt;html class=&quot;ie9&quot; lang=&quot;en&quot;&gt; &lt;![endif]--&gt;</div><div class="line">&lt;!--[if (gt IE 9)|!(IE)]&gt;&lt;!--&gt;</div><div class="line">&lt;html lang=&quot;en&quot;&gt; &lt;!--&lt;![endif]--&gt;</div></pre></td></tr></table></figure></p>
+<p>好处：可以独立的维护处理兼容ie浏览器的样式表，又不会淹没在一大堆css hack标识中，只需要在独立对ie8应用样式规则的地方，copy该条规则，然后在前面加上 .ie8然后就能随便写了，对付ie9也一样。</p>
+</blockquote>
+<h2 id="3-对于360双核这种找抽浏览器，据说添加以下头部meta信息可以使得网页用webkit内核渲染："><a href="#3-对于360双核这种找抽浏览器，据说添加以下头部meta信息可以使得网页用webkit内核渲染：" class="headerlink" title="3. 对于360双核这种找抽浏览器，据说添加以下头部meta信息可以使得网页用webkit内核渲染："></a>3. 对于360双核这种找抽浏览器，据说添加以下头部meta信息可以使得网页用webkit内核渲染：</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=edge,chrome=1&quot;&gt;</div></pre></td></tr></table></figure>
+<p>IE=edge：保持使用最高级别模式显示内容；</p>
+<p>chrome=1：谷歌的外挂插件Google Chrome Frame（谷歌内嵌浏览器框架GCF），使用IE浏览网页时实际上是使用Chrome浏览器内核渲染，最低支持IE6，但前提是客户端已经安装GCF。</p>
+<p>但实际上这个meta标识是ie浏览器所识别的（详情：ies-compatibility-features-for-site-developers/)，并不是公认的标准，所以用双核的浏览器会傲娇。当然360也会傲娇，所以有时你会发现360并不能总是（也可能是我本人rp差）以chrome内核渲染你的按现代标准开发的网页。</p>
+<p>那么试试这个吧，添加：<meta name="renderer" content="webkit"></p>
+<p>这个meta标识是360自家实现的(详情：meta.html)，表示强制要求360这造福中国社会万千网民的浏览器用chrome的内核渲染网页。</p>
+<p>ok，一行代码搞定360绝大部分的兼容。</p>
+<p>————————以下转———————————————-</p>
+<h1 id="二、ie8的css兼容"><a href="#二、ie8的css兼容" class="headerlink" title="二、ie8的css兼容"></a>二、ie8的css兼容</h1><p>现在说说ie8下的css问题：</p>
+<h2 id="1、ie8支持-first-child-但不支持-last-child。因为前者是css2-1标准，后者是css3标准。参下："><a href="#1、ie8支持-first-child-但不支持-last-child。因为前者是css2-1标准，后者是css3标准。参下：" class="headerlink" title="1、ie8支持:first-child,但不支持:last-child。因为前者是css2.1标准，后者是css3标准。参下："></a>1、ie8支持:first-child,但不支持:last-child。因为前者是css2.1标准，后者是css3标准。参下：</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">CSS 2.1 selectors：Basic CSS selectors including: * (universal selector), &gt; (child selector), :first-child, :link, :visited, :active, :hover, :focus, :lang(), + (adjacent sibling selector), [attr], [attr=&quot;val&quot;], [attr~=&quot;val&quot;], [attr|=&quot;bar&quot;], .foo (class selector), #foo (id selector)</div></pre></td></tr></table></figure>
+<h2 id="2、-为什么会发现上面的奇怪的东西（怪我css2-1和css3分不清），因为编译sass文件后发现ie8下的样式基本全歇菜了。需要注意的是，如果浏览器-不支持的选择器和支持的选择器写在一起，那么整条规则就不起作用了。比如你不小心创造了一个伪元素（是真的伪哦）-bb-bb-child-cc-background-333-那么这整条规则就不起作用了，所有浏览器在此情况下都会歇菜-cc的样式就丢失了。"><a href="#2、-为什么会发现上面的奇怪的东西（怪我css2-1和css3分不清），因为编译sass文件后发现ie8下的样式基本全歇菜了。需要注意的是，如果浏览器-不支持的选择器和支持的选择器写在一起，那么整条规则就不起作用了。比如你不小心创造了一个伪元素（是真的伪哦）-bb-bb-child-cc-background-333-那么这整条规则就不起作用了，所有浏览器在此情况下都会歇菜-cc的样式就丢失了。" class="headerlink" title="2、 为什么会发现上面的奇怪的东西（怪我css2.1和css3分不清），因为编译sass文件后发现ie8下的样式基本全歇菜了。需要注意的是，如果浏览器 不支持的选择器和支持的选择器写在一起，那么整条规则就不起作用了。比如你不小心创造了一个伪元素（是真的伪哦）.bb:bb-child, .cc{background:#333;}那么这整条规则就不起作用了，所有浏览器在此情况下都会歇菜,.cc的样式就丢失了。"></a>2、 为什么会发现上面的奇怪的东西（怪我css2.1和css3分不清），因为编译sass文件后发现ie8下的样式基本全歇菜了。需要注意的是，如果浏览器 不支持的选择器和支持的选择器写在一起，那么整条规则就不起作用了。比如你不小心创造了一个伪元素（是真的伪哦）.bb:bb-child, .cc{background:#333;}那么这整条规则就不起作用了，所有浏览器在此情况下都会歇菜,.cc的样式就丢失了。</h2><h2 id="3、-input设置了左右padding，but输入较多内容时padding还是会消失。这个问题是无解的，ie浏览器她就是这么渲染input的，解决方法是在input-外面套一层div，用div设置左右padding，border，width和height，input只需要设置width和weight为100-即可。另外，正常来讲，如果没有明确设置height的值，那么设置的line-height值就是height的值，but对于ie8，如果input-设置了-line-height，那么input必须设置height，否则input的内容显示有问题，会上下隐藏部分内容，她就是要躲猫猫。"><a href="#3、-input设置了左右padding，but输入较多内容时padding还是会消失。这个问题是无解的，ie浏览器她就是这么渲染input的，解决方法是在input-外面套一层div，用div设置左右padding，border，width和height，input只需要设置width和weight为100-即可。另外，正常来讲，如果没有明确设置height的值，那么设置的line-height值就是height的值，but对于ie8，如果input-设置了-line-height，那么input必须设置height，否则input的内容显示有问题，会上下隐藏部分内容，她就是要躲猫猫。" class="headerlink" title="3、 input设置了左右padding，but输入较多内容时padding还是会消失。这个问题是无解的，ie浏览器她就是这么渲染input的，解决方法是在input 外面套一层div，用div设置左右padding，border，width和height，input只需要设置width和weight为100% 即可。另外，正常来讲，如果没有明确设置height的值，那么设置的line-height值就是height的值，but对于ie8，如果input 设置了 line-height，那么input必须设置height，否则input的内容显示有问题，会上下隐藏部分内容，她就是要躲猫猫。"></a>3、 input设置了左右padding，but输入较多内容时padding还是会消失。这个问题是无解的，ie浏览器她就是这么渲染input的，解决方法是在input 外面套一层div，用div设置左右padding，border，width和height，input只需要设置width和weight为100% 即可。另外，正常来讲，如果没有明确设置height的值，那么设置的line-height值就是height的值，but对于ie8，如果input 设置了 line-height，那么input必须设置height，否则input的内容显示有问题，会上下隐藏部分内容，她就是要躲猫猫。</h2><h2 id="4、-为什么上面我不用input的伪元素进行设置而要嵌套多一层div呢？因为input，img，iframe等元素不支持伪元素-。-before-和-after伪元素指定了一个元素文档树内容之前和之后的内容。与’content’属性联用-指定了插入的内容（也就是你必须显性设置content-属性这两个伪家伙才能在文档中显示出来，哪怕设置content属性为空字符串也行）。作为DOM元素，伪元素都是在容器内进行渲染的-input，img，iframe等元素都不能包含其他元素，也就是不是容器，所以不能通过伪元素插入内容。"><a href="#4、-为什么上面我不用input的伪元素进行设置而要嵌套多一层div呢？因为input，img，iframe等元素不支持伪元素-。-before-和-after伪元素指定了一个元素文档树内容之前和之后的内容。与’content’属性联用-指定了插入的内容（也就是你必须显性设置content-属性这两个伪家伙才能在文档中显示出来，哪怕设置content属性为空字符串也行）。作为DOM元素，伪元素都是在容器内进行渲染的-input，img，iframe等元素都不能包含其他元素，也就是不是容器，所以不能通过伪元素插入内容。" class="headerlink" title="4、 为什么上面我不用input的伪元素进行设置而要嵌套多一层div呢？因为input，img，iframe等元素不支持伪元素 -_-||。:before 和:after伪元素指定了一个元素文档树内容之前和之后的内容。与’content’属性联用,指定了插入的内容（也就是你必须显性设置content 属性这两个伪家伙才能在文档中显示出来，哪怕设置content属性为空字符串也行）。作为DOM元素，伪元素都是在容器内进行渲染的, input，img，iframe等元素都不能包含其他元素，也就是不是容器，所以不能通过伪元素插入内容。"></a>4、 为什么上面我不用input的伪元素进行设置而要嵌套多一层div呢？因为input，img，iframe等元素不支持伪元素 -_-||。:before 和:after伪元素指定了一个元素文档树内容之前和之后的内容。与’content’属性联用,指定了插入的内容（也就是你必须显性设置content 属性这两个伪家伙才能在文档中显示出来，哪怕设置content属性为空字符串也行）。作为DOM元素，伪元素都是在容器内进行渲染的, input，img，iframe等元素都不能包含其他元素，也就是不是容器，所以不能通过伪元素插入内容。</h2><h2 id="5、-table中如果不是严格的用于表格，而是用于奇葩的局部布局时（我也想问为什么用来布局。。），td设置成inline-block可以排成一行，但是-ie8和ie9-下，如果td中的内容很长，即使td设置了宽度，td也会撑开并占用td设置的margin（废话，td是没有margin可言的），直到挤占所有的td-宽度之和为tr的宽度。但是td设置成float：left；就能表现成block。这个不清楚为什么，但是管用。。"><a href="#5、-table中如果不是严格的用于表格，而是用于奇葩的局部布局时（我也想问为什么用来布局。。），td设置成inline-block可以排成一行，但是-ie8和ie9-下，如果td中的内容很长，即使td设置了宽度，td也会撑开并占用td设置的margin（废话，td是没有margin可言的），直到挤占所有的td-宽度之和为tr的宽度。但是td设置成float：left；就能表现成block。这个不清楚为什么，但是管用。。" class="headerlink" title="5、 table中如果不是严格的用于表格，而是用于奇葩的局部布局时（我也想问为什么用来布局。。），td设置成inline-block可以排成一行，但是 ie8和ie9 下，如果td中的内容很长，即使td设置了宽度，td也会撑开并占用td设置的margin（废话，td是没有margin可言的），直到挤占所有的td 宽度之和为tr的宽度。但是td设置成float：left；就能表现成block。这个不清楚为什么，但是管用。。"></a>5、 table中如果不是严格的用于表格，而是用于奇葩的局部布局时（我也想问为什么用来布局。。），td设置成inline-block可以排成一行，但是 ie8和ie9 下，如果td中的内容很长，即使td设置了宽度，td也会撑开并占用td设置的margin（废话，td是没有margin可言的），直到挤占所有的td 宽度之和为tr的宽度。但是td设置成float：left；就能表现成block。这个不清楚为什么，但是管用。。</h2><h2 id="6、父元素的左padding会和子元素的左margin重叠。这个是没有好好实现盒子模型的事情了，包容吧。。"><a href="#6、父元素的左padding会和子元素的左margin重叠。这个是没有好好实现盒子模型的事情了，包容吧。。" class="headerlink" title="6、父元素的左padding会和子元素的左margin重叠。这个是没有好好实现盒子模型的事情了，包容吧。。"></a>6、父元素的左padding会和子元素的左margin重叠。这个是没有好好实现盒子模型的事情了，包容吧。。</h2><h2 id="7、sprite图中的icons之间最好留空白间隔，哪怕间隔1px也好，否则ie8下会出现使用了某一个icon当背景，icon后面跟着的其他icon也顺带显示了一小部分的bug，所以icons之间还是要适当留白，不要太省。"><a href="#7、sprite图中的icons之间最好留空白间隔，哪怕间隔1px也好，否则ie8下会出现使用了某一个icon当背景，icon后面跟着的其他icon也顺带显示了一小部分的bug，所以icons之间还是要适当留白，不要太省。" class="headerlink" title="7、sprite图中的icons之间最好留空白间隔，哪怕间隔1px也好，否则ie8下会出现使用了某一个icon当背景，icon后面跟着的其他icon也顺带显示了一小部分的bug，所以icons之间还是要适当留白，不要太省。"></a>7、sprite图中的icons之间最好留空白间隔，哪怕间隔1px也好，否则ie8下会出现使用了某一个icon当背景，icon后面跟着的其他icon也顺带显示了一小部分的bug，所以icons之间还是要适当留白，不要太省。</h2><h1 id="三、ie11部分css问题"><a href="#三、ie11部分css问题" class="headerlink" title="三、ie11部分css问题"></a>三、ie11部分css问题</h1><h2 id="1、-ie11下很多元素表现和其他浏览器不一致，比如对应用了同一样式（不设置-高度）的div，其他浏览器解析的高度是一致的，但是ie11下该div有可能高度偏大，由此导致一些排版上的问题，所以，如果发现元素排版上下偏移的问题，查看此元素或其当代元素是否设置了高度，统一添上高度一切都ok了。"><a href="#1、-ie11下很多元素表现和其他浏览器不一致，比如对应用了同一样式（不设置-高度）的div，其他浏览器解析的高度是一致的，但是ie11下该div有可能高度偏大，由此导致一些排版上的问题，所以，如果发现元素排版上下偏移的问题，查看此元素或其当代元素是否设置了高度，统一添上高度一切都ok了。" class="headerlink" title="1、 ie11下很多元素表现和其他浏览器不一致，比如对应用了同一样式（不设置 高度）的div，其他浏览器解析的高度是一致的，但是ie11下该div有可能高度偏大，由此导致一些排版上的问题，所以，如果发现元素排版上下偏移的问题，查看此元素或其当代元素是否设置了高度，统一添上高度一切都ok了。"></a>1、 ie11下很多元素表现和其他浏览器不一致，比如对应用了同一样式（不设置 高度）的div，其他浏览器解析的高度是一致的，但是ie11下该div有可能高度偏大，由此导致一些排版上的问题，所以，如果发现元素排版上下偏移的问题，查看此元素或其当代元素是否设置了高度，统一添上高度一切都ok了。</h2><h2 id="2、抱歉，ie11问题确实不多。"><a href="#2、抱歉，ie11问题确实不多。" class="headerlink" title="2、抱歉，ie11问题确实不多。"></a>2、抱歉，ie11问题确实不多。</h2><h1 id="四、结尾附上一个关于css优先级的奇谈"><a href="#四、结尾附上一个关于css优先级的奇谈" class="headerlink" title="四、结尾附上一个关于css优先级的奇谈"></a>四、结尾附上一个关于css优先级的奇谈</h1><h2 id="首先我们知道："><a href="#首先我们知道：" class="headerlink" title="首先我们知道："></a>首先我们知道：</h2><blockquote>
+<p>1、id选择器优先级权重比class选择器大一个数量级，class选择器权重比标签选择器大一个数量级；<br>2、class选择器和属性选择器同优先级;<br>3、样式的优先程度需要根据第1条规则计算整体的优先级，按选择器权重计算各条样式规则中所有选择器优先级之和，哪条规则权重大，那条就说了算。如果相同那么后面的覆盖前面的。<br>4、像这种.dog &gt; p开挂，多了特殊符号的，并不会增加优势，还是和 .dog p优先级一样。<br>然后可以抛出一个问题了：</p>
+</blockquote>
+<p>对于下面的文档结构，分别对 p | .p | div p | .parent | #parent设置color属性，那么优先级如何呢？<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;div id=&quot;parent&quot; class=&quot;parent&quot;&gt;</div><div class="line">  &lt;p class=&quot;p&quot;&gt;p&lt;/p&gt;</div><div class="line">&lt;/div&gt;</div></pre></td></tr></table></figure></p>
+<p>结果表现：也就是 .p &gt; div p &gt; p &gt; #parent &gt; .parent<br>id选择器居然比p选择器优先级还低！将p元素和div元素分开看，.p &gt; div p &gt; p 很正常， #parent &gt; .parent也很正常。所以问题关键在子级p和父级#parent, 子级的选择器优先级比父级的选择器优先级高，或者说继承的优先级程度比自身的优先级低！</p>
+<p>嵌套多一层看看就知道是不是了，分别对#parent | div | p设置color属性：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"></div><div class="line">&lt;div id=&quot;parent&quot; class=&quot;parent&quot;&gt;</div><div class="line">  &lt;div class=&quot;mid&quot;&gt;</div><div class="line">    &lt;p id=&quot;p&quot; class=&quot;p&quot;&gt;p&lt;/p&gt; </div><div class="line">  &lt;div&gt;</div><div class="line">&lt;/div&gt;</div></pre></td></tr></table></figure></p>
+<p>结果确实是p &gt; div &gt; #parent：</p>
+<p>即使应用两个选择器也无济于事，依然是p &gt;#parent div</p>
+<blockquote>
+<p>只要能定位到p元素，那么父级选择器的权重就起作用了,一试便知，对#parent p | #p 设置同样的样式结果是这样的：<br>嗯，确实如此。所以：</p>
+</blockquote>
+<p>5、css样式优先级还和继承有关，继承的优先级不如本身应用的优先级高。</p>
+
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="https://jonathonchen.github.io/2017/08/24/css兼容/" data-id="cj6q9urod0000ngwq58392gi3" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+        <a href="https://jonathonchen.github.io/2017/08/24/css兼容/#comments" class="article-comment-link">评论</a>
+    
+
+        </footer>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+    
+        <a href="/2017/08/24/深入理解HTTP协议（转）/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">下一篇</strong>
+            <div class="article-nav-title">深入理解HTTP协议（转）</div>
+        </a>
+    
+</nav>
+
+
+    
+</article>
+
+
+    
+    
+        <section id="comments">
+    <div id="lv-container" data-id="city" data-uid=MTAyMC8zMDIyOC82Nzgz></div>
+</section>
+	
+
+</section>
+            
+                
+<aside id="sidebar">
+   
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">最新文章</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2017/08/24/css兼容/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2017/08/24/css兼容/" class="title">CSS兼容</a></p>
+                            <p class="item-date"><time datetime="2017-08-24T09:33:45.774Z" itemprop="datePublished">2017-08-24</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2017/08/24/深入理解HTTP协议（转）/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2017/08/24/深入理解HTTP协议（转）/" class="title">深入理解HTTP协议（转）</a></p>
+                            <p class="item-date"><time datetime="2017-08-24T03:56:40.019Z" itemprop="datePublished">2017-08-24</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2017/08/24/批处理HTTP模块SuperAgent/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2017/08/24/批处理HTTP模块SuperAgent/" class="title">SUPERAGENT</a></p>
+                            <p class="item-date"><time datetime="2017-08-24T03:52:10.831Z" itemprop="datePublished">2017-08-24</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2017/08/24/Node.js的学习--使用cheerio抓取网页数据/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2017/08/24/Node.js的学习--使用cheerio抓取网页数据/" class="title">Node.js的学习--使用cheerio抓取网页数据</a></p>
+                            <p class="item-date"><time datetime="2017-08-24T03:49:33.357Z" itemprop="datePublished">2017-08-24</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2017/08/24/iis部署/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2017/08/24/iis部署/" class="title">IIS部署</a></p>
+                            <p class="item-date"><time datetime="2017-08-24T03:46:48.674Z" itemprop="datePublished">2017-08-24</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+    
+        
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">归档</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">八月 2017</a><span class="archive-list-count">13</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    
+        
+    
+        
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">链接</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="http://hexo.io">Hexo</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+    
+    <div id="toTop" class="fa fa-angle-up"></div>
+</aside>
+
+            
+        </div>
+        <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            &copy; 2017 陈志远<br>
+            Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="http://github.com/ppoffice">PPOffice</a>
+        </div>
+    </div>
+</footer>
+        
+    
+    
+    <!-- 来必力City版安装代码 -->
+    <script type="text/javascript">
+     (function(d, s) {
+         var j, e = d.getElementsByTagName(s)[0];
+
+         if (typeof LivereTower === 'function') { return; }
+
+         j = d.createElement(s);
+         j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+         j.async = true;
+
+         e.parentNode.insertBefore(j, e);
+     })(document, 'script');
+    </script>
+  <noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
+  <!-- City版安装代码已完成 -->
+
+
+
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+</html>

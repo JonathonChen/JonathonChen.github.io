@@ -5,19 +5,20 @@
     
     <title>vue 生命周期 | 博客</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta name="description" content="前言  在使用vue一个多礼拜后，感觉现在还停留在初级阶段，虽然知道怎么和后端做数据交互，但是对于mounted这个挂载还不是很清楚的。放大之，对vue的生命周期不甚了解。只知道简单的使用，而不知道为什么，这对后面的踩坑是相当不利的。 因为我们有时候会在几个钩子函数里做一些事情，什么时候做，在哪个函数里做，我们不清楚。 vue生命周期简介">
+    <meta name="description" content="前言  在使用vue一个多礼拜后，感觉现在还停留在初级阶段，虽然知道怎么和后端做数据交互，但是对于mounted这个挂载还不是很清楚的。放大之，对vue的生命周期不甚了解。只知道简单的使用，而不知道为什么，这对后面的踩坑是相当不利的。 因为我们有时候会在几个钩子函数里做一些事情，什么时候做，在哪个函数里做，我们不清楚。 vue生命周期简介 生命周期探究&amp;gt;1234567891011121314">
 <meta property="og:type" content="article">
 <meta property="og:title" content="vue 生命周期">
 <meta property="og:url" content="https://jonathonchen.github.io/2017/08/24/vue.生命周期/index.html">
 <meta property="og:site_name" content="博客">
-<meta property="og:description" content="前言  在使用vue一个多礼拜后，感觉现在还停留在初级阶段，虽然知道怎么和后端做数据交互，但是对于mounted这个挂载还不是很清楚的。放大之，对vue的生命周期不甚了解。只知道简单的使用，而不知道为什么，这对后面的踩坑是相当不利的。 因为我们有时候会在几个钩子函数里做一些事情，什么时候做，在哪个函数里做，我们不清楚。 vue生命周期简介">
+<meta property="og:description" content="前言  在使用vue一个多礼拜后，感觉现在还停留在初级阶段，虽然知道怎么和后端做数据交互，但是对于mounted这个挂载还不是很清楚的。放大之，对vue的生命周期不甚了解。只知道简单的使用，而不知道为什么，这对后面的踩坑是相当不利的。 因为我们有时候会在几个钩子函数里做一些事情，什么时候做，在哪个函数里做，我们不清楚。 vue生命周期简介 生命周期探究&amp;gt;1234567891011121314">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://jonathonchen.github.io/2017/08/24/imgs/Video_2017-08-19_213646.gif">
-<meta property="og:updated_time" content="2017-08-24T03:29:45.917Z">
+<meta property="og:image" content="https://jonathonchen.github.io/2017/08/24/vue.生命周期/vuelife.png">
+<meta property="og:image" content="https://jonathonchen.github.io/2017/08/24/vue.生命周期/vuelife2.png">
+<meta property="og:updated_time" content="2017-08-24T03:38:07.800Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="vue 生命周期">
-<meta name="twitter:description" content="前言  在使用vue一个多礼拜后，感觉现在还停留在初级阶段，虽然知道怎么和后端做数据交互，但是对于mounted这个挂载还不是很清楚的。放大之，对vue的生命周期不甚了解。只知道简单的使用，而不知道为什么，这对后面的踩坑是相当不利的。 因为我们有时候会在几个钩子函数里做一些事情，什么时候做，在哪个函数里做，我们不清楚。 vue生命周期简介">
-<meta name="twitter:image" content="https://jonathonchen.github.io/2017/08/24/imgs/Video_2017-08-19_213646.gif">
+<meta name="twitter:description" content="前言  在使用vue一个多礼拜后，感觉现在还停留在初级阶段，虽然知道怎么和后端做数据交互，但是对于mounted这个挂载还不是很清楚的。放大之，对vue的生命周期不甚了解。只知道简单的使用，而不知道为什么，这对后面的踩坑是相当不利的。 因为我们有时候会在几个钩子函数里做一些事情，什么时候做，在哪个函数里做，我们不清楚。 vue生命周期简介 生命周期探究&amp;gt;1234567891011121314">
+<meta name="twitter:image" content="https://jonathonchen.github.io/2017/08/24/vue.生命周期/vuelife.png">
     
 
     
@@ -160,7 +161,7 @@
         </div>
         <div class="article-info profile-block">
             <div class="article-info-block">
-                6
+                13
                 <span>文章</span>
             </div>
             <div class="article-info-block">
@@ -247,7 +248,15 @@
             
             <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>  在使用vue一个多礼拜后，感觉现在还停留在初级阶段，虽然知道怎么和后端做数据交互，但是对于mounted这个挂载还不是很清楚的。放大之，对vue的生命周期不甚了解。只知道简单的使用，而不知道为什么，这对后面的踩坑是相当不利的。</p>
 <p>因为我们有时候会在几个钩子函数里做一些事情，什么时候做，在哪个函数里做，我们不清楚。</p>
-<h1 id="vue生命周期简介"><a href="#vue生命周期简介" class="headerlink" title="vue生命周期简介"></a>vue生命周期简介</h1><p><img src="../imgs/Video_2017-08-19_213646.gif" alt="vue生命周期"></p>
+<h1 id="vue生命周期简介"><a href="#vue生命周期简介" class="headerlink" title="vue生命周期简介"></a>vue生命周期简介</h1><p><img src="vuelife.png" alt="vue生命周期"><br><img src="vuelife2.png" alt="vue生命周期"></p>
+<h1 id="生命周期探究"><a href="#生命周期探究" class="headerlink" title="生命周期探究"></a>生命周期探究</h1><p>&gt;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div></pre></td><td class="code"><pre><div class="line">&lt;!DOCTYPE html&gt;</div><div class="line">&lt;html&gt;</div><div class="line">&lt;head&gt;</div><div class="line">    &lt;title&gt;&lt;/title&gt;</div><div class="line">    &lt;script type=&quot;text/javascript&quot; src=&quot;https://cdn.jsdelivr.net/vue/2.1.3/vue.js&quot;&gt;&lt;/script&gt;</div><div class="line">&lt;/head&gt;</div><div class="line">&lt;body&gt;</div><div class="line"></div><div class="line">&lt;div id=&quot;app&quot;&gt;</div><div class="line">     &lt;p&gt;&#123;&#123; message &#125;&#125;&lt;/p&gt;</div><div class="line">&lt;/div&gt;</div><div class="line"></div><div class="line">&lt;script type=&quot;text/javascript&quot;&gt;</div><div class="line">    </div><div class="line">  var app = new Vue(&#123;</div><div class="line">      el: &apos;#app&apos;,</div><div class="line">      data: &#123;</div><div class="line">          message : &quot;xuxiao is boy&quot; </div><div class="line">      &#125;,</div><div class="line">       beforeCreate: function () &#123;</div><div class="line">                console.group(&apos;beforeCreate 创建前状态===============》&apos;);</div><div class="line">               console.log(&quot;%c%s&quot;, &quot;color:red&quot; , &quot;el     : &quot; + this.$el); //undefined</div><div class="line">               console.log(&quot;%c%s&quot;, &quot;color:red&quot;,&quot;data   : &quot; + this.$data); //undefined </div><div class="line">               console.log(&quot;%c%s&quot;, &quot;color:red&quot;,&quot;message: &quot; + this.message)  </div><div class="line">        &#125;,</div><div class="line">        created: function () &#123;</div><div class="line">            console.group(&apos;created 创建完毕状态===============》&apos;);</div><div class="line">            console.log(&quot;%c%s&quot;, &quot;color:red&quot;,&quot;el     : &quot; + this.$el); //undefined</div><div class="line">               console.log(&quot;%c%s&quot;, &quot;color:red&quot;,&quot;data   : &quot; + this.$data); //已被初始化 </div><div class="line">               console.log(&quot;%c%s&quot;, &quot;color:red&quot;,&quot;message: &quot; + this.message); //已被初始化</div><div class="line">        &#125;,</div><div class="line">        beforeMount: function () &#123;</div><div class="line">            console.group(&apos;beforeMount 挂载前状态===============》&apos;);</div><div class="line">            console.log(&quot;%c%s&quot;, &quot;color:red&quot;,&quot;el     : &quot; + (this.$el)); //已被初始化</div><div class="line">            console.log(this.$el);</div><div class="line">               console.log(&quot;%c%s&quot;, &quot;color:red&quot;,&quot;data   : &quot; + this.$data); //已被初始化  </div><div class="line">               console.log(&quot;%c%s&quot;, &quot;color:red&quot;,&quot;message: &quot; + this.message); //已被初始化  </div><div class="line">        &#125;,</div><div class="line">        mounted: function () &#123;</div><div class="line">            console.group(&apos;mounted 挂载结束状态===============》&apos;);</div><div class="line">            console.log(&quot;%c%s&quot;, &quot;color:red&quot;,&quot;el     : &quot; + this.$el); //已被初始化</div><div class="line">            console.log(this.$el);    </div><div class="line">               console.log(&quot;%c%s&quot;, &quot;color:red&quot;,&quot;data   : &quot; + this.$data); //已被初始化</div><div class="line">               console.log(&quot;%c%s&quot;, &quot;color:red&quot;,&quot;message: &quot; + this.message); //已被初始化 </div><div class="line">        &#125;,</div><div class="line">        beforeUpdate: function () &#123;</div><div class="line">            console.group(&apos;beforeUpdate 更新前状态===============》&apos;);</div><div class="line">            console.log(&quot;%c%s&quot;, &quot;color:red&quot;,&quot;el     : &quot; + this.$el);</div><div class="line">            console.log(this.$el);   </div><div class="line">               console.log(&quot;%c%s&quot;, &quot;color:red&quot;,&quot;data   : &quot; + this.$data); </div><div class="line">               console.log(&quot;%c%s&quot;, &quot;color:red&quot;,&quot;message: &quot; + this.message); </div><div class="line">        &#125;,</div><div class="line">        updated: function () &#123;</div><div class="line">            console.group(&apos;updated 更新完成状态===============》&apos;);</div><div class="line">            console.log(&quot;%c%s&quot;, &quot;color:red&quot;,&quot;el     : &quot; + this.$el);</div><div class="line">            console.log(this.$el); </div><div class="line">               console.log(&quot;%c%s&quot;, &quot;color:red&quot;,&quot;data   : &quot; + this.$data); </div><div class="line">               console.log(&quot;%c%s&quot;, &quot;color:red&quot;,&quot;message: &quot; + this.message); </div><div class="line">        &#125;,</div><div class="line">        beforeDestroy: function () &#123;</div><div class="line">            console.group(&apos;beforeDestroy 销毁前状态===============》&apos;);</div><div class="line">            console.log(&quot;%c%s&quot;, &quot;color:red&quot;,&quot;el     : &quot; + this.$el);</div><div class="line">            console.log(this.$el);    </div><div class="line">               console.log(&quot;%c%s&quot;, &quot;color:red&quot;,&quot;data   : &quot; + this.$data);</div></pre></td></tr></table></figure></p>
+<h2 id="create-和-mounted-相关"><a href="#create-和-mounted-相关" class="headerlink" title="create 和 mounted 相关"></a>create 和 mounted 相关</h2><blockquote>
+<p>beforecreated：el 和 data 并未初始化<br>created:完成了 data 数据的初始化，el没有<br>beforeMount：完成了 el 和 data 初始化<br>mounted ：完成挂载</p>
+</blockquote>
+<h2 id="生命周期总结"><a href="#生命周期总结" class="headerlink" title="生命周期总结"></a>生命周期总结</h2><blockquote>
+<p>beforecreate : 举个栗子：可以在这加个loading事件<br>created ：在这结束loading，还做一些初始化，实现函数自执行<br>mounted ： 在这发起后端请求，拿回数据，配合路由钩子做一些事情<br>beforeDestory： 你确认删除XX吗？ destoryed ：当前组件已被删除，清空相关内容</p>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><p>  <a href="https://segmentfault.com/q/10" target="_blank" rel="external">https://segmentfault.com/q/10</a>…<br>    <a href="http://www.cnblogs.com/gagag/" target="_blank" rel="external">http://www.cnblogs.com/gagag/</a>…</p>
+</blockquote>
 
         
         </div>
@@ -258,7 +267,7 @@
 
 </div>
 
-    <a data-url="https://jonathonchen.github.io/2017/08/24/vue.生命周期/" data-id="cj6pvqhar0002cswqp1m4x7j9" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://jonathonchen.github.io/2017/08/24/vue.生命周期/" data-id="cj6q8x4b00004z4wqyj7mumtm" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -335,6 +344,15 @@
         
 <nav id="article-nav">
     
+        <a href="/2017/08/24/mongose中间件/" id="article-nav-newer" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">上一篇</strong>
+            <div class="article-nav-title">
+                
+                    mongodb mongoose node中间件增删改查方法
+                
+            </div>
+        </a>
+    
     
         <a href="/2017/08/24/懒加载/" id="article-nav-older" class="article-nav-link-wrap">
             <strong class="article-nav-caption">下一篇</strong>
@@ -369,7 +387,7 @@
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/2017/08/24/vue.生命周期/" class="thumbnail">
+                            <a href="/2017/08/24/css兼容/" class="thumbnail">
     
     
         <span class="thumbnail-image thumbnail-none"></span>
@@ -380,15 +398,15 @@
                         
                         <div class="item-inner">
                             <p class="item-category"></p>
-                            <p class="item-title"><a href="/2017/08/24/vue.生命周期/" class="title">vue 生命周期</a></p>
-                            <p class="item-date"><time datetime="2017-08-24T03:19:07.529Z" itemprop="datePublished">2017-08-24</time></p>
+                            <p class="item-title"><a href="/2017/08/24/css兼容/" class="title">CSS兼容</a></p>
+                            <p class="item-date"><time datetime="2017-08-24T09:33:45.774Z" itemprop="datePublished">2017-08-24</time></p>
                         </div>
                     </li>
                 
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/2017/08/24/懒加载/" class="thumbnail">
+                            <a href="/2017/08/24/深入理解HTTP协议（转）/" class="thumbnail">
     
     
         <span class="thumbnail-image thumbnail-none"></span>
@@ -399,15 +417,15 @@
                         
                         <div class="item-inner">
                             <p class="item-category"></p>
-                            <p class="item-title"><a href="/2017/08/24/懒加载/" class="title">懒加载原理</a></p>
-                            <p class="item-date"><time datetime="2017-08-24T03:16:18.150Z" itemprop="datePublished">2017-08-24</time></p>
+                            <p class="item-title"><a href="/2017/08/24/深入理解HTTP协议（转）/" class="title">深入理解HTTP协议（转）</a></p>
+                            <p class="item-date"><time datetime="2017-08-24T03:56:40.019Z" itemprop="datePublished">2017-08-24</time></p>
                         </div>
                     </li>
                 
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/2017/08/24/闭包/" class="thumbnail">
+                            <a href="/2017/08/24/批处理HTTP模块SuperAgent/" class="thumbnail">
     
     
         <span class="thumbnail-image thumbnail-none"></span>
@@ -418,15 +436,15 @@
                         
                         <div class="item-inner">
                             <p class="item-category"></p>
-                            <p class="item-title"><a href="/2017/08/24/闭包/" class="title">JavaScript深入之闭包(转)</a></p>
-                            <p class="item-date"><time datetime="2017-08-24T03:00:10.217Z" itemprop="datePublished">2017-08-24</time></p>
+                            <p class="item-title"><a href="/2017/08/24/批处理HTTP模块SuperAgent/" class="title">SUPERAGENT</a></p>
+                            <p class="item-date"><time datetime="2017-08-24T03:52:10.831Z" itemprop="datePublished">2017-08-24</time></p>
                         </div>
                     </li>
                 
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/2017/08/19/vue loading组件/" class="thumbnail">
+                            <a href="/2017/08/24/Node.js的学习--使用cheerio抓取网页数据/" class="thumbnail">
     
     
         <span class="thumbnail-image thumbnail-none"></span>
@@ -437,15 +455,15 @@
                         
                         <div class="item-inner">
                             <p class="item-category"></p>
-                            <p class="item-title"><a href="/2017/08/19/vue loading组件/" class="title">vue loading加载动画组件</a></p>
-                            <p class="item-date"><time datetime="2017-08-19T13:09:14.515Z" itemprop="datePublished">2017-08-19</time></p>
+                            <p class="item-title"><a href="/2017/08/24/Node.js的学习--使用cheerio抓取网页数据/" class="title">Node.js的学习--使用cheerio抓取网页数据</a></p>
+                            <p class="item-date"><time datetime="2017-08-24T03:49:33.357Z" itemprop="datePublished">2017-08-24</time></p>
                         </div>
                     </li>
                 
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/2017/08/17/v-model/" class="thumbnail">
+                            <a href="/2017/08/24/iis部署/" class="thumbnail">
     
     
         <span class="thumbnail-image thumbnail-none"></span>
@@ -456,8 +474,8 @@
                         
                         <div class="item-inner">
                             <p class="item-category"></p>
-                            <p class="item-title"><a href="/2017/08/17/v-model/" class="title">v-model本质（以底部导航切换为例子）</a></p>
-                            <p class="item-date"><time datetime="2017-08-17T13:33:16.790Z" itemprop="datePublished">2017-08-17</time></p>
+                            <p class="item-title"><a href="/2017/08/24/iis部署/" class="title">IIS部署</a></p>
+                            <p class="item-date"><time datetime="2017-08-24T03:46:48.674Z" itemprop="datePublished">2017-08-24</time></p>
                         </div>
                     </li>
                 
@@ -472,7 +490,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">归档</h3>
         <div class="widget">
-            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">八月 2017</a><span class="archive-list-count">6</span></li></ul>
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">八月 2017</a><span class="archive-list-count">13</span></li></ul>
         </div>
     </div>
 

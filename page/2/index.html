@@ -3,19 +3,15 @@
 <head>
     <meta charset="utf-8">
     
-    <title>v-model本质（以底部导航切换为例子） | 博客</title>
+    <title>博客</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta name="description" content="v-modelv-model本质是1&amp;lt;input type=&amp;quot;text&amp;quot; v-bind:value=&amp;quot;dataA&amp;quot; v-on:input=&amp;quot;dataA = $event.target.value&amp;quot; /&amp;gt; 1.Index页面该页面包含了m-tabbar和m-tabbar-item组件，目的是实现底部tab切换m-tabbar传入">
-<meta property="og:type" content="article">
-<meta property="og:title" content="v-model本质（以底部导航切换为例子）">
-<meta property="og:url" content="https://jonathonchen.github.io/2017/08/17/v-model/index.html">
+    <meta property="og:type" content="website">
+<meta property="og:title" content="博客">
+<meta property="og:url" content="https://jonathonchen.github.io/page/2/index.html">
 <meta property="og:site_name" content="博客">
-<meta property="og:description" content="v-modelv-model本质是1&amp;lt;input type=&amp;quot;text&amp;quot; v-bind:value=&amp;quot;dataA&amp;quot; v-on:input=&amp;quot;dataA = $event.target.value&amp;quot; /&amp;gt; 1.Index页面该页面包含了m-tabbar和m-tabbar-item组件，目的是实现底部tab切换m-tabbar传入">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2017-08-17T13:47:46.823Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="v-model本质（以底部导航切换为例子）">
-<meta name="twitter:description" content="v-modelv-model本质是1&amp;lt;input type=&amp;quot;text&amp;quot; v-bind:value=&amp;quot;dataA&amp;quot; v-on:input=&amp;quot;dataA = $event.target.value&amp;quot; /&amp;gt; 1.Index页面该页面包含了m-tabbar和m-tabbar-item组件，目的是实现底部tab切换m-tabbar传入">
+<meta name="twitter:title" content="博客">
     
 
     
@@ -210,15 +206,151 @@
 </aside>
 
             
-            <section id="main"><article id="post-v-model" class="article article-type-post" itemscope itemprop="blogPost">
+            <section id="main">
+    <article id="post-vue loading组件" class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
         
             <header class="article-header">
                 
     
-        <h1 class="article-title" itemprop="name">
-            v-model本质（以底部导航切换为例子）
+        <h1 itemprop="name">
+            <a class="article-title" href="/2017/08/19/vue loading组件/">vue loading加载动画组件</a>
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2017/08/19/vue loading组件/">
+            <time datetime="2017-08-19T13:09:14.515Z" itemprop="datePublished">2017-08-19</time>
+        </a>
+    </div>
+
+
+                        
+                        
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <blockquote>
+<h2 id="实现效果"><a href="#实现效果" class="headerlink" title="实现效果"></a>实现效果</h2><pre><code>实现了加载是颜色的变化以及进度条的变化
+</code></pre><p>下面是代码实现</p>
+<ol>
+<li>html页面测试</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div></pre></td><td class="code"><pre><div class="line">&lt;!DOCTYPE html&gt;</div><div class="line">&lt;html&gt;</div><div class="line">&lt;style&gt;</div><div class="line">  .spinner &#123;</div><div class="line">    transform-origin: center;</div><div class="line">    animation: rotator 6s linear infinite;</div><div class="line">	background-color:#cccccc;</div><div class="line">	width:150px;</div><div class="line">	height:150px;</div><div class="line">  &#125;</div><div class="line">  @keyframes rotator &#123;</div><div class="line">    0% &#123; transform: rotate(0deg); &#125;</div><div class="line">    100% &#123; transform: rotate(270deg); &#125;</div><div class="line">  &#125;</div><div class="line">  .path &#123;</div><div class="line">    stroke-dasharray: 187;</div><div class="line">    stroke-dashoffset: 0;</div><div class="line">    transform-origin: center;</div><div class="line">    animation: dash 2s ease-in-out infinite, colors 4s ease-in-out infinite;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  @keyframes colors &#123;</div><div class="line">    0% &#123; stroke: #4285F4; &#125;</div><div class="line">    25% &#123; stroke: #DE3E35; &#125;</div><div class="line">    50% &#123; stroke: #F7C223; &#125;</div><div class="line">    75% &#123; stroke: #1B9A59; &#125;</div><div class="line">    100% &#123; stroke: #4285F4; &#125;</div><div class="line">  &#125;</div><div class="line">  @keyframes dash &#123;</div><div class="line">    0% &#123; stroke-dashoffset: 187; &#125;</div><div class="line">    50% &#123;</div><div class="line">      stroke-dashoffset: 93.5;</div><div class="line">    &#125;</div><div class="line">    100% &#123;</div><div class="line">      stroke-dashoffset: 0;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&lt;/style&gt;</div><div class="line">&lt;body&gt;</div><div class="line"> &lt;svg class=&quot;spinner&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot;&gt;</div><div class="line">      &lt;circle class=&quot;path&quot;  stroke=&quot;red&quot; fill=&quot;none&quot; stroke-width=&quot;6&quot;  cx=&quot;75&quot; cy=&quot;75&quot; r=&quot;30&quot;&gt;&lt;/circle&gt;</div><div class="line"> &lt;/svg&gt;</div><div class="line"> </div><div class="line">&lt;/body&gt;</div><div class="line">&lt;/html&gt;</div></pre></td></tr></table></figure>
+</blockquote>
+<p><img src="../imgs/Video_2017-08-19_213646.gif"></p>
+<blockquote>
+<ol>
+<li>vue Loading组件</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div></pre></td><td class="code"><pre><div class="line">&lt;template&gt;</div><div class="line">  &lt;div class=&quot;loading-component&quot;&gt;</div><div class="line">    &lt;svg class=&quot;spinner&quot; :style=&quot;loadingSize&quot; viewBox=&quot;0 0 66 66&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot;&gt;</div><div class="line">      &lt;circle class=&quot;path&quot; :style=&quot;loadingColor&quot; fill=&quot;none&quot; :stroke-width=&quot;stroke&quot;  cx=&quot;33&quot; cy=&quot;33&quot; r=&quot;30&quot;&gt;&lt;/circle&gt;</div><div class="line">    &lt;/svg&gt;</div><div class="line">  &lt;/div&gt;</div><div class="line">&lt;/template&gt;</div><div class="line"></div><div class="line">&lt;script type=&quot;text/ecmascript-6&quot;&gt;</div><div class="line">  export default &#123;</div><div class="line">    props: &#123;</div><div class="line">      size: &#123;</div><div class="line">        type: Number,</div><div class="line">        default: 50</div><div class="line">      &#125;,</div><div class="line">      stroke: &#123;</div><div class="line">        type: Number,</div><div class="line">        default: 3.5</div><div class="line">      &#125;,</div><div class="line">      color: &#123;</div><div class="line">        type: String,</div><div class="line">        default: &apos;#ed424b&apos;</div><div class="line">      &#125;</div><div class="line">    &#125;,</div><div class="line">    computed: &#123;</div><div class="line">      loadingSize() &#123;</div><div class="line">        const newSize = this.size + &apos;px&apos;</div><div class="line">        return &#123;</div><div class="line">          width: newSize,</div><div class="line">          height: newSize</div><div class="line">        &#125;</div><div class="line">      &#125;,</div><div class="line">      loadingColor() &#123;</div><div class="line">        return &#123;</div><div class="line">          stroke: this.color</div><div class="line">        &#125;</div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&lt;/script&gt;</div><div class="line"></div><div class="line">&lt;style lang=&quot;less&quot; type=&quot;text/less&quot;&gt;</div><div class="line"></div><div class="line">  .loading-component &#123;</div><div class="line">    display: inline-block;</div><div class="line">    pointer-events: none;</div><div class="line">    will-change: transform, opacity;</div><div class="line">    position: fixed;</div><div class="line">    left: 50%;</div><div class="line">    top: 50%;</div><div class="line">    transform: translate(-50%, -50%);</div><div class="line">  &#125;</div><div class="line">  //2 * pi * r = 188.4</div><div class="line">  @offset: 187;</div><div class="line">  @duration: 1.4s;</div><div class="line">  //设置外层旋转形成加载的效果</div><div class="line">  .spinner &#123;</div><div class="line">    transform-origin: center;</div><div class="line">    animation: rotator @duration linear infinite;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  @keyframes rotator &#123;</div><div class="line">    0% &#123; transform: rotate(0deg); &#125;</div><div class="line">    100% &#123; transform: rotate(270deg); &#125;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  .path &#123;</div><div class="line">    stroke-dasharray: @offset;</div><div class="line">    stroke-dashoffset: 0;</div><div class="line">    transform-origin: center;</div><div class="line">    // 设置颜色变化以及dash长度的变化</div><div class="line">    animation: dash @duration ease-in-out infinite, colors @duration ease-in-out infinite;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  @keyframes colors &#123;</div><div class="line">    0% &#123; stroke: #4285F4; &#125;</div><div class="line">    25% &#123; stroke: #DE3E35; &#125;</div><div class="line">    50% &#123; stroke: #F7C223; &#125;</div><div class="line">    75% &#123; stroke: #1B9A59; &#125;</div><div class="line">    100% &#123; stroke: #4285F4; &#125;</div><div class="line">  &#125;</div><div class="line"> //让空白部分慢慢减少</div><div class="line">  @keyframes dash &#123;</div><div class="line">    0% &#123; stroke-dashoffset: @offset; &#125;</div><div class="line">    50% &#123;</div><div class="line">      stroke-dashoffset: @offset/4;</div><div class="line">    &#125;</div><div class="line">    100% &#123;</div><div class="line">      stroke-dashoffset: @offset;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&lt;/style&gt;</div></pre></td></tr></table></figure></blockquote>
+
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="https://jonathonchen.github.io/2017/08/19/vue loading组件/" data-id="cj6q8x4bn000bz4wq25hzuj9l" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+        <a href="https://jonathonchen.github.io/2017/08/19/vue loading组件/#comments" class="article-comment-link">评论</a>
+    
+
+        </footer>
+    </div>
+    
+</article>
+
+
+
+    <article id="post-v-model" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/2017/08/17/v-model/">v-model本质（以底部导航切换为例子）</a>
         </h1>
     
 
@@ -330,38 +462,143 @@
         </footer>
     </div>
     
+</article>
+
+
+
+    <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
         
-<nav id="article-nav">
-    
-        <a href="/2017/08/19/vue loading组件/" id="article-nav-newer" class="article-nav-link-wrap">
-            <strong class="article-nav-caption">上一篇</strong>
-            <div class="article-nav-title">
+        
+            <header class="article-header">
                 
-                    vue loading加载动画组件
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/2017/08/15/hello-world/">Hello World</a>
+        </h1>
+    
+
                 
-            </div>
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2017/08/15/hello-world/">
+            <time datetime="2017-08-15T14:26:13.022Z" itemprop="datePublished">2017-08-15</time>
         </a>
-    
-    
-        <a href="/2017/08/15/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
-            <strong class="article-nav-caption">下一篇</strong>
-            <div class="article-nav-title">Hello World</div>
-        </a>
-    
-</nav>
+    </div>
 
 
+                        
+                        
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="https://jonathonchen.github.io/2017/08/15/hello-world/" data-id="cj6q8x4bl000az4wqx836g2od" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+        <a href="https://jonathonchen.github.io/2017/08/15/hello-world/#comments" class="article-comment-link">评论</a>
+    
+
+        </footer>
+    </div>
     
 </article>
 
 
-    
-    
-        <section id="comments">
-    <div id="lv-container" data-id="city" data-uid=MTAyMC8zMDIyOC82Nzgz></div>
-</section>
-	
 
+    <nav id="page-nav">
+        <a class="extend prev" rel="prev" href="/">&laquo; 上一页</a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
+    </nav>
 </section>
             
                 
