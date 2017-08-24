@@ -170,10 +170,11 @@ code {
   width: 40px;
   height: 40px;
   background-repeat: no-repeat;
-  background-image: url("images/logo.png");
+  background-image: url("images/logo.jpeg");
   -webkit-background-size: 40px 40px;
   -moz-background-size: 40px 40px;
   background-size: 40px 40px;
+  border-radius: 50% 50%;
 }
 #container {
   position: relative;
@@ -657,7 +658,7 @@ code {
 }
 #profile .inner .base-info #avatar {
   display: block;
-  margin: 10px auto 20px;
+  margin: 10px auto 10px;
   width: 128px;
   height: 128px;
 }
