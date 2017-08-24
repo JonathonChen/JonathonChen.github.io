@@ -142,7 +142,7 @@
         </div>
         <div class="article-info profile-block">
             <div class="article-info-block">
-                13
+                14
                 <span>文章</span>
             </div>
             <div class="article-info-block">
@@ -195,6 +195,132 @@
 
             
             <section id="main">
+    <article id="post-解决https请求下发送http请求问题 " class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/2017/08/24/解决https请求下发送http请求问题 /">解决https请求下发送http请求问题</a>
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2017/08/24/解决https请求下发送http请求问题 /">
+            <time datetime="2017-08-24T10:02:58.022Z" itemprop="datePublished">2017-08-24</time>
+        </a>
+    </div>
+
+
+                        
+                        
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <p>在https页面下的带有相对路径的请求都会与页面的协议保持一致。如果想在https页面下发送http的请求，如果只把链接写死成为http的绝对路径是不够的，这样会导致http的请求与总页面https的请求的session不一致。</p>
+<p>为什么呢？原因是https的请求中服务器发回的cookie是标记为”secure”的，而http的请求时非”secure”,”由于在服务器端secure”的cookie不会兼容非”secure”的，所以当http的请求携带着同一jsessionid的cookie到达服务器时，服务器拒绝非”secure”，进而返回的结果是一个新的非”secure”的cookie，于是两个session就不同了。</p>
+<p> 怎么解决呢？由原因分析可知，两个session不同，更具体说是cookie的状态不同。那么办法是，在接收到第一个https请求的响应后 到 发送下面的http请求之前，将cookie去”secure”状态，但是又要保证jsessionid不变。具体操作可以新建一个cookie(新建的是非”secure”状态)，然后赋予同一个jessionid，然后加入response中。</p>
+<p> 代码如下：<br> <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">Cookie cookie = new Cookie(&quot;JSESSIONID&quot;, req.getSession().getId());</div><div class="line">cookie.setPath(req.getContextPath());</div><div class="line">resp.addCookie(cookie);</div></pre></td></tr></table></figure></p>
+<p>本文转载自<a href="http://blog.csdn.NET/songgeabc/article/details/18192057" target="_blank" rel="external">http://blog.csdn.NET/songgeabc/article/details/18192057</a></p>
+
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="https://jonathonchen.github.io/2017/08/24/解决https请求下发送http请求问题 /" data-id="cj6qa8ph5000czswq2sdq9b98" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+        <a href="https://jonathonchen.github.io/2017/08/24/解决https请求下发送http请求问题 /#comments" class="article-comment-link">评论</a>
+    
+
+        </footer>
+    </div>
+    
+</article>
+
+
+
     <article id="post-css兼容" class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
@@ -268,7 +394,7 @@
 
 </div>
 
-    <a data-url="https://jonathonchen.github.io/2017/08/24/css兼容/" data-id="cj6qa1n0b0001eswqyboo0gvb" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://jonathonchen.github.io/2017/08/24/css兼容/" data-id="cj6qa8pga0001zswqtqj62egu" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -466,7 +592,7 @@
 
 </div>
 
-    <a data-url="https://jonathonchen.github.io/2017/08/24/深入理解HTTP协议（转）/" data-id="cj6qa1n19000beswq6mxhqukf" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://jonathonchen.github.io/2017/08/24/深入理解HTTP协议（转）/" data-id="cj6qa8ph3000bzswqg329krq9" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -677,7 +803,7 @@ superagent也支持复合请求,比如你想上传一个带有你的姓名和邮
 
 </div>
 
-    <a data-url="https://jonathonchen.github.io/2017/08/24/批处理HTTP模块SuperAgent/" data-id="cj6qa1n18000aeswqqws307oo" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://jonathonchen.github.io/2017/08/24/批处理HTTP模块SuperAgent/" data-id="cj6qa8pgx0009zswqcccg589o" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -808,7 +934,7 @@ superagent也支持复合请求,比如你想上传一个带有你的姓名和邮
 
 </div>
 
-    <a data-url="https://jonathonchen.github.io/2017/08/24/Node.js的学习--使用cheerio抓取网页数据/" data-id="cj6qa1n050000eswqjp9xbwjp" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://jonathonchen.github.io/2017/08/24/Node.js的学习--使用cheerio抓取网页数据/" data-id="cj6qa8pg30000zswq4d9o1mif" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -940,7 +1066,7 @@ superagent也支持复合请求,比如你想上传一个带有你的姓名和邮
 
 </div>
 
-    <a data-url="https://jonathonchen.github.io/2017/08/24/iis部署/" data-id="cj6qa1n0k0004eswqggrplq01" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://jonathonchen.github.io/2017/08/24/iis部署/" data-id="cj6qa8pgl0005zswqs8v1bs8f" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -1153,7 +1279,7 @@ superagent也支持复合请求,比如你想上传一个带有你的姓名和邮
 
 </div>
 
-    <a data-url="https://jonathonchen.github.io/2017/08/24/git远程操作/" data-id="cj6qa1n0f0002eswqqhdysm3o" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://jonathonchen.github.io/2017/08/24/git远程操作/" data-id="cj6qa8pgd0002zswqk97t8uma" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -1279,7 +1405,7 @@ superagent也支持复合请求,比如你想上传一个带有你的姓名和邮
 
 </div>
 
-    <a data-url="https://jonathonchen.github.io/2017/08/24/mongose中间件/" data-id="cj6qa1n0n0005eswq0tctz5z4" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://jonathonchen.github.io/2017/08/24/mongose中间件/" data-id="cj6qa8pgi0004zswqalsm6x9i" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -1411,7 +1537,7 @@ superagent也支持复合请求,比如你想上传一个带有你的姓名和邮
 
 </div>
 
-    <a data-url="https://jonathonchen.github.io/2017/08/24/vue.生命周期/" data-id="cj6qa1n110008eswqjwb6p8kp" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://jonathonchen.github.io/2017/08/24/vue.生命周期/" data-id="cj6qa8pgw0008zswqlhzp7w5m" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -1542,7 +1668,7 @@ superagent也支持复合请求,比如你想上传一个带有你的姓名和邮
 
 </div>
 
-    <a data-url="https://jonathonchen.github.io/2017/08/24/懒加载/" data-id="cj6qa1n140009eswqsf0qrzqz" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://jonathonchen.github.io/2017/08/24/懒加载/" data-id="cj6qa8ph1000azswq2tful6s9" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -1620,182 +1746,6 @@ superagent也支持复合请求,比如你想上传一个带有你的姓名和邮
 
 
 
-    <article id="post-闭包" class="article article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
-        
-        
-            <header class="article-header">
-                
-    
-        <h1 itemprop="name">
-            <a class="article-title" href="/2017/08/24/闭包/">JavaScript深入之闭包(转)</a>
-        </h1>
-    
-
-                
-                    <div class="article-meta">
-                        
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/2017/08/24/闭包/">
-            <time datetime="2017-08-24T03:00:10.217Z" itemprop="datePublished">2017-08-24</time>
-        </a>
-    </div>
-
-
-                        
-                        
-                    </div>
-                
-            </header>
-        
-        
-        <div class="article-entry" itemprop="articleBody">
-        
-            
-            <h1 id="JavaScript深入之闭包"><a href="#JavaScript深入之闭包" class="headerlink" title="JavaScript深入之闭包"></a>JavaScript深入之闭包</h1><blockquote>
-<p>介绍理论上的闭包和实践上的闭包，以及从作用域链的角度解析经典的闭包题。</p>
-</blockquote>
-<h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><h3 id="MDN-对闭包的定义为："><a href="#MDN-对闭包的定义为：" class="headerlink" title="MDN 对闭包的定义为："></a>MDN 对闭包的定义为：</h3><blockquote>
-<p>闭包是指那些能够访问自由变量的函数。</p>
-</blockquote>
-<h2 id="那什么是自由变量呢？"><a href="#那什么是自由变量呢？" class="headerlink" title="那什么是自由变量呢？"></a>那什么是自由变量呢？</h2><blockquote>
-<p>自由变量是指在函数中使用的，但既不是函数参数也不是函数的局部变量的变量。</p>
-</blockquote>
-<p>由此，我们可以看出闭包共有两部分组成：</p>
-<blockquote>
-<p>闭包 = 函数 + 函数能够访问的自由变量</p>
-</blockquote>
-<h2 id="举个例子"><a href="#举个例子" class="headerlink" title="举个例子"></a>举个例子</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">var a = 1;</div><div class="line"></div><div class="line">function foo() &#123;</div><div class="line">    console.log(a);</div><div class="line">&#125;</div><div class="line"></div><div class="line">foo();</div></pre></td></tr></table></figure>
-<p>foo 函数可以访问变量 a，但是 a 既不是 foo 函数的局部变量，也不是 foo 函数的参数，所以 a 就是自由变量。</p>
-<p>那么，函数 foo + foo 函数访问的自由变量 a 不就是构成了一个闭包嘛……</p>
-<p>还真是这样的！</p>
-<p>所以在《JavaScript权威指南》中就讲到：从技术的角度讲，所有的JavaScript函数都是闭包。</p>
-<p>咦，这怎么跟我们平时看到的讲到的闭包不一样呢！？</p>
-<p>别着急，这是理论上的闭包，其实还有一个实践角度上的闭包，让我们看看汤姆大叔翻译的关于闭包的文章中的定义：</p>
-<p>ECMAScript中，闭包指的是：</p>
-<blockquote>
-<p>1.从理论角度：所有的函数。因为它们都在创建的时候就将上层上下文的数据保存起来了。哪怕是简单的全局变量也是如此，因为函数中访问全局变量就相当于是在访问自由变量，这个时候使用最外层的作用域。<br>  2.从实践角度：以下函数才算是闭包：<br>        (1).即使创建它的上下文已经销毁，它仍然存在（比如，内部函数从父函数中返回）<br>        (2).在代码中引用了自由变量</p>
-</blockquote>
-<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">var scope = &quot;global scope&quot;;</div><div class="line">function checkscope()&#123;</div><div class="line">    var scope = &quot;local scope&quot;;</div><div class="line">    function f()&#123;</div><div class="line">        return scope;</div><div class="line">    &#125;</div><div class="line">    return f;</div><div class="line">&#125;</div><div class="line"></div><div class="line">var foo = checkscope();</div><div class="line">foo();</div></pre></td></tr></table></figure>
-<blockquote>
-<p>首先我们要分析一下这段代码中执行上下文栈和执行上下文的变化情况。</p>
-</blockquote>
-<p>另一个与这段代码相似的例子，在《JavaScript深入之执行上下文》中有着非常详细的分析。如果看不懂以下的执行过程，建议先阅读这篇文章。</p>
-<p>这里直接给出简要的执行过程：</p>
-<pre><code>进入全局代码，创建全局执行上下文，全局执行上下文压入执行上下文栈
-全局执行上下文初始化
-执行 checkscope 函数，创建 checkscope 函数执行上下文，checkscope 执行上下文被压入执行上下文栈
-checkscope 执行上下文初始化，创建变量对象、作用域链、this等
-checkscope 函数执行完毕，checkscope 执行上下文从执行上下文栈中弹出
-执行 f 函数，创建 f 函数执行上下文，f 执行上下文被压入执行上下文栈
-f 执行上下文初始化，创建变量对象、作用域链、this等
-f 函数执行完毕，f 函数上下文从执行上下文栈中弹出
-</code></pre><p>了解到这个过程，我们应该思考一个问题，那就是：</p>
-<p>当 f 函数执行的时候，checkscope 函数上下文已经被销毁了啊(即从执行上下文栈中被弹出)，怎么还会读取到 checkscope 作用域下的 scope 值呢？</p>
-<p>以上的代码，要是转换成 PHP，就会报错，因为在 PHP 中，f 函数只能读取到自己作用域和全局作用域里的值，所以读不到 checkscope 下的 scope 值。(这段我问的PHP同事……)</p>
-<p>然而 JavaScript 却是可以的！</p>
-<h2 id="必刷题"><a href="#必刷题" class="headerlink" title="必刷题"></a>必刷题</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">var data = [];</div><div class="line"></div><div class="line">for (var i = 0; i &lt; 3; i++) &#123;</div><div class="line">  data[i] = function () &#123;</div><div class="line">    console.log(i);</div><div class="line">  &#125;;</div><div class="line">&#125;</div><div class="line"></div><div class="line">data[0]();</div><div class="line">data[1]();</div><div class="line">data[2]();</div></pre></td></tr></table></figure>
-<p>答案是都是 3，让我们分析一下原因：</p>
-<p>当执行到 data[0] 函数之前，此时全局上下文的 VO 为：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">globalContext = &#123;</div><div class="line">    VO: &#123;</div><div class="line">        data: [...],</div><div class="line">        i: 3</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>当执行 data[0] 函数的时候，data[0] 函数的作用域链为：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">data[0]Context = &#123;</div><div class="line">    Scope: [AO, globalContext.VO]</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>data[0]Context 的 AO 并没有 i 值，所以会从 globalContext.VO 中查找，i 为 3，所以打印的结果就是 3。</p>
-<p>data[1] 和 data[2] 是一样的道理。</p>
-<p>所以让我们改成闭包看看：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">var data = [];</div><div class="line"></div><div class="line">for (var i = 0; i &lt; 3; i++) &#123;</div><div class="line">  data[i] = (function (i) &#123;</div><div class="line">        return function()&#123;</div><div class="line">            console.log(i);</div><div class="line">        &#125;</div><div class="line">  &#125;)(i);</div><div class="line">&#125;</div><div class="line"></div><div class="line">data[0]();</div><div class="line">data[1]();</div><div class="line">data[2]();</div></pre></td></tr></table></figure></p>
-<p>当执行到 data[0] 函数之前，此时全局上下文的 VO 为：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">globalContext = &#123;</div><div class="line">    VO: &#123;</div><div class="line">        data: [...],</div><div class="line">        i: 3</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>跟没改之前一模一样。</p>
-<p>当执行 data[0] 函数的时候，data[0] 函数的作用域链发生了改变：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">data[0]Context = &#123;</div><div class="line">    Scope: [AO, 匿名函数Context.AO globalContext.VO]</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>匿名函数执行上下文的 AO 为：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">匿名函数Context = &#123;</div><div class="line">    AO: &#123;</div><div class="line">        arguments: &#123;</div><div class="line">            0: 0,</div><div class="line">            length: 1</div><div class="line">        &#125;,</div><div class="line">        i: 0</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>data[0]Context 的 AO 并没有 i 值，所以会沿着作用域链从匿名函数 Context.AO 中查找，这时候就会找 i 为 0，找到了就不会往 globalContext.VO 中查找了，即使 globalContext.VO 也有 i 的值(值为3)，所以打印的结果就是 0。</p>
-<p>data[1] 和 data[2] 是一样的道理。</p>
-<h2 id="转自-https-juejin-im-post-590159d8a22b9d0065c2d918"><a href="#转自-https-juejin-im-post-590159d8a22b9d0065c2d918" class="headerlink" title="转自 https://juejin.im/post/590159d8a22b9d0065c2d918"></a>转自 <a href="https://juejin.im/post/590159d8a22b9d0065c2d918" target="_blank" rel="external">https://juejin.im/post/590159d8a22b9d0065c2d918</a></h2>
-        
-        </div>
-        <footer class="article-footer">
-            <div class="share-container">
-
-
-
-</div>
-
-    <a data-url="https://jonathonchen.github.io/2017/08/24/闭包/" data-id="cj6qa1n1b000ceswq5rbvug60" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
-<script>
-    (function ($) {
-        // Prevent duplicate binding
-        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
-            __SHARE_BUTTON_BINDED__ = true;
-        } else {
-            return;
-        }
-        $('body').on('click', function() {
-            $('.article-share-box.on').removeClass('on');
-        }).on('click', '.article-share-link', function(e) {
-            e.stopPropagation();
-
-            var $this = $(this),
-                url = $this.attr('data-url'),
-                encodedUrl = encodeURIComponent(url),
-                id = 'article-share-box-' + $this.attr('data-id'),
-                offset = $this.offset(),
-                box;
-
-            if ($('#' + id).length) {
-                box = $('#' + id);
-
-                if (box.hasClass('on')){
-                    box.removeClass('on');
-                    return;
-                }
-            } else {
-                var html = [
-                    '<div id="' + id + '" class="article-share-box">',
-                        '<input class="article-share-input" value="' + url + '">',
-                        '<div class="article-share-links">',
-                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
-                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
-                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
-                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
-                        '</div>',
-                    '</div>'
-                ].join('');
-
-              box = $(html);
-
-              $('body').append(box);
-            }
-
-            $('.article-share-box.on').hide();
-
-            box.css({
-                top: offset.top + 25,
-                left: offset.left
-            }).addClass('on');
-
-        }).on('click', '.article-share-box', function (e) {
-            e.stopPropagation();
-        }).on('click', '.article-share-box-input', function () {
-            $(this).select();
-        }).on('click', '.article-share-box-link', function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-
-            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
-        });
-    })(jQuery);
-</script>
-
-            
-    
-        <a href="https://jonathonchen.github.io/2017/08/24/闭包/#comments" class="article-comment-link">评论</a>
-    
-
-        </footer>
-    </div>
-    
-</article>
-
-
-
     <nav id="page-nav">
         <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">下一页 &raquo;</a>
     </nav>
@@ -1809,6 +1759,25 @@ f 函数执行完毕，f 函数上下文从执行上下文栈中弹出
         <h3 class="widget-title">最新文章</h3>
         <div class="widget">
             <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2017/08/24/解决https请求下发送http请求问题 /" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2017/08/24/解决https请求下发送http请求问题 /" class="title">解决https请求下发送http请求问题</a></p>
+                            <p class="item-date"><time datetime="2017-08-24T10:02:58.022Z" itemprop="datePublished">2017-08-24</time></p>
+                        </div>
+                    </li>
                 
                     <li>
                         
@@ -1886,25 +1855,6 @@ f 函数执行完毕，f 函数上下文从执行上下文栈中弹出
                         </div>
                     </li>
                 
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2017/08/24/iis部署/" class="thumbnail">
-    
-    
-        <span class="thumbnail-image thumbnail-none"></span>
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"></p>
-                            <p class="item-title"><a href="/2017/08/24/iis部署/" class="title">IIS部署</a></p>
-                            <p class="item-date"><time datetime="2017-08-24T03:46:48.674Z" itemprop="datePublished">2017-08-24</time></p>
-                        </div>
-                    </li>
-                
             </ul>
         </div>
     </div>
@@ -1916,7 +1866,7 @@ f 函数执行完毕，f 函数上下文从执行上下文栈中弹出
     <div class="widget-wrap">
         <h3 class="widget-title">归档</h3>
         <div class="widget">
-            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">八月 2017</a><span class="archive-list-count">13</span></li></ul>
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">八月 2017</a><span class="archive-list-count">14</span></li></ul>
         </div>
     </div>
 
