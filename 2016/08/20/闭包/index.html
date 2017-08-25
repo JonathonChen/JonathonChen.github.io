@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <meta charset="utf-8">
+    
+    <title>JavaScript深入之闭包(转) | 博客</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="JavaScript深入之闭包 介绍理论上的闭包和实践上的闭包，以及从作用域链的角度解析经典的闭包题。  定义MDN 对闭包的定义为： 闭包是指那些能够访问自由变量的函数。  那什么是自由变量呢？ 自由变量是指在函数中使用的，但既不是函数参数也不是函数的局部变量的变量。  由此，我们可以看出闭包共有两部分组成：  闭包 = 函数 + 函数能够访问的自由变量  举个例子1234567var a =">
+<meta name="keywords" content="js">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaScript深入之闭包(转)">
+<meta property="og:url" content="https://jonathonchen.github.io/2016/08/20/闭包/index.html">
+<meta property="og:site_name" content="博客">
+<meta property="og:description" content="JavaScript深入之闭包 介绍理论上的闭包和实践上的闭包，以及从作用域链的角度解析经典的闭包题。  定义MDN 对闭包的定义为： 闭包是指那些能够访问自由变量的函数。  那什么是自由变量呢？ 自由变量是指在函数中使用的，但既不是函数参数也不是函数的局部变量的变量。  由此，我们可以看出闭包共有两部分组成：  闭包 = 函数 + 函数能够访问的自由变量  举个例子1234567var a =">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://st2.originoo.cn/1008768/8238/i/950/depositphotos_82386882-stock-photo-work-versus-life-road-sign.jpg">
+<meta property="og:updated_time" content="2017-08-25T12:43:39.284Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JavaScript深入之闭包(转)">
+<meta name="twitter:description" content="JavaScript深入之闭包 介绍理论上的闭包和实践上的闭包，以及从作用域链的角度解析经典的闭包题。  定义MDN 对闭包的定义为： 闭包是指那些能够访问自由变量的函数。  那什么是自由变量呢？ 自由变量是指在函数中使用的，但既不是函数参数也不是函数的局部变量的变量。  由此，我们可以看出闭包共有两部分组成：  闭包 = 函数 + 函数能够访问的自由变量  举个例子1234567var a =">
+<meta name="twitter:image" content="http://st2.originoo.cn/1008768/8238/i/950/depositphotos_82386882-stock-photo-work-versus-life-road-sign.jpg">
+    
+
+    
+        <link rel="alternate" href="/" title="博客" type="application/atom+xml" />
+    
+
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/open-sans/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/2.1.3/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+    
+    
+
+
+</head>
+
+<body>
+    <div id="container">
+        <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="/" id="logo">
+                <i class="logo"></i>
+                <span class="site-title">博客</span>
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="/.">首页</a>
+                
+                    <a class="main-nav-link" href="/archives">归档</a>
+                
+                    <a class="main-nav-link" href="/categories">目录</a>
+                
+                    <a class="main-nav-link" href="/tags">标签</a>
+                
+                    <a class="main-nav-link" href="/about">关于</a>
+                
+            </nav>
+            
+                
+                <nav id="sub-nav">
+                    <div class="profile" id="profile-nav">
+                        <a id="profile-anchor" href="javascript:;">
+                            <img class="avatar" src="https://timgsa.baidu.com/timg?image&amp;quality=80&amp;size=b9999_10000&amp;sec=1503671977721&amp;di=ffb3d003d1c3e3585ee6e6887ad86963&amp;imgtype=0&amp;src=http%3A%2F%2F2t.5068.com%2Fuploads%2Fallimg%2F151126%2F1-151126164146-50.jpg" />
+                            <i class="fa fa-caret-down"></i>
+                        </a>
+                    </div>
+                </nav>
+            
+            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="想要查找什么..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="/.">首页</a></td>
+                
+                    <td><a class="main-nav-link" href="/archives">归档</a></td>
+                
+                    <td><a class="main-nav-link" href="/categories">目录</a></td>
+                
+                    <td><a class="main-nav-link" href="/tags">标签</a></td>
+                
+                    <td><a class="main-nav-link" href="/about">关于</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</header>
+
+        <div class="outer">
+            
+                
+
+<aside id="profile">
+    <div class="inner profile-inner">
+        <div class="base-info profile-block">
+            <img id="avatar" src="https://timgsa.baidu.com/timg?image&amp;quality=80&amp;size=b9999_10000&amp;sec=1503671977721&amp;di=ffb3d003d1c3e3585ee6e6887ad86963&amp;imgtype=0&amp;src=http%3A%2F%2F2t.5068.com%2Fuploads%2Fallimg%2F151126%2F1-151126164146-50.jpg" />
+            <h2 id="name">陈志远</h2>
+            <h3 id="title">Web前端开发</h3>
+            <span id="location"><i class="fa fa-map-marker"></i>中国厦门</span>
+            <a id="follow" target="_blank" href="https://github.com/JonathonChen">关注我</a>
+        </div>
+        <div class="article-info profile-block">
+            <div class="article-info-block">
+                19
+                <span>文章</span>
+            </div>
+            <div class="article-info-block">
+                14
+                <span>标签</span>
+            </div>
+        </div>
+        
+        <div class="profile-block social-links">
+            <table>
+                <tr>
+                    
+                    
+                    <td>
+                        <a href="https://github.com/JonathonChen" target="_blank" title="github" class=tooltip>
+                            <i class="fa fa-github"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/" target="_blank" title="twitter" class=tooltip>
+                            <i class="fa fa-twitter"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/" target="_blank" title="facebook" class=tooltip>
+                            <i class="fa fa-facebook"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/" target="_blank" title="dribbble" class=tooltip>
+                            <i class="fa fa-dribbble"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/" target="_blank" title="rss" class=tooltip>
+                            <i class="fa fa-rss"></i>
+                        </a>
+                    </td>
+                    
+                </tr>
+            </table>
+        </div>
+        
+    </div>
+</aside>
+
+            
+            <section id="main"><article id="post-闭包" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            
+	
+		<img src="http://st2.originoo.cn/1008768/8238/i/950/depositphotos_82386882-stock-photo-work-versus-life-road-sign.jpg" class="article-banner" />
+	
+
+
+
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+            JavaScript深入之闭包(转)
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2016/08/20/闭包/">
+            <time datetime="2016-08-19T16:00:00.000Z" itemprop="datePublished">2016-08-20</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/前端/">前端</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/js/">js</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <h1 id="JavaScript深入之闭包"><a href="#JavaScript深入之闭包" class="headerlink" title="JavaScript深入之闭包"></a>JavaScript深入之闭包</h1><blockquote>
+<p>介绍理论上的闭包和实践上的闭包，以及从作用域链的角度解析经典的闭包题。</p>
+</blockquote>
+<h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><h3 id="MDN-对闭包的定义为："><a href="#MDN-对闭包的定义为：" class="headerlink" title="MDN 对闭包的定义为："></a>MDN 对闭包的定义为：</h3><blockquote>
+<p>闭包是指那些能够访问自由变量的函数。</p>
+</blockquote>
+<h2 id="那什么是自由变量呢？"><a href="#那什么是自由变量呢？" class="headerlink" title="那什么是自由变量呢？"></a>那什么是自由变量呢？</h2><blockquote>
+<p>自由变量是指在函数中使用的，但既不是函数参数也不是函数的局部变量的变量。</p>
+</blockquote>
+<p>由此，我们可以看出闭包共有两部分组成：</p>
+<blockquote>
+<p>闭包 = 函数 + 函数能够访问的自由变量</p>
+</blockquote>
+<h2 id="举个例子"><a href="#举个例子" class="headerlink" title="举个例子"></a>举个例子</h2><figure class="highlight delphi"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> a = <span class="number">1</span>;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span><span class="params">()</span> <span class="comment">&#123;</span></span></div><div class="line"><span class="function"><span class="comment">    console.log(a);</span></span></div><div class="line"><span class="function"><span class="comment">&#125;</span></span></div><div class="line"><span class="function"></span></div><div class="line"><span class="function"><span class="title">foo</span><span class="params">()</span>;</span></div></pre></td></tr></table></figure>
+<p>foo 函数可以访问变量 a，但是 a 既不是 foo 函数的局部变量，也不是 foo 函数的参数，所以 a 就是自由变量。</p>
+<p>那么，函数 foo + foo 函数访问的自由变量 a 不就是构成了一个闭包嘛……</p>
+<p>还真是这样的！</p>
+<p>所以在《JavaScript权威指南》中就讲到：从技术的角度讲，所有的JavaScript函数都是闭包。</p>
+<p>咦，这怎么跟我们平时看到的讲到的闭包不一样呢！？</p>
+<p>别着急，这是理论上的闭包，其实还有一个实践角度上的闭包，让我们看看汤姆大叔翻译的关于闭包的文章中的定义：</p>
+<p>ECMAScript中，闭包指的是：</p>
+<blockquote>
+<p>1.从理论角度：所有的函数。因为它们都在创建的时候就将上层上下文的数据保存起来了。哪怕是简单的全局变量也是如此，因为函数中访问全局变量就相当于是在访问自由变量，这个时候使用最外层的作用域。<br>  2.从实践角度：以下函数才算是闭包：<br>        (1).即使创建它的上下文已经销毁，它仍然存在（比如，内部函数从父函数中返回）<br>        (2).在代码中引用了自由变量</p>
+</blockquote>
+<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><figure class="highlight actionscript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> scope = <span class="string">"global scope"</span>;</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">checkscope</span><span class="params">()</span></span>&#123;</div><div class="line">    <span class="keyword">var</span> scope = <span class="string">"local scope"</span>;</div><div class="line">    <span class="function"><span class="keyword">function</span> <span class="title">f</span><span class="params">()</span></span>&#123;</div><div class="line">        <span class="keyword">return</span> scope;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> f;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">var</span> foo = checkscope();</div><div class="line">foo();</div></pre></td></tr></table></figure>
+<blockquote>
+<p>首先我们要分析一下这段代码中执行上下文栈和执行上下文的变化情况。</p>
+</blockquote>
+<p>另一个与这段代码相似的例子，在《JavaScript深入之执行上下文》中有着非常详细的分析。如果看不懂以下的执行过程，建议先阅读这篇文章。</p>
+<p>这里直接给出简要的执行过程：</p>
+<pre><code>进入全局代码，创建全局执行上下文，全局执行上下文压入执行上下文栈
+全局执行上下文初始化
+执行 checkscope 函数，创建 checkscope 函数执行上下文，checkscope 执行上下文被压入执行上下文栈
+checkscope 执行上下文初始化，创建变量对象、作用域链、this等
+checkscope 函数执行完毕，checkscope 执行上下文从执行上下文栈中弹出
+执行 f 函数，创建 f 函数执行上下文，f 执行上下文被压入执行上下文栈
+f 执行上下文初始化，创建变量对象、作用域链、this等
+f 函数执行完毕，f 函数上下文从执行上下文栈中弹出
+</code></pre><p>了解到这个过程，我们应该思考一个问题，那就是：</p>
+<p>当 f 函数执行的时候，checkscope 函数上下文已经被销毁了啊(即从执行上下文栈中被弹出)，怎么还会读取到 checkscope 作用域下的 scope 值呢？</p>
+<p>以上的代码，要是转换成 PHP，就会报错，因为在 PHP 中，f 函数只能读取到自己作用域和全局作用域里的值，所以读不到 checkscope 下的 scope 值。(这段我问的PHP同事……)</p>
+<p>然而 JavaScript 却是可以的！</p>
+<h2 id="必刷题"><a href="#必刷题" class="headerlink" title="必刷题"></a>必刷题</h2><figure class="highlight haskell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="title">var</span> <span class="class"><span class="keyword">data</span> = [];</span></div><div class="line"></div><div class="line"><span class="title">for</span> (var i = <span class="number">0</span>; i &lt; <span class="number">3</span>; i++) &#123;</div><div class="line">  <span class="class"><span class="keyword">data</span>[i] = function () &#123;</span></div><div class="line"><span class="class">    <span class="title">console</span>.<span class="title">log</span>(<span class="title">i</span>);</span></div><div class="line"><span class="class">  &#125;;</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">data</span>[0]();</span></div><div class="line"><span class="class"><span class="keyword">data</span>[1]();</span></div><div class="line"><span class="class"><span class="keyword">data</span>[2]();</span></div></pre></td></tr></table></figure>
+<p>答案是都是 3，让我们分析一下原因：</p>
+<p>当执行到 data[0] 函数之前，此时全局上下文的 VO 为：<br><figure class="highlight dts"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">globalContext = &#123;</div><div class="line"><span class="symbol">    VO:</span> &#123;</div><div class="line"><span class="symbol">        data:</span> [...],</div><div class="line"><span class="symbol">        i:</span> <span class="number">3</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>当执行 data[0] 函数的时候，data[0] 函数的作用域链为：<br><figure class="highlight haskell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">data</span>[0]<span class="type">Context</span> = &#123;</span></div><div class="line"><span class="class">    <span class="type">Scope</span>: [<span class="type">AO</span>, <span class="title">globalContext</span>.<span class="type">VO</span>]</span></div><div class="line"><span class="class">&#125;</span></div></pre></td></tr></table></figure></p>
+<p>data[0]Context 的 AO 并没有 i 值，所以会从 globalContext.VO 中查找，i 为 3，所以打印的结果就是 3。</p>
+<p>data[1] 和 data[2] 是一样的道理。</p>
+<p>所以让我们改成闭包看看：<br><figure class="highlight haskell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="title">var</span> <span class="class"><span class="keyword">data</span> = [];</span></div><div class="line"></div><div class="line"><span class="title">for</span> (var i = <span class="number">0</span>; i &lt; <span class="number">3</span>; i++) &#123;</div><div class="line">  <span class="class"><span class="keyword">data</span>[i] = (<span class="title">function</span> (<span class="title">i</span>) &#123;</span></div><div class="line"><span class="class">        <span class="title">return</span> <span class="title">function</span>()&#123;</span></div><div class="line"><span class="class">            <span class="title">console</span>.<span class="title">log</span>(<span class="title">i</span>);</span></div><div class="line"><span class="class">        &#125;</span></div><div class="line">  &#125;)(i);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">data</span>[0]();</span></div><div class="line"><span class="class"><span class="keyword">data</span>[1]();</span></div><div class="line"><span class="class"><span class="keyword">data</span>[2]();</span></div></pre></td></tr></table></figure></p>
+<p>当执行到 data[0] 函数之前，此时全局上下文的 VO 为：<br><figure class="highlight dts"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">globalContext = &#123;</div><div class="line"><span class="symbol">    VO:</span> &#123;</div><div class="line"><span class="symbol">        data:</span> [...],</div><div class="line"><span class="symbol">        i:</span> <span class="number">3</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>跟没改之前一模一样。</p>
+<p>当执行 data[0] 函数的时候，data[0] 函数的作用域链发生了改变：<br><figure class="highlight haskell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">data</span>[0]<span class="type">Context</span> = &#123;</span></div><div class="line"><span class="class">    <span class="type">Scope</span>: [<span class="type">AO</span>, 匿名函数<span class="type">Context</span>.<span class="type">AO</span> <span class="title">globalContext</span>.<span class="type">VO</span>]</span></div><div class="line"><span class="class">&#125;</span></div></pre></td></tr></table></figure></p>
+<p>匿名函数执行上下文的 AO 为：<br><figure class="highlight dts"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">匿名函数Context = &#123;</div><div class="line"><span class="symbol">    AO:</span> &#123;</div><div class="line"><span class="symbol">        arguments:</span> &#123;</div><div class="line">            <span class="number">0</span>: <span class="number">0</span>,</div><div class="line"><span class="symbol">            length:</span> <span class="number">1</span></div><div class="line">        &#125;,</div><div class="line"><span class="symbol">        i:</span> <span class="number">0</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>data[0]Context 的 AO 并没有 i 值，所以会沿着作用域链从匿名函数 Context.AO 中查找，这时候就会找 i 为 0，找到了就不会往 globalContext.VO 中查找了，即使 globalContext.VO 也有 i 的值(值为3)，所以打印的结果就是 0。</p>
+<p>data[1] 和 data[2] 是一样的道理。</p>
+<h2 id="转自-https-juejin-im-post-590159d8a22b9d0065c2d918"><a href="#转自-https-juejin-im-post-590159d8a22b9d0065c2d918" class="headerlink" title="转自 https://juejin.im/post/590159d8a22b9d0065c2d918"></a>转自 <a href="https://juejin.im/post/590159d8a22b9d0065c2d918" target="_blank" rel="external">https://juejin.im/post/590159d8a22b9d0065c2d918</a></h2>
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="https://jonathonchen.github.io/2016/08/20/闭包/" data-id="cj6rur8f0000zxswqiyot9cbq" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+        <a href="https://jonathonchen.github.io/2016/08/20/闭包/#comments" class="article-comment-link">评论</a>
+    
+
+        </footer>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2016/08/25/解决https请求下发送http请求问题 /" id="article-nav-newer" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">上一篇</strong>
+            <div class="article-nav-title">
+                
+                    解决https请求下发送http请求问题
+                
+            </div>
+        </a>
+    
+    
+        <a href="/2016/08/15/git远程操作/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">下一篇</strong>
+            <div class="article-nav-title">git远程操作</div>
+        </a>
+    
+</nav>
+
+
+    
+</article>
+
+
+    
+    
+        <section id="comments">
+    <div id="lv-container" data-id="city" data-uid=MTAyMC8zMDIyOC82Nzgz></div>
+</section>
+	
+
+</section>
+            
+                
+<aside id="sidebar">
+   
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">最新文章</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2017/02/01/js变量和函数的提升/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://st.originoo.cn/2632165/4026/i/950/depositphotos_40264933-stock-photo-young-plant.jpg)" alt="js变量提升和函数提升" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/前端/">前端</a></p>
+                            <p class="item-title"><a href="/2017/02/01/js变量和函数的提升/" class="title">js变量提升和函数提升</a></p>
+                            <p class="item-date"><time datetime="2017-01-31T16:00:00.000Z" itemprop="datePublished">2017-02-01</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2017/01/30/js变量的只声明不赋值/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://st3.originoo.cn/3591429/12987/i/950/depositphotos_129873842-stock-photo-best-friends-in-amusement-park.jpg)" alt="js变量的只声明不赋值" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/前端/">前端</a></p>
+                            <p class="item-title"><a href="/2017/01/30/js变量的只声明不赋值/" class="title">js变量的只声明不赋值</a></p>
+                            <p class="item-date"><time datetime="2017-01-29T16:00:00.000Z" itemprop="datePublished">2017-01-30</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2017/01/13/js作用域和作用域链/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://www.gratisography.com/pictures/299_1.jpg)" alt="js作用域和作用域链" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/前端/">前端</a></p>
+                            <p class="item-title"><a href="/2017/01/13/js作用域和作用域链/" class="title">js作用域和作用域链</a></p>
+                            <p class="item-date"><time datetime="2017-01-12T16:00:00.000Z" itemprop="datePublished">2017-01-13</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2016/12/29/js你所不知道的预编译/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://st2.originoo.cn/2332949/5930/i/950/depositphotos_59309355-stock-photo-laptop-on-wooden-table-blue.jpg)" alt="js你说不知道的编译" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/前端/">前端</a></p>
+                            <p class="item-title"><a href="/2016/12/29/js你所不知道的预编译/" class="title">js你说不知道的编译</a></p>
+                            <p class="item-date"><time datetime="2016-12-28T16:00:00.000Z" itemprop="datePublished">2016-12-29</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2016/12/29/mongose中间件/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://www.gratisography.com/pictures/316_1.jpg)" alt="mongodb mongoose node中间件增删改查方法" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/数据库/">数据库</a></p>
+                            <p class="item-title"><a href="/2016/12/29/mongose中间件/" class="title">mongodb mongoose node中间件增删改查方法</a></p>
+                            <p class="item-date"><time datetime="2016-12-28T16:00:00.000Z" itemprop="datePublished">2016-12-29</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">分类</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Http/">Http</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Node/">Node</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Node/爬虫/">爬虫</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端/">前端</a><span class="category-list-count">12</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据库/">数据库</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/服务器/">服务器</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/版本管理/">版本管理</a><span class="category-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">归档</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">十二月 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">二月 2016</a><span class="archive-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">标签</h3>
+        <div class="widget">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/">CSS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cheerio/">cheerio</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http请求/">http请求</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/">js</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lazyload/">lazyload</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongodb/">mongodb</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue/">vue</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/中间件/">中间件</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/代理/">代理</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/懒加载/">懒加载</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/爬虫/">爬虫</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/跨域/">跨域</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/页面请求/">页面请求</a><span class="tag-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">标签云</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/CSS/" style="font-size: 10px;">CSS</a> <a href="/tags/cheerio/" style="font-size: 10px;">cheerio</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/http请求/" style="font-size: 10px;">http请求</a> <a href="/tags/js/" style="font-size: 20px;">js</a> <a href="/tags/lazyload/" style="font-size: 10px;">lazyload</a> <a href="/tags/mongodb/" style="font-size: 10px;">mongodb</a> <a href="/tags/vue/" style="font-size: 15px;">vue</a> <a href="/tags/中间件/" style="font-size: 10px;">中间件</a> <a href="/tags/代理/" style="font-size: 10px;">代理</a> <a href="/tags/懒加载/" style="font-size: 10px;">懒加载</a> <a href="/tags/爬虫/" style="font-size: 10px;">爬虫</a> <a href="/tags/跨域/" style="font-size: 10px;">跨域</a> <a href="/tags/页面请求/" style="font-size: 10px;">页面请求</a>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">链接</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="http://hexo.io">Hexo</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+    
+    <div id="toTop" class="fa fa-angle-up"></div>
+</aside>
+
+            
+        </div>
+        <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            &copy; 2017 陈志远<br>
+            Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="http://github.com/ppoffice">PPOffice</a>
+        </div>
+    </div>
+</footer>
+        
+    
+    
+    <!-- 来必力City版安装代码 -->
+    <script type="text/javascript">
+     (function(d, s) {
+         var j, e = d.getElementsByTagName(s)[0];
+
+         if (typeof LivereTower === 'function') { return; }
+
+         j = d.createElement(s);
+         j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+         j.async = true;
+
+         e.parentNode.insertBefore(j, e);
+     })(document, 'script');
+    </script>
+  <noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
+  <!-- City版安装代码已完成 -->
+
+
+
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+</html>

@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <meta charset="utf-8">
+    
+    <title>v-model本质（以底部导航切换为例子） | 博客</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="v-modelv-model本质是1&amp;lt;input type=&quot;text&quot; v-bind:value=&quot;dataA&quot; v-on:input=&quot;dataA = $event.target.value&quot; /&amp;gt; 1.Index页面该页面包含了m-tabbar和m-tabbar-item组件，目的是实现底部tab切换m-tabbar传入 v-mode:”select”实际上是v-bind:val">
+<meta name="keywords" content="vue">
+<meta property="og:type" content="article">
+<meta property="og:title" content="v-model本质（以底部导航切换为例子）">
+<meta property="og:url" content="https://jonathonchen.github.io/2016/10/25/v-model/index.html">
+<meta property="og:site_name" content="博客">
+<meta property="og:description" content="v-modelv-model本质是1&amp;lt;input type=&quot;text&quot; v-bind:value=&quot;dataA&quot; v-on:input=&quot;dataA = $event.target.value&quot; /&amp;gt; 1.Index页面该页面包含了m-tabbar和m-tabbar-item组件，目的是实现底部tab切换m-tabbar传入 v-mode:”select”实际上是v-bind:val">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://www.gratisography.com/pictures/410_1.jpg">
+<meta property="og:updated_time" content="2017-08-25T13:04:10.494Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="v-model本质（以底部导航切换为例子）">
+<meta name="twitter:description" content="v-modelv-model本质是1&amp;lt;input type=&quot;text&quot; v-bind:value=&quot;dataA&quot; v-on:input=&quot;dataA = $event.target.value&quot; /&amp;gt; 1.Index页面该页面包含了m-tabbar和m-tabbar-item组件，目的是实现底部tab切换m-tabbar传入 v-mode:”select”实际上是v-bind:val">
+<meta name="twitter:image" content="http://www.gratisography.com/pictures/410_1.jpg">
+    
+
+    
+        <link rel="alternate" href="/" title="博客" type="application/atom+xml" />
+    
+
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/open-sans/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/2.1.3/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+    
+    
+
+
+</head>
+
+<body>
+    <div id="container">
+        <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="/" id="logo">
+                <i class="logo"></i>
+                <span class="site-title">博客</span>
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="/.">首页</a>
+                
+                    <a class="main-nav-link" href="/archives">归档</a>
+                
+                    <a class="main-nav-link" href="/categories">目录</a>
+                
+                    <a class="main-nav-link" href="/tags">标签</a>
+                
+                    <a class="main-nav-link" href="/about">关于</a>
+                
+            </nav>
+            
+                
+                <nav id="sub-nav">
+                    <div class="profile" id="profile-nav">
+                        <a id="profile-anchor" href="javascript:;">
+                            <img class="avatar" src="https://timgsa.baidu.com/timg?image&amp;quality=80&amp;size=b9999_10000&amp;sec=1503671977721&amp;di=ffb3d003d1c3e3585ee6e6887ad86963&amp;imgtype=0&amp;src=http%3A%2F%2F2t.5068.com%2Fuploads%2Fallimg%2F151126%2F1-151126164146-50.jpg" />
+                            <i class="fa fa-caret-down"></i>
+                        </a>
+                    </div>
+                </nav>
+            
+            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="想要查找什么..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="/.">首页</a></td>
+                
+                    <td><a class="main-nav-link" href="/archives">归档</a></td>
+                
+                    <td><a class="main-nav-link" href="/categories">目录</a></td>
+                
+                    <td><a class="main-nav-link" href="/tags">标签</a></td>
+                
+                    <td><a class="main-nav-link" href="/about">关于</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</header>
+
+        <div class="outer">
+            
+                
+
+<aside id="profile">
+    <div class="inner profile-inner">
+        <div class="base-info profile-block">
+            <img id="avatar" src="https://timgsa.baidu.com/timg?image&amp;quality=80&amp;size=b9999_10000&amp;sec=1503671977721&amp;di=ffb3d003d1c3e3585ee6e6887ad86963&amp;imgtype=0&amp;src=http%3A%2F%2F2t.5068.com%2Fuploads%2Fallimg%2F151126%2F1-151126164146-50.jpg" />
+            <h2 id="name">陈志远</h2>
+            <h3 id="title">Web前端开发</h3>
+            <span id="location"><i class="fa fa-map-marker"></i>中国厦门</span>
+            <a id="follow" target="_blank" href="https://github.com/JonathonChen">关注我</a>
+        </div>
+        <div class="article-info profile-block">
+            <div class="article-info-block">
+                19
+                <span>文章</span>
+            </div>
+            <div class="article-info-block">
+                14
+                <span>标签</span>
+            </div>
+        </div>
+        
+        <div class="profile-block social-links">
+            <table>
+                <tr>
+                    
+                    
+                    <td>
+                        <a href="https://github.com/JonathonChen" target="_blank" title="github" class=tooltip>
+                            <i class="fa fa-github"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/" target="_blank" title="twitter" class=tooltip>
+                            <i class="fa fa-twitter"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/" target="_blank" title="facebook" class=tooltip>
+                            <i class="fa fa-facebook"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/" target="_blank" title="dribbble" class=tooltip>
+                            <i class="fa fa-dribbble"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/" target="_blank" title="rss" class=tooltip>
+                            <i class="fa fa-rss"></i>
+                        </a>
+                    </td>
+                    
+                </tr>
+            </table>
+        </div>
+        
+    </div>
+</aside>
+
+            
+            <section id="main"><article id="post-v-model" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            
+	
+		<img src="http://www.gratisography.com/pictures/410_1.jpg" class="article-banner" />
+	
+
+
+
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+            v-model本质（以底部导航切换为例子）
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2016/10/25/v-model/">
+            <time datetime="2016-10-24T16:00:00.000Z" itemprop="datePublished">2016-10-25</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/前端/">前端</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/vue/">vue</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <h1 id="v-model"><a href="#v-model" class="headerlink" title="v-model"></a>v-model</h1><h3 id="v-model本质是"><a href="#v-model本质是" class="headerlink" title="v-model本质是"></a>v-model本质是</h3><figure class="highlight routeros"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;input <span class="attribute">type</span>=<span class="string">"text"</span> v-bind:<span class="attribute">value</span>=<span class="string">"dataA"</span> v-on:<span class="attribute">input</span>=<span class="string">"dataA = <span class="variable">$event</span>.target.value"</span> /&gt;</div></pre></td></tr></table></figure>
+<h2 id="1-Index页面"><a href="#1-Index页面" class="headerlink" title="1.Index页面"></a>1.Index页面</h2><h3 id="该页面包含了m-tabbar和m-tabbar-item组件，目的是实现底部tab切换"><a href="#该页面包含了m-tabbar和m-tabbar-item组件，目的是实现底部tab切换" class="headerlink" title="该页面包含了m-tabbar和m-tabbar-item组件，目的是实现底部tab切换"></a>该页面包含了m-tabbar和m-tabbar-item组件，目的是实现底部tab切换</h3><h3 id="m-tabbar传入-v-mode-”select”实际上是v-bind-value-”select”-v-on-input-”select-event-target-value”"><a href="#m-tabbar传入-v-mode-”select”实际上是v-bind-value-”select”-v-on-input-”select-event-target-value”" class="headerlink" title="m-tabbar传入 v-mode:”select”实际上是v-bind:value=”select” v-on:input=”select = $event.target.value”"></a>m-tabbar传入 v-mode:”select”实际上是v-bind:value=”select” v-on:input=”select = $event.target.value”</h3><h4 id="v-bind-value-”select”传入的props-父-gt-子"><a href="#v-bind-value-”select”传入的props-父-gt-子" class="headerlink" title="v-bind:value=”select”传入的props(父-&gt;子)"></a>v-bind:value=”select”传入的props(父-&gt;子)</h4><h4 id="v-on-input-”select-event-target-value”-监听-emit-‘input’-…"><a href="#v-on-input-”select-event-target-value”-监听-emit-‘input’-…" class="headerlink" title="v-on:input=”select = $event.target.value” 监听$emit(‘input’,…)"></a>v-on:input=”select = $event.target.value” 监听$emit(‘input’,…)</h4><h4 id="v-model-数据双向绑定"><a href="#v-model-数据双向绑定" class="headerlink" title="v-model 数据双向绑定"></a>v-model 数据双向绑定</h4><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">div</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">m-tabbar</span> <span class="attr">v-model</span>=<span class="string">"select"</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">m-tabbar-item</span> <span class="attr">id</span>=<span class="string">'tab1'</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"../assets/images/ic_tab_home_normal.png"</span> <span class="attr">alt</span>=<span class="string">""</span> <span class="attr">slot</span>=<span class="string">"icon-normal"</span>&gt;</span> </div><div class="line">        <span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"../assets/images/ic_tab_home_active.png"</span> <span class="attr">alt</span>=<span class="string">""</span> <span class="attr">slot</span>=<span class="string">"icon-active"</span>&gt;</span></div><div class="line">        首页</div><div class="line">      <span class="tag">&lt;/<span class="name">m-tabbar-item</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">m-tabbar-item</span> <span class="attr">id</span>=<span class="string">'tab2'</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"../assets/images/ic_tab_subject_normal.png"</span> <span class="attr">alt</span>=<span class="string">""</span> <span class="attr">slot</span>=<span class="string">"icon-normal"</span>&gt;</span> </div><div class="line">        <span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"../assets/images/ic_tab_subject_active.png"</span> <span class="attr">alt</span>=<span class="string">""</span> <span class="attr">slot</span>=<span class="string">"icon-active"</span>&gt;</span> </div><div class="line">        书影音</div><div class="line">      <span class="tag">&lt;/<span class="name">m-tabbar-item</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">m-tabbar-item</span> <span class="attr">id</span>=<span class="string">'tab3'</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"../assets/images/ic_tab_status_normal.png"</span> <span class="attr">alt</span>=<span class="string">""</span> <span class="attr">slot</span>=<span class="string">"icon-normal"</span>&gt;</span> </div><div class="line">        <span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"../assets/images/ic_tab_status_active.png"</span> <span class="attr">alt</span>=<span class="string">""</span> <span class="attr">slot</span>=<span class="string">"icon-active"</span>&gt;</span> </div><div class="line">        广播</div><div class="line">      <span class="tag">&lt;/<span class="name">m-tabbar-item</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">m-tabbar-item</span> <span class="attr">id</span>=<span class="string">'tab4'</span>&gt;</span></div><div class="line">          <span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"../assets/images/ic_tab_group_normal.png"</span> <span class="attr">alt</span>=<span class="string">""</span> <span class="attr">slot</span>=<span class="string">"icon-normal"</span>&gt;</span> </div><div class="line">          <span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"../assets/images/ic_tab_group_active.png"</span> <span class="attr">alt</span>=<span class="string">""</span> <span class="attr">slot</span>=<span class="string">"icon-active"</span>&gt;</span> </div><div class="line">        小组</div><div class="line">      <span class="tag">&lt;/<span class="name">m-tabbar-item</span>&gt;</span></div><div class="line">       <span class="tag">&lt;<span class="name">m-tabbar-item</span> <span class="attr">id</span>=<span class="string">'tab5'</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"../assets/images/ic_tab_profile_normal.png"</span> <span class="attr">alt</span>=<span class="string">""</span> <span class="attr">slot</span>=<span class="string">"icon-normal"</span>&gt;</span> </div><div class="line">        <span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"../assets/images/ic_tab_profile_active.png"</span> <span class="attr">alt</span>=<span class="string">""</span> <span class="attr">slot</span>=<span class="string">"icon-active"</span>&gt;</span> </div><div class="line">        我的</div><div class="line">      <span class="tag">&lt;/<span class="name">m-tabbar-item</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">m-tabbar</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined"></span></div><div class="line"><span class="javascript">  <span class="keyword">import</span> mTabbar <span class="keyword">from</span> <span class="string">'../components/tabbar'</span></span></div><div class="line"><span class="javascript">  <span class="keyword">import</span> mTabbarItem <span class="keyword">from</span> <span class="string">'../components/tabbar-item'</span></span></div><div class="line"><span class="javascript">  <span class="keyword">export</span> <span class="keyword">default</span> &#123;</span></div><div class="line"><span class="actionscript">    name: <span class="string">'index'</span>,</span></div><div class="line"><span class="undefined">    components: &#123;</span></div><div class="line"><span class="undefined">      mTabbar,</span></div><div class="line"><span class="undefined">      mTabbarItem</span></div><div class="line"><span class="undefined">    &#125;,</span></div><div class="line"><span class="undefined">    data()&#123;</span></div><div class="line"><span class="actionscript">        <span class="keyword">return</span>&#123;</span></div><div class="line"><span class="actionscript">            select:<span class="string">'tab1'</span></span></div><div class="line"><span class="undefined">        &#125;</span></div><div class="line"><span class="undefined">    &#125;,</span></div><div class="line"><span class="undefined">    watch:&#123;</span></div><div class="line"><span class="actionscript">        select:<span class="function"><span class="keyword">function</span><span class="params">()</span></span>&#123;</span></div><div class="line"><span class="javascript">            <span class="built_in">console</span>.log(<span class="keyword">this</span>.select);</span></div><div class="line"><span class="undefined">        &#125;</span></div><div class="line"><span class="undefined">    &#125;</span></div><div class="line"><span class="undefined">  &#125;</span></div><div class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div></pre></td></tr></table></figure>
+<h2 id="1-父组件"><a href="#1-父组件" class="headerlink" title="1.父组件"></a>1.父组件</h2><h3 id="接收v-bind-value属性"><a href="#接收v-bind-value属性" class="headerlink" title="接收v-bind:value属性"></a>接收v-bind:value属性</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"m-tabbar"</span>&gt;</span></div><div class="line">       <span class="tag">&lt;<span class="name">slot</span>&gt;</span><span class="tag">&lt;/<span class="name">slot</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined"></span></div><div class="line"><span class="undefined"></span></div><div class="line"><span class="javascript"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span></div><div class="line"><span class="actionscript">    props:[<span class="string">'value'</span>]</span></div><div class="line"><span class="undefined">&#125;</span></div><div class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">style</span> <span class="attr">lang</span>=<span class="string">"less"</span>&gt;</span><span class="undefined"></span></div><div class="line"><span class="css"><span class="selector-class">.m-tabbar</span>&#123;</span></div><div class="line"><span class="undefined">    display: flex;</span></div><div class="line"><span class="undefined">    flex-direction: row;</span></div><div class="line"><span class="undefined">    position: fixed;</span></div><div class="line"><span class="undefined">    bottom: 0;</span></div><div class="line"><span class="undefined">    left: 0;</span></div><div class="line"><span class="undefined">    right: 0;</span></div><div class="line"><span class="undefined">    width: 100%;</span></div><div class="line"><span class="undefined">    overflow: hidden;</span></div><div class="line"><span class="undefined">    height: 50px;</span></div><div class="line"><span class="css">    <span class="selector-tag">background</span>: <span class="selector-id">#fff</span>;</span></div><div class="line"><span class="css">    <span class="selector-tag">border-top</span>: 1<span class="selector-tag">px</span> <span class="selector-tag">solid</span> <span class="selector-id">#e4e4e4</span>;</span></div><div class="line"><span class="undefined">&#125;</span></div><div class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></div></pre></td></tr></table></figure>
+<h2 id="2-子组件"><a href="#2-子组件" class="headerlink" title="2.子组件"></a>2.子组件</h2><h3 id="接收id属性值，通过-parent-emit-‘input’-id-向父组件传递当前点击id的值，父组件由on来接收"><a href="#接收id属性值，通过-parent-emit-‘input’-id-向父组件传递当前点击id的值，父组件由on来接收" class="headerlink" title="接收id属性值，通过$parent.$emit(‘input’,id)向父组件传递当前点击id的值，父组件由on来接收"></a>接收id属性值，通过$parent.$emit(‘input’,id)向父组件传递当前点击id的值，父组件由on来接收</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></div><div class="line">     <span class="tag">&lt;<span class="name">a</span> <span class="attr">class</span>=<span class="string">"m-tabbar-item"</span> <span class="attr">:class</span>=<span class="string">"&#123;'is-active':isActive&#125;"</span> @<span class="attr">click</span>=<span class="string">"$parent.$emit('input',id)"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"m-tabbar-item-icon"</span> <span class="attr">v-show</span>=<span class="string">"!isActive"</span>&gt;</span><span class="tag">&lt;<span class="name">slot</span> <span class="attr">name</span>=<span class="string">"icon-normal"</span>&gt;</span><span class="tag">&lt;/<span class="name">slot</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"m-tabbar-item-icon"</span> <span class="attr">v-show</span>=<span class="string">"isActive"</span>&gt;</span><span class="tag">&lt;<span class="name">slot</span> <span class="attr">name</span>=<span class="string">"icon-active"</span>&gt;</span><span class="tag">&lt;/<span class="name">slot</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"m-tabbar-item-text"</span>&gt;</span><span class="tag">&lt;<span class="name">slot</span>&gt;</span><span class="tag">&lt;/<span class="name">slot</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">a</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined"></span></div><div class="line"><span class="javascript"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span></div><div class="line"><span class="actionscript">  props:[<span class="string">'id'</span>],</span></div><div class="line"><span class="undefined">  computed: &#123;</span></div><div class="line"><span class="undefined">    isActive()&#123;</span></div><div class="line"><span class="actionscript">      <span class="keyword">if</span>(<span class="keyword">this</span>.$parent.value===<span class="keyword">this</span>.id)&#123;</span></div><div class="line"><span class="actionscript">        <span class="keyword">return</span> <span class="literal">true</span>;</span></div><div class="line"><span class="undefined">      &#125;</span></div><div class="line"><span class="undefined">    &#125;</span></div><div class="line"><span class="undefined">  &#125;</span></div><div class="line"><span class="undefined">&#125;</span></div><div class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">style</span> <span class="attr">lang</span>=<span class="string">"less"</span>&gt;</span><span class="undefined"></span></div><div class="line"><span class="css"><span class="selector-class">.m-tabbar-item</span>&#123;</span></div><div class="line"><span class="undefined">    flex: 1;</span></div><div class="line"><span class="undefined">    text-align: center;</span></div><div class="line"><span class="css">    <span class="selector-class">.m-tabbar-item-icon</span>&#123;</span></div><div class="line"><span class="undefined">        display: block;</span></div><div class="line"><span class="undefined">        padding-top: 2px;</span></div><div class="line"><span class="undefined">        img&#123;</span></div><div class="line"><span class="undefined">            width: 28px;</span></div><div class="line"><span class="undefined">            height: 28px;</span></div><div class="line"><span class="undefined">        &#125;</span></div><div class="line"><span class="undefined"></span></div><div class="line"><span class="undefined">    &#125;</span></div><div class="line"><span class="css">    <span class="selector-class">.m-tabbar-item-text</span>&#123;</span></div><div class="line"><span class="undefined">        display: block;</span></div><div class="line"><span class="undefined">        font-size: 10px;</span></div><div class="line"><span class="css">        <span class="selector-tag">color</span>:<span class="selector-id">#949494</span>;</span></div><div class="line"><span class="undefined">    &#125;</span></div><div class="line"><span class="css">    &amp;<span class="selector-class">.is-active</span>&#123;</span></div><div class="line"><span class="css">        <span class="selector-class">.m-tabbar-item-text</span>&#123;</span></div><div class="line"><span class="css">            <span class="selector-tag">color</span>: <span class="selector-id">#42bd56</span>;</span></div><div class="line"><span class="undefined">        &#125;</span></div><div class="line"><span class="undefined">    &#125;</span></div><div class="line"><span class="undefined">&#125;</span></div><div class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></div></pre></td></tr></table></figure>
+
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="https://jonathonchen.github.io/2016/10/25/v-model/" data-id="cj6rusb700003pwwqnz5q6a6i" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+        <a href="https://jonathonchen.github.io/2016/10/25/v-model/#comments" class="article-comment-link">评论</a>
+    
+
+        </footer>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2016/11/02/vue loading组件/" id="article-nav-newer" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">上一篇</strong>
+            <div class="article-nav-title">
+                
+                    vue loading加载动画组件
+                
+            </div>
+        </a>
+    
+    
+        <a href="/2016/10/03/iis部署/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">下一篇</strong>
+            <div class="article-nav-title">IIS部署</div>
+        </a>
+    
+</nav>
+
+
+    
+</article>
+
+
+    
+    
+        <section id="comments">
+    <div id="lv-container" data-id="city" data-uid=MTAyMC8zMDIyOC82Nzgz></div>
+</section>
+	
+
+</section>
+            
+                
+<aside id="sidebar">
+   
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">最新文章</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2017/02/01/js变量和函数的提升/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://st.originoo.cn/2632165/4026/i/950/depositphotos_40264933-stock-photo-young-plant.jpg)" alt="js变量提升和函数提升" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/前端/">前端</a></p>
+                            <p class="item-title"><a href="/2017/02/01/js变量和函数的提升/" class="title">js变量提升和函数提升</a></p>
+                            <p class="item-date"><time datetime="2017-01-31T16:00:00.000Z" itemprop="datePublished">2017-02-01</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2017/01/30/js变量的只声明不赋值/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://st3.originoo.cn/3591429/12987/i/950/depositphotos_129873842-stock-photo-best-friends-in-amusement-park.jpg)" alt="js变量的只声明不赋值" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/前端/">前端</a></p>
+                            <p class="item-title"><a href="/2017/01/30/js变量的只声明不赋值/" class="title">js变量的只声明不赋值</a></p>
+                            <p class="item-date"><time datetime="2017-01-29T16:00:00.000Z" itemprop="datePublished">2017-01-30</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2017/01/13/js作用域和作用域链/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://www.gratisography.com/pictures/299_1.jpg)" alt="js作用域和作用域链" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/前端/">前端</a></p>
+                            <p class="item-title"><a href="/2017/01/13/js作用域和作用域链/" class="title">js作用域和作用域链</a></p>
+                            <p class="item-date"><time datetime="2017-01-12T16:00:00.000Z" itemprop="datePublished">2017-01-13</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2016/12/29/js你所不知道的预编译/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://st2.originoo.cn/2332949/5930/i/950/depositphotos_59309355-stock-photo-laptop-on-wooden-table-blue.jpg)" alt="js你说不知道的编译" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/前端/">前端</a></p>
+                            <p class="item-title"><a href="/2016/12/29/js你所不知道的预编译/" class="title">js你说不知道的编译</a></p>
+                            <p class="item-date"><time datetime="2016-12-28T16:00:00.000Z" itemprop="datePublished">2016-12-29</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2016/12/29/mongose中间件/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://www.gratisography.com/pictures/316_1.jpg)" alt="mongodb mongoose node中间件增删改查方法" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/数据库/">数据库</a></p>
+                            <p class="item-title"><a href="/2016/12/29/mongose中间件/" class="title">mongodb mongoose node中间件增删改查方法</a></p>
+                            <p class="item-date"><time datetime="2016-12-28T16:00:00.000Z" itemprop="datePublished">2016-12-29</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">分类</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Http/">Http</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Node/">Node</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Node/爬虫/">爬虫</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端/">前端</a><span class="category-list-count">12</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据库/">数据库</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/服务器/">服务器</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/版本管理/">版本管理</a><span class="category-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">归档</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">十二月 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">二月 2016</a><span class="archive-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">标签</h3>
+        <div class="widget">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/">CSS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cheerio/">cheerio</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http请求/">http请求</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/">js</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lazyload/">lazyload</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongodb/">mongodb</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue/">vue</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/中间件/">中间件</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/代理/">代理</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/懒加载/">懒加载</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/爬虫/">爬虫</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/跨域/">跨域</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/页面请求/">页面请求</a><span class="tag-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">标签云</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/CSS/" style="font-size: 10px;">CSS</a> <a href="/tags/cheerio/" style="font-size: 10px;">cheerio</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/http请求/" style="font-size: 10px;">http请求</a> <a href="/tags/js/" style="font-size: 20px;">js</a> <a href="/tags/lazyload/" style="font-size: 10px;">lazyload</a> <a href="/tags/mongodb/" style="font-size: 10px;">mongodb</a> <a href="/tags/vue/" style="font-size: 15px;">vue</a> <a href="/tags/中间件/" style="font-size: 10px;">中间件</a> <a href="/tags/代理/" style="font-size: 10px;">代理</a> <a href="/tags/懒加载/" style="font-size: 10px;">懒加载</a> <a href="/tags/爬虫/" style="font-size: 10px;">爬虫</a> <a href="/tags/跨域/" style="font-size: 10px;">跨域</a> <a href="/tags/页面请求/" style="font-size: 10px;">页面请求</a>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">链接</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="http://hexo.io">Hexo</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+    
+    <div id="toTop" class="fa fa-angle-up"></div>
+</aside>
+
+            
+        </div>
+        <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            &copy; 2017 陈志远<br>
+            Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="http://github.com/ppoffice">PPOffice</a>
+        </div>
+    </div>
+</footer>
+        
+    
+    
+    <!-- 来必力City版安装代码 -->
+    <script type="text/javascript">
+     (function(d, s) {
+         var j, e = d.getElementsByTagName(s)[0];
+
+         if (typeof LivereTower === 'function') { return; }
+
+         j = d.createElement(s);
+         j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+         j.async = true;
+
+         e.parentNode.insertBefore(j, e);
+     })(document, 'script');
+    </script>
+  <noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
+  <!-- City版安装代码已完成 -->
+
+
+
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+</html>

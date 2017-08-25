@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <meta charset="utf-8">
+    
+    <title>vue loading加载动画组件 | 博客</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="实现效果实现了加载是颜色的变化以及进度条的变化 下面是代码实现  html页面测试  123456789101112131415161718192021222324252627282930313233343536373839404142434445&amp;lt;!DOCTYPE html&amp;gt;&amp;lt;html&amp;gt;&amp;lt;style&amp;gt;  .spinner &amp;#123;    transfor">
+<meta name="keywords" content="vue">
+<meta property="og:type" content="article">
+<meta property="og:title" content="vue loading加载动画组件">
+<meta property="og:url" content="https://jonathonchen.github.io/2016/11/02/vue loading组件/index.html">
+<meta property="og:site_name" content="博客">
+<meta property="og:description" content="实现效果实现了加载是颜色的变化以及进度条的变化 下面是代码实现  html页面测试  123456789101112131415161718192021222324252627282930313233343536373839404142434445&amp;lt;!DOCTYPE html&amp;gt;&amp;lt;html&amp;gt;&amp;lt;style&amp;gt;  .spinner &amp;#123;    transfor">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://www.gratisography.com/pictures/433_1.jpg">
+<meta property="og:updated_time" content="2017-08-25T13:04:31.889Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="vue loading加载动画组件">
+<meta name="twitter:description" content="实现效果实现了加载是颜色的变化以及进度条的变化 下面是代码实现  html页面测试  123456789101112131415161718192021222324252627282930313233343536373839404142434445&amp;lt;!DOCTYPE html&amp;gt;&amp;lt;html&amp;gt;&amp;lt;style&amp;gt;  .spinner &amp;#123;    transfor">
+<meta name="twitter:image" content="http://www.gratisography.com/pictures/433_1.jpg">
+    
+
+    
+        <link rel="alternate" href="/" title="博客" type="application/atom+xml" />
+    
+
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/open-sans/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/2.1.3/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+    
+    
+
+
+</head>
+
+<body>
+    <div id="container">
+        <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="/" id="logo">
+                <i class="logo"></i>
+                <span class="site-title">博客</span>
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="/.">首页</a>
+                
+                    <a class="main-nav-link" href="/archives">归档</a>
+                
+                    <a class="main-nav-link" href="/categories">目录</a>
+                
+                    <a class="main-nav-link" href="/tags">标签</a>
+                
+                    <a class="main-nav-link" href="/about">关于</a>
+                
+            </nav>
+            
+                
+                <nav id="sub-nav">
+                    <div class="profile" id="profile-nav">
+                        <a id="profile-anchor" href="javascript:;">
+                            <img class="avatar" src="https://timgsa.baidu.com/timg?image&amp;quality=80&amp;size=b9999_10000&amp;sec=1503671977721&amp;di=ffb3d003d1c3e3585ee6e6887ad86963&amp;imgtype=0&amp;src=http%3A%2F%2F2t.5068.com%2Fuploads%2Fallimg%2F151126%2F1-151126164146-50.jpg" />
+                            <i class="fa fa-caret-down"></i>
+                        </a>
+                    </div>
+                </nav>
+            
+            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="想要查找什么..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="/.">首页</a></td>
+                
+                    <td><a class="main-nav-link" href="/archives">归档</a></td>
+                
+                    <td><a class="main-nav-link" href="/categories">目录</a></td>
+                
+                    <td><a class="main-nav-link" href="/tags">标签</a></td>
+                
+                    <td><a class="main-nav-link" href="/about">关于</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</header>
+
+        <div class="outer">
+            
+                
+
+<aside id="profile">
+    <div class="inner profile-inner">
+        <div class="base-info profile-block">
+            <img id="avatar" src="https://timgsa.baidu.com/timg?image&amp;quality=80&amp;size=b9999_10000&amp;sec=1503671977721&amp;di=ffb3d003d1c3e3585ee6e6887ad86963&amp;imgtype=0&amp;src=http%3A%2F%2F2t.5068.com%2Fuploads%2Fallimg%2F151126%2F1-151126164146-50.jpg" />
+            <h2 id="name">陈志远</h2>
+            <h3 id="title">Web前端开发</h3>
+            <span id="location"><i class="fa fa-map-marker"></i>中国厦门</span>
+            <a id="follow" target="_blank" href="https://github.com/JonathonChen">关注我</a>
+        </div>
+        <div class="article-info profile-block">
+            <div class="article-info-block">
+                19
+                <span>文章</span>
+            </div>
+            <div class="article-info-block">
+                14
+                <span>标签</span>
+            </div>
+        </div>
+        
+        <div class="profile-block social-links">
+            <table>
+                <tr>
+                    
+                    
+                    <td>
+                        <a href="https://github.com/JonathonChen" target="_blank" title="github" class=tooltip>
+                            <i class="fa fa-github"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/" target="_blank" title="twitter" class=tooltip>
+                            <i class="fa fa-twitter"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/" target="_blank" title="facebook" class=tooltip>
+                            <i class="fa fa-facebook"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/" target="_blank" title="dribbble" class=tooltip>
+                            <i class="fa fa-dribbble"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/" target="_blank" title="rss" class=tooltip>
+                            <i class="fa fa-rss"></i>
+                        </a>
+                    </td>
+                    
+                </tr>
+            </table>
+        </div>
+        
+    </div>
+</aside>
+
+            
+            <section id="main"><article id="post-vue loading组件" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            
+	
+		<img src="http://www.gratisography.com/pictures/433_1.jpg" class="article-banner" />
+	
+
+
+
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+            vue loading加载动画组件
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2016/11/02/vue loading组件/">
+            <time datetime="2016-11-01T16:00:00.000Z" itemprop="datePublished">2016-11-02</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/前端/">前端</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/vue/">vue</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <blockquote>
+<h2 id="实现效果"><a href="#实现效果" class="headerlink" title="实现效果"></a>实现效果</h2><pre><code>实现了加载是颜色的变化以及进度条的变化
+</code></pre><p>下面是代码实现</p>
+<ol>
+<li>html页面测试</li>
+</ol>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="undefined"></span></div><div class="line"><span class="css">  <span class="selector-class">.spinner</span> &#123;</span></div><div class="line"><span class="undefined">    transform-origin: center;</span></div><div class="line"><span class="undefined">    animation: rotator 6s linear infinite;</span></div><div class="line"><span class="css">	<span class="selector-tag">background-color</span>:<span class="selector-id">#cccccc</span>;</span></div><div class="line"><span class="css">	<span class="selector-tag">width</span><span class="selector-pseudo">:150px</span>;</span></div><div class="line"><span class="css">	<span class="selector-tag">height</span><span class="selector-pseudo">:150px</span>;</span></div><div class="line"><span class="undefined">  &#125;</span></div><div class="line"><span class="css">  @<span class="keyword">keyframes</span> rotator &#123;</span></div><div class="line"><span class="css">    0% &#123; <span class="attribute">transform</span>: <span class="built_in">rotate</span>(0deg); &#125;</span></div><div class="line"><span class="css">    100% &#123; <span class="attribute">transform</span>: <span class="built_in">rotate</span>(270deg); &#125;</span></div><div class="line"><span class="undefined">  &#125;</span></div><div class="line"><span class="css">  <span class="selector-class">.path</span> &#123;</span></div><div class="line"><span class="undefined">    stroke-dasharray: 187;</span></div><div class="line"><span class="undefined">    stroke-dashoffset: 0;</span></div><div class="line"><span class="undefined">    transform-origin: center;</span></div><div class="line"><span class="undefined">    animation: dash 2s ease-in-out infinite, colors 4s ease-in-out infinite;</span></div><div class="line"><span class="undefined">  &#125;</span></div><div class="line"><span class="undefined"></span></div><div class="line"><span class="css">  @<span class="keyword">keyframes</span> colors &#123;</span></div><div class="line"><span class="css">    0% &#123; <span class="attribute">stroke</span>: <span class="number">#4285F4</span>; &#125;</span></div><div class="line"><span class="css">    25% &#123; <span class="attribute">stroke</span>: <span class="number">#DE3E35</span>; &#125;</span></div><div class="line"><span class="css">    50% &#123; <span class="attribute">stroke</span>: <span class="number">#F7C223</span>; &#125;</span></div><div class="line"><span class="css">    75% &#123; <span class="attribute">stroke</span>: <span class="number">#1B9A59</span>; &#125;</span></div><div class="line"><span class="css">    100% &#123; <span class="attribute">stroke</span>: <span class="number">#4285F4</span>; &#125;</span></div><div class="line"><span class="undefined">  &#125;</span></div><div class="line"><span class="css">  @<span class="keyword">keyframes</span> dash &#123;</span></div><div class="line"><span class="css">    0% &#123; <span class="attribute">stroke-dashoffset</span>: <span class="number">187</span>; &#125;</span></div><div class="line"><span class="undefined">    50% &#123;</span></div><div class="line"><span class="css">      <span class="selector-tag">stroke-dashoffset</span>: 93<span class="selector-class">.5</span>;</span></div><div class="line"><span class="undefined">    &#125;</span></div><div class="line"><span class="undefined">    100% &#123;</span></div><div class="line"><span class="undefined">      stroke-dashoffset: 0;</span></div><div class="line"><span class="undefined">    &#125;</span></div><div class="line"><span class="undefined">  &#125;</span></div><div class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line"> <span class="tag">&lt;<span class="name">svg</span> <span class="attr">class</span>=<span class="string">"spinner"</span> <span class="attr">xmlns</span>=<span class="string">"http://www.w3.org/2000/svg"</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">circle</span> <span class="attr">class</span>=<span class="string">"path"</span>  <span class="attr">stroke</span>=<span class="string">"red"</span> <span class="attr">fill</span>=<span class="string">"none"</span> <span class="attr">stroke-width</span>=<span class="string">"6"</span>  <span class="attr">cx</span>=<span class="string">"75"</span> <span class="attr">cy</span>=<span class="string">"75"</span> <span class="attr">r</span>=<span class="string">"30"</span>&gt;</span><span class="tag">&lt;/<span class="name">circle</span>&gt;</span></div><div class="line"> <span class="tag">&lt;/<span class="name">svg</span>&gt;</span></div><div class="line"> </div><div class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure>
+</blockquote>
+<p><img src="/2017/02/01/vue loading组件/Video_2017-08-19_213646.gif"></p>
+<blockquote>
+<ol>
+<li>vue Loading组件</li>
+</ol>
+<figure class="highlight arduino"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div></pre></td><td class="code"><pre><div class="line">&lt;<span class="keyword">template</span>&gt;</div><div class="line">  &lt;div class=<span class="string">"loading-component"</span>&gt;</div><div class="line">    &lt;svg class=<span class="string">"spinner"</span> :style=<span class="string">"loadingSize"</span> viewBox=<span class="string">"0 0 66 66"</span> xmlns=<span class="string">"http://www.w3.org/2000/svg"</span>&gt;</div><div class="line">      &lt;<span class="built_in">circle</span> class=<span class="string">"path"</span> :style=<span class="string">"loadingColor"</span> <span class="built_in">fill</span>=<span class="string">"none"</span> :<span class="built_in">stroke</span>-<span class="built_in">width</span>=<span class="string">"stroke"</span>  cx=<span class="string">"33"</span> cy=<span class="string">"33"</span> r=<span class="string">"30"</span>&gt;&lt;/<span class="built_in">circle</span>&gt;</div><div class="line">    &lt;/svg&gt;</div><div class="line">  &lt;/div&gt;</div><div class="line">&lt;/<span class="keyword">template</span>&gt;</div><div class="line"></div><div class="line">&lt;script type=<span class="string">"text/ecmascript-6"</span>&gt;</div><div class="line">  <span class="keyword">export</span> <span class="built_in">default</span> &#123;</div><div class="line">    props: &#123;</div><div class="line">      <span class="built_in">size</span>: &#123;</div><div class="line">        type: Number,</div><div class="line">        <span class="built_in">default</span>: <span class="number">50</span></div><div class="line">      &#125;,</div><div class="line">      <span class="built_in">stroke</span>: &#123;</div><div class="line">        type: Number,</div><div class="line">        <span class="built_in">default</span>: <span class="number">3.5</span></div><div class="line">      &#125;,</div><div class="line">      color: &#123;</div><div class="line">        type: <span class="keyword">String</span>,</div><div class="line">        <span class="built_in">default</span>: <span class="string">'#ed424b'</span></div><div class="line">      &#125;</div><div class="line">    &#125;,</div><div class="line">    computed: &#123;</div><div class="line">      loadingSize() &#123;</div><div class="line">        <span class="keyword">const</span> newSize = <span class="keyword">this</span>.<span class="built_in">size</span> + <span class="string">'px'</span></div><div class="line">        <span class="built_in">return</span> &#123;</div><div class="line">          <span class="built_in">width</span>: newSize,</div><div class="line">          <span class="built_in">height</span>: newSize</div><div class="line">        &#125;</div><div class="line">      &#125;,</div><div class="line">      loadingColor() &#123;</div><div class="line">        <span class="built_in">return</span> &#123;</div><div class="line">          <span class="built_in">stroke</span>: <span class="keyword">this</span>.color</div><div class="line">        &#125;</div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&lt;/script&gt;</div><div class="line"></div><div class="line">&lt;style lang=<span class="string">"less"</span> type=<span class="string">"text/less"</span>&gt;</div><div class="line"></div><div class="line">  .loading-component &#123;</div><div class="line">    <span class="built_in">display</span>: <span class="keyword">inline</span>-block;</div><div class="line">    pointer-events: none;</div><div class="line">    will-change: transform, opacity;</div><div class="line">    <span class="built_in">position</span>: fixed;</div><div class="line">    left: <span class="number">50</span>%;</div><div class="line">    top: <span class="number">50</span>%;</div><div class="line">    transform: translate(<span class="number">-50</span>%, <span class="number">-50</span>%);</div><div class="line">  &#125;</div><div class="line">  <span class="comment">//2 * pi * r = 188.4</span></div><div class="line">  @offset: <span class="number">187</span>;</div><div class="line">  @duration: <span class="number">1.4</span>s;</div><div class="line">  <span class="comment">//设置外层旋转形成加载的效果</span></div><div class="line">  .spinner &#123;</div><div class="line">    transform-origin: center;</div><div class="line">    animation: rotator @duration linear infinite;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  @keyframes rotator &#123;</div><div class="line">    <span class="number">0</span>% &#123; transform: rotate(<span class="number">0</span>deg); &#125;</div><div class="line">    <span class="number">100</span>% &#123; transform: rotate(<span class="number">270</span>deg); &#125;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  .path &#123;</div><div class="line">    <span class="built_in">stroke</span>-dasharray: @offset;</div><div class="line">    <span class="built_in">stroke</span>-dashoffset: <span class="number">0</span>;</div><div class="line">    transform-origin: center;</div><div class="line">    <span class="comment">// 设置颜色变化以及dash长度的变化</span></div><div class="line">    animation: dash @duration ease-in-out infinite, colors @duration ease-in-out infinite;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  @keyframes colors &#123;</div><div class="line">    <span class="number">0</span>% &#123; <span class="built_in">stroke</span>: #<span class="number">4285</span>F4; &#125;</div><div class="line">    <span class="number">25</span>% &#123; <span class="built_in">stroke</span>: #DE3E35; &#125;</div><div class="line">    <span class="number">50</span>% &#123; <span class="built_in">stroke</span>: #F7C223; &#125;</div><div class="line">    <span class="number">75</span>% &#123; <span class="built_in">stroke</span>: #<span class="number">1</span>B9A59; &#125;</div><div class="line">    <span class="number">100</span>% &#123; <span class="built_in">stroke</span>: #<span class="number">4285</span>F4; &#125;</div><div class="line">  &#125;</div><div class="line"> <span class="comment">//让空白部分慢慢减少</span></div><div class="line">  @keyframes dash &#123;</div><div class="line">    <span class="number">0</span>% &#123; <span class="built_in">stroke</span>-dashoffset: @offset; &#125;</div><div class="line">    <span class="number">50</span>% &#123;</div><div class="line">      <span class="built_in">stroke</span>-dashoffset: @offset/<span class="number">4</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="number">100</span>% &#123;</div><div class="line">      <span class="built_in">stroke</span>-dashoffset: @offset;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&lt;/style&gt;</div></pre></td></tr></table></figure></blockquote>
+
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="https://jonathonchen.github.io/2016/11/02/vue loading组件/" data-id="cj6rur8dz000oxswqxixsiymx" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+        <a href="https://jonathonchen.github.io/2016/11/02/vue loading组件/#comments" class="article-comment-link">评论</a>
+    
+
+        </footer>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2016/11/15/vue.生命周期/" id="article-nav-newer" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">上一篇</strong>
+            <div class="article-nav-title">
+                
+                    vue 生命周期
+                
+            </div>
+        </a>
+    
+    
+        <a href="/2016/10/25/v-model/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">下一篇</strong>
+            <div class="article-nav-title">v-model本质（以底部导航切换为例子）</div>
+        </a>
+    
+</nav>
+
+
+    
+</article>
+
+
+    
+    
+        <section id="comments">
+    <div id="lv-container" data-id="city" data-uid=MTAyMC8zMDIyOC82Nzgz></div>
+</section>
+	
+
+</section>
+            
+                
+<aside id="sidebar">
+   
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">最新文章</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2017/02/01/js变量和函数的提升/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://st.originoo.cn/2632165/4026/i/950/depositphotos_40264933-stock-photo-young-plant.jpg)" alt="js变量提升和函数提升" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/前端/">前端</a></p>
+                            <p class="item-title"><a href="/2017/02/01/js变量和函数的提升/" class="title">js变量提升和函数提升</a></p>
+                            <p class="item-date"><time datetime="2017-01-31T16:00:00.000Z" itemprop="datePublished">2017-02-01</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2017/01/30/js变量的只声明不赋值/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://st3.originoo.cn/3591429/12987/i/950/depositphotos_129873842-stock-photo-best-friends-in-amusement-park.jpg)" alt="js变量的只声明不赋值" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/前端/">前端</a></p>
+                            <p class="item-title"><a href="/2017/01/30/js变量的只声明不赋值/" class="title">js变量的只声明不赋值</a></p>
+                            <p class="item-date"><time datetime="2017-01-29T16:00:00.000Z" itemprop="datePublished">2017-01-30</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2017/01/13/js作用域和作用域链/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://www.gratisography.com/pictures/299_1.jpg)" alt="js作用域和作用域链" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/前端/">前端</a></p>
+                            <p class="item-title"><a href="/2017/01/13/js作用域和作用域链/" class="title">js作用域和作用域链</a></p>
+                            <p class="item-date"><time datetime="2017-01-12T16:00:00.000Z" itemprop="datePublished">2017-01-13</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2016/12/29/js你所不知道的预编译/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://st2.originoo.cn/2332949/5930/i/950/depositphotos_59309355-stock-photo-laptop-on-wooden-table-blue.jpg)" alt="js你说不知道的编译" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/前端/">前端</a></p>
+                            <p class="item-title"><a href="/2016/12/29/js你所不知道的预编译/" class="title">js你说不知道的编译</a></p>
+                            <p class="item-date"><time datetime="2016-12-28T16:00:00.000Z" itemprop="datePublished">2016-12-29</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2016/12/29/mongose中间件/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://www.gratisography.com/pictures/316_1.jpg)" alt="mongodb mongoose node中间件增删改查方法" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/数据库/">数据库</a></p>
+                            <p class="item-title"><a href="/2016/12/29/mongose中间件/" class="title">mongodb mongoose node中间件增删改查方法</a></p>
+                            <p class="item-date"><time datetime="2016-12-28T16:00:00.000Z" itemprop="datePublished">2016-12-29</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">分类</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Http/">Http</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Node/">Node</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Node/爬虫/">爬虫</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端/">前端</a><span class="category-list-count">12</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据库/">数据库</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/服务器/">服务器</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/版本管理/">版本管理</a><span class="category-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">归档</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">十二月 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">二月 2016</a><span class="archive-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">标签</h3>
+        <div class="widget">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/">CSS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cheerio/">cheerio</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http请求/">http请求</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/">js</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lazyload/">lazyload</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongodb/">mongodb</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue/">vue</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/中间件/">中间件</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/代理/">代理</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/懒加载/">懒加载</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/爬虫/">爬虫</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/跨域/">跨域</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/页面请求/">页面请求</a><span class="tag-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">标签云</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/CSS/" style="font-size: 10px;">CSS</a> <a href="/tags/cheerio/" style="font-size: 10px;">cheerio</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/http请求/" style="font-size: 10px;">http请求</a> <a href="/tags/js/" style="font-size: 20px;">js</a> <a href="/tags/lazyload/" style="font-size: 10px;">lazyload</a> <a href="/tags/mongodb/" style="font-size: 10px;">mongodb</a> <a href="/tags/vue/" style="font-size: 15px;">vue</a> <a href="/tags/中间件/" style="font-size: 10px;">中间件</a> <a href="/tags/代理/" style="font-size: 10px;">代理</a> <a href="/tags/懒加载/" style="font-size: 10px;">懒加载</a> <a href="/tags/爬虫/" style="font-size: 10px;">爬虫</a> <a href="/tags/跨域/" style="font-size: 10px;">跨域</a> <a href="/tags/页面请求/" style="font-size: 10px;">页面请求</a>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">链接</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="http://hexo.io">Hexo</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+    
+    <div id="toTop" class="fa fa-angle-up"></div>
+</aside>
+
+            
+        </div>
+        <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            &copy; 2017 陈志远<br>
+            Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="http://github.com/ppoffice">PPOffice</a>
+        </div>
+    </div>
+</footer>
+        
+    
+    
+    <!-- 来必力City版安装代码 -->
+    <script type="text/javascript">
+     (function(d, s) {
+         var j, e = d.getElementsByTagName(s)[0];
+
+         if (typeof LivereTower === 'function') { return; }
+
+         j = d.createElement(s);
+         j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+         j.async = true;
+
+         e.parentNode.insertBefore(j, e);
+     })(document, 'script');
+    </script>
+  <noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
+  <!-- City版安装代码已完成 -->
+
+
+
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+</html>
