@@ -63,6 +63,10 @@
                 
                     <a class="main-nav-link" href="/archives">归档</a>
                 
+                    <a class="main-nav-link" href="/tags">标签</a>
+                
+                    <a class="main-nav-link" href="/about">关于</a>
+                
             </nav>
             
                 
@@ -122,6 +126,10 @@
                 
                     <td><a class="main-nav-link" href="/archives">归档</a></td>
                 
+                    <td><a class="main-nav-link" href="/tags">标签</a></td>
+                
+                    <td><a class="main-nav-link" href="/about">关于</a></td>
+                
                 <td>
                     
     <div class="search-form">
@@ -149,11 +157,11 @@
         </div>
         <div class="article-info profile-block">
             <div class="article-info-block">
-                14
+                20
                 <span>文章</span>
             </div>
             <div class="article-info-block">
-                0
+                2
                 <span>标签</span>
             </div>
         </div>
@@ -237,7 +245,7 @@
             <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>  在使用vue一个多礼拜后，感觉现在还停留在初级阶段，虽然知道怎么和后端做数据交互，但是对于mounted这个挂载还不是很清楚的。放大之，对vue的生命周期不甚了解。只知道简单的使用，而不知道为什么，这对后面的踩坑是相当不利的。</p>
 <p>因为我们有时候会在几个钩子函数里做一些事情，什么时候做，在哪个函数里做，我们不清楚。</p>
 <h1 id="vue生命周期简介"><a href="#vue生命周期简介" class="headerlink" title="vue生命周期简介"></a>vue生命周期简介</h1><p><img src="vuelife.png" alt="vue生命周期"><br><img src="vuelife2.png" alt="vue生命周期"></p>
-<h1 id="生命周期探究"><a href="#生命周期探究" class="headerlink" title="生命周期探究"></a>生命周期探究</h1><p>&gt;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div></pre></td><td class="code"><pre><div class="line">&lt;!DOCTYPE html&gt;</div><div class="line">&lt;html&gt;</div><div class="line">&lt;head&gt;</div><div class="line">    &lt;title&gt;&lt;/title&gt;</div><div class="line">    &lt;script type=&quot;text/javascript&quot; src=&quot;https://cdn.jsdelivr.net/vue/2.1.3/vue.js&quot;&gt;&lt;/script&gt;</div><div class="line">&lt;/head&gt;</div><div class="line">&lt;body&gt;</div><div class="line"></div><div class="line">&lt;div id=&quot;app&quot;&gt;</div><div class="line">     &lt;p&gt;&#123;&#123; message &#125;&#125;&lt;/p&gt;</div><div class="line">&lt;/div&gt;</div><div class="line"></div><div class="line">&lt;script type=&quot;text/javascript&quot;&gt;</div><div class="line">    </div><div class="line">  var app = new Vue(&#123;</div><div class="line">      el: &apos;#app&apos;,</div><div class="line">      data: &#123;</div><div class="line">          message : &quot;xuxiao is boy&quot; </div><div class="line">      &#125;,</div><div class="line">       beforeCreate: function () &#123;</div><div class="line">                console.group(&apos;beforeCreate 创建前状态===============》&apos;);</div><div class="line">               console.log(&quot;%c%s&quot;, &quot;color:red&quot; , &quot;el     : &quot; + this.$el); //undefined</div><div class="line">               console.log(&quot;%c%s&quot;, &quot;color:red&quot;,&quot;data   : &quot; + this.$data); //undefined </div><div class="line">               console.log(&quot;%c%s&quot;, &quot;color:red&quot;,&quot;message: &quot; + this.message)  </div><div class="line">        &#125;,</div><div class="line">        created: function () &#123;</div><div class="line">            console.group(&apos;created 创建完毕状态===============》&apos;);</div><div class="line">            console.log(&quot;%c%s&quot;, &quot;color:red&quot;,&quot;el     : &quot; + this.$el); //undefined</div><div class="line">               console.log(&quot;%c%s&quot;, &quot;color:red&quot;,&quot;data   : &quot; + this.$data); //已被初始化 </div><div class="line">               console.log(&quot;%c%s&quot;, &quot;color:red&quot;,&quot;message: &quot; + this.message); //已被初始化</div><div class="line">        &#125;,</div><div class="line">        beforeMount: function () &#123;</div><div class="line">            console.group(&apos;beforeMount 挂载前状态===============》&apos;);</div><div class="line">            console.log(&quot;%c%s&quot;, &quot;color:red&quot;,&quot;el     : &quot; + (this.$el)); //已被初始化</div><div class="line">            console.log(this.$el);</div><div class="line">               console.log(&quot;%c%s&quot;, &quot;color:red&quot;,&quot;data   : &quot; + this.$data); //已被初始化  </div><div class="line">               console.log(&quot;%c%s&quot;, &quot;color:red&quot;,&quot;message: &quot; + this.message); //已被初始化  </div><div class="line">        &#125;,</div><div class="line">        mounted: function () &#123;</div><div class="line">            console.group(&apos;mounted 挂载结束状态===============》&apos;);</div><div class="line">            console.log(&quot;%c%s&quot;, &quot;color:red&quot;,&quot;el     : &quot; + this.$el); //已被初始化</div><div class="line">            console.log(this.$el);    </div><div class="line">               console.log(&quot;%c%s&quot;, &quot;color:red&quot;,&quot;data   : &quot; + this.$data); //已被初始化</div><div class="line">               console.log(&quot;%c%s&quot;, &quot;color:red&quot;,&quot;message: &quot; + this.message); //已被初始化 </div><div class="line">        &#125;,</div><div class="line">        beforeUpdate: function () &#123;</div><div class="line">            console.group(&apos;beforeUpdate 更新前状态===============》&apos;);</div><div class="line">            console.log(&quot;%c%s&quot;, &quot;color:red&quot;,&quot;el     : &quot; + this.$el);</div><div class="line">            console.log(this.$el);   </div><div class="line">               console.log(&quot;%c%s&quot;, &quot;color:red&quot;,&quot;data   : &quot; + this.$data); </div><div class="line">               console.log(&quot;%c%s&quot;, &quot;color:red&quot;,&quot;message: &quot; + this.message); </div><div class="line">        &#125;,</div><div class="line">        updated: function () &#123;</div><div class="line">            console.group(&apos;updated 更新完成状态===============》&apos;);</div><div class="line">            console.log(&quot;%c%s&quot;, &quot;color:red&quot;,&quot;el     : &quot; + this.$el);</div><div class="line">            console.log(this.$el); </div><div class="line">               console.log(&quot;%c%s&quot;, &quot;color:red&quot;,&quot;data   : &quot; + this.$data); </div><div class="line">               console.log(&quot;%c%s&quot;, &quot;color:red&quot;,&quot;message: &quot; + this.message); </div><div class="line">        &#125;,</div><div class="line">        beforeDestroy: function () &#123;</div><div class="line">            console.group(&apos;beforeDestroy 销毁前状态===============》&apos;);</div><div class="line">            console.log(&quot;%c%s&quot;, &quot;color:red&quot;,&quot;el     : &quot; + this.$el);</div><div class="line">            console.log(this.$el);    </div><div class="line">               console.log(&quot;%c%s&quot;, &quot;color:red&quot;,&quot;data   : &quot; + this.$data);</div></pre></td></tr></table></figure></p>
+<h1 id="生命周期探究"><a href="#生命周期探究" class="headerlink" title="生命周期探究"></a>生命周期探究</h1><p>&gt;<br><figure class="highlight django"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div></pre></td><td class="code"><pre><div class="line"><span class="xml"><span class="meta">&lt;!DOCTYPE html&gt;</span></span></div><div class="line"><span class="xml"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span></div><div class="line"><span class="xml"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span></div><div class="line"><span class="xml">    <span class="tag">&lt;<span class="name">title</span>&gt;</span><span class="tag">&lt;/<span class="name">title</span>&gt;</span></span></div><div class="line"><span class="xml">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span> <span class="attr">src</span>=<span class="string">"https://cdn.jsdelivr.net/vue/2.1.3/vue.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></div><div class="line"><span class="xml"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span></div><div class="line"><span class="xml"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span></div><div class="line"><span class="xml"></span></div><div class="line"><span class="xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"app"</span>&gt;</span></span></div><div class="line"><span class="xml">     <span class="tag">&lt;<span class="name">p</span>&gt;</span></span><span class="template-variable">&#123;&#123; message &#125;&#125;</span><span class="xml"><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></div><div class="line"><span class="xml"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></div><div class="line"><span class="xml"></span></div><div class="line"><span class="xml"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span><span class="undefined"></span></span></div><div class="line"><span class="xml">    </span></div><div class="line"><span class="xml">  var app = new Vue(&#123;</span></div><div class="line"><span class="xml">      el: '#app',</span></div><div class="line"><span class="xml">      data: &#123;</span></div><div class="line"><span class="xml">          message : "xuxiao is boy" </span></div><div class="line"><span class="xml">      &#125;,</span></div><div class="line"><span class="xml">       beforeCreate: function () &#123;</span></div><div class="line"><span class="xml">                console.group('beforeCreate 创建前状态===============》');</span></div><div class="line"><span class="xml">               console.log("%c%s", "color:red" , "el     : " + this.$el); //undefined</span></div><div class="line"><span class="xml">               console.log("%c%s", "color:red","data   : " + this.$data); //undefined </span></div><div class="line"><span class="xml">               console.log("%c%s", "color:red","message: " + this.message)  </span></div><div class="line"><span class="xml">        &#125;,</span></div><div class="line"><span class="xml">        created: function () &#123;</span></div><div class="line"><span class="xml">            console.group('created 创建完毕状态===============》');</span></div><div class="line"><span class="xml">            console.log("%c%s", "color:red","el     : " + this.$el); //undefined</span></div><div class="line"><span class="xml">               console.log("%c%s", "color:red","data   : " + this.$data); //已被初始化 </span></div><div class="line"><span class="xml">               console.log("%c%s", "color:red","message: " + this.message); //已被初始化</span></div><div class="line"><span class="xml">        &#125;,</span></div><div class="line"><span class="xml">        beforeMount: function () &#123;</span></div><div class="line"><span class="xml">            console.group('beforeMount 挂载前状态===============》');</span></div><div class="line"><span class="xml">            console.log("%c%s", "color:red","el     : " + (this.$el)); //已被初始化</span></div><div class="line"><span class="xml">            console.log(this.$el);</span></div><div class="line"><span class="xml">               console.log("%c%s", "color:red","data   : " + this.$data); //已被初始化  </span></div><div class="line"><span class="xml">               console.log("%c%s", "color:red","message: " + this.message); //已被初始化  </span></div><div class="line"><span class="xml">        &#125;,</span></div><div class="line"><span class="xml">        mounted: function () &#123;</span></div><div class="line"><span class="xml">            console.group('mounted 挂载结束状态===============》');</span></div><div class="line"><span class="xml">            console.log("%c%s", "color:red","el     : " + this.$el); //已被初始化</span></div><div class="line"><span class="xml">            console.log(this.$el);    </span></div><div class="line"><span class="xml">               console.log("%c%s", "color:red","data   : " + this.$data); //已被初始化</span></div><div class="line"><span class="xml">               console.log("%c%s", "color:red","message: " + this.message); //已被初始化 </span></div><div class="line"><span class="xml">        &#125;,</span></div><div class="line"><span class="xml">        beforeUpdate: function () &#123;</span></div><div class="line"><span class="xml">            console.group('beforeUpdate 更新前状态===============》');</span></div><div class="line"><span class="xml">            console.log("%c%s", "color:red","el     : " + this.$el);</span></div><div class="line"><span class="xml">            console.log(this.$el);   </span></div><div class="line"><span class="xml">               console.log("%c%s", "color:red","data   : " + this.$data); </span></div><div class="line"><span class="xml">               console.log("%c%s", "color:red","message: " + this.message); </span></div><div class="line"><span class="xml">        &#125;,</span></div><div class="line"><span class="xml">        updated: function () &#123;</span></div><div class="line"><span class="xml">            console.group('updated 更新完成状态===============》');</span></div><div class="line"><span class="xml">            console.log("%c%s", "color:red","el     : " + this.$el);</span></div><div class="line"><span class="xml">            console.log(this.$el); </span></div><div class="line"><span class="xml">               console.log("%c%s", "color:red","data   : " + this.$data); </span></div><div class="line"><span class="xml">               console.log("%c%s", "color:red","message: " + this.message); </span></div><div class="line"><span class="xml">        &#125;,</span></div><div class="line"><span class="xml">        beforeDestroy: function () &#123;</span></div><div class="line"><span class="xml">            console.group('beforeDestroy 销毁前状态===============》');</span></div><div class="line"><span class="xml">            console.log("%c%s", "color:red","el     : " + this.$el);</span></div><div class="line"><span class="xml">            console.log(this.$el);    </span></div><div class="line"><span class="xml">               console.log("%c%s", "color:red","data   : " + this.$data);</span></div></pre></td></tr></table></figure></p>
 <h2 id="create-和-mounted-相关"><a href="#create-和-mounted-相关" class="headerlink" title="create 和 mounted 相关"></a>create 和 mounted 相关</h2><blockquote>
 <p>beforecreated：el 和 data 并未初始化<br>created:完成了 data 数据的初始化，el没有<br>beforeMount：完成了 el 和 data 初始化<br>mounted ：完成挂载</p>
 </blockquote>
@@ -255,7 +263,7 @@
 
 </div>
 
-    <a data-url="https://jonathonchen.github.io/2017/08/24/vue.生命周期/" data-id="cj6qa8pgw0008zswqlhzp7w5m" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://jonathonchen.github.io/2017/08/24/vue.生命周期/" data-id="cj6rrjjo0000txcwq3064youe" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -375,6 +383,44 @@
                     <li>
                         
                         <div class="item-thumbnail">
+                            <a href="/2017/08/25/js作用域和作用域链/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2017/08/25/js作用域和作用域链/" class="title">js作用域和作用域链</a></p>
+                            <p class="item-date"><time datetime="2017-08-25T10:54:55.445Z" itemprop="datePublished">2017-08-25</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2017/08/25/js变量的只声明不赋值/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://upload-images.jianshu.io/upload_images/3305482-776049bf088bbf06.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)" alt="js变量的只声明不赋值" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2017/08/25/js变量的只声明不赋值/" class="title">js变量的只声明不赋值</a></p>
+                            <p class="item-date"><time datetime="2017-08-25T10:54:55.402Z" itemprop="datePublished">2017-08-25</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
                             <a href="/2017/08/24/解决https请求下发送http请求问题 /" class="thumbnail">
     
     
@@ -429,63 +475,46 @@
                         </div>
                     </li>
                 
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2017/08/24/批处理HTTP模块SuperAgent/" class="thumbnail">
-    
-    
-        <span class="thumbnail-image thumbnail-none"></span>
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"></p>
-                            <p class="item-title"><a href="/2017/08/24/批处理HTTP模块SuperAgent/" class="title">SUPERAGENT</a></p>
-                            <p class="item-date"><time datetime="2017-08-24T03:52:10.831Z" itemprop="datePublished">2017-08-24</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2017/08/24/Node.js的学习--使用cheerio抓取网页数据/" class="thumbnail">
-    
-    
-        <span class="thumbnail-image thumbnail-none"></span>
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"></p>
-                            <p class="item-title"><a href="/2017/08/24/Node.js的学习--使用cheerio抓取网页数据/" class="title">Node.js的学习--使用cheerio抓取网页数据</a></p>
-                            <p class="item-date"><time datetime="2017-08-24T03:49:33.357Z" itemprop="datePublished">2017-08-24</time></p>
-                        </div>
-                    </li>
-                
             </ul>
         </div>
     </div>
 
     
         
-    
-        
     <div class="widget-wrap">
-        <h3 class="widget-title">归档</h3>
+        <h3 class="widget-title">分类</h3>
         <div class="widget">
-            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">八月 2017</a><span class="archive-list-count">14</span></li></ul>
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/javascript/">javascript</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/type1/">type1</a><span class="category-list-count">1</span></li></ul>
         </div>
     </div>
 
     
         
+    <div class="widget-wrap">
+        <h3 class="widget-title">归档</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">八月 2017</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">十二月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/07/">七月 2013</a><span class="archive-list-count">1</span></li></ul>
+        </div>
+    </div>
+
     
         
+    <div class="widget-wrap">
+        <h3 class="widget-title">标签</h3>
+        <div class="widget">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/">js</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tags1/">tags1</a><span class="tag-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">标签云</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/js/" style="font-size: 20px;">js</a> <a href="/tags/tags1/" style="font-size: 10px;">tags1</a>
+        </div>
+    </div>
+
     
         
     <div class="widget-wrap widget-list">

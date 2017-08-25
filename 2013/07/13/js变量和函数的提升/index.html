@@ -3,19 +3,22 @@
 <head>
     <meta charset="utf-8">
     
-    <title>mongodb mongoose node中间件增删改查方法 | 博客</title>
+    <title>js变量提升和函数提升 | 博客</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta name="description" content="官网 http://mongoosejs.com/docs/api.html#model_Model.update  命令 1234567891011121314151617181920212223242526272829303132333435363738394041424344#model.js$whereincrementmodelModelremovesaveaggregatebulkWr">
+    <meta name="description" content="一、先抛出一个笔试题目123456789101112var a = 100;function fn() &amp;#123;    alert(a);//undefined    var a = 200;    alert(a);//200&amp;#125;fn();alert(a);//100var a;alert(a);//100var a = 300;alert(a);//300 知识点1 变量的提升 上">
+<meta name="keywords" content="tags1">
 <meta property="og:type" content="article">
-<meta property="og:title" content="mongodb mongoose node中间件增删改查方法">
-<meta property="og:url" content="https://jonathonchen.github.io/2017/08/24/mongose中间件/index.html">
+<meta property="og:title" content="js变量提升和函数提升">
+<meta property="og:url" content="https://jonathonchen.github.io/2013/07/13/js变量和函数的提升/index.html">
 <meta property="og:site_name" content="博客">
-<meta property="og:description" content="官网 http://mongoosejs.com/docs/api.html#model_Model.update  命令 1234567891011121314151617181920212223242526272829303132333435363738394041424344#model.js$whereincrementmodelModelremovesaveaggregatebulkWr">
+<meta property="og:description" content="一、先抛出一个笔试题目123456789101112var a = 100;function fn() &amp;#123;    alert(a);//undefined    var a = 200;    alert(a);//200&amp;#125;fn();alert(a);//100var a;alert(a);//100var a = 300;alert(a);//300 知识点1 变量的提升 上">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2017-08-24T03:44:22.732Z">
+<meta property="og:image" content="http://localhost:4000/css/images/avatar.png">
+<meta property="og:updated_time" content="2017-08-25T07:29:13.941Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="mongodb mongoose node中间件增删改查方法">
-<meta name="twitter:description" content="官网 http://mongoosejs.com/docs/api.html#model_Model.update  命令 1234567891011121314151617181920212223242526272829303132333435363738394041424344#model.js$whereincrementmodelModelremovesaveaggregatebulkWr">
+<meta name="twitter:title" content="js变量提升和函数提升">
+<meta name="twitter:description" content="一、先抛出一个笔试题目123456789101112var a = 100;function fn() &amp;#123;    alert(a);//undefined    var a = 200;    alert(a);//200&amp;#125;fn();alert(a);//100var a;alert(a);//100var a = 300;alert(a);//300 知识点1 变量的提升 上">
+<meta name="twitter:image" content="http://localhost:4000/css/images/avatar.png">
     
 
     
@@ -206,15 +209,23 @@
 </aside>
 
             
-            <section id="main"><article id="post-mongose中间件" class="article article-type-post" itemscope itemprop="blogPost">
+            <section id="main"><article id="post-js变量和函数的提升" class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
+        
+            
+	
+		<img src="http://localhost:4000/css/images/avatar.png" class="article-banner" />
+	
+
+
+
         
         
             <header class="article-header">
                 
     
         <h1 class="article-title" itemprop="name">
-            mongodb mongoose node中间件增删改查方法
+            js变量提升和函数提升
         </h1>
     
 
@@ -223,14 +234,24 @@
                         
     <div class="article-date">
         <i class="fa fa-calendar"></i>
-        <a href="/2017/08/24/mongose中间件/">
-            <time datetime="2017-08-24T03:41:43.826Z" itemprop="datePublished">2017-08-24</time>
+        <a href="/2013/07/13/js变量和函数的提升/">
+            <time datetime="2013-07-13T12:46:25.000Z" itemprop="datePublished">2013-07-13</time>
         </a>
     </div>
 
 
                         
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/type1/">type1</a>
+    </div>
+
                         
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/tags1/">tags1</a>
+    </div>
+
                     </div>
                 
             </header>
@@ -239,11 +260,17 @@
         <div class="article-entry" itemprop="articleBody">
         
             
-            <h1 id="官网"><a href="#官网" class="headerlink" title="官网"></a>官网</h1><blockquote>
-<p><a href="http://mongoosejs.com/docs/api.html#model_Model.update" target="_blank" rel="external">http://mongoosejs.com/docs/api.html#model_Model.update</a></p>
+            <h1 id="一、先抛出一个笔试题目"><a href="#一、先抛出一个笔试题目" class="headerlink" title="一、先抛出一个笔试题目"></a>一、先抛出一个笔试题目</h1><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> a = <span class="number">100</span>;</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    alert(a);<span class="comment">//undefined</span></div><div class="line">    <span class="keyword">var</span> a = <span class="number">200</span>;</div><div class="line">    alert(a);<span class="comment">//200</span></div><div class="line">&#125;</div><div class="line">fn();</div><div class="line">alert(a);<span class="comment">//100</span></div><div class="line"><span class="keyword">var</span> a;</div><div class="line">alert(a);<span class="comment">//100</span></div><div class="line"><span class="keyword">var</span> a = <span class="number">300</span>;</div><div class="line">alert(a);<span class="comment">//300</span></div></pre></td></tr></table></figure>
+<h2 id="知识点1-变量的提升"><a href="#知识点1-变量的提升" class="headerlink" title="知识点1 变量的提升"></a>知识点1 变量的提升</h2><blockquote>
+<p>上面的代码实际的执行顺序如下<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> a;<span class="comment">//全局作用域范围内，此时只是声明，并没有赋值</span></div><div class="line">a = <span class="number">100</span>;</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="keyword">var</span> a;</div><div class="line">    alert(a);<span class="comment">//undefined</span></div><div class="line">    a = <span class="number">200</span>;</div><div class="line">    alert(a);<span class="comment">//200</span></div><div class="line">&#125;</div><div class="line">fn();</div><div class="line">alert(a);<span class="comment">//100</span></div><div class="line">alert(a);<span class="comment">//100</span></div><div class="line">a = <span class="number">300</span>;</div><div class="line">alert(a);<span class="comment">//300</span></div></pre></td></tr></table></figure></p>
 </blockquote>
-<h1 id="命令"><a href="#命令" class="headerlink" title="命令"></a>命令</h1><blockquote>
-<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#model.js</span></div><div class="line">$where</div><div class="line">increment</div><div class="line">model</div><div class="line">Model</div><div class="line">remove</div><div class="line">save</div><div class="line">aggregate</div><div class="line"><span class="keyword">bulkWrite</span></div><div class="line"><span class="keyword">count</span></div><div class="line"><span class="keyword">create</span></div><div class="line"><span class="keyword">deleteMany</span></div><div class="line"><span class="keyword">deleteOne</span></div><div class="line"><span class="keyword">discriminator</span></div><div class="line"><span class="keyword">distinct</span></div><div class="line"><span class="keyword">ensureIndexes</span></div><div class="line"><span class="keyword">find</span></div><div class="line"><span class="keyword">findById</span></div><div class="line"><span class="keyword">findByIdAndRemove</span></div><div class="line"><span class="keyword">findByIdAndUpdate</span></div><div class="line"><span class="keyword">findOne</span></div><div class="line"><span class="keyword">findOneAndRemove</span></div><div class="line"><span class="keyword">findOneAndUpdate</span></div><div class="line"><span class="keyword">geoNear</span></div><div class="line"><span class="keyword">geoSearch</span></div><div class="line"><span class="keyword">hydrate</span></div><div class="line"><span class="keyword">insertMany</span></div><div class="line"><span class="keyword">mapReduce</span></div><div class="line"><span class="keyword">populate</span></div><div class="line"><span class="keyword">remove</span></div><div class="line"><span class="keyword">replaceOne</span></div><div class="line"><span class="keyword">translateAliases</span></div><div class="line"><span class="keyword">update</span></div><div class="line"><span class="keyword">updateMany</span></div><div class="line"><span class="keyword">updateOne</span></div><div class="line"><span class="keyword">where</span></div><div class="line"><span class="keyword">$where</span></div><div class="line"><span class="keyword">base</span></div><div class="line"><span class="keyword">baseModelName</span></div><div class="line"><span class="keyword">collection</span></div><div class="line"><span class="keyword">db</span></div><div class="line"><span class="keyword">discriminators</span></div><div class="line"><span class="keyword">modelName</span></div><div class="line"><span class="keyword">schema</span></div></pre></td></tr></table></figure></blockquote>
+<h2 id="知识点2-函数的提升"><a href="#知识点2-函数的提升" class="headerlink" title="知识点2 函数的提升"></a>知识点2 函数的提升</h2><blockquote>
+<p>　　js中创建函数有两种方式：函数声明式和函数字面量式。只有函数声明才存在函数提升！如:</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">console</span>.log(f1); <span class="comment">// function f1() &#123;&#125;   </span></div><div class="line"><span class="built_in">console</span>.log(f2); <span class="comment">// undefined  </span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">f1</span>(<span class="params"></span>) </span>&#123;&#125;</div><div class="line"><span class="keyword">var</span> f2 = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;&#125;</div></pre></td></tr></table></figure>
+<p>只所以会有以上的打印结果，是由于js中的函数提升导致代码实际上是按照以下来执行的：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">f1</span>(<span class="params"></span>) </span>&#123;&#125; <span class="comment">// 函数提升，整个代码块提升到文件的最开始</span></div><div class="line"><span class="built_in">console</span>.log(f1);   </div><div class="line"><span class="built_in">console</span>.log(f2);   </div><div class="line"><span class="keyword">var</span> f2 = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;&#125;</div></pre></td></tr></table></figure></p>
+<p>结语：基本上就是这样，要熟练掌握的话可以多做些练习，test:<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">console</span>.log(f1); </div><div class="line"><span class="built_in">console</span>.log(f2);   </div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">f1</span>(<span class="params"></span>) </span>&#123;<span class="built_in">console</span>.log(<span class="string">'aa'</span>)&#125;</div><div class="line"><span class="keyword">var</span> f2 = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;&#125;</div></pre></td></tr></table></figure></p>
+<figure class="highlight scheme"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">(<span class="name">function</span>() &#123;</div><div class="line">　　console.log(<span class="name">a</span>)<span class="comment">;//undefined</span></div><div class="line">　　a = <span class="symbol">'aaa</span>'<span class="comment">;</span></div><div class="line">　　var a = <span class="symbol">'bbb</span>'<span class="comment">;</span></div><div class="line">　　console.log(<span class="name">a</span>)<span class="comment">;//bbb</span></div><div class="line">&#125;)()<span class="comment">;</span></div></pre></td></tr></table></figure>
 
         
         </div>
@@ -254,7 +281,7 @@
 
 </div>
 
-    <a data-url="https://jonathonchen.github.io/2017/08/24/mongose中间件/" data-id="cj6rrjjn3000kxcwq903reoxu" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://jonathonchen.github.io/2013/07/13/js变量和函数的提升/" data-id="cj6rrjjkn0002xcwqqgzbxhlg" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -322,7 +349,7 @@
 
             
     
-        <a href="https://jonathonchen.github.io/2017/08/24/mongose中间件/#comments" class="article-comment-link">评论</a>
+        <a href="https://jonathonchen.github.io/2013/07/13/js变量和函数的提升/#comments" class="article-comment-link">评论</a>
     
 
         </footer>
@@ -331,20 +358,15 @@
         
 <nav id="article-nav">
     
-        <a href="/2017/08/24/git远程操作/" id="article-nav-newer" class="article-nav-link-wrap">
+        <a href="/2016/12/01/js你所不知道的预编译/" id="article-nav-newer" class="article-nav-link-wrap">
             <strong class="article-nav-caption">上一篇</strong>
             <div class="article-nav-title">
                 
-                    git远程操作
+                    (no title)
                 
             </div>
         </a>
     
-    
-        <a href="/2017/08/24/vue.生命周期/" id="article-nav-older" class="article-nav-link-wrap">
-            <strong class="article-nav-caption">下一篇</strong>
-            <div class="article-nav-title">vue 生命周期</div>
-        </a>
     
 </nav>
 

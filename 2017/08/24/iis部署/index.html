@@ -60,6 +60,10 @@
                 
                     <a class="main-nav-link" href="/archives">归档</a>
                 
+                    <a class="main-nav-link" href="/tags">标签</a>
+                
+                    <a class="main-nav-link" href="/about">关于</a>
+                
             </nav>
             
                 
@@ -119,6 +123,10 @@
                 
                     <td><a class="main-nav-link" href="/archives">归档</a></td>
                 
+                    <td><a class="main-nav-link" href="/tags">标签</a></td>
+                
+                    <td><a class="main-nav-link" href="/about">关于</a></td>
+                
                 <td>
                     
     <div class="search-form">
@@ -146,11 +154,11 @@
         </div>
         <div class="article-info profile-block">
             <div class="article-info-block">
-                14
+                20
                 <span>文章</span>
             </div>
             <div class="article-info-block">
-                0
+                2
                 <span>标签</span>
             </div>
         </div>
@@ -242,7 +250,7 @@
 <p>ip地址：命令提示符 –&gt; ipconfig 使用ping www.baidu.com可以把域名转换成ip地址</p>
 <p>DNS： Domain name system域名解析服务</p>
 </blockquote>
-<h4 id="开启IIS服务器"><a href="#开启IIS服务器" class="headerlink" title="开启IIS服务器"></a>开启IIS服务器</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">* 1.打开控制面板--&gt;程序--&gt;启用或关闭windows功能--&gt;internet information service--&gt;全部勾选</div><div class="line">* 2.使用localhost或者127.0.0.1访问本地服务器</div><div class="line">* 3.默认站点，IIS服务器默认站点在c:\inetpub\wwwroot文件夹下</div><div class="line">* 4.默认文档，打开服务器的时候加载显示的页面。可以上移提高优先级，也可以添加自己想要显示的页面。</div><div class="line">* 5.注意浏览器缓存，可能会加载以前缓存的页面，而没有加载自己添加的页面</div><div class="line">* 6.目录浏览，把服务器下的文件以目录的形式展示，这种方式很不安全，因为会把所有文件暴露出来</div><div class="line">* 7.开启目录浏览，需要把默认文档关掉或者删除所有的默认文档</div><div class="line">* 8.如果被人通过ip地址访问你的电脑。需要把防火墙关闭</div><div class="line">* 9.添加站点，端口需要改，要指定路径，如果不能访问，没有权限，需要修改权限</div><div class="line">* 10.文件夹--&gt;右键属性--&gt;安全--&gt;编辑--&gt;添加--&gt;everyone--&gt;全部控制--&gt;应用</div><div class="line">* 11.ftp文件传输协议，上传下载文件</div><div class="line">* 12.http超文本传输协议</div></pre></td></tr></table></figure>
+<h4 id="开启IIS服务器"><a href="#开启IIS服务器" class="headerlink" title="开启IIS服务器"></a>开启IIS服务器</h4><figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="bullet">* </span>1.打开控制面板--&gt;程序--&gt;启用或关闭windows功能--&gt;internet information service--&gt;全部勾选</div><div class="line"><span class="bullet">* </span>2.使用localhost或者127.0.0.1访问本地服务器</div><div class="line"><span class="bullet">* </span>3.默认站点，IIS服务器默认站点在c:\inetpub\wwwroot文件夹下</div><div class="line"><span class="bullet">* </span>4.默认文档，打开服务器的时候加载显示的页面。可以上移提高优先级，也可以添加自己想要显示的页面。</div><div class="line"><span class="bullet">* </span>5.注意浏览器缓存，可能会加载以前缓存的页面，而没有加载自己添加的页面</div><div class="line"><span class="bullet">* </span>6.目录浏览，把服务器下的文件以目录的形式展示，这种方式很不安全，因为会把所有文件暴露出来</div><div class="line"><span class="bullet">* </span>7.开启目录浏览，需要把默认文档关掉或者删除所有的默认文档</div><div class="line"><span class="bullet">* </span>8.如果被人通过ip地址访问你的电脑。需要把防火墙关闭</div><div class="line"><span class="bullet">* </span>9.添加站点，端口需要改，要指定路径，如果不能访问，没有权限，需要修改权限</div><div class="line"><span class="bullet">* </span>10.文件夹--&gt;右键属性--&gt;安全--&gt;编辑--&gt;添加--&gt;everyone--&gt;全部控制--&gt;应用</div><div class="line"><span class="bullet">* </span>11.ftp文件传输协议，上传下载文件</div><div class="line"><span class="bullet">* </span>12.http超文本传输协议</div></pre></td></tr></table></figure>
         
         </div>
         <footer class="article-footer">
@@ -252,7 +260,7 @@
 
 </div>
 
-    <a data-url="https://jonathonchen.github.io/2017/08/24/iis部署/" data-id="cj6qa8pgl0005zswqs8v1bs8f" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://jonathonchen.github.io/2017/08/24/iis部署/" data-id="cj6rrjjnr000rxcwq68lodhz8" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -372,6 +380,44 @@
                     <li>
                         
                         <div class="item-thumbnail">
+                            <a href="/2017/08/25/js作用域和作用域链/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2017/08/25/js作用域和作用域链/" class="title">js作用域和作用域链</a></p>
+                            <p class="item-date"><time datetime="2017-08-25T10:54:55.445Z" itemprop="datePublished">2017-08-25</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2017/08/25/js变量的只声明不赋值/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://upload-images.jianshu.io/upload_images/3305482-776049bf088bbf06.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)" alt="js变量的只声明不赋值" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2017/08/25/js变量的只声明不赋值/" class="title">js变量的只声明不赋值</a></p>
+                            <p class="item-date"><time datetime="2017-08-25T10:54:55.402Z" itemprop="datePublished">2017-08-25</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
                             <a href="/2017/08/24/解决https请求下发送http请求问题 /" class="thumbnail">
     
     
@@ -426,63 +472,46 @@
                         </div>
                     </li>
                 
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2017/08/24/批处理HTTP模块SuperAgent/" class="thumbnail">
-    
-    
-        <span class="thumbnail-image thumbnail-none"></span>
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"></p>
-                            <p class="item-title"><a href="/2017/08/24/批处理HTTP模块SuperAgent/" class="title">SUPERAGENT</a></p>
-                            <p class="item-date"><time datetime="2017-08-24T03:52:10.831Z" itemprop="datePublished">2017-08-24</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2017/08/24/Node.js的学习--使用cheerio抓取网页数据/" class="thumbnail">
-    
-    
-        <span class="thumbnail-image thumbnail-none"></span>
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"></p>
-                            <p class="item-title"><a href="/2017/08/24/Node.js的学习--使用cheerio抓取网页数据/" class="title">Node.js的学习--使用cheerio抓取网页数据</a></p>
-                            <p class="item-date"><time datetime="2017-08-24T03:49:33.357Z" itemprop="datePublished">2017-08-24</time></p>
-                        </div>
-                    </li>
-                
             </ul>
         </div>
     </div>
 
     
         
-    
-        
     <div class="widget-wrap">
-        <h3 class="widget-title">归档</h3>
+        <h3 class="widget-title">分类</h3>
         <div class="widget">
-            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">八月 2017</a><span class="archive-list-count">14</span></li></ul>
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/javascript/">javascript</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/type1/">type1</a><span class="category-list-count">1</span></li></ul>
         </div>
     </div>
 
     
         
+    <div class="widget-wrap">
+        <h3 class="widget-title">归档</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">八月 2017</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">十二月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/07/">七月 2013</a><span class="archive-list-count">1</span></li></ul>
+        </div>
+    </div>
+
     
         
+    <div class="widget-wrap">
+        <h3 class="widget-title">标签</h3>
+        <div class="widget">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/">js</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tags1/">tags1</a><span class="tag-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">标签云</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/js/" style="font-size: 20px;">js</a> <a href="/tags/tags1/" style="font-size: 10px;">tags1</a>
+        </div>
+    </div>
+
     
         
     <div class="widget-wrap widget-list">

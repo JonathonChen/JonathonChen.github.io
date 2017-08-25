@@ -3,19 +3,16 @@
 <head>
     <meta charset="utf-8">
     
-    <title>mongodb mongoose node中间件增删改查方法 | 博客</title>
+    <title>Categories | 博客</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta name="description" content="官网 http://mongoosejs.com/docs/api.html#model_Model.update  命令 1234567891011121314151617181920212223242526272829303132333435363738394041424344#model.js$whereincrementmodelModelremovesaveaggregatebulkWr">
-<meta property="og:type" content="article">
-<meta property="og:title" content="mongodb mongoose node中间件增删改查方法">
-<meta property="og:url" content="https://jonathonchen.github.io/2017/08/24/mongose中间件/index.html">
+    <meta property="og:type" content="website">
+<meta property="og:title" content="Categories">
+<meta property="og:url" content="https://jonathonchen.github.io/categories/index.html">
 <meta property="og:site_name" content="博客">
-<meta property="og:description" content="官网 http://mongoosejs.com/docs/api.html#model_Model.update  命令 1234567891011121314151617181920212223242526272829303132333435363738394041424344#model.js$whereincrementmodelModelremovesaveaggregatebulkWr">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2017-08-24T03:44:22.732Z">
+<meta property="og:updated_time" content="2017-08-16T08:34:47.338Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="mongodb mongoose node中间件增删改查方法">
-<meta name="twitter:description" content="官网 http://mongoosejs.com/docs/api.html#model_Model.update  命令 1234567891011121314151617181920212223242526272829303132333435363738394041424344#model.js$whereincrementmodelModelremovesaveaggregatebulkWr">
+<meta name="twitter:title" content="Categories">
     
 
     
@@ -206,161 +203,16 @@
 </aside>
 
             
-            <section id="main"><article id="post-mongose中间件" class="article article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
-        
-        
-            <header class="article-header">
-                
-    
-        <h1 class="article-title" itemprop="name">
-            mongodb mongoose node中间件增删改查方法
-        </h1>
-    
-
-                
-                    <div class="article-meta">
-                        
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/2017/08/24/mongose中间件/">
-            <time datetime="2017-08-24T03:41:43.826Z" itemprop="datePublished">2017-08-24</time>
-        </a>
+            <section id="main"><section class="layout-wrap">
+    <div class="layout-title">
+        <span>Categories</span>
     </div>
-
-
-                        
-                        
-                    </div>
-                
-            </header>
+    <div class="layout-wrap-inner list-categories">
         
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/javascript/">javascript</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/type1/">type1</a><span class="category-list-count">1</span></li></ul>
         
-        <div class="article-entry" itemprop="articleBody">
-        
-            
-            <h1 id="官网"><a href="#官网" class="headerlink" title="官网"></a>官网</h1><blockquote>
-<p><a href="http://mongoosejs.com/docs/api.html#model_Model.update" target="_blank" rel="external">http://mongoosejs.com/docs/api.html#model_Model.update</a></p>
-</blockquote>
-<h1 id="命令"><a href="#命令" class="headerlink" title="命令"></a>命令</h1><blockquote>
-<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#model.js</span></div><div class="line">$where</div><div class="line">increment</div><div class="line">model</div><div class="line">Model</div><div class="line">remove</div><div class="line">save</div><div class="line">aggregate</div><div class="line"><span class="keyword">bulkWrite</span></div><div class="line"><span class="keyword">count</span></div><div class="line"><span class="keyword">create</span></div><div class="line"><span class="keyword">deleteMany</span></div><div class="line"><span class="keyword">deleteOne</span></div><div class="line"><span class="keyword">discriminator</span></div><div class="line"><span class="keyword">distinct</span></div><div class="line"><span class="keyword">ensureIndexes</span></div><div class="line"><span class="keyword">find</span></div><div class="line"><span class="keyword">findById</span></div><div class="line"><span class="keyword">findByIdAndRemove</span></div><div class="line"><span class="keyword">findByIdAndUpdate</span></div><div class="line"><span class="keyword">findOne</span></div><div class="line"><span class="keyword">findOneAndRemove</span></div><div class="line"><span class="keyword">findOneAndUpdate</span></div><div class="line"><span class="keyword">geoNear</span></div><div class="line"><span class="keyword">geoSearch</span></div><div class="line"><span class="keyword">hydrate</span></div><div class="line"><span class="keyword">insertMany</span></div><div class="line"><span class="keyword">mapReduce</span></div><div class="line"><span class="keyword">populate</span></div><div class="line"><span class="keyword">remove</span></div><div class="line"><span class="keyword">replaceOne</span></div><div class="line"><span class="keyword">translateAliases</span></div><div class="line"><span class="keyword">update</span></div><div class="line"><span class="keyword">updateMany</span></div><div class="line"><span class="keyword">updateOne</span></div><div class="line"><span class="keyword">where</span></div><div class="line"><span class="keyword">$where</span></div><div class="line"><span class="keyword">base</span></div><div class="line"><span class="keyword">baseModelName</span></div><div class="line"><span class="keyword">collection</span></div><div class="line"><span class="keyword">db</span></div><div class="line"><span class="keyword">discriminators</span></div><div class="line"><span class="keyword">modelName</span></div><div class="line"><span class="keyword">schema</span></div></pre></td></tr></table></figure></blockquote>
-
-        
-        </div>
-        <footer class="article-footer">
-            <div class="share-container">
-
-
-
-</div>
-
-    <a data-url="https://jonathonchen.github.io/2017/08/24/mongose中间件/" data-id="cj6rrjjn3000kxcwq903reoxu" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
-<script>
-    (function ($) {
-        // Prevent duplicate binding
-        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
-            __SHARE_BUTTON_BINDED__ = true;
-        } else {
-            return;
-        }
-        $('body').on('click', function() {
-            $('.article-share-box.on').removeClass('on');
-        }).on('click', '.article-share-link', function(e) {
-            e.stopPropagation();
-
-            var $this = $(this),
-                url = $this.attr('data-url'),
-                encodedUrl = encodeURIComponent(url),
-                id = 'article-share-box-' + $this.attr('data-id'),
-                offset = $this.offset(),
-                box;
-
-            if ($('#' + id).length) {
-                box = $('#' + id);
-
-                if (box.hasClass('on')){
-                    box.removeClass('on');
-                    return;
-                }
-            } else {
-                var html = [
-                    '<div id="' + id + '" class="article-share-box">',
-                        '<input class="article-share-input" value="' + url + '">',
-                        '<div class="article-share-links">',
-                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
-                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
-                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
-                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
-                        '</div>',
-                    '</div>'
-                ].join('');
-
-              box = $(html);
-
-              $('body').append(box);
-            }
-
-            $('.article-share-box.on').hide();
-
-            box.css({
-                top: offset.top + 25,
-                left: offset.left
-            }).addClass('on');
-
-        }).on('click', '.article-share-box', function (e) {
-            e.stopPropagation();
-        }).on('click', '.article-share-box-input', function () {
-            $(this).select();
-        }).on('click', '.article-share-box-link', function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-
-            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
-        });
-    })(jQuery);
-</script>
-
-            
-    
-        <a href="https://jonathonchen.github.io/2017/08/24/mongose中间件/#comments" class="article-comment-link">评论</a>
-    
-
-        </footer>
     </div>
-    
-        
-<nav id="article-nav">
-    
-        <a href="/2017/08/24/git远程操作/" id="article-nav-newer" class="article-nav-link-wrap">
-            <strong class="article-nav-caption">上一篇</strong>
-            <div class="article-nav-title">
-                
-                    git远程操作
-                
-            </div>
-        </a>
-    
-    
-        <a href="/2017/08/24/vue.生命周期/" id="article-nav-older" class="article-nav-link-wrap">
-            <strong class="article-nav-caption">下一篇</strong>
-            <div class="article-nav-title">vue 生命周期</div>
-        </a>
-    
-</nav>
-
-
-    
-</article>
-
-
-    
-    
-        <section id="comments">
-    <div id="lv-container" data-id="city" data-uid=MTAyMC8zMDIyOC82Nzgz></div>
-</section>
-	
-
-</section>
+</section></section>
             
                 
 <aside id="sidebar">

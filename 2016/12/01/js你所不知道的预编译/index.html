@@ -3,19 +3,20 @@
 <head>
     <meta charset="utf-8">
     
-    <title>mongodb mongoose node中间件增删改查方法 | 博客</title>
+    <title>博客</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta name="description" content="官网 http://mongoosejs.com/docs/api.html#model_Model.update  命令 1234567891011121314151617181920212223242526272829303132333435363738394041424344#model.js$whereincrementmodelModelremovesaveaggregatebulkWr">
+    <meta name="description" content="JavaScript三部曲前言 在JavaScript中变量和函数的声明会提升到最顶部执行。 函数的提升高于变量的提升。 函数内部如果用var声明了相同名称的外部变量，函数将不再向上寻找。 匿名函数不会提升。 不同script脚本块中的函数互不影响。脚本执行引擎都做了什么   语法分析 预编译 解释执行  通俗讲就是  在执行代码前，还有两个步骤  语法分析很简单，就是引擎检查你的代码有没有什么低">
+<meta name="keywords" content="js">
 <meta property="og:type" content="article">
-<meta property="og:title" content="mongodb mongoose node中间件增删改查方法">
-<meta property="og:url" content="https://jonathonchen.github.io/2017/08/24/mongose中间件/index.html">
+<meta property="og:title" content="博客">
+<meta property="og:url" content="https://jonathonchen.github.io/2016/12/01/js你所不知道的预编译/index.html">
 <meta property="og:site_name" content="博客">
-<meta property="og:description" content="官网 http://mongoosejs.com/docs/api.html#model_Model.update  命令 1234567891011121314151617181920212223242526272829303132333435363738394041424344#model.js$whereincrementmodelModelremovesaveaggregatebulkWr">
+<meta property="og:description" content="JavaScript三部曲前言 在JavaScript中变量和函数的声明会提升到最顶部执行。 函数的提升高于变量的提升。 函数内部如果用var声明了相同名称的外部变量，函数将不再向上寻找。 匿名函数不会提升。 不同script脚本块中的函数互不影响。脚本执行引擎都做了什么   语法分析 预编译 解释执行  通俗讲就是  在执行代码前，还有两个步骤  语法分析很简单，就是引擎检查你的代码有没有什么低">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2017-08-24T03:44:22.732Z">
+<meta property="og:updated_time" content="2017-08-25T08:05:10.065Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="mongodb mongoose node中间件增删改查方法">
-<meta name="twitter:description" content="官网 http://mongoosejs.com/docs/api.html#model_Model.update  命令 1234567891011121314151617181920212223242526272829303132333435363738394041424344#model.js$whereincrementmodelModelremovesaveaggregatebulkWr">
+<meta name="twitter:title" content="博客">
+<meta name="twitter:description" content="JavaScript三部曲前言 在JavaScript中变量和函数的声明会提升到最顶部执行。 函数的提升高于变量的提升。 函数内部如果用var声明了相同名称的外部变量，函数将不再向上寻找。 匿名函数不会提升。 不同script脚本块中的函数互不影响。脚本执行引擎都做了什么   语法分析 预编译 解释执行  通俗讲就是  在执行代码前，还有两个步骤  语法分析很简单，就是引擎检查你的代码有没有什么低">
     
 
     
@@ -206,44 +207,99 @@
 </aside>
 
             
-            <section id="main"><article id="post-mongose中间件" class="article article-type-post" itemscope itemprop="blogPost">
+            <section id="main"><article id="post-js你所不知道的预编译" class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
-        
-            <header class="article-header">
-                
-    
-        <h1 class="article-title" itemprop="name">
-            mongodb mongoose node中间件增删改查方法
-        </h1>
-    
-
-                
-                    <div class="article-meta">
-                        
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/2017/08/24/mongose中间件/">
-            <time datetime="2017-08-24T03:41:43.826Z" itemprop="datePublished">2017-08-24</time>
-        </a>
-    </div>
-
-
-                        
-                        
-                    </div>
-                
-            </header>
         
         
         <div class="article-entry" itemprop="articleBody">
         
             
-            <h1 id="官网"><a href="#官网" class="headerlink" title="官网"></a>官网</h1><blockquote>
-<p><a href="http://mongoosejs.com/docs/api.html#model_Model.update" target="_blank" rel="external">http://mongoosejs.com/docs/api.html#model_Model.update</a></p>
+            <h1 id="JavaScript三部曲"><a href="#JavaScript三部曲" class="headerlink" title="JavaScript三部曲"></a>JavaScript三部曲</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><ol>
+<li>在JavaScript中变量和函数的声明会提升到最顶部执行。</li>
+<li>函数的提升高于变量的提升。</li>
+<li>函数内部如果用var声明了相同名称的外部变量，函数将不再向上寻找。</li>
+<li>匿名函数不会提升。</li>
+<li>不同script脚本块中的函数互不影响。<h2 id="脚本执行引擎都做了什么"><a href="#脚本执行引擎都做了什么" class="headerlink" title="脚本执行引擎都做了什么"></a>脚本执行引擎都做了什么</h2><blockquote>
 </blockquote>
-<h1 id="命令"><a href="#命令" class="headerlink" title="命令"></a>命令</h1><blockquote>
-<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#model.js</span></div><div class="line">$where</div><div class="line">increment</div><div class="line">model</div><div class="line">Model</div><div class="line">remove</div><div class="line">save</div><div class="line">aggregate</div><div class="line"><span class="keyword">bulkWrite</span></div><div class="line"><span class="keyword">count</span></div><div class="line"><span class="keyword">create</span></div><div class="line"><span class="keyword">deleteMany</span></div><div class="line"><span class="keyword">deleteOne</span></div><div class="line"><span class="keyword">discriminator</span></div><div class="line"><span class="keyword">distinct</span></div><div class="line"><span class="keyword">ensureIndexes</span></div><div class="line"><span class="keyword">find</span></div><div class="line"><span class="keyword">findById</span></div><div class="line"><span class="keyword">findByIdAndRemove</span></div><div class="line"><span class="keyword">findByIdAndUpdate</span></div><div class="line"><span class="keyword">findOne</span></div><div class="line"><span class="keyword">findOneAndRemove</span></div><div class="line"><span class="keyword">findOneAndUpdate</span></div><div class="line"><span class="keyword">geoNear</span></div><div class="line"><span class="keyword">geoSearch</span></div><div class="line"><span class="keyword">hydrate</span></div><div class="line"><span class="keyword">insertMany</span></div><div class="line"><span class="keyword">mapReduce</span></div><div class="line"><span class="keyword">populate</span></div><div class="line"><span class="keyword">remove</span></div><div class="line"><span class="keyword">replaceOne</span></div><div class="line"><span class="keyword">translateAliases</span></div><div class="line"><span class="keyword">update</span></div><div class="line"><span class="keyword">updateMany</span></div><div class="line"><span class="keyword">updateOne</span></div><div class="line"><span class="keyword">where</span></div><div class="line"><span class="keyword">$where</span></div><div class="line"><span class="keyword">base</span></div><div class="line"><span class="keyword">baseModelName</span></div><div class="line"><span class="keyword">collection</span></div><div class="line"><span class="keyword">db</span></div><div class="line"><span class="keyword">discriminators</span></div><div class="line"><span class="keyword">modelName</span></div><div class="line"><span class="keyword">schema</span></div></pre></td></tr></table></figure></blockquote>
+</li>
+<li>语法分析</li>
+<li>预编译</li>
+<li>解释执行</li>
+</ol>
+<p>通俗讲就是</p>
+<blockquote>
+<p>在执行代码前，还有两个步骤</p>
+<ol>
+<li>语法分析很简单，就是引擎检查你的代码有没有什么低级的语法错误</li>
+<li>解释执行顾名思义便是执行代码了</li>
+</ol>
+</blockquote>
+<p>预编译简单理解就是在<strong>内存</strong>中开辟一些空间，存放一些<strong>变量</strong>与<strong>函数</strong><br>理解了预编译对大家理解作用域同样有帮助</p>
+<h2 id="JS预编译什么时候发生"><a href="#JS预编译什么时候发生" class="headerlink" title="JS预编译什么时候发生"></a>JS预编译什么时候发生</h2><blockquote>
+<ul>
+<li>我当初思维误区也发生在这里<ul>
+<li>预编译到底什么时候发生</li>
+<li>希望大家不要让上面的运行过程让你产生误会，</li>
+<li>误以为预编译仅仅发生在script内代码块执行前</li>
+<li>这倒并没有错</li>
+<li>预编译确确实实在script代码内执行前发生了</li>
+<li>但是它大部分会发生在函数执行前<h2 id="JS预编译实例"><a href="#JS预编译实例" class="headerlink" title="JS预编译实例"></a>JS预编译实例</h2>几个概念</li>
+</ul>
+</li>
+</ul>
+<ol>
+<li>变量声明 关键词<strong>var</strong></li>
+<li>函数声明 关键词<strong>function</strong><br>注意函数声明和函数表达是的区别<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"> &lt;script&gt;</div><div class="line">  <span class="keyword">var</span> a = <span class="number">1</span>;<span class="comment">// 变量声明</span></div><div class="line">  <span class="function"><span class="keyword">function</span> <span class="title">b</span>(<span class="params">y</span>)</span>&#123;<span class="comment">//函数声明</span></div><div class="line">      <span class="keyword">var</span> x = <span class="number">1</span>;</div><div class="line">      <span class="built_in">console</span>.log(<span class="string">'so easy'</span>);</div><div class="line">  &#125;;</div><div class="line">  <span class="keyword">var</span> c = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;<span class="comment">//是变量声明而不是函数声明！！</span></div><div class="line">      <span class="comment">//...</span></div><div class="line">  &#125;</div><div class="line">  b(<span class="number">100</span>);</div><div class="line">&lt;<span class="regexp">/script&gt;</span></div><div class="line"><span class="regexp">&lt;script&gt;</span></div><div class="line"><span class="regexp">  var d = 0;</span></div><div class="line"><span class="regexp">&lt;/</span>script&gt;</div></pre></td></tr></table></figure>
+</li>
+</ol>
+</blockquote>
+<p>让我们看看引擎对这段代码做了什么吧</p>
+<ul>
+<li>页面产生便创建了GO全局对象（Global Object）（也就是大家熟悉的window对象）</li>
+<li>第一个脚本文件加载</li>
+<li>脚本加载完毕后，分析语法是否合法</li>
+<li>开始预编译 <blockquote>
+<ul>
+<li>查找变量声明，作为GO属性，值赋予undefined</li>
+<li>查找函数声明，作为GO属性，值赋予函数体<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">  <span class="comment">//伪代码</span></div><div class="line">GO/<span class="built_in">window</span> = &#123;</div><div class="line">    <span class="comment">//页面加载创建GO同时，创建了document、navigator、screen等等属性，此处省略</span></div><div class="line">    a: <span class="literal">undefined</span>,</div><div class="line">    c: <span class="literal">undefined</span>，</div><div class="line">    b: <span class="function"><span class="keyword">function</span>(<span class="params">y</span>)</span>&#123;</div><div class="line">        <span class="keyword">var</span> x = <span class="number">1</span>;</div><div class="line">        <span class="built_in">console</span>.log(<span class="string">'so easy'</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+</blockquote>
+</li>
+</ul>
+<p>解释执行代码（直到执行函数b）<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//伪代码</span></div><div class="line">GO/<span class="built_in">window</span> = &#123;</div><div class="line">    <span class="comment">//变量随着执行流得到初始化</span></div><div class="line">    a: <span class="number">1</span>,</div><div class="line">    c: <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">        <span class="comment">//...</span></div><div class="line">    &#125;,</div><div class="line">    b: <span class="function"><span class="keyword">function</span>(<span class="params">y</span>)</span>&#123;</div><div class="line">        <span class="keyword">var</span> x = <span class="number">1</span>;</div><div class="line">        <span class="built_in">console</span>.log(<span class="string">'so easy'</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>执行函数b之前，发生预编译</p>
+<blockquote>
+<ul>
+<li>创建AO活动对象（Active Object）</li>
+<li>查找形参和变量声明，值赋予undefined</li>
+<li>实参值赋给形参</li>
+<li>查找函数声明，值赋予函数体<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//伪代码</span></div><div class="line">AO = &#123;</div><div class="line">  <span class="comment">//创建AO同时，创建了arguments等等属性，此处省略</span></div><div class="line">  y: <span class="number">100</span>,</div><div class="line">  x: <span class="literal">undefined</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<ul>
+<li>解释执行函数中代码</li>
+<li>第一个脚本文件执行完毕，加载第二个脚本文件<br><strong>注意每个script是独立的,不会预编译下一个scipt</strong></li>
+<li>第二个脚本文件加载完毕后，进行语法分析</li>
+<li>语法分析完毕，开始预编译</li>
+<li>重复最开始的预编译步骤……</li>
+</ul>
+</blockquote>
+<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>预编译阶段发生变量声明和函数声明，没有初始化行为（赋值），匿名函数不<br>参与预编译<br><br>只有在解释执行阶段才会进行变量初始化</p>
+<p>预编译(函数执行前)※</p>
+<ol>
+<li>创建AO对象（Active Object）</li>
+<li>查找函数形参及函数内变量声明，形参名及变量名作为AO对象的属性，值为undefined</li>
+<li>实参形参相统一，实参值赋给形参</li>
+<li>查找函数声明，函数名作为AO对象的属性，值为函数引用</li>
+</ol>
+<p>预编译(脚本代码块script执行前)</p>
+<ol>
+<li>查找全局变量声明（包括隐式全局变量声明，省略var声明），变量名作全局对象的属性，值为undefined</li>
+<li>查找函数声明，函数名作为全局对象的属性，值为函数引用</li>
+</ol>
+<p>理解了预编译对理解提升行为，this指向，作用域及性能等问题都有很大帮助</p>
 
         
         </div>
@@ -254,7 +310,7 @@
 
 </div>
 
-    <a data-url="https://jonathonchen.github.io/2017/08/24/mongose中间件/" data-id="cj6rrjjn3000kxcwq903reoxu" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://jonathonchen.github.io/2016/12/01/js你所不知道的预编译/" data-id="cj6rrjjlz0008xcwqsooyc31b" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -322,7 +378,7 @@
 
             
     
-        <a href="https://jonathonchen.github.io/2017/08/24/mongose中间件/#comments" class="article-comment-link">评论</a>
+        <a href="https://jonathonchen.github.io/2016/12/01/js你所不知道的预编译/#comments" class="article-comment-link">评论</a>
     
 
         </footer>
@@ -331,19 +387,19 @@
         
 <nav id="article-nav">
     
-        <a href="/2017/08/24/git远程操作/" id="article-nav-newer" class="article-nav-link-wrap">
+        <a href="/2016/12/10/js简单了解上下文/" id="article-nav-newer" class="article-nav-link-wrap">
             <strong class="article-nav-caption">上一篇</strong>
             <div class="article-nav-title">
                 
-                    git远程操作
+                    js简单了解上下文
                 
             </div>
         </a>
     
     
-        <a href="/2017/08/24/vue.生命周期/" id="article-nav-older" class="article-nav-link-wrap">
+        <a href="/2013/07/13/js变量和函数的提升/" id="article-nav-older" class="article-nav-link-wrap">
             <strong class="article-nav-caption">下一篇</strong>
-            <div class="article-nav-title">vue 生命周期</div>
+            <div class="article-nav-title">js变量提升和函数提升</div>
         </a>
     
 </nav>

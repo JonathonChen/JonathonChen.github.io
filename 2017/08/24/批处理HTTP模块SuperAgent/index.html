@@ -5,17 +5,17 @@
     
     <title>SUPERAGENT | 博客</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta name="description" content="最近在写爬虫，看了下node里面有啥关于ajax的模块,发现superagent这个模块灰常的好用。好东西要和大家分享，话不多说，开始吧～ 什么是SuperAgentsuperagent它是一个强大并且可读性很好的轻量级ajaxAPI，是一个关于HTTP方面的一个库，而且它可以将链式写法玩的出神入化。1var superagent = require(&amp;apos;superagent&amp;apos;)">
+    <meta name="description" content="最近在写爬虫，看了下node里面有啥关于ajax的模块,发现superagent这个模块灰常的好用。好东西要和大家分享，话不多说，开始吧～ 什么是SuperAgentsuperagent它是一个强大并且可读性很好的轻量级ajaxAPI，是一个关于HTTP方面的一个库，而且它可以将链式写法玩的出神入化。1var superagent = require(&apos;superagent&apos;); superage">
 <meta property="og:type" content="article">
 <meta property="og:title" content="SUPERAGENT">
 <meta property="og:url" content="https://jonathonchen.github.io/2017/08/24/批处理HTTP模块SuperAgent/index.html">
 <meta property="og:site_name" content="博客">
-<meta property="og:description" content="最近在写爬虫，看了下node里面有啥关于ajax的模块,发现superagent这个模块灰常的好用。好东西要和大家分享，话不多说，开始吧～ 什么是SuperAgentsuperagent它是一个强大并且可读性很好的轻量级ajaxAPI，是一个关于HTTP方面的一个库，而且它可以将链式写法玩的出神入化。1var superagent = require(&amp;apos;superagent&amp;apos;)">
+<meta property="og:description" content="最近在写爬虫，看了下node里面有啥关于ajax的模块,发现superagent这个模块灰常的好用。好东西要和大家分享，话不多说，开始吧～ 什么是SuperAgentsuperagent它是一个强大并且可读性很好的轻量级ajaxAPI，是一个关于HTTP方面的一个库，而且它可以将链式写法玩的出神入化。1var superagent = require(&apos;superagent&apos;); superage">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:updated_time" content="2017-08-24T03:55:10.887Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SUPERAGENT">
-<meta name="twitter:description" content="最近在写爬虫，看了下node里面有啥关于ajax的模块,发现superagent这个模块灰常的好用。好东西要和大家分享，话不多说，开始吧～ 什么是SuperAgentsuperagent它是一个强大并且可读性很好的轻量级ajaxAPI，是一个关于HTTP方面的一个库，而且它可以将链式写法玩的出神入化。1var superagent = require(&amp;apos;superagent&amp;apos;)">
+<meta name="twitter:description" content="最近在写爬虫，看了下node里面有啥关于ajax的模块,发现superagent这个模块灰常的好用。好东西要和大家分享，话不多说，开始吧～ 什么是SuperAgentsuperagent它是一个强大并且可读性很好的轻量级ajaxAPI，是一个关于HTTP方面的一个库，而且它可以将链式写法玩的出神入化。1var superagent = require(&apos;superagent&apos;); superage">
     
 
     
@@ -59,6 +59,10 @@
                     <a class="main-nav-link" href="/.">首页</a>
                 
                     <a class="main-nav-link" href="/archives">归档</a>
+                
+                    <a class="main-nav-link" href="/tags">标签</a>
+                
+                    <a class="main-nav-link" href="/about">关于</a>
                 
             </nav>
             
@@ -119,6 +123,10 @@
                 
                     <td><a class="main-nav-link" href="/archives">归档</a></td>
                 
+                    <td><a class="main-nav-link" href="/tags">标签</a></td>
+                
+                    <td><a class="main-nav-link" href="/about">关于</a></td>
+                
                 <td>
                     
     <div class="search-form">
@@ -146,11 +154,11 @@
         </div>
         <div class="article-info profile-block">
             <div class="article-info-block">
-                14
+                20
                 <span>文章</span>
             </div>
             <div class="article-info-block">
-                0
+                2
                 <span>标签</span>
             </div>
         </div>
@@ -232,7 +240,7 @@
         
             
             <p>最近在写爬虫，看了下node里面有啥关于ajax的模块,发现superagent这个模块灰常的好用。好东西要和大家分享，话不多说，开始吧～</p>
-<h2 id="什么是SuperAgent"><a href="#什么是SuperAgent" class="headerlink" title="什么是SuperAgent"></a>什么是SuperAgent</h2><p>superagent它是一个强大并且可读性很好的轻量级ajaxAPI，是一个关于HTTP方面的一个库，而且它可以将链式写法玩的出神入化。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">var superagent = require(&apos;superagent&apos;); superagent .post(&apos;/api&apos;) .send(&#123; &apos;key&apos;: &apos;value&apos; &#125;) .set(&apos;header_key&apos;, &apos;header_value&apos;) .end(function(err, res) &#123; if (err) &#123; //do something &#125; else &#123; //do something &#125; &#125;)</div></pre></td></tr></table></figure></p>
+<h2 id="什么是SuperAgent"><a href="#什么是SuperAgent" class="headerlink" title="什么是SuperAgent"></a>什么是SuperAgent</h2><p>superagent它是一个强大并且可读性很好的轻量级ajaxAPI，是一个关于HTTP方面的一个库，而且它可以将链式写法玩的出神入化。<br><figure class="highlight lua"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">var superagent = <span class="built_in">require</span>(<span class="string">'superagent'</span>); superagent .post(<span class="string">'/api'</span>) .send(&#123; <span class="string">'key'</span>: <span class="string">'value'</span> &#125;) .set(<span class="string">'header_key'</span>, <span class="string">'header_value'</span>) .<span class="keyword">end</span>(<span class="function"><span class="keyword">function</span><span class="params">(err, res)</span></span> &#123; <span class="keyword">if</span> (err) &#123; //<span class="keyword">do</span> something &#125; <span class="keyword">else</span> &#123; //<span class="keyword">do</span> something &#125; &#125;)</div></pre></td></tr></table></figure></p>
 <p>接下来，让我们逐一的对SuperAgent的一些特性进行分析吧～🚀</p>
 <pre><code>设置请求头
 
@@ -241,11 +249,11 @@
 SuperAgent里面设置请求头很简单,通过使用set()方法就可以设置了，有两种方式
 
     单个单个的设置
-</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">superagent</div><div class="line">    .get(&apos;/api&apos;)</div><div class="line">    .set(&apos;Referer&apos;,&apos;https://www.google.com&apos;)</div><div class="line">    .set(&apos;Accept&apos;,&apos;image/webp,image/*,*/*;q=0.8&apos;)</div><div class="line">    .end(function(req,res)&#123;</div><div class="line">        //do something</div><div class="line">    &#125;)</div><div class="line"></div><div class="line">  放在一起设置</div><div class="line"></div><div class="line">  superagent</div><div class="line"></div><div class="line">      .get(&apos;/api&apos;)</div><div class="line">      .set(&#123;</div><div class="line">          &apos;Referer&apos;,&apos;https://www.google.com&apos;,</div><div class="line">          &apos;Accept&apos;,&apos;image/webp,image/*,*/*;q=0.8&apos;</div><div class="line">      &#125;)</div><div class="line">       .end(function(req,res)&#123;</div><div class="line">          //do something</div><div class="line">      &#125;)</div></pre></td></tr></table></figure>
+</code></pre><figure class="highlight haxe"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">superagent</div><div class="line">    .<span class="keyword">get</span>(<span class="string">'/api'</span>)</div><div class="line">    .<span class="keyword">set</span>(<span class="string">'Referer'</span>,<span class="string">'https://www.google.com'</span>)</div><div class="line">    .<span class="keyword">set</span>(<span class="string">'Accept'</span>,<span class="string">'image/webp,image/*,*/*;q=0.8'</span>)</div><div class="line">    .end(<span class="function"><span class="keyword">function</span></span>(req,res)&#123;</div><div class="line">        <span class="comment">//do something</span></div><div class="line">    &#125;)</div><div class="line"></div><div class="line">  放在一起设置</div><div class="line"></div><div class="line">  superagent</div><div class="line"></div><div class="line">      .<span class="keyword">get</span>(<span class="string">'/api'</span>)</div><div class="line">      .<span class="keyword">set</span>(&#123;</div><div class="line">          <span class="string">'Referer'</span>,<span class="string">'https://www.google.com'</span>,</div><div class="line">          <span class="string">'Accept'</span>,<span class="string">'image/webp,image/*,*/*;q=0.8'</span></div><div class="line">      &#125;)</div><div class="line">       .end(<span class="function"><span class="keyword">function</span></span>(req,res)&#123;</div><div class="line">          <span class="comment">//do something</span></div><div class="line">      &#125;)</div></pre></td></tr></table></figure>
 <pre><code>GET请求方式
 
 我相信大家都一定见过这样类型的URL:http://localhost:8080/api和http://localhost:8080/api?id=1&amp;price=10,就是GET方式可以带上参数,也可以不带上参数。不带参数的就不说了,相信大家都会,在superagent中我们可以通过query()方法给URL后面带上参数,有4种写法
-</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">//接下来所形成的URL为/api?name=An&amp;age=20&amp;sex=male</div><div class="line">//第一种</div><div class="line">superagent</div><div class="line">    .get(/api)</div><div class="line">    .query(&#123;name:&apos;An&apos;&#125;)</div><div class="line">    .query(&#123;age:20&#125;)</div><div class="line">    .query(&#123;sex:&apos;male&apos;&#125;)</div><div class="line">    .end(cb)</div><div class="line">//第二种</div><div class="line">superagent</div><div class="line">    .get(/api)</div><div class="line">    .query(&#123;name:&apos;An&apos;,age:20,sex:&apos;male&apos;&#125;)</div><div class="line">    .end(cb)</div><div class="line">//第三种 </div><div class="line">superagent</div><div class="line">    .get(/api)</div><div class="line">    .query(&apos;name=An&amp;age=20&amp;sex=male&apos;)</div><div class="line">    .end(cb)</div><div class="line">//第四种</div><div class="line">    superagent</div><div class="line">        .get(/api)</div><div class="line">        .query(&apos;name=An&apos;)</div><div class="line">        .query(&apos;age=20&apos;)</div><div class="line">        .query(&apos;sex=male&apos;)</div><div class="line">        .end(cb)</div></pre></td></tr></table></figure>
+</code></pre><figure class="highlight less"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//接下来所形成的URL为/api?name=An&amp;age=20&amp;sex=male</span></div><div class="line"><span class="comment">//第一种</span></div><div class="line"><span class="selector-tag">superagent</span></div><div class="line">    <span class="selector-class">.get</span>(/api)</div><div class="line">    <span class="selector-class">.query</span>(&#123;<span class="attribute">name</span>:<span class="string">'An'</span>&#125;)</div><div class="line">    <span class="selector-class">.query</span>(&#123;<span class="attribute">age</span>:<span class="number">20</span>&#125;)</div><div class="line">    <span class="selector-class">.query</span>(&#123;<span class="attribute">sex</span>:<span class="string">'male'</span>&#125;)</div><div class="line">    <span class="selector-class">.end</span>(cb)</div><div class="line"><span class="comment">//第二种</span></div><div class="line"><span class="selector-tag">superagent</span></div><div class="line">    <span class="selector-class">.get</span>(/api)</div><div class="line">    <span class="selector-class">.query</span>(&#123;<span class="attribute">name</span>:<span class="string">'An'</span>,<span class="attribute">age</span>:<span class="number">20</span>,<span class="attribute">sex</span>:<span class="string">'male'</span>&#125;)</div><div class="line">    <span class="selector-class">.end</span>(cb)</div><div class="line"><span class="comment">//第三种 </span></div><div class="line"><span class="selector-tag">superagent</span></div><div class="line">    <span class="selector-class">.get</span>(/api)</div><div class="line">    <span class="selector-class">.query</span>(<span class="string">'name=An&amp;age=20&amp;sex=male'</span>)</div><div class="line">    <span class="selector-class">.end</span>(cb)</div><div class="line"><span class="comment">//第四种</span></div><div class="line">    <span class="selector-tag">superagent</span></div><div class="line">        <span class="selector-class">.get</span>(/api)</div><div class="line">        <span class="selector-class">.query</span>(<span class="string">'name=An'</span>)</div><div class="line">        <span class="selector-class">.query</span>(<span class="string">'age=20'</span>)</div><div class="line">        <span class="selector-class">.query</span>(<span class="string">'sex=male'</span>)</div><div class="line">        <span class="selector-class">.end</span>(cb)</div></pre></td></tr></table></figure>
 <pre><code>head请求
 
 head请求也可以通过query()的方式进行传递参数,大家可以参考👆的GET请求
@@ -255,9 +263,9 @@ POST/PUT请求
 这两种请求，一般是要给服务端发送数据，现在文本数据的方式一般都以json的方式传递。我们可以在请求头里设置Accept=application/json，从而服务器可以根据请求头来生成json数据(在java开发后台时可以这样)
 
 在superagent里面，默认的数据传递格式是json，所以下面几种种方式是相同的。
-</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">superagent</div><div class="line">    .post(&apos;/api&apos;)</div><div class="line">    .set(&apos;Accept&apos;,&apos;application/json&apos;)</div><div class="line">    .send(&apos;&#123;&quot;name&quot;:&quot;An&quot;,&quot;age&quot;:20,&quot;sex&quot;:&quot;male&quot;&#125;&apos;)</div><div class="line">    .end(cb)</div><div class="line">//等价于 ==&gt;</div><div class="line">superagent</div><div class="line">    .post(&apos;/api&apos;)</div><div class="line">    .send(&#123;name:&quot;An&quot;,age:20,sex:&quot;male&quot;&#125;)</div><div class="line">    .end(cb)</div><div class="line">//等价于 ==&gt;</div><div class="line">superagent</div><div class="line">    .post(&apos;/api&apos;)</div><div class="line">    .send(&#123;name:&quot;An&quot;&#125;)</div><div class="line">    .send(&#123;age:20&#125;)</div><div class="line">    .sex(&#123;sex:&apos;male&apos;&#125;)</div><div class="line">    .end(cb)</div></pre></td></tr></table></figure>
+</code></pre><figure class="highlight less"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">superagent</span></div><div class="line">    <span class="selector-class">.post</span>(<span class="string">'/api'</span>)</div><div class="line">    <span class="selector-class">.set</span>(<span class="string">'Accept'</span>,<span class="string">'application/json'</span>)</div><div class="line">    <span class="selector-class">.send</span>(<span class="string">'&#123;"name":"An","age":20,"sex":"male"&#125;'</span>)</div><div class="line">    <span class="selector-class">.end</span>(cb)</div><div class="line"><span class="comment">//等价于 ==&gt;</span></div><div class="line"><span class="selector-tag">superagent</span></div><div class="line">    <span class="selector-class">.post</span>(<span class="string">'/api'</span>)</div><div class="line">    <span class="selector-class">.send</span>(&#123;<span class="attribute">name</span>:<span class="string">"An"</span>,<span class="attribute">age</span>:<span class="number">20</span>,<span class="attribute">sex</span>:<span class="string">"male"</span>&#125;)</div><div class="line">    <span class="selector-class">.end</span>(cb)</div><div class="line"><span class="comment">//等价于 ==&gt;</span></div><div class="line"><span class="selector-tag">superagent</span></div><div class="line">    <span class="selector-class">.post</span>(<span class="string">'/api'</span>)</div><div class="line">    <span class="selector-class">.send</span>(&#123;<span class="attribute">name</span>:<span class="string">"An"</span>&#125;)</div><div class="line">    <span class="selector-class">.send</span>(&#123;<span class="attribute">age</span>:<span class="number">20</span>&#125;)</div><div class="line">    <span class="selector-class">.sex</span>(&#123;<span class="attribute">sex</span>:<span class="string">'male'</span>&#125;)</div><div class="line">    <span class="selector-class">.end</span>(cb)</div></pre></td></tr></table></figure>
 <pre><code>当然，除了json的形式去传递，我们还有一种很常见的表单提交，在superagent里，也实现了模拟表单的提交数据类型application/x-www-form-urlencoded， 我们可以通过type(&apos;form&apos;)方法进行转换
-</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">superagent</div><div class="line">    .post(&apos;/api&apos;)</div><div class="line">    .type(&apos;form&apos;)</div><div class="line">    .send(&#123;name:&apos;An&apos;,age:20&#125;) // name=An&amp;age=20</div><div class="line">    .end(cb)</div></pre></td></tr></table></figure>
+</code></pre><figure class="highlight less"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">superagent</span></div><div class="line">    <span class="selector-class">.post</span>(<span class="string">'/api'</span>)</div><div class="line">    <span class="selector-class">.type</span>(<span class="string">'form'</span>)</div><div class="line">    <span class="selector-class">.send</span>(&#123;<span class="attribute">name</span>:<span class="string">'An'</span>,<span class="attribute">age</span>:<span class="number">20</span>&#125;) <span class="comment">// name=An&amp;age=20</span></div><div class="line">    <span class="selector-class">.end</span>(cb)</div></pre></td></tr></table></figure>
 <pre><code>有时候，我们也会在POST请求时，将一些参数放在URL上面，那这个时候还是可以用query()方法
 
 设置Content-Type的两种快速方式
@@ -266,7 +274,7 @@ POST/PUT请求
     accept()方法
 
     这两种方法都可以接受规范的MIME格式,以及图片和xml等这些格式的数据。
-</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">superagent</div><div class="line"></div><div class="line">  .post(&apos;/api&apos;)</div><div class="line">  .type(&apos;application/json&apos;)</div><div class="line">  .type(&apos;png&apos;)</div><div class="line"></div><div class="line">// 等价于==&gt;</div><div class="line">superagent</div><div class="line"></div><div class="line">  .post(&apos;/api&apos;)</div><div class="line">  .accept(&apos;application/json&apos;)</div><div class="line">  .accept(&apos;png&apos;)</div></pre></td></tr></table></figure>
+</code></pre><figure class="highlight less"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">superagent</span></div><div class="line"></div><div class="line">  <span class="selector-class">.post</span>(<span class="string">'/api'</span>)</div><div class="line">  <span class="selector-class">.type</span>(<span class="string">'application/json'</span>)</div><div class="line">  <span class="selector-class">.type</span>(<span class="string">'png'</span>)</div><div class="line"></div><div class="line"><span class="comment">// 等价于==&gt;</span></div><div class="line"><span class="selector-tag">superagent</span></div><div class="line"></div><div class="line">  <span class="selector-class">.post</span>(<span class="string">'/api'</span>)</div><div class="line">  <span class="selector-class">.accept</span>(<span class="string">'application/json'</span>)</div><div class="line">  <span class="selector-class">.accept</span>(<span class="string">'png'</span>)</div></pre></td></tr></table></figure>
 <pre><code>分析处理response body
 
 superagent可以帮你解析返回的数据,当前支持三种类型的数据application/x-www-form-urlencoded application/json 和multipart/form-data
@@ -304,23 +312,23 @@ Basic Access Authentication
 原理是将用户名和密码通过:连接,形成username:password然后再进行base64加密，发送到服务器后再进行解密得到用户名和密码,进行进一步的匹配验证。参考文章:HTTP Basic Authentication认证。
 
 在superagent里，有两种方式进行验证
-</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">superagent</div><div class="line">    .get(&apos;http://username:password@localhost&apos;)</div><div class="line">    .end(cb)</div><div class="line">//等价于 ==&gt;</div><div class="line">superagent</div><div class="line">    .get(&apos;http://localhost&apos;)</div><div class="line">    .auth(&apos;username&apos;,&apos;password&apos;)</div><div class="line">    .end(cb)</div></pre></td></tr></table></figure>
+</code></pre><figure class="highlight less"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">superagent</span></div><div class="line">    <span class="selector-class">.get</span>(<span class="string">'http://username:password@localhost'</span>)</div><div class="line">    <span class="selector-class">.end</span>(cb)</div><div class="line"><span class="comment">//等价于 ==&gt;</span></div><div class="line"><span class="selector-tag">superagent</span></div><div class="line">    <span class="selector-class">.get</span>(<span class="string">'http://localhost'</span>)</div><div class="line">    <span class="selector-class">.auth</span>(<span class="string">'username'</span>,<span class="string">'password'</span>)</div><div class="line">    <span class="selector-class">.end</span>(cb)</div></pre></td></tr></table></figure>
 <pre><code>可以通过pipe管道流入流出数据
 
 我想大家应该知道node里面有个核心特性就是stream，如果不知道的，可以参考:nodejs中流(stream)的理解,举两个栗子：
-</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">//第一个例子</div><div class="line">var fs = require(&apos;fs&apos;);</div><div class="line">var request = require(&apos;superagent&apos;);</div><div class="line">var postJson = fs.createReadStream(&apos;./postDataJson&apos;);</div><div class="line">var req= request.post(&apos;/api&apos;);</div><div class="line">req.accept(&apos;json&apos;);</div><div class="line">stream.pipe(req);</div><div class="line"></div><div class="line">//第二个例子</div><div class="line">var fs = require(&apos;fs&apos;);</div><div class="line">var request = require(&apos;superagent&apos;);</div><div class="line">var getData = fs.createWriteStream(&apos;./getData&apos;);</div><div class="line">var res= request.get(&apos;/api&apos;);</div><div class="line">res.pipe(getData);</div></pre></td></tr></table></figure>
+</code></pre><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//第一个例子</span></div><div class="line"><span class="keyword">var</span> fs = <span class="built_in">require</span>(<span class="string">'fs'</span>);</div><div class="line"><span class="keyword">var</span> request = <span class="built_in">require</span>(<span class="string">'superagent'</span>);</div><div class="line"><span class="keyword">var</span> postJson = fs.createReadStream(<span class="string">'./postDataJson'</span>);</div><div class="line"><span class="keyword">var</span> req= request.post(<span class="string">'/api'</span>);</div><div class="line">req.accept(<span class="string">'json'</span>);</div><div class="line">stream.pipe(req);</div><div class="line"></div><div class="line"><span class="comment">//第二个例子</span></div><div class="line"><span class="keyword">var</span> fs = <span class="built_in">require</span>(<span class="string">'fs'</span>);</div><div class="line"><span class="keyword">var</span> request = <span class="built_in">require</span>(<span class="string">'superagent'</span>);</div><div class="line"><span class="keyword">var</span> getData = fs.createWriteStream(<span class="string">'./getData'</span>);</div><div class="line"><span class="keyword">var</span> res= request.get(<span class="string">'/api'</span>);</div><div class="line">res.pipe(getData);</div></pre></td></tr></table></figure>
 <pre><code>添加多个附件
 
 superagent也提供了一些高级的API，如果你想添加多个附件可以使用attach(name,[path],[filename]),其中你可以通过filename来自定义上传后文件的文件名
-</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">request</div><div class="line">    .post(&apos;/upload&apos;)</div><div class="line">    .attach(&apos;avator&apos;,&apos;/path/a.png&apos;,&apos;An.png&apos;)</div><div class="line">    .attach(&apos;photo&apos;,&apos;/path/b.png&apos;)</div><div class="line">    .end(cb)</div></pre></td></tr></table></figure>
+</code></pre><figure class="highlight less"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">request</span></div><div class="line">    <span class="selector-class">.post</span>(<span class="string">'/upload'</span>)</div><div class="line">    <span class="selector-class">.attach</span>(<span class="string">'avator'</span>,<span class="string">'/path/a.png'</span>,<span class="string">'An.png'</span>)</div><div class="line">    <span class="selector-class">.attach</span>(<span class="string">'photo'</span>,<span class="string">'/path/b.png'</span>)</div><div class="line">    <span class="selector-class">.end</span>(cb)</div></pre></td></tr></table></figure>
 <pre><code>复合请求
 
 superagent也支持复合请求,比如你想上传一个带有你的姓名和邮箱的图片，那可以通过field(name,value)方法
-</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">request</div><div class="line">    .post(&apos;/upload&apos;)</div><div class="line">    .field(&apos;name&apos;,&apos;An&apos;)</div><div class="line">    .field(&apos;age&apos;:20)</div><div class="line">    .attach(&apos;avator&apos;,&apos;/path/a.png&apos;,&apos;An.png&apos;)</div><div class="line">    .end(cb)</div></pre></td></tr></table></figure>
+</code></pre><figure class="highlight less"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">request</span></div><div class="line">    <span class="selector-class">.post</span>(<span class="string">'/upload'</span>)</div><div class="line">    <span class="selector-class">.field</span>(<span class="string">'name'</span>,<span class="string">'An'</span>)</div><div class="line">    <span class="selector-class">.field</span>(<span class="string">'age'</span>:<span class="number">20</span>)</div><div class="line">    <span class="selector-class">.attach</span>(<span class="string">'avator'</span>,<span class="string">'/path/a.png'</span>,<span class="string">'An.png'</span>)</div><div class="line">    <span class="selector-class">.end</span>(cb)</div></pre></td></tr></table></figure>
 <pre><code>错误处理
 
 有时候我们可能会因为不同的原因得到4XX或者5XX的错误，这个时候我们确实是可以从end(function(err,res){...})里的err得到错误信息,比如er.status错误的状态码啥的，但是有些时候我们想去处理这些错误，重新发送一个别的请求啥的，那么这个时候我们可以通过on(&apos;error&apos;,handleFn)去处理了
-</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">request</div><div class="line">    .post(&apos;/api&apos;)</div><div class="line">    .send(data)</div><div class="line">    .on(&apos;error&apos;,handleFn)</div><div class="line">    .end(cb);</div></pre></td></tr></table></figure>
+</code></pre><figure class="highlight less"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">request</span></div><div class="line">    <span class="selector-class">.post</span>(<span class="string">'/api'</span>)</div><div class="line">    <span class="selector-class">.send</span>(data)</div><div class="line">    <span class="selector-class">.on</span>(<span class="string">'error'</span>,handleFn)</div><div class="line">    <span class="selector-class">.end</span>(cb);</div></pre></td></tr></table></figure>
 
         
         </div>
@@ -331,7 +339,7 @@ superagent也支持复合请求,比如你想上传一个带有你的姓名和邮
 
 </div>
 
-    <a data-url="https://jonathonchen.github.io/2017/08/24/批处理HTTP模块SuperAgent/" data-id="cj6qa8pgx0009zswqcccg589o" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://jonathonchen.github.io/2017/08/24/批处理HTTP模块SuperAgent/" data-id="cj6rrjjp90010xcwqvd40fzvl" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -451,6 +459,44 @@ superagent也支持复合请求,比如你想上传一个带有你的姓名和邮
                     <li>
                         
                         <div class="item-thumbnail">
+                            <a href="/2017/08/25/js作用域和作用域链/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2017/08/25/js作用域和作用域链/" class="title">js作用域和作用域链</a></p>
+                            <p class="item-date"><time datetime="2017-08-25T10:54:55.445Z" itemprop="datePublished">2017-08-25</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2017/08/25/js变量的只声明不赋值/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://upload-images.jianshu.io/upload_images/3305482-776049bf088bbf06.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)" alt="js变量的只声明不赋值" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2017/08/25/js变量的只声明不赋值/" class="title">js变量的只声明不赋值</a></p>
+                            <p class="item-date"><time datetime="2017-08-25T10:54:55.402Z" itemprop="datePublished">2017-08-25</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
                             <a href="/2017/08/24/解决https请求下发送http请求问题 /" class="thumbnail">
     
     
@@ -505,63 +551,46 @@ superagent也支持复合请求,比如你想上传一个带有你的姓名和邮
                         </div>
                     </li>
                 
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2017/08/24/批处理HTTP模块SuperAgent/" class="thumbnail">
-    
-    
-        <span class="thumbnail-image thumbnail-none"></span>
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"></p>
-                            <p class="item-title"><a href="/2017/08/24/批处理HTTP模块SuperAgent/" class="title">SUPERAGENT</a></p>
-                            <p class="item-date"><time datetime="2017-08-24T03:52:10.831Z" itemprop="datePublished">2017-08-24</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2017/08/24/Node.js的学习--使用cheerio抓取网页数据/" class="thumbnail">
-    
-    
-        <span class="thumbnail-image thumbnail-none"></span>
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"></p>
-                            <p class="item-title"><a href="/2017/08/24/Node.js的学习--使用cheerio抓取网页数据/" class="title">Node.js的学习--使用cheerio抓取网页数据</a></p>
-                            <p class="item-date"><time datetime="2017-08-24T03:49:33.357Z" itemprop="datePublished">2017-08-24</time></p>
-                        </div>
-                    </li>
-                
             </ul>
         </div>
     </div>
 
     
         
-    
-        
     <div class="widget-wrap">
-        <h3 class="widget-title">归档</h3>
+        <h3 class="widget-title">分类</h3>
         <div class="widget">
-            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">八月 2017</a><span class="archive-list-count">14</span></li></ul>
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/javascript/">javascript</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/type1/">type1</a><span class="category-list-count">1</span></li></ul>
         </div>
     </div>
 
     
         
+    <div class="widget-wrap">
+        <h3 class="widget-title">归档</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">八月 2017</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">十二月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/07/">七月 2013</a><span class="archive-list-count">1</span></li></ul>
+        </div>
+    </div>
+
     
         
+    <div class="widget-wrap">
+        <h3 class="widget-title">标签</h3>
+        <div class="widget">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/">js</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tags1/">tags1</a><span class="tag-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">标签云</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/js/" style="font-size: 20px;">js</a> <a href="/tags/tags1/" style="font-size: 10px;">tags1</a>
+        </div>
+    </div>
+
     
         
     <div class="widget-wrap widget-list">

@@ -60,6 +60,10 @@
                 
                     <a class="main-nav-link" href="/archives">归档</a>
                 
+                    <a class="main-nav-link" href="/tags">标签</a>
+                
+                    <a class="main-nav-link" href="/about">关于</a>
+                
             </nav>
             
                 
@@ -119,6 +123,10 @@
                 
                     <td><a class="main-nav-link" href="/archives">归档</a></td>
                 
+                    <td><a class="main-nav-link" href="/tags">标签</a></td>
+                
+                    <td><a class="main-nav-link" href="/about">关于</a></td>
+                
                 <td>
                     
     <div class="search-form">
@@ -146,11 +154,11 @@
         </div>
         <div class="article-info profile-block">
             <div class="article-info-block">
-                14
+                20
                 <span>文章</span>
             </div>
             <div class="article-info-block">
-                0
+                2
                 <span>标签</span>
             </div>
         </div>
@@ -236,11 +244,11 @@
 <p>关键是抓取到网页之后如何获取到想要的数据呢？然后就发现了cheerio，用来解析html非常方便，就像在浏览器中使用jquery一样。</p>
 <p>使用如下命令安装cheerio</p>
 <pre><code>npm install cheerio
-</code></pre><p>Cheerio安装完成， 我们就可以开始工作了。 首先让我们来看一段javascript代码 这段代码可以下载任意一个网页的内容。将其放入到curl.js中，并导出。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"> var http = require(&quot;http&quot;);</div><div class="line"> </div><div class="line">// Utility function that downloads a URL and invokes</div><div class="line">// callback with the data.</div><div class="line">function download(url, callback) &#123;</div><div class="line">  http.get(url, function(res) &#123;</div><div class="line">    var data = &quot;&quot;;</div><div class="line">    res.on(&apos;data&apos;, function (chunk) &#123;</div><div class="line">      data += chunk;</div><div class="line">    &#125;);</div><div class="line">    res.on(&quot;end&quot;, function() &#123;</div><div class="line">      callback(data);</div><div class="line">    &#125;);</div><div class="line">  &#125;).on(&quot;error&quot;, function() &#123;</div><div class="line">    callback(null);</div><div class="line">  &#125;);</div><div class="line">&#125;</div><div class="line"></div><div class="line">exports.download = download;</div></pre></td></tr></table></figure></p>
+</code></pre><p>Cheerio安装完成， 我们就可以开始工作了。 首先让我们来看一段javascript代码 这段代码可以下载任意一个网页的内容。将其放入到curl.js中，并导出。<br><figure class="highlight qml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"> <span class="keyword">var</span> http = <span class="built_in">require</span>(<span class="string">"http"</span>);</div><div class="line"> </div><div class="line"><span class="comment">// Utility function that downloads a URL and invokes</span></div><div class="line"><span class="comment">// callback with the data.</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">download</span>(<span class="params">url, callback</span>) </span>&#123;</div><div class="line">  http.get(<span class="built_in">url</span>, <span class="function"><span class="keyword">function</span>(<span class="params">res</span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> data = <span class="string">""</span>;</div><div class="line">    res.on(<span class="string">'data'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">chunk</span>) </span>&#123;</div><div class="line">      data += chunk;</div><div class="line">    &#125;);</div><div class="line">    res.on(<span class="string">"end"</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">      callback(data);</div><div class="line">    &#125;);</div><div class="line">  &#125;).on(<span class="string">"error"</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    callback(<span class="literal">null</span>);</div><div class="line">  &#125;);</div><div class="line">&#125;</div><div class="line"></div><div class="line">exports.download = download;</div></pre></td></tr></table></figure></p>
 <p>然后是使用cheerio解析html，找到想要的数据。</p>
-<p>我们先来自己分析一下页面。我们要抓取<a href="http://v.163.com/special/opencourse/englishs1.html这个页面中的视频，视频的地址都在下载的按钮里。其中一个下载按钮的html的代码如下：" target="_blank" rel="external">http://v.163.com/special/opencourse/englishs1.html这个页面中的视频，视频的地址都在下载的按钮里。其中一个下载按钮的html的代码如下：</a><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">&lt;a class=&quot;downbtn&quot; href=&quot;http://mov.bn.netease.com/mobilev/2013/1/F/G/S8KTEF7FG.mp4&quot; id=&quot;M8KTEKR84&quot; target=&quot;_blank&quot;&gt;&lt;/a&gt;</div></pre></td></tr></table></figure></p>
-<p>我们取到其中的href属性，只需要进行如下选择即可<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">$(&quot;a.downbtn&quot;).attr(&quot;href&quot;);</div></pre></td></tr></table></figure></p>
-<p>在是现实，我们可以在index.js中写入如下代码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">var cheerio = require(&quot;cheerio&quot;);</div><div class="line">var server = require(&quot;./curl&quot;);</div><div class="line"> </div><div class="line">var url = &quot;http://v.163.com/special/opencourse/englishs1.html&quot;</div><div class="line"></div><div class="line">server.download(url, function(data) &#123;</div><div class="line">  if (data) &#123;</div><div class="line">    //console.log(data);</div><div class="line"> </div><div class="line">    var $ = cheerio.load(data);</div><div class="line">    $(&quot;a.downbtn&quot;).each(function(i, e) &#123;</div><div class="line">        console.log($(e).attr(&quot;href&quot;));</div><div class="line">    &#125;);</div><div class="line"> </div><div class="line">    console.log(&quot;done&quot;);</div><div class="line">  &#125; else &#123;</div><div class="line">      console.log(&quot;error&quot;);</div><div class="line">  &#125; </div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
+<p>我们先来自己分析一下页面。我们要抓取<a href="http://v.163.com/special/opencourse/englishs1.html这个页面中的视频，视频的地址都在下载的按钮里。其中一个下载按钮的html的代码如下：" target="_blank" rel="external">http://v.163.com/special/opencourse/englishs1.html这个页面中的视频，视频的地址都在下载的按钮里。其中一个下载按钮的html的代码如下：</a><br><figure class="highlight routeros"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">&lt;a <span class="attribute">class</span>=<span class="string">"downbtn"</span> <span class="attribute">href</span>=<span class="string">"http://mov.bn.netease.com/mobilev/2013/1/F/G/S8KTEF7FG.mp4"</span> <span class="attribute">id</span>=<span class="string">"M8KTEKR84"</span> <span class="attribute">target</span>=<span class="string">"_blank"</span>&gt;&lt;/a&gt;</div></pre></td></tr></table></figure></p>
+<p>我们取到其中的href属性，只需要进行如下选择即可<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="meta">$</span><span class="bash">(<span class="string">"a.downbtn"</span>).attr(<span class="string">"href"</span>);</span></div></pre></td></tr></table></figure></p>
+<p>在是现实，我们可以在index.js中写入如下代码<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> cheerio = <span class="built_in">require</span>(<span class="string">"cheerio"</span>);</div><div class="line"><span class="keyword">var</span> server = <span class="built_in">require</span>(<span class="string">"./curl"</span>);</div><div class="line"> </div><div class="line"><span class="keyword">var</span> url = <span class="string">"http://v.163.com/special/opencourse/englishs1.html"</span></div><div class="line"></div><div class="line">server.download(url, <span class="function"><span class="keyword">function</span>(<span class="params">data</span>) </span>&#123;</div><div class="line">  <span class="keyword">if</span> (data) &#123;</div><div class="line">    <span class="comment">//console.log(data);</span></div><div class="line"> </div><div class="line">    <span class="keyword">var</span> $ = cheerio.load(data);</div><div class="line">    $(<span class="string">"a.downbtn"</span>).each(<span class="function"><span class="keyword">function</span>(<span class="params">i, e</span>) </span>&#123;</div><div class="line">        <span class="built_in">console</span>.log($(e).attr(<span class="string">"href"</span>));</div><div class="line">    &#125;);</div><div class="line"> </div><div class="line">    <span class="built_in">console</span>.log(<span class="string">"done"</span>);</div><div class="line">  &#125; <span class="keyword">else</span> &#123;</div><div class="line">      <span class="built_in">console</span>.log(<span class="string">"error"</span>);</div><div class="line">  &#125; </div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
 
         
         </div>
@@ -251,7 +259,7 @@
 
 </div>
 
-    <a data-url="https://jonathonchen.github.io/2017/08/24/Node.js的学习--使用cheerio抓取网页数据/" data-id="cj6qa8pg30000zswq4d9o1mif" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://jonathonchen.github.io/2017/08/24/Node.js的学习--使用cheerio抓取网页数据/" data-id="cj6rrjjni000pxcwqo25v2l11" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -371,6 +379,44 @@
                     <li>
                         
                         <div class="item-thumbnail">
+                            <a href="/2017/08/25/js作用域和作用域链/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2017/08/25/js作用域和作用域链/" class="title">js作用域和作用域链</a></p>
+                            <p class="item-date"><time datetime="2017-08-25T10:54:55.445Z" itemprop="datePublished">2017-08-25</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2017/08/25/js变量的只声明不赋值/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://upload-images.jianshu.io/upload_images/3305482-776049bf088bbf06.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)" alt="js变量的只声明不赋值" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2017/08/25/js变量的只声明不赋值/" class="title">js变量的只声明不赋值</a></p>
+                            <p class="item-date"><time datetime="2017-08-25T10:54:55.402Z" itemprop="datePublished">2017-08-25</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
                             <a href="/2017/08/24/解决https请求下发送http请求问题 /" class="thumbnail">
     
     
@@ -425,63 +471,46 @@
                         </div>
                     </li>
                 
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2017/08/24/批处理HTTP模块SuperAgent/" class="thumbnail">
-    
-    
-        <span class="thumbnail-image thumbnail-none"></span>
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"></p>
-                            <p class="item-title"><a href="/2017/08/24/批处理HTTP模块SuperAgent/" class="title">SUPERAGENT</a></p>
-                            <p class="item-date"><time datetime="2017-08-24T03:52:10.831Z" itemprop="datePublished">2017-08-24</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2017/08/24/Node.js的学习--使用cheerio抓取网页数据/" class="thumbnail">
-    
-    
-        <span class="thumbnail-image thumbnail-none"></span>
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"></p>
-                            <p class="item-title"><a href="/2017/08/24/Node.js的学习--使用cheerio抓取网页数据/" class="title">Node.js的学习--使用cheerio抓取网页数据</a></p>
-                            <p class="item-date"><time datetime="2017-08-24T03:49:33.357Z" itemprop="datePublished">2017-08-24</time></p>
-                        </div>
-                    </li>
-                
             </ul>
         </div>
     </div>
 
     
         
-    
-        
     <div class="widget-wrap">
-        <h3 class="widget-title">归档</h3>
+        <h3 class="widget-title">分类</h3>
         <div class="widget">
-            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">八月 2017</a><span class="archive-list-count">14</span></li></ul>
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/javascript/">javascript</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/type1/">type1</a><span class="category-list-count">1</span></li></ul>
         </div>
     </div>
 
     
         
+    <div class="widget-wrap">
+        <h3 class="widget-title">归档</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">八月 2017</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">十二月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/07/">七月 2013</a><span class="archive-list-count">1</span></li></ul>
+        </div>
+    </div>
+
     
         
+    <div class="widget-wrap">
+        <h3 class="widget-title">标签</h3>
+        <div class="widget">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/">js</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tags1/">tags1</a><span class="tag-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">标签云</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/js/" style="font-size: 20px;">js</a> <a href="/tags/tags1/" style="font-size: 10px;">tags1</a>
+        </div>
+    </div>
+
     
         
     <div class="widget-wrap widget-list">
