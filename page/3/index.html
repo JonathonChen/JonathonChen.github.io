@@ -207,6 +207,239 @@
 
             
             <section id="main">
+    <article id="post-git远程操作" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            
+	
+		<a href="/2016/08/15/git远程操作/" itemprop="url">
+            <img src="http://st2.originoo.cn/3591429/5246/i/950/depositphotos_52469051-stock-photo-businessman-working-by-beach.jpg" class="article-banner" />
+        </a>
+	
+
+
+
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/2016/08/15/git远程操作/">git远程操作</a>
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2016/08/15/git远程操作/">
+            <time datetime="2016-08-14T16:00:00.000Z" itemprop="datePublished">2016-08-15</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/版本管理/">版本管理</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/git/">git</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <h4 id="git远程操作"><a href="#git远程操作" class="headerlink" title="git远程操作"></a>git远程操作</h4><blockquote>
+<p>在开源中国的码云平台做代码的远程提交</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">码云地址:https://git.oschina.net</div><div class="line">登录注册:此步骤省略</div><div class="line">具体操作步骤</div><div class="line">true1. 在平台上通过新建项目创建一个代码仓库</div><div class="line">true2. 把远程仓库的代码<span class="built_in">clone</span>到本地</div><div class="line">truetrue在本地电脑上创建一个文件夹(通过<span class="built_in">cd</span>命令进入此文件夹)，执行以下命令</div><div class="line">truetruegit <span class="built_in">clone</span> https://.... <span class="comment"># 通过clone命令把代码clone到本地</span></div><div class="line">true3. 使用编辑器打开文件夹,对内容做修改</div><div class="line">true4. 修改之后对代码做本地的缓存和提交</div><div class="line">truetruegit add . <span class="comment">#把文件加入缓存区</span></div><div class="line">truetruegit commit -m <span class="string">'提交信息'</span> <span class="comment">#把代码提交到本地仓库</span></div><div class="line">true5. 把本地代码push(推送)到远程服务器</div><div class="line">truetruegit push</div></pre></td></tr></table></figure>
+<p>git客户端gui工具  </p>
+<ol>
+<li>tortoisegit</li>
+<li>sourcetree</li>
+</ol>
+<hr>
+<h4 id="github上创建个人主页"><a href="#github上创建个人主页" class="headerlink" title="github上创建个人主页"></a>github上创建个人主页</h4><blockquote>
+<p>在github上创建一个项目名为 xxx.github.io的仓库<br>此仓库中放置的静态html文件可以直接通过外网地址进行访问</p>
+</blockquote>
+<p>创建个人github主页的步骤为</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="bullet">1. </span>打开github,登陆个人账号</div><div class="line"><span class="bullet">2. </span>创建项目,项目名为 用户名.github.io</div><div class="line"><span class="bullet">3. </span>在此项目中提交一些可以直接访问的静态html文件</div></pre></td></tr></table></figure>
+<h1 id="查看、添加、提交、删除、找回，重置修改文件"><a href="#查看、添加、提交、删除、找回，重置修改文件" class="headerlink" title="查看、添加、提交、删除、找回，重置修改文件"></a>查看、添加、提交、删除、找回，重置修改文件</h1><p>git help <command> # 显示command的help</p>
+<p>git show # 显示某次提交的内容 git show $id</p>
+<p>git co – <file> # 抛弃工作区修改</file></p>
+<p>git co . # 抛弃工作区修改</p>
+<p>git add <file> # 将工作文件修改提交到本地暂存区</file></p>
+<p>git add . # 将所有修改过的工作文件提交暂存区</p>
+<p>git rm <file> # 从版本库中删除文件</file></p>
+<p>git rm <file> –cached # 从版本库中删除文件，但不删除文件</file></p>
+<p>git reset <file> # 从暂存区恢复到工作文件</file></p>
+<p>git reset – . # 从暂存区恢复到工作文件</p>
+<p>git reset –hard # 恢复最近一次提交过的状态，即放弃上次提交后的所有本次修改</p>
+<p>git ci <file> git ci . git ci -a # 将git add, git rm和git ci等操作都合并在一起做　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　git ci -am “some comments”</file></p>
+<p>git ci –amend # 修改最后一次提交记录</p>
+<p>git revert &lt;$id&gt; # 恢复某次提交的状态，恢复动作本身也创建次提交对象</p>
+<p>git revert HEAD # 恢复最后一次提交的状态</p>
+<h1 id="查看文件diff"><a href="#查看文件diff" class="headerlink" title="查看文件diff"></a>查看文件diff</h1><p>git diff <file> # 比较当前文件和暂存区文件差异 git diff</file></p>
+<p>git diff &lt; </p>
+<p>id2&gt; # 比较两次提交之间的差异</p>
+<p>git diff <branch1>..<branch2> # 在两个分支之间比较</branch2></branch1></p>
+<p>git diff –staged # 比较暂存区和版本库差异</p>
+<p>git diff –cached # 比较暂存区和版本库差异</p>
+<p>git diff –stat # 仅仅比较统计信息</p>
+<h1 id="查看提交记录"><a href="#查看提交记录" class="headerlink" title="查看提交记录"></a>查看提交记录</h1><p>git log git log <file> # 查看该文件每次提交记录</file></p>
+<p>git log -p <file> # 查看每次详细修改内容的diff</file></p>
+<p>git log -p -2 # 查看最近两次详细修改内容的diff</p>
+<p>git log –stat #查看提交统计信息</p>
+<p>tig</p>
+<p>Mac上可以使用tig代替diff和log，brew install tig</p>
+<p>Git 本地分支管理</p>
+<h1 id="查看、切换、创建和删除分支"><a href="#查看、切换、创建和删除分支" class="headerlink" title="查看、切换、创建和删除分支"></a>查看、切换、创建和删除分支</h1><p>git br -r # 查看远程分支</p>
+<p>git br <new_branch> # 创建新的分支</new_branch></p>
+<p>git br -v # 查看各个分支最后提交信息</p>
+<p>git br –merged # 查看已经被合并到当前分支的分支</p>
+<p>git br –no-merged # 查看尚未被合并到当前分支的分支</p>
+<p>git co <branch> # 切换到某个分支</branch></p>
+<p>git co -b <new_branch> # 创建新的分支，并且切换过去</new_branch></p>
+<p>git co -b <new_branch> <branch> # 基于branch创建新的new_branch</branch></new_branch></p>
+<p>git co $id # 把某次历史提交记录checkout出来，但无分支信息，切换到其他分支会自动删除</p>
+<p>git co $id -b <new_branch> # 把某次历史提交记录checkout出来，创建成一个分支</new_branch></p>
+<p>git br -d <branch> # 删除某个分支</branch></p>
+<p>git br -D <branch> # 强制删除某个分支 (未被合并的分支被删除的时候需要强制)</branch></p>
+<h1 id="分支合并和rebase"><a href="#分支合并和rebase" class="headerlink" title="分支合并和rebase"></a>分支合并和rebase</h1><p>git merge <branch> # 将branch分支合并到当前分支</branch></p>
+<p>git merge origin/master –no-ff # 不要Fast-Foward合并，这样可以生成merge提交</p>
+<p>git rebase master <branch> # 将master rebase到branch，相当于： git co <branch> &amp;&amp; git rebase master &amp;&amp; git co master &amp;&amp; git merge <branch></branch></branch></branch></p>
+<p> Git补丁管理(方便在多台机器上开发同步时用)</p>
+<p>git diff &gt; ../sync.patch # 生成补丁</p>
+<p>git apply ../sync.patch # 打补丁</p>
+<p>git apply –check ../sync.patch #测试补丁能否成功</p>
+<h1 id="Git暂存管理"><a href="#Git暂存管理" class="headerlink" title="Git暂存管理"></a>Git暂存管理</h1><p>git stash # 暂存</p>
+<p>git stash list # 列所有stash</p>
+<p>git stash apply # 恢复暂存的内容</p>
+<p>git stash drop # 删除暂存区</p>
+<h1 id="Git远程分支管理"><a href="#Git远程分支管理" class="headerlink" title="Git远程分支管理"></a>Git远程分支管理</h1><p>git pull # 抓取远程仓库所有分支更新并合并到本地</p>
+<p>git pull –no-ff # 抓取远程仓库所有分支更新并合并到本地，不要快进合并</p>
+<p>git fetch origin # 抓取远程仓库更新</p>
+<p>git merge origin/master # 将远程主分支合并到本地当前分支</p>
+<p>git co –track origin/branch # 跟踪某个远程分支创建相应的本地分支</p>
+<p>git co -b <local_branch> origin/<remote_branch> # 基于远程分支创建本地分支，功能同上</remote_branch></local_branch></p>
+<p>git push # push所有分支</p>
+<p>git push origin master # 将本地主分支推到远程主分支</p>
+<p>git push -u origin master # 将本地主分支推到远程(如无远程主分支则创建，用于初始化远程仓库)</p>
+<p>git push origin <local_branch> # 创建远程分支， origin是远程仓库名</local_branch></p>
+<p>git push origin <local_branch>:<remote_branch> # 创建远程分支</remote_branch></local_branch></p>
+<p>git push origin :<remote_branch> #先删除本地分支(git br -d <branch>)，然后再push删除远程分支</branch></remote_branch></p>
+<h1 id="Git远程仓库管理"><a href="#Git远程仓库管理" class="headerlink" title="Git远程仓库管理"></a>Git远程仓库管理</h1><h1 id="GitHub"><a href="#GitHub" class="headerlink" title="GitHub"></a>GitHub</h1><p>git remote -v # 查看远程服务器地址和仓库名称</p>
+<p>git remote show origin # 查看远程服务器仓库状态</p>
+<p>git remote add origin git@ github:robbin/robbin_site.git # 添加远程仓库地址</p>
+<p>git remote set-url origin git@ github.com:robbin/robbin_site.git # 设置远程仓库地址(用于修改远程仓库地址) git remote rm <repository> # 删除远程仓库</repository></p>
+<h1 id="创建远程仓库"><a href="#创建远程仓库" class="headerlink" title="创建远程仓库"></a>创建远程仓库</h1><p>git clone –bare robbin_site robbin_site.git # 用带版本的项目创建纯版本仓库</p>
+<p>scp -r my_project.git git@ git.csdn.net:~ # 将纯仓库上传到服务器上</p>
+<p>mkdir robbin_site.git &amp;&amp; cd robbin_site.git &amp;&amp; git –bare init # 在服务器创建纯仓库</p>
+<p>git remote add origin git@ github.com:robbin/robbin_site.git # 设置远程仓库地址</p>
+<p>git push -u origin master # 客户端首次提交</p>
+<p>git push -u origin develop # 首次将本地develop分支提交到远程develop分支，并且track</p>
+<p>git remote set-head origin master # 设置远程仓库的HEAD指向master分支</p>
+<h1 id="也可以命令设置跟踪远程库和本地库"><a href="#也可以命令设置跟踪远程库和本地库" class="headerlink" title="也可以命令设置跟踪远程库和本地库"></a>也可以命令设置跟踪远程库和本地库</h1><p>git branch –set-upstream master origin/master</p>
+<p>git branch –set-upstream develop origin/develop</p>
+
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="/2016/08/15/git远程操作/" data-id="cj6ueqgc100092gwqoae4sm35" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+        <a href="/2016/08/15/git远程操作/#comments" class="article-comment-link">评论</a>
+    
+
+        </footer>
+    </div>
+    
+</article>
+
+
+
     <article id="post-css兼容" class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
@@ -281,7 +514,7 @@
 <h2 id="2、-为什么会发现上面的奇怪的东西（怪我css2-1和css3分不清），因为编译sass文件后发现ie8下的样式基本全歇菜了。需要注意的是，如果浏览器-不支持的选择器和支持的选择器写在一起，那么整条规则就不起作用了。比如你不小心创造了一个伪元素（是真的伪哦）-bb-bb-child-cc-background-333-那么这整条规则就不起作用了，所有浏览器在此情况下都会歇菜-cc的样式就丢失了。"><a href="#2、-为什么会发现上面的奇怪的东西（怪我css2-1和css3分不清），因为编译sass文件后发现ie8下的样式基本全歇菜了。需要注意的是，如果浏览器-不支持的选择器和支持的选择器写在一起，那么整条规则就不起作用了。比如你不小心创造了一个伪元素（是真的伪哦）-bb-bb-child-cc-background-333-那么这整条规则就不起作用了，所有浏览器在此情况下都会歇菜-cc的样式就丢失了。" class="headerlink" title="2、 为什么会发现上面的奇怪的东西（怪我css2.1和css3分不清），因为编译sass文件后发现ie8下的样式基本全歇菜了。需要注意的是，如果浏览器 不支持的选择器和支持的选择器写在一起，那么整条规则就不起作用了。比如你不小心创造了一个伪元素（是真的伪哦）.bb:bb-child, .cc{background:#333;}那么这整条规则就不起作用了，所有浏览器在此情况下都会歇菜,.cc的样式就丢失了。"></a>2、 为什么会发现上面的奇怪的东西（怪我css2.1和css3分不清），因为编译sass文件后发现ie8下的样式基本全歇菜了。需要注意的是，如果浏览器 不支持的选择器和支持的选择器写在一起，那么整条规则就不起作用了。比如你不小心创造了一个伪元素（是真的伪哦）.bb:bb-child, .cc{background:#333;}那么这整条规则就不起作用了，所有浏览器在此情况下都会歇菜,.cc的样式就丢失了。</h2><h2 id="3、-input设置了左右padding，but输入较多内容时padding还是会消失。这个问题是无解的，ie浏览器她就是这么渲染input的，解决方法是在input-外面套一层div，用div设置左右padding，border，width和height，input只需要设置width和weight为100-即可。另外，正常来讲，如果没有明确设置height的值，那么设置的line-height值就是height的值，but对于ie8，如果input-设置了-line-height，那么input必须设置height，否则input的内容显示有问题，会上下隐藏部分内容，她就是要躲猫猫。"><a href="#3、-input设置了左右padding，but输入较多内容时padding还是会消失。这个问题是无解的，ie浏览器她就是这么渲染input的，解决方法是在input-外面套一层div，用div设置左右padding，border，width和height，input只需要设置width和weight为100-即可。另外，正常来讲，如果没有明确设置height的值，那么设置的line-height值就是height的值，but对于ie8，如果input-设置了-line-height，那么input必须设置height，否则input的内容显示有问题，会上下隐藏部分内容，她就是要躲猫猫。" class="headerlink" title="3、 input设置了左右padding，but输入较多内容时padding还是会消失。这个问题是无解的，ie浏览器她就是这么渲染input的，解决方法是在input 外面套一层div，用div设置左右padding，border，width和height，input只需要设置width和weight为100% 即可。另外，正常来讲，如果没有明确设置height的值，那么设置的line-height值就是height的值，but对于ie8，如果input 设置了 line-height，那么input必须设置height，否则input的内容显示有问题，会上下隐藏部分内容，她就是要躲猫猫。"></a>3、 input设置了左右padding，but输入较多内容时padding还是会消失。这个问题是无解的，ie浏览器她就是这么渲染input的，解决方法是在input 外面套一层div，用div设置左右padding，border，width和height，input只需要设置width和weight为100% 即可。另外，正常来讲，如果没有明确设置height的值，那么设置的line-height值就是height的值，but对于ie8，如果input 设置了 line-height，那么input必须设置height，否则input的内容显示有问题，会上下隐藏部分内容，她就是要躲猫猫。</h2><h2 id="4、-为什么上面我不用input的伪元素进行设置而要嵌套多一层div呢？因为input，img，iframe等元素不支持伪元素-。-before-和-after伪元素指定了一个元素文档树内容之前和之后的内容。与’content’属性联用-指定了插入的内容（也就是你必须显性设置content-属性这两个伪家伙才能在文档中显示出来，哪怕设置content属性为空字符串也行）。作为DOM元素，伪元素都是在容器内进行渲染的-input，img，iframe等元素都不能包含其他元素，也就是不是容器，所以不能通过伪元素插入内容。"><a href="#4、-为什么上面我不用input的伪元素进行设置而要嵌套多一层div呢？因为input，img，iframe等元素不支持伪元素-。-before-和-after伪元素指定了一个元素文档树内容之前和之后的内容。与’content’属性联用-指定了插入的内容（也就是你必须显性设置content-属性这两个伪家伙才能在文档中显示出来，哪怕设置content属性为空字符串也行）。作为DOM元素，伪元素都是在容器内进行渲染的-input，img，iframe等元素都不能包含其他元素，也就是不是容器，所以不能通过伪元素插入内容。" class="headerlink" title="4、 为什么上面我不用input的伪元素进行设置而要嵌套多一层div呢？因为input，img，iframe等元素不支持伪元素 -_-||。:before 和:after伪元素指定了一个元素文档树内容之前和之后的内容。与’content’属性联用,指定了插入的内容（也就是你必须显性设置content 属性这两个伪家伙才能在文档中显示出来，哪怕设置content属性为空字符串也行）。作为DOM元素，伪元素都是在容器内进行渲染的, input，img，iframe等元素都不能包含其他元素，也就是不是容器，所以不能通过伪元素插入内容。"></a>4、 为什么上面我不用input的伪元素进行设置而要嵌套多一层div呢？因为input，img，iframe等元素不支持伪元素 -_-||。:before 和:after伪元素指定了一个元素文档树内容之前和之后的内容。与’content’属性联用,指定了插入的内容（也就是你必须显性设置content 属性这两个伪家伙才能在文档中显示出来，哪怕设置content属性为空字符串也行）。作为DOM元素，伪元素都是在容器内进行渲染的, input，img，iframe等元素都不能包含其他元素，也就是不是容器，所以不能通过伪元素插入内容。</h2><h2 id="5、-table中如果不是严格的用于表格，而是用于奇葩的局部布局时（我也想问为什么用来布局。。），td设置成inline-block可以排成一行，但是-ie8和ie9-下，如果td中的内容很长，即使td设置了宽度，td也会撑开并占用td设置的margin（废话，td是没有margin可言的），直到挤占所有的td-宽度之和为tr的宽度。但是td设置成float：left；就能表现成block。这个不清楚为什么，但是管用。。"><a href="#5、-table中如果不是严格的用于表格，而是用于奇葩的局部布局时（我也想问为什么用来布局。。），td设置成inline-block可以排成一行，但是-ie8和ie9-下，如果td中的内容很长，即使td设置了宽度，td也会撑开并占用td设置的margin（废话，td是没有margin可言的），直到挤占所有的td-宽度之和为tr的宽度。但是td设置成float：left；就能表现成block。这个不清楚为什么，但是管用。。" class="headerlink" title="5、 table中如果不是严格的用于表格，而是用于奇葩的局部布局时（我也想问为什么用来布局。。），td设置成inline-block可以排成一行，但是 ie8和ie9 下，如果td中的内容很长，即使td设置了宽度，td也会撑开并占用td设置的margin（废话，td是没有margin可言的），直到挤占所有的td 宽度之和为tr的宽度。但是td设置成float：left；就能表现成block。这个不清楚为什么，但是管用。。"></a>5、 table中如果不是严格的用于表格，而是用于奇葩的局部布局时（我也想问为什么用来布局。。），td设置成inline-block可以排成一行，但是 ie8和ie9 下，如果td中的内容很长，即使td设置了宽度，td也会撑开并占用td设置的margin（废话，td是没有margin可言的），直到挤占所有的td 宽度之和为tr的宽度。但是td设置成float：left；就能表现成block。这个不清楚为什么，但是管用。。</h2><h2 id="6、父元素的左padding会和子元素的左margin重叠。这个是没有好好实现盒子模型的事情了，包容吧。。"><a href="#6、父元素的左padding会和子元素的左margin重叠。这个是没有好好实现盒子模型的事情了，包容吧。。" class="headerlink" title="6、父元素的左padding会和子元素的左margin重叠。这个是没有好好实现盒子模型的事情了，包容吧。。"></a>6、父元素的左padding会和子元素的左margin重叠。这个是没有好好实现盒子模型的事情了，包容吧。。</h2><h2 id="7、sprite图中的icons之间最好留空白间隔，哪怕间隔1px也好，否则ie8下会出现使用了某一个icon当背景，icon后面跟着的其他icon也顺带显示了一小部分的bug，所以icons之间还是要适当留白，不要太省。"><a href="#7、sprite图中的icons之间最好留空白间隔，哪怕间隔1px也好，否则ie8下会出现使用了某一个icon当背景，icon后面跟着的其他icon也顺带显示了一小部分的bug，所以icons之间还是要适当留白，不要太省。" class="headerlink" title="7、sprite图中的icons之间最好留空白间隔，哪怕间隔1px也好，否则ie8下会出现使用了某一个icon当背景，icon后面跟着的其他icon也顺带显示了一小部分的bug，所以icons之间还是要适当留白，不要太省。"></a>7、sprite图中的icons之间最好留空白间隔，哪怕间隔1px也好，否则ie8下会出现使用了某一个icon当背景，icon后面跟着的其他icon也顺带显示了一小部分的bug，所以icons之间还是要适当留白，不要太省。</h2><h1 id="三、ie11部分css问题"><a href="#三、ie11部分css问题" class="headerlink" title="三、ie11部分css问题"></a>三、ie11部分css问题</h1><h2 id="1、-ie11下很多元素表现和其他浏览器不一致，比如对应用了同一样式（不设置-高度）的div，其他浏览器解析的高度是一致的，但是ie11下该div有可能高度偏大，由此导致一些排版上的问题，所以，如果发现元素排版上下偏移的问题，查看此元素或其当代元素是否设置了高度，统一添上高度一切都ok了。"><a href="#1、-ie11下很多元素表现和其他浏览器不一致，比如对应用了同一样式（不设置-高度）的div，其他浏览器解析的高度是一致的，但是ie11下该div有可能高度偏大，由此导致一些排版上的问题，所以，如果发现元素排版上下偏移的问题，查看此元素或其当代元素是否设置了高度，统一添上高度一切都ok了。" class="headerlink" title="1、 ie11下很多元素表现和其他浏览器不一致，比如对应用了同一样式（不设置 高度）的div，其他浏览器解析的高度是一致的，但是ie11下该div有可能高度偏大，由此导致一些排版上的问题，所以，如果发现元素排版上下偏移的问题，查看此元素或其当代元素是否设置了高度，统一添上高度一切都ok了。"></a>1、 ie11下很多元素表现和其他浏览器不一致，比如对应用了同一样式（不设置 高度）的div，其他浏览器解析的高度是一致的，但是ie11下该div有可能高度偏大，由此导致一些排版上的问题，所以，如果发现元素排版上下偏移的问题，查看此元素或其当代元素是否设置了高度，统一添上高度一切都ok了。</h2><h2 id="2、抱歉，ie11问题确实不多。"><a href="#2、抱歉，ie11问题确实不多。" class="headerlink" title="2、抱歉，ie11问题确实不多。"></a>2、抱歉，ie11问题确实不多。</h2><h1 id="四、结尾附上一个关于css优先级的奇谈"><a href="#四、结尾附上一个关于css优先级的奇谈" class="headerlink" title="四、结尾附上一个关于css优先级的奇谈"></a>四、结尾附上一个关于css优先级的奇谈</h1><h2 id="首先我们知道："><a href="#首先我们知道：" class="headerlink" title="首先我们知道："></a>首先我们知道：</h2><blockquote>
 <p>1、id选择器优先级权重比class选择器大一个数量级，class选择器权重比标签选择器大一个数量级；<br>2、class选择器和属性选择器同优先级;<br>3、样式的优先程度需要根据第1条规则计算整体的优先级，按选择器权重计算各条样式规则中所有选择器优先级之和，哪条规则权重大，那条就说了算。如果相同那么后面的覆盖前面的。<br>4、像这种.dog &gt; p开挂，多了特殊符号的，并不会增加优势，还是和 .dog p优先级一样。<br>然后可以抛出一个问题了：</p>
 </blockquote>
-<p>对于下面的文档结构，分别对 p | .p | div p | .parent | #parent设置color属性，那么优先级如何呢？<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;div id=<span class="string">"parent"</span> <span class="class"><span class="keyword">class</span></span>=<span class="string">"parent"</span>&gt;</div><div class="line">  &lt;p <span class="class"><span class="keyword">class</span></span>=<span class="string">"p"</span>&gt;p&lt;<span class="regexp">/p&gt;</span></div><div class="line"><span class="regexp">&lt;/</span>div&gt;</div></pre></td></tr></table></figure></p>
+<p>对于下面的文档结构，分别对 p | .p | div p | .parent | #parent设置color属性，那么优先级如何呢？<br><figure class="highlight applescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;<span class="keyword">div</span> <span class="built_in">id</span>=<span class="string">"parent"</span> <span class="built_in">class</span>=<span class="string">"parent"</span>&gt;</div><div class="line">  &lt;p <span class="built_in">class</span>=<span class="string">"p"</span>&gt;p&lt;/p&gt;</div><div class="line">&lt;/<span class="keyword">div</span>&gt;</div></pre></td></tr></table></figure></p>
 <p>结果表现：也就是 .p &gt; div p &gt; p &gt; #parent &gt; .parent<br>id选择器居然比p选择器优先级还低！将p元素和div元素分开看，.p &gt; div p &gt; p 很正常， #parent &gt; .parent也很正常。所以问题关键在子级p和父级#parent, 子级的选择器优先级比父级的选择器优先级高，或者说继承的优先级程度比自身的优先级低！</p>
 <p>嵌套多一层看看就知道是不是了，分别对#parent | div | p设置color属性：<br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"></div><div class="line">&lt;div id="parent" class="parent"&gt;</div><div class="line">  &lt;div class="mid"&gt;</div><div class="line">    &lt;p id="p" class="p"&gt;p&lt;/p&gt; </div><div class="line">  &lt;div&gt;</div><div class="line">&lt;/div&gt;</div></pre></td></tr></table></figure></p>
 <p>结果确实是p &gt; div &gt; #parent：</p>
@@ -300,7 +533,7 @@
 
 </div>
 
-    <a data-url="/2016/08/12/css兼容/" data-id="cj6uenfso0008s8wqysu73utp" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="/2016/08/12/css兼容/" data-id="cj6ueqgbu00082gwqer4sillr" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -378,150 +611,6 @@
 
 
 
-    <article id="post-js简单了解上下文" class="article article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
-        
-            
-	
-		<a href="/2016/02/03/js简单了解上下文/" itemprop="url">
-            <img src="http://st2.originoo.cn/4002815/7329/i/950/depositphotos_73298599-stock-photo-asparagus-on-a-dark-surface.jpg" class="article-banner" />
-        </a>
-	
-
-
-
-        
-        
-            <header class="article-header">
-                
-    
-        <h1 itemprop="name">
-            <a class="article-title" href="/2016/02/03/js简单了解上下文/">js简单了解上下文</a>
-        </h1>
-    
-
-                
-                    <div class="article-meta">
-                        
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/2016/02/03/js简单了解上下文/">
-            <time datetime="2016-02-02T16:00:00.000Z" itemprop="datePublished">2016-02-03</time>
-        </a>
-    </div>
-
-
-                        
-    <div class="article-category">
-    	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/categories/前端/">前端</a>
-    </div>
-
-                        
-    <div class="article-tag">
-        <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/js/">js</a>
-    </div>
-
-                    </div>
-                
-            </header>
-        
-        
-        <div class="article-entry" itemprop="articleBody">
-        
-            
-            <h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><blockquote>
-<p>在JavaScript中，你的代码将总是有着某种形式的上下文(代码在其内部工作的 对象)。这也是其它面向对象语言所共有的功能，但它们都不如JavaScript处理得这样极端。上下文是通过变量this工作。变量this总是引用代 码当前所在的那个对象。记住全局对象实际上是window对象的属性。这意味着即使是在全局上下文里，this 变量仍然引用一个对象。上下文可以成为一个强大的工具，是面向对象代码不可或缺的一环。程序1展示了一些关于上下文的简单例子。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">代码</div><div class="line"> <span class="keyword">var</span>  obj  =  &#123;</div><div class="line"> yes:  <span class="function"><span class="keyword">function</span> (<span class="params"></span>)</span>&#123;</div><div class="line"> <span class="comment">//  this == obj </span></div><div class="line"> <span class="keyword">this</span> .val  =   <span class="literal">true</span> ;</div><div class="line"> &#125;,</div><div class="line"> no:  <span class="function"><span class="keyword">function</span> (<span class="params"></span>)</span>&#123;</div><div class="line"> <span class="keyword">this</span> .val  =   <span class="literal">false</span> ;</div><div class="line"> &#125;</div><div class="line"> &#125;;</div><div class="line"> <span class="comment">// 我们看到，obj对象没有"val"的属性 </span></div><div class="line"> alert( obj.val  ==   <span class="literal">null</span>  );</div><div class="line"> <span class="comment">// 我们运行yes函数，它将改变附着在obj 对象的val属性 </span></div><div class="line"> obj.yes();</div><div class="line"> alert( obj.val  ==   <span class="literal">true</span>  );</div><div class="line"> <span class="comment">// 然而，我们现在让window.no指向obj.no方法，并运行之 </span></div><div class="line"> <span class="built_in">window</span>.no  =  obj.no;</div><div class="line"> <span class="built_in">window</span>.no();</div><div class="line"> <span class="comment">// 这导致obj对象保持不变(上下文则切换到了window对象)， </span></div><div class="line"> alert( obj.val  ==   <span class="literal">true</span>  );</div><div class="line"> <span class="comment">// 而window的val属性被更新 </span></div><div class="line"> alert( <span class="built_in">window</span>.val  ==   <span class="literal">false</span>  );</div></pre></td></tr></table></figure></p>
-</blockquote>
-
-        
-        </div>
-        <footer class="article-footer">
-            <div class="share-container">
-
-
-
-</div>
-
-    <a data-url="/2016/02/03/js简单了解上下文/" data-id="cj6uenfuu0012s8wqperotm5b" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
-<script>
-    (function ($) {
-        // Prevent duplicate binding
-        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
-            __SHARE_BUTTON_BINDED__ = true;
-        } else {
-            return;
-        }
-        $('body').on('click', function() {
-            $('.article-share-box.on').removeClass('on');
-        }).on('click', '.article-share-link', function(e) {
-            e.stopPropagation();
-
-            var $this = $(this),
-                url = $this.attr('data-url'),
-                encodedUrl = encodeURIComponent(url),
-                id = 'article-share-box-' + $this.attr('data-id'),
-                offset = $this.offset(),
-                box;
-
-            if ($('#' + id).length) {
-                box = $('#' + id);
-
-                if (box.hasClass('on')){
-                    box.removeClass('on');
-                    return;
-                }
-            } else {
-                var html = [
-                    '<div id="' + id + '" class="article-share-box">',
-                        '<input class="article-share-input" value="' + url + '">',
-                        '<div class="article-share-links">',
-                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
-                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
-                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
-                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
-                        '</div>',
-                    '</div>'
-                ].join('');
-
-              box = $(html);
-
-              $('body').append(box);
-            }
-
-            $('.article-share-box.on').hide();
-
-            box.css({
-                top: offset.top + 25,
-                left: offset.left
-            }).addClass('on');
-
-        }).on('click', '.article-share-box', function (e) {
-            e.stopPropagation();
-        }).on('click', '.article-share-box-input', function () {
-            $(this).select();
-        }).on('click', '.article-share-box-link', function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-
-            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
-        });
-    })(jQuery);
-</script>
-
-            
-    
-        <a href="/2016/02/03/js简单了解上下文/#comments" class="article-comment-link">评论</a>
-    
-
-        </footer>
-    </div>
-    
-</article>
-
-
-
     <nav id="page-nav">
         <a class="extend prev" rel="prev" href="/page/2/">&laquo; 上一页</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span>
     </nav>
@@ -535,6 +624,25 @@
         <h3 class="widget-title">最新文章</h3>
         <div class="widget">
             <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2017/02/03/js简单了解上下文/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://st2.originoo.cn/4002815/7329/i/950/depositphotos_73298599-stock-photo-asparagus-on-a-dark-surface.jpg)" alt="js简单了解上下文" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/前端/">前端</a></p>
+                            <p class="item-title"><a href="/2017/02/03/js简单了解上下文/" class="title">js简单了解上下文</a></p>
+                            <p class="item-date"><time datetime="2017-02-02T16:00:00.000Z" itemprop="datePublished">2017-02-03</time></p>
+                        </div>
+                    </li>
                 
                     <li>
                         
@@ -612,25 +720,6 @@
                         </div>
                     </li>
                 
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2017/01/18/js存储/" class="thumbnail">
-    
-    
-        <span style="background-image:url(http://www.gratisography.com/pictures/221_1.jpg)" alt="js存储" class="thumbnail-image"></span>
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/js/">js</a></p>
-                            <p class="item-title"><a href="/2017/01/18/js存储/" class="title">js存储</a></p>
-                            <p class="item-date"><time datetime="2017-01-17T16:00:00.000Z" itemprop="datePublished">2017-01-18</time></p>
-                        </div>
-                    </li>
-                
             </ul>
         </div>
     </div>
@@ -649,7 +738,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">归档</h3>
         <div class="widget">
-            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">十二月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">二月 2016</a><span class="archive-list-count">1</span></li></ul>
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">十二月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a><span class="archive-list-count">4</span></li></ul>
         </div>
     </div>
 
