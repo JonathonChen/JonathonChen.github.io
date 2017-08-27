@@ -3,19 +3,22 @@
 <head>
     <meta charset="utf-8">
     
-    <title>博客</title>
+    <title>CSS兼容 | 博客</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta name="description" content="Document             #example { height:100px; width: 100px;background: red;} /* FF */   *#example { height:200px; } /* IE6 */  *+#example { height:300px; } /* IE7 */">
+    <meta name="description" content="@import url（）机制是不同于link的，link是在加载页面前把css加载完毕，而@import url（）则是读取完文件后在加载，所以会出现一开始没有css样式，闪烁一下出现样式后的页面(网速慢的情况下)。   @import 是css2里面的，所以古老的ie5不支持。   当使用javascript控制dom去改变样式的时候，只能使用link标签，因为@import不是dom可以控">
+<meta name="keywords" content="css">
 <meta property="og:type" content="article">
-<meta property="og:title" content="博客">
-<meta property="og:url" content="/2017/08/27/1/index.html">
+<meta property="og:title" content="CSS兼容">
+<meta property="og:url" content="/2017/02/20/link和import/index.html">
 <meta property="og:site_name" content="博客">
-<meta property="og:description" content="Document             #example { height:100px; width: 100px;background: red;} /* FF */   *#example { height:200px; } /* IE6 */  *+#example { height:300px; } /* IE7 */">
+<meta property="og:description" content="@import url（）机制是不同于link的，link是在加载页面前把css加载完毕，而@import url（）则是读取完文件后在加载，所以会出现一开始没有css样式，闪烁一下出现样式后的页面(网速慢的情况下)。   @import 是css2里面的，所以古老的ie5不支持。   当使用javascript控制dom去改变样式的时候，只能使用link标签，因为@import不是dom可以控">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2017-08-27T11:13:43.349Z">
+<meta property="og:image" content="http://www.gratisography.com/pictures/88_1.jpg">
+<meta property="og:updated_time" content="2017-08-27T12:53:38.962Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="博客">
-<meta name="twitter:description" content="Document             #example { height:100px; width: 100px;background: red;} /* FF */   *#example { height:200px; } /* IE6 */  *+#example { height:300px; } /* IE7 */">
+<meta name="twitter:title" content="CSS兼容">
+<meta name="twitter:description" content="@import url（）机制是不同于link的，link是在加载页面前把css加载完毕，而@import url（）则是读取完文件后在加载，所以会出现一开始没有css样式，闪烁一下出现样式后的页面(网速慢的情况下)。   @import 是css2里面的，所以古老的ie5不支持。   当使用javascript控制dom去改变样式的时候，只能使用link标签，因为@import不是dom可以控">
+<meta name="twitter:image" content="http://www.gratisography.com/pictures/88_1.jpg">
     
 
     
@@ -210,36 +213,64 @@
 </aside>
 
             
-            <section id="main"><article id="post-1" class="article article-type-post" itemscope itemprop="blogPost">
+            <section id="main"><article id="post-link和import" class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
+            
+	
+		<img src="http://www.gratisography.com/pictures/88_1.jpg" class="article-banner" />
+	
+
+
+
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+            CSS兼容
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2017/02/20/link和import/">
+            <time datetime="2017-02-19T16:00:00.000Z" itemprop="datePublished">2017-02-20</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/前端/">前端</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/css/">css</a>
+    </div>
+
+                    </div>
+                
+            </header>
         
         
         <div class="article-entry" itemprop="articleBody">
         
             
-            <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-    <style>
-       #example { height:100px; width: 100px;background: red;} /* FF */
+            <ol>
+<li>@import url（）机制是不同于link的，link是在加载页面前把css加载完毕，而@import url（）则是读取完文件后在加载，所以会出现一开始没有css样式，闪烁一下出现样式后的页面(网速慢的情况下)。  </li>
+<li>@import 是css2里面的，所以古老的ie5不支持。  </li>
+<li>当使用javascript控制dom去改变样式的时候，只能使用link标签，因为@import不是dom可以控制的。 </li>
+<li>link除了能加载css外还能定义RSS，定义rel连接属性，@import只能加载css</li>
+</ol>
 
- *#example { height:200px; } /* IE6 */
-
-*+#example { height:300px; } /* IE7 */
-
-    </style>
-</head>
-<body>
-   <div id="example"> 
-</div> 
-
-</body>
-</html>
         
         </div>
         <footer class="article-footer">
@@ -249,7 +280,7 @@
 
 </div>
 
-    <a data-url="/2017/08/27/1/" data-id="cj6ur3mie00043cwq27kfkqhr" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="/2017/02/20/link和import/" data-id="cj6ur3mk400193cwqjcdsak8v" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -317,7 +348,7 @@
 
             
     
-        <a href="/2017/08/27/1/#comments" class="article-comment-link">评论</a>
+        <a href="/2017/02/20/link和import/#comments" class="article-comment-link">评论</a>
     
 
         </footer>
@@ -326,7 +357,7 @@
         
 <nav id="article-nav">
     
-        <a href="/2017/08/27/2/" id="article-nav-newer" class="article-nav-link-wrap">
+        <a href="/2017/08/27/1/" id="article-nav-newer" class="article-nav-link-wrap">
             <strong class="article-nav-caption">上一篇</strong>
             <div class="article-nav-title">
                 
@@ -336,7 +367,7 @@
         </a>
     
     
-        <a href="/2017/02/20/link和import/" id="article-nav-older" class="article-nav-link-wrap">
+        <a href="/2017/02/15/元素竖向的百分比设定/" id="article-nav-older" class="article-nav-link-wrap">
             <strong class="article-nav-caption">下一篇</strong>
             <div class="article-nav-title">CSS兼容</div>
         </a>

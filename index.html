@@ -154,7 +154,7 @@
         </div>
         <div class="article-info profile-block">
             <div class="article-info-block">
-                25
+                27
                 <span>文章</span>
             </div>
             <div class="article-info-block">
@@ -266,7 +266,7 @@
 
 </div>
 
-    <a data-url="/2017/08/27/2/" data-id="cj6uq2zy10006ocwqu5qq0dfa" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="/2017/08/27/2/" data-id="cj6ur3mhv00003cwqc7m2g908" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -383,7 +383,7 @@
 
 </div>
 
-    <a data-url="/2017/08/27/1/" data-id="cj6uq2zxp0002ocwq52tibpmw" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="/2017/08/27/1/" data-id="cj6ur3mie00043cwq27kfkqhr" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -452,6 +452,323 @@
             
     
         <a href="/2017/08/27/1/#comments" class="article-comment-link">评论</a>
+    
+
+        </footer>
+    </div>
+    
+</article>
+
+
+
+    <article id="post-link和import" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            
+	
+		<a href="/2017/02/20/link和import/" itemprop="url">
+            <img src="http://www.gratisography.com/pictures/88_1.jpg" class="article-banner" />
+        </a>
+	
+
+
+
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/2017/02/20/link和import/">CSS兼容</a>
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2017/02/20/link和import/">
+            <time datetime="2017-02-19T16:00:00.000Z" itemprop="datePublished">2017-02-20</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/前端/">前端</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/css/">css</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <ol>
+<li>@import url（）机制是不同于link的，link是在加载页面前把css加载完毕，而@import url（）则是读取完文件后在加载，所以会出现一开始没有css样式，闪烁一下出现样式后的页面(网速慢的情况下)。  </li>
+<li>@import 是css2里面的，所以古老的ie5不支持。  </li>
+<li>当使用javascript控制dom去改变样式的时候，只能使用link标签，因为@import不是dom可以控制的。 </li>
+<li>link除了能加载css外还能定义RSS，定义rel连接属性，@import只能加载css</li>
+</ol>
+
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="/2017/02/20/link和import/" data-id="cj6ur3mk400193cwqjcdsak8v" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+        <a href="/2017/02/20/link和import/#comments" class="article-comment-link">评论</a>
+    
+
+        </footer>
+    </div>
+    
+</article>
+
+
+
+    <article id="post-元素竖向的百分比设定" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            
+	
+		<a href="/2017/02/15/元素竖向的百分比设定/" itemprop="url">
+            <img src="http://www.gratisography.com/pictures/188_1.jpg" class="article-banner" />
+        </a>
+	
+
+
+
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/2017/02/15/元素竖向的百分比设定/">CSS兼容</a>
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2017/02/15/元素竖向的百分比设定/">
+            <time datetime="2017-02-14T16:00:00.000Z" itemprop="datePublished">2017-02-15</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/前端/">前端</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/css/">css</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <h1 id="一、-相对父元素"><a href="#一、-相对父元素" class="headerlink" title="一、 相对父元素"></a>一、 相对父元素</h1><ul>
+<li><p>宽度：</p>
+<blockquote>
+<p>[max/min-]width、left、right、padding、margin 等</p>
+</blockquote>
+</li>
+<li><p>高度</p>
+<blockquote>
+<p>[max/min-]height、top、bottom 等</p>
+</blockquote>
+</li>
+</ul>
+<h1 id="二、相对于继承字号的："><a href="#二、相对于继承字号的：" class="headerlink" title="二、相对于继承字号的："></a>二、相对于继承字号的：</h1><blockquote>
+<p>font-size 等；</p>
+</blockquote>
+<h1 id="三、相对于自身字号的："><a href="#三、相对于自身字号的：" class="headerlink" title="三、相对于自身字号的："></a>三、相对于自身字号的：</h1><blockquote>
+<p>line-height（line-height与height相等垂直居中原理可参见<a href="http://www.jianshu.com/p/6e4d683f6cf2）" target="_blank" rel="external">http://www.jianshu.com/p/6e4d683f6cf2）</a> 等；</p>
+</blockquote>
+<h1 id="四、-相对于自身宽高的："><a href="#四、-相对于自身宽高的：" class="headerlink" title="四、 相对于自身宽高的："></a>四、 相对于自身宽高的：</h1><blockquote>
+<p>border-radius、background-size、transform: translate()、transform-origin、zoom、clip-path 等；</p>
+</blockquote>
+<h1 id="五、-特殊算法的："><a href="#五、-特殊算法的：" class="headerlink" title="五、 特殊算法的："></a>五、 特殊算法的：</h1><p>background-position（方向长度 / 该方向除背景图之外部分总长度 * 100）、<br>filter 系列函数等；</p>
+<p>可以对元素的margin设置百分数，百分数是相对于父元素的width计算，不管是margin-top/margin-bottom还是margin-left/margin-right。（padding同理） </p>
+<p>如果没有为元素声明width，在这种情况下，元素框的总宽度包括外边距取决于父元素的width，这样可能得到“流式”页面，即元素的外边距会扩大或缩小以适应父元素的实际大小。如果对这个文档设置样式，使其元素使用百分数外边距，当用户修改浏览窗口的宽度时，外边距会随之扩大或缩小。 </p>
+<h2 id="为什么margin-top-margin-bottom的百分数也是相对于width而不是height呢？"><a href="#为什么margin-top-margin-bottom的百分数也是相对于width而不是height呢？" class="headerlink" title="为什么margin-top/margin-bottom的百分数也是相对于width而不是height呢？"></a>为什么margin-top/margin-bottom的百分数也是相对于width而不是height呢？</h2><p>CSS权威指南中的解释： </p>
+<blockquote>
+<p>我们认为，正常流中的大多数元素都会足够高以包含其后代元素（包括外边距），如果一个元素的上下外边距时父元素的height的百分数，就可能导致一个无限循环，父元素的height会增加，以适应后代元素上下外边距的增加，而相应的，上下外边距因为父元素height的增加也会增加，如果循环。 </p>
+</blockquote>
+<p><img src="./1.jpg" alt="图片1"><br><img src="./2.jpg" alt="图片2"><br><img src="./3.jpg" alt="图片3"></p>
+
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="/2017/02/15/元素竖向的百分比设定/" data-id="cj6ur3mlb001s3cwq18bsrq1v" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+        <a href="/2017/02/15/元素竖向的百分比设定/#comments" class="article-comment-link">评论</a>
     
 
         </footer>
@@ -544,6 +861,7 @@
 <p>只要能定位到p元素，那么父级选择器的权重就起作用了,一试便知，对#parent p | #p 设置同样的样式结果是这样的：<br>嗯，确实如此。所以：</p>
 </blockquote>
 <p>5、css样式优先级还和继承有关，继承的优先级不如本身应用的优先级高。 </p>
+<p>6、css3的calc()<br>浏览器支持IE9+、FF4.0+、Chrome19+、Safari6+</p>
 
         
         </div>
@@ -554,7 +872,7 @@
 
 </div>
 
-    <a data-url="/2017/02/06/css兼容/" data-id="cj6uq2zy4000bocwqetc5papd" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="/2017/02/06/css兼容/" data-id="cj6ur3mj2000d3cwq6voxhqmt" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -842,7 +1160,7 @@ display:inline-block; /*IE7+*/
 
 </div>
 
-    <a data-url="/2017/02/05/DIV+CSS 与不同 IE 版本等的兼容性/" data-id="cj6uq2zy40008ocwqkx8a7a9v" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="/2017/02/05/DIV+CSS 与不同 IE 版本等的兼容性/" data-id="cj6ur3miu00083cwqsm4aju8t" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -1008,7 +1326,7 @@ display:inline-block; /*IE7+*/
 
 </div>
 
-    <a data-url="/2017/02/05/去除inline-block元素间间距的N种方法/" data-id="cj6uq300k001oocwqvr1v01uj" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="/2017/02/05/去除inline-block元素间间距的N种方法/" data-id="cj6ur3mlg001w3cwqhgbpf9am" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -1152,7 +1470,7 @@ display:inline-block; /*IE7+*/
 
 </div>
 
-    <a data-url="/2017/02/03/js简单了解上下文/" data-id="cj6uq2zzf0015ocwqp5mhcssq" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="/2017/02/03/js简单了解上下文/" data-id="cj6ur3mk100163cwqgtpx5lus" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -1304,7 +1622,7 @@ display:inline-block; /*IE7+*/
 
 </div>
 
-    <a data-url="/2017/02/01/js变量和函数的提升/" data-id="cj6uq2zyk000pocwq5t22gnbc" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="/2017/02/01/js变量和函数的提升/" data-id="cj6ur3mjj000q3cwqxkzcqs04" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -1449,7 +1767,7 @@ display:inline-block; /*IE7+*/
 
 </div>
 
-    <a data-url="/2017/01/30/js变量的只声明不赋值/" data-id="cj6uq2zyz000uocwq8cs6dr40" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="/2017/01/30/js变量的只声明不赋值/" data-id="cj6ur3mjo000t3cwqnj5xbtyb" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -1527,392 +1845,6 @@ display:inline-block; /*IE7+*/
 
 
 
-    <article id="post-Ajax和Flash的优缺点" class="article article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
-        
-            
-	
-		<a href="/2017/01/22/Ajax和Flash的优缺点/" itemprop="url">
-            <img src="http://www.gratisography.com/pictures/333_1.jpg" class="article-banner" />
-        </a>
-	
-
-
-
-        
-        
-            <header class="article-header">
-                
-    
-        <h1 itemprop="name">
-            <a class="article-title" href="/2017/01/22/Ajax和Flash的优缺点/">Ajax和Flash优缺点</a>
-        </h1>
-    
-
-                
-                    <div class="article-meta">
-                        
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/2017/01/22/Ajax和Flash的优缺点/">
-            <time datetime="2017-01-21T16:00:00.000Z" itemprop="datePublished">2017-01-22</time>
-        </a>
-    </div>
-
-
-                        
-    <div class="article-category">
-    	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/categories/前端/">前端</a>
-    </div>
-
-                        
-    <div class="article-tag">
-        <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/css/">css</a>, <a class="tag-link" href="/tags/html/">html</a>, <a class="tag-link" href="/tags/js/">js</a>
-    </div>
-
-                    </div>
-                
-            </header>
-        
-        
-        <div class="article-entry" itemprop="articleBody">
-        
-            
-            <h2 id="Ajax优势"><a href="#Ajax优势" class="headerlink" title="Ajax优势"></a>Ajax优势</h2><ol>
-<li><p>可搜索性</p>
-<blockquote>
-<p>普通的文本网页会更有利于SEO。文本内容是搜索引擎容易检索的，而繁琐的swf字节码却是搜索引擎不愿触及的。虽然Google等一些大型的搜索引擎可以检索SWF内部的内容，但是仍然有很多麻烦存在。 </p>
-</blockquote>
-</li>
-<li><p>开放性</p>
-<blockquote>
-<p>Flash常年以来被Macromedia看的很死。包括Flex、FMS等辅佐技术一直都需要昂贵的安装、维护费用。而JS则没有这样的麻烦。没有人愿意承担法律和版权的风险。 </p>
-</blockquote>
-</li>
-<li><p>费用</p>
-<blockquote>
-<p>Flash开发是很昂贵的，因为FlashIDE等环境都是要收费的．而Ajax则不同．虽然有一些便宜的生成swf的工具，但是他们的工能实在无法满足复杂需求。 </p>
-</blockquote>
-</li>
-<li><p>易用性</p>
-<blockquote>
-<p>Ajax程序有更好的易用性。由于中间有一层Flashplayer代理层，因此许多辅助功能无法被Flash灵活利用。而且Flash在一些方面有着不好的口碑。比如弹出广告、比如恶意代码。</p>
-</blockquote>
-</li>
-<li><p>易于开发</p>
-<blockquote>
-<p>人们开发复杂的Ajax和Flash应用程序时，都会借助一些高级的开发工具。普遍来说，Ajax的开发包比Flash简便、容易</p>
-<h2 id="Flash优势"><a href="#Flash优势" class="headerlink" title="Flash优势"></a>Flash优势</h2></blockquote>
-</li>
-<li><p>多媒体处理</p>
-<blockquote>
-<p>Flash在音频、视频等多媒体领域相比HTML有绝对的优势。现在几乎所有的网站都包含有Flash内容。</p>
-</blockquote>
-</li>
-<li><p>兼容性</p>
-<blockquote>
-<p>兼容性好：由于通过了唯一的FlashPlayer“代理”。人们不必像调试JS那样，在不同的浏览器中调试程序。</p>
-</blockquote>
-</li>
-<li><p>矢量图形</p>
-<blockquote>
-<p>这是Flash最大的优势，同样处在这一领域的SVG、Canvas element以及Direct完全不能与Flash相比。</p>
-</blockquote>
-</li>
-<li><p>客户端资源调度</p>
-<blockquote>
-<p>Flash能够更容易的调用浏览器以外的外部资源。比如摄像头、麦克风等。然而这是普通的HTML无法完成的。</p>
-</blockquote>
-</li>
-</ol>
-<h2 id="Ajax劣势"><a href="#Ajax劣势" class="headerlink" title="Ajax劣势"></a>Ajax劣势</h2><ol>
-<li>他可能破坏浏览器的后退动能</li>
-<li>使用动态页面很难将某个特定状态保存到收藏夹</li>
-<li>不过这些都有方法解决</li>
-</ol>
-<h2 id="false劣势"><a href="#false劣势" class="headerlink" title="false劣势"></a>false劣势</h2><ol>
-<li>二进制格式</li>
-<li>格式私有</li>
-<li>flash文件经常会很大，用户第一次使用时要等待很久</li>
-<li>性能问题</li>
-</ol>
-<h2 id="解决ajax前进后退功能"><a href="#解决ajax前进后退功能" class="headerlink" title="解决ajax前进后退功能"></a>解决ajax前进后退功能</h2><p>我们可以利用ajax进行无刷新改变文档内容，但是没办法去修改URL，即无法实现浏览器的前进与后退、书签的收藏功能。</p>
-<p>利用location的hash部分和使用window.onhashchange来实现</p>
-<p>hash就是uri中#及后面的部分，例如：www.google.com.hk#123的#123。当只有hash部分发生变化时，浏览器的历史记录会产生记录，但不会向服务器发出请求，这时按后退键地址栏的uri会变化但页面内容不变。</p>
-<p>通过window.onhashchange事件来监听hash值的更改。</p>
-<p>ie6、7均不支持onhashchange，但可以用setInterval定期检查hash的改变，或者onload中检查的方法</p>
-<h3 id="而这样的方式对搜索引擎是十分不友好的，twitter和google约定使用hash-bang-xxx-，也就是hash后面的第一个字符为感叹号，这样的网址他们是会爬取的，但是其他搜索引擎不支持"><a href="#而这样的方式对搜索引擎是十分不友好的，twitter和google约定使用hash-bang-xxx-，也就是hash后面的第一个字符为感叹号，这样的网址他们是会爬取的，但是其他搜索引擎不支持" class="headerlink" title="而这样的方式对搜索引擎是十分不友好的，twitter和google约定使用hash bang (#!xxx)，也就是hash后面的第一个字符为感叹号，这样的网址他们是会爬取的，但是其他搜索引擎不支持"></a>而这样的方式对搜索引擎是十分不友好的，twitter和google约定使用hash bang (#!xxx)，也就是hash后面的第一个字符为感叹号，这样的网址他们是会爬取的，但是其他搜索引擎不支持</h3><h3 id="html5的history"><a href="#html5的history" class="headerlink" title="html5的history"></a>html5的history</h3><p>在HTML4，Histroy对象有下面属性方法：</p>
-<ol>
-<li>length：历史堆栈中的记录数。</li>
-<li>back()：返回上一页。</li>
-<li>forward()：前进到下一页。</li>
-<li>go([delta])：delta是个数字，如果不写或为0，则刷新本页；如果为正数，则前进到相应数目的页面；若为负数，则后退到相应数目的页面。</li>
-</ol>
-<p>在HTML5中，新增了两个方法和一个事件：</p>
-<p>pushState</p>
-<p>history.pushState(stateObject, title, url)，包括三个参数。</p>
-<pre><code>第一个参数用于存储该url对应的状态对象，该对象可在onpopstate事件对象（event.state）中获取，也可在history对象（history.state）中获取。
-
-第二个参数是标题，目前浏览器并未实现。
-
-第三个参数则是设定的url。一般设置为相对路径，如果设置为绝对路径时需要保证同源。
-</code></pre><p>pushState函数向浏览器的历史堆栈压入一个url为设定值的记录，并改变历史堆栈的当前指针至栈顶。</p>
-<p>replaceState</p>
-<p>该接口与pushState参数相同，含义也相同。唯一的区别在于replaceState是替换浏览器历史堆栈的当前历史记录为设定的url。需要注意的是，replaceState<strong>不会改动</strong>浏览器历史堆栈的当前指针。</p>
-<p>onpopstate</p>
-<p>该事件是window的属性。该事件会在调用浏览器的前进、后退以及执行history.forward、history.back、和history.Go触发，因为这些操作有一个共性，即修改了历史堆栈的当前指针。在不改变document的前提下，一旦当前指针改变则会触发onpopstate事件。</p>
-<p>popstate事件对象(event)的state属性包含了这个历史记录条目的state对象的一个拷贝.<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">window</span>.onpopstate = <span class="function"><span class="keyword">function</span>(<span class="params">event</span>) </span>&#123;</div><div class="line">  alert(<span class="string">"location: "</span> + <span class="built_in">document</span>.location + <span class="string">", state: "</span> + <span class="built_in">JSON</span>.stringify(event.state));</div><div class="line">&#125;;</div><div class="line"><span class="comment">//绑定事件处理函数. </span></div><div class="line">history.pushState(&#123;<span class="attr">page</span>: <span class="number">1</span>&#125;, <span class="string">"title 1"</span>, <span class="string">"?page=1"</span>);    <span class="comment">//添加并激活一个历史记录条目 http://example.com/example.html?page=1,条目索引为1</span></div><div class="line">history.pushState(&#123;<span class="attr">page</span>: <span class="number">2</span>&#125;, <span class="string">"title 2"</span>, <span class="string">"?page=2"</span>);    <span class="comment">//添加并激活一个历史记录条目 http://example.com/example.html?page=2,条目索引为2</span></div><div class="line">history.replaceState(&#123;<span class="attr">page</span>: <span class="number">3</span>&#125;, <span class="string">"title 3"</span>, <span class="string">"?page=3"</span>); <span class="comment">//修改当前激活的历史记录条目 http://ex..?page=2 变为 http://ex..?page=3,条目索引为3</span></div><div class="line">history.back(); <span class="comment">// 弹出 "location: http://example.com/example.html?page=1, state: &#123;"page":1&#125;"</span></div><div class="line">history.back(); <span class="comment">// 弹出 "location: http://example.com/example.html, state: null</span></div><div class="line">history.go(<span class="number">2</span>);  <span class="comment">// 弹出 "location: http://example.com/example.html?page=3, state: &#123;"page":3&#125;</span></div></pre></td></tr></table></figure></p>
-<h3 id="具体场景实用解析http-www-cnblogs-com-accordion-p-5699372-html-top"><a href="#具体场景实用解析http-www-cnblogs-com-accordion-p-5699372-html-top" class="headerlink" title="具体场景实用解析http://www.cnblogs.com/accordion/p/5699372.html#top"></a>具体场景实用解析<a href="http://www.cnblogs.com/accordion/p/5699372.html#top" target="_blank" rel="external">http://www.cnblogs.com/accordion/p/5699372.html#top</a></h3>
-        
-        </div>
-        <footer class="article-footer">
-            <div class="share-container">
-
-
-
-</div>
-
-    <a data-url="/2017/01/22/Ajax和Flash的优缺点/" data-id="cj6uq2zxg0000ocwqagym5gwy" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
-<script>
-    (function ($) {
-        // Prevent duplicate binding
-        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
-            __SHARE_BUTTON_BINDED__ = true;
-        } else {
-            return;
-        }
-        $('body').on('click', function() {
-            $('.article-share-box.on').removeClass('on');
-        }).on('click', '.article-share-link', function(e) {
-            e.stopPropagation();
-
-            var $this = $(this),
-                url = $this.attr('data-url'),
-                encodedUrl = encodeURIComponent(url),
-                id = 'article-share-box-' + $this.attr('data-id'),
-                offset = $this.offset(),
-                box;
-
-            if ($('#' + id).length) {
-                box = $('#' + id);
-
-                if (box.hasClass('on')){
-                    box.removeClass('on');
-                    return;
-                }
-            } else {
-                var html = [
-                    '<div id="' + id + '" class="article-share-box">',
-                        '<input class="article-share-input" value="' + url + '">',
-                        '<div class="article-share-links">',
-                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
-                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
-                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
-                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
-                        '</div>',
-                    '</div>'
-                ].join('');
-
-              box = $(html);
-
-              $('body').append(box);
-            }
-
-            $('.article-share-box.on').hide();
-
-            box.css({
-                top: offset.top + 25,
-                left: offset.left
-            }).addClass('on');
-
-        }).on('click', '.article-share-box', function (e) {
-            e.stopPropagation();
-        }).on('click', '.article-share-box-input', function () {
-            $(this).select();
-        }).on('click', '.article-share-box-link', function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-
-            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
-        });
-    })(jQuery);
-</script>
-
-            
-    
-        <a href="/2017/01/22/Ajax和Flash的优缺点/#comments" class="article-comment-link">评论</a>
-    
-
-        </footer>
-    </div>
-    
-</article>
-
-
-
-    <article id="post-js存储" class="article article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
-        
-            
-	
-		<a href="/2017/01/18/js存储/" itemprop="url">
-            <img src="http://www.gratisography.com/pictures/201_1.jpg" class="article-banner" />
-        </a>
-	
-
-
-
-        
-        
-            <header class="article-header">
-                
-    
-        <h1 itemprop="name">
-            <a class="article-title" href="/2017/01/18/js存储/">js存储</a>
-        </h1>
-    
-
-                
-                    <div class="article-meta">
-                        
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/2017/01/18/js存储/">
-            <time datetime="2017-01-17T16:00:00.000Z" itemprop="datePublished">2017-01-18</time>
-        </a>
-    </div>
-
-
-                        
-    <div class="article-category">
-    	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/categories/js/">js</a>
-    </div>
-
-                        
-    <div class="article-tag">
-        <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/存储/">存储</a>
-    </div>
-
-                    </div>
-                
-            </header>
-        
-        
-        <div class="article-entry" itemprop="articleBody">
-        
-            
-            <h2 id="1-indexDB"><a href="#1-indexDB" class="headerlink" title="1. indexDB"></a>1. indexDB</h2><p>indexDB 是HTML5的本地存储，把一些数据存储到浏览器（客户端）中，当与网络断开时，可以从浏览器中读取数据，用来做一些离线应用。<br>索引数据库 (IndexedDB) API（作为 HTML5 的一部分）对创建具有丰富本地存储数据的数据密集型的离线 HTML5 Web 应用程序很有用。同时它还有助于本地缓存数据，使传统在线 Web 应用程序（比如移动 Web 应用程序）能够更快地运行和响应。</p>
-<p>1.<a href="http://www.cnblogs.com/dolphinX/p/3415761.html" target="_blank" rel="external">http://www.cnblogs.com/dolphinX/p/3415761.html</a>　</p>
-<p>2.<a href="http://www.cnblogs.com/dolphinX/p/3416889.html" target="_blank" rel="external">http://www.cnblogs.com/dolphinX/p/3416889.html</a></p>
-<h2 id="2-cookie"><a href="#2-cookie" class="headerlink" title="2. cookie"></a>2. cookie</h2><p>cookie 通过在（客户端）浏览器记录信息确定身份，最大为4kb</p>
-<h2 id="3-url参数"><a href="#3-url参数" class="headerlink" title="3. url参数"></a>3. url参数</h2><p>url参数用的是get方法，从服务器上获取数据，大小不能大于2kb</p>
-<h2 id="4-session"><a href="#4-session" class="headerlink" title="4. session"></a>4. session</h2><p>session 是服务器端使用的一种记录客户端状态的机制</p>
-<h2 id="5-post"><a href="#5-post" class="headerlink" title="5. post"></a>5. post</h2><p>post 是向服务器传送数据，数据量较大</p>
-<h2 id="6-localStorage"><a href="#6-localStorage" class="headerlink" title="6.localStorage"></a>6.localStorage</h2><p>localStorage也是html5的本地存储，将数据保存在客户端，以键值对(Key-Value)的方式存储，永久存储，永不失效，除非手动删除。</p>
-<p>大小：每个域名5M</p>
-<p>浏览器支持：<br><img src="http://images2015.cnblogs.com/blog/911587/201607/911587-20160723133547154-1865674181.jpg" alt="浏览器支持"><br>检测方法：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span>(<span class="built_in">window</span>.localStorage)&#123;</div><div class="line"> alert(<span class="string">'This browser supports localStorage'</span>);</div><div class="line">&#125;<span class="keyword">else</span>&#123;</div><div class="line"> alert(<span class="string">'This browser does NOT support localStorage'</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>常用的API：</p>
-<p>getItem //取记录</p>
-<p>setIten//设置记录</p>
-<p>removeItem//移除记录</p>
-<p>key//取key所对应的值</p>
-<p>clear//清除记录</p>
-<p>存储的内容：</p>
-<p>数组，图片，json，样式，脚本。。。（只要是能序列化成字符串的内容都可以存储）</p>
-<h2 id="7-sessionStorage"><a href="#7-sessionStorage" class="headerlink" title="7. sessionStorage"></a>7. sessionStorage</h2><p>HTML5 的本地存储 API 中的 localStorage 与 sessionStorage 在使用方法上是相同的，区别在于 sessionStorage 在关闭页面后即被清空，而 localStorage 则会一直保存。</p>
-<h2 id="7-userData"><a href="#7-userData" class="headerlink" title="7. userData"></a>7. userData</h2><p>对于IE浏览器有UserData，大小是64k,只有IE浏览器支持。<br>UserData是微软为IE专门在系统中开辟的一块存储空间，所以说只支持Windows+IE的组合，实际测试在2000（IE5.5）、XP（IE6、IE7），Vista（IE7）下都是可以正常使用的。 </p>
-
-        
-        </div>
-        <footer class="article-footer">
-            <div class="share-container">
-
-
-
-</div>
-
-    <a data-url="/2017/01/18/js存储/" data-id="cj6uq2zyz000xocwqardagcuu" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
-<script>
-    (function ($) {
-        // Prevent duplicate binding
-        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
-            __SHARE_BUTTON_BINDED__ = true;
-        } else {
-            return;
-        }
-        $('body').on('click', function() {
-            $('.article-share-box.on').removeClass('on');
-        }).on('click', '.article-share-link', function(e) {
-            e.stopPropagation();
-
-            var $this = $(this),
-                url = $this.attr('data-url'),
-                encodedUrl = encodeURIComponent(url),
-                id = 'article-share-box-' + $this.attr('data-id'),
-                offset = $this.offset(),
-                box;
-
-            if ($('#' + id).length) {
-                box = $('#' + id);
-
-                if (box.hasClass('on')){
-                    box.removeClass('on');
-                    return;
-                }
-            } else {
-                var html = [
-                    '<div id="' + id + '" class="article-share-box">',
-                        '<input class="article-share-input" value="' + url + '">',
-                        '<div class="article-share-links">',
-                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
-                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
-                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
-                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
-                        '</div>',
-                    '</div>'
-                ].join('');
-
-              box = $(html);
-
-              $('body').append(box);
-            }
-
-            $('.article-share-box.on').hide();
-
-            box.css({
-                top: offset.top + 25,
-                left: offset.left
-            }).addClass('on');
-
-        }).on('click', '.article-share-box', function (e) {
-            e.stopPropagation();
-        }).on('click', '.article-share-box-input', function () {
-            $(this).select();
-        }).on('click', '.article-share-box-link', function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-
-            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
-        });
-    })(jQuery);
-</script>
-
-            
-    
-        <a href="/2017/01/18/js存储/#comments" class="article-comment-link">评论</a>
-    
-
-        </footer>
-    </div>
-    
-</article>
-
-
-
     <nav id="page-nav">
         <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">下一页 &raquo;</a>
     </nav>
@@ -1968,6 +1900,44 @@ display:inline-block; /*IE7+*/
                     <li>
                         
                         <div class="item-thumbnail">
+                            <a href="/2017/02/20/link和import/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://www.gratisography.com/pictures/88_1.jpg)" alt="CSS兼容" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/前端/">前端</a></p>
+                            <p class="item-title"><a href="/2017/02/20/link和import/" class="title">CSS兼容</a></p>
+                            <p class="item-date"><time datetime="2017-02-19T16:00:00.000Z" itemprop="datePublished">2017-02-20</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2017/02/15/元素竖向的百分比设定/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://www.gratisography.com/pictures/188_1.jpg)" alt="CSS兼容" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/前端/">前端</a></p>
+                            <p class="item-title"><a href="/2017/02/15/元素竖向的百分比设定/" class="title">CSS兼容</a></p>
+                            <p class="item-date"><time datetime="2017-02-14T16:00:00.000Z" itemprop="datePublished">2017-02-15</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
                             <a href="/2017/02/06/css兼容/" class="thumbnail">
     
     
@@ -1984,44 +1954,6 @@ display:inline-block; /*IE7+*/
                         </div>
                     </li>
                 
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2017/02/05/DIV+CSS 与不同 IE 版本等的兼容性/" class="thumbnail">
-    
-    
-        <span style="background-image:url(http://www.gratisography.com/pictures/413_1.jpg)" alt="DIV+CSS 与不同 IE 版本等的兼容性" class="thumbnail-image"></span>
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/前端/">前端</a></p>
-                            <p class="item-title"><a href="/2017/02/05/DIV+CSS 与不同 IE 版本等的兼容性/" class="title">DIV+CSS 与不同 IE 版本等的兼容性</a></p>
-                            <p class="item-date"><time datetime="2017-02-04T16:00:00.000Z" itemprop="datePublished">2017-02-05</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2017/02/05/去除inline-block元素间间距的N种方法/" class="thumbnail">
-    
-    
-        <span style="background-image:url(http://www.gratisography.com/pictures/404_1.jpg)" alt="去除inline-block元素间间距的N种方法(转)" class="thumbnail-image"></span>
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/前端/">前端</a></p>
-                            <p class="item-title"><a href="/2017/02/05/去除inline-block元素间间距的N种方法/" class="title">去除inline-block元素间间距的N种方法(转)</a></p>
-                            <p class="item-date"><time datetime="2017-02-04T16:00:00.000Z" itemprop="datePublished">2017-02-05</time></p>
-                        </div>
-                    </li>
-                
             </ul>
         </div>
     </div>
@@ -2031,7 +1963,7 @@ display:inline-block; /*IE7+*/
     <div class="widget-wrap">
         <h3 class="widget-title">分类</h3>
         <div class="widget">
-            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Http/">Http</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Node/">Node</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Node/爬虫/">爬虫</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/js/">js</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端/">前端</a><span class="category-list-count">15</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据库/">数据库</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/服务器/">服务器</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/版本管理/">版本管理</a><span class="category-list-count">1</span></li></ul>
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Http/">Http</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Node/">Node</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Node/爬虫/">爬虫</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/js/">js</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端/">前端</a><span class="category-list-count">17</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据库/">数据库</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/服务器/">服务器</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/版本管理/">版本管理</a><span class="category-list-count">1</span></li></ul>
         </div>
     </div>
 
@@ -2040,7 +1972,7 @@ display:inline-block; /*IE7+*/
     <div class="widget-wrap">
         <h3 class="widget-title">归档</h3>
         <div class="widget">
-            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">八月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">十二月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a><span class="archive-list-count">3</span></li></ul>
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">八月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">十二月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a><span class="archive-list-count">3</span></li></ul>
         </div>
     </div>
 
@@ -2049,7 +1981,7 @@ display:inline-block; /*IE7+*/
     <div class="widget-wrap">
         <h3 class="widget-title">标签</h3>
         <div class="widget">
-            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue/">Vue</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cheerio/">cheerio</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html/">html</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http请求/">http请求</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/">js</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lazyload/">lazyload</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongodb/">mongodb</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/中间件/">中间件</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/代理/">代理</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/存储/">存储</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/懒加载/">懒加载</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/爬虫/">爬虫</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/跨域/">跨域</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/页面请求/">页面请求</a><span class="tag-list-count">1</span></li></ul>
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue/">Vue</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cheerio/">cheerio</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html/">html</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http请求/">http请求</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/">js</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lazyload/">lazyload</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongodb/">mongodb</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/中间件/">中间件</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/代理/">代理</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/存储/">存储</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/懒加载/">懒加载</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/爬虫/">爬虫</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/跨域/">跨域</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/页面请求/">页面请求</a><span class="tag-list-count">1</span></li></ul>
         </div>
     </div>
 

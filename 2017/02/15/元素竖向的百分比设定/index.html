@@ -3,19 +3,22 @@
 <head>
     <meta charset="utf-8">
     
-    <title>博客</title>
+    <title>CSS兼容 | 博客</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta name="description" content="Document             #example { height:100px; width: 100px;background: red;} /* FF */   *#example { height:200px; } /* IE6 */  *+#example { height:300px; } /* IE7 */">
+    <meta name="description" content="一、 相对父元素 宽度：  [max/min-]width、left、right、padding、margin 等   高度  [max/min-]height、top、bottom 等    二、相对于继承字号的： font-size 等；  三、相对于自身字号的： line-height（line-height与height相等垂直居中原理可参见http://www.jianshu.com/p">
+<meta name="keywords" content="css">
 <meta property="og:type" content="article">
-<meta property="og:title" content="博客">
-<meta property="og:url" content="/2017/08/27/1/index.html">
+<meta property="og:title" content="CSS兼容">
+<meta property="og:url" content="/2017/02/15/元素竖向的百分比设定/index.html">
 <meta property="og:site_name" content="博客">
-<meta property="og:description" content="Document             #example { height:100px; width: 100px;background: red;} /* FF */   *#example { height:200px; } /* IE6 */  *+#example { height:300px; } /* IE7 */">
+<meta property="og:description" content="一、 相对父元素 宽度：  [max/min-]width、left、right、padding、margin 等   高度  [max/min-]height、top、bottom 等    二、相对于继承字号的： font-size 等；  三、相对于自身字号的： line-height（line-height与height相等垂直居中原理可参见http://www.jianshu.com/p">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2017-08-27T11:13:43.349Z">
+<meta property="og:image" content="http://www.gratisography.com/pictures/188_1.jpg">
+<meta property="og:updated_time" content="2017-08-27T13:10:00.765Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="博客">
-<meta name="twitter:description" content="Document             #example { height:100px; width: 100px;background: red;} /* FF */   *#example { height:200px; } /* IE6 */  *+#example { height:300px; } /* IE7 */">
+<meta name="twitter:title" content="CSS兼容">
+<meta name="twitter:description" content="一、 相对父元素 宽度：  [max/min-]width、left、right、padding、margin 等   高度  [max/min-]height、top、bottom 等    二、相对于继承字号的： font-size 等；  三、相对于自身字号的： line-height（line-height与height相等垂直居中原理可参见http://www.jianshu.com/p">
+<meta name="twitter:image" content="http://www.gratisography.com/pictures/188_1.jpg">
     
 
     
@@ -210,36 +213,87 @@
 </aside>
 
             
-            <section id="main"><article id="post-1" class="article article-type-post" itemscope itemprop="blogPost">
+            <section id="main"><article id="post-元素竖向的百分比设定" class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
+            
+	
+		<img src="http://www.gratisography.com/pictures/188_1.jpg" class="article-banner" />
+	
+
+
+
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+            CSS兼容
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2017/02/15/元素竖向的百分比设定/">
+            <time datetime="2017-02-14T16:00:00.000Z" itemprop="datePublished">2017-02-15</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/前端/">前端</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/css/">css</a>
+    </div>
+
+                    </div>
+                
+            </header>
         
         
         <div class="article-entry" itemprop="articleBody">
         
             
-            <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-    <style>
-       #example { height:100px; width: 100px;background: red;} /* FF */
+            <h1 id="一、-相对父元素"><a href="#一、-相对父元素" class="headerlink" title="一、 相对父元素"></a>一、 相对父元素</h1><ul>
+<li><p>宽度：</p>
+<blockquote>
+<p>[max/min-]width、left、right、padding、margin 等</p>
+</blockquote>
+</li>
+<li><p>高度</p>
+<blockquote>
+<p>[max/min-]height、top、bottom 等</p>
+</blockquote>
+</li>
+</ul>
+<h1 id="二、相对于继承字号的："><a href="#二、相对于继承字号的：" class="headerlink" title="二、相对于继承字号的："></a>二、相对于继承字号的：</h1><blockquote>
+<p>font-size 等；</p>
+</blockquote>
+<h1 id="三、相对于自身字号的："><a href="#三、相对于自身字号的：" class="headerlink" title="三、相对于自身字号的："></a>三、相对于自身字号的：</h1><blockquote>
+<p>line-height（line-height与height相等垂直居中原理可参见<a href="http://www.jianshu.com/p/6e4d683f6cf2）" target="_blank" rel="external">http://www.jianshu.com/p/6e4d683f6cf2）</a> 等；</p>
+</blockquote>
+<h1 id="四、-相对于自身宽高的："><a href="#四、-相对于自身宽高的：" class="headerlink" title="四、 相对于自身宽高的："></a>四、 相对于自身宽高的：</h1><blockquote>
+<p>border-radius、background-size、transform: translate()、transform-origin、zoom、clip-path 等；</p>
+</blockquote>
+<h1 id="五、-特殊算法的："><a href="#五、-特殊算法的：" class="headerlink" title="五、 特殊算法的："></a>五、 特殊算法的：</h1><p>background-position（方向长度 / 该方向除背景图之外部分总长度 * 100）、<br>filter 系列函数等；</p>
+<p>可以对元素的margin设置百分数，百分数是相对于父元素的width计算，不管是margin-top/margin-bottom还是margin-left/margin-right。（padding同理） </p>
+<p>如果没有为元素声明width，在这种情况下，元素框的总宽度包括外边距取决于父元素的width，这样可能得到“流式”页面，即元素的外边距会扩大或缩小以适应父元素的实际大小。如果对这个文档设置样式，使其元素使用百分数外边距，当用户修改浏览窗口的宽度时，外边距会随之扩大或缩小。 </p>
+<h2 id="为什么margin-top-margin-bottom的百分数也是相对于width而不是height呢？"><a href="#为什么margin-top-margin-bottom的百分数也是相对于width而不是height呢？" class="headerlink" title="为什么margin-top/margin-bottom的百分数也是相对于width而不是height呢？"></a>为什么margin-top/margin-bottom的百分数也是相对于width而不是height呢？</h2><p>CSS权威指南中的解释： </p>
+<blockquote>
+<p>我们认为，正常流中的大多数元素都会足够高以包含其后代元素（包括外边距），如果一个元素的上下外边距时父元素的height的百分数，就可能导致一个无限循环，父元素的height会增加，以适应后代元素上下外边距的增加，而相应的，上下外边距因为父元素height的增加也会增加，如果循环。 </p>
+</blockquote>
+<p><img src="./1.jpg" alt="图片1"><br><img src="./2.jpg" alt="图片2"><br><img src="./3.jpg" alt="图片3"></p>
 
- *#example { height:200px; } /* IE6 */
-
-*+#example { height:300px; } /* IE7 */
-
-    </style>
-</head>
-<body>
-   <div id="example"> 
-</div> 
-
-</body>
-</html>
         
         </div>
         <footer class="article-footer">
@@ -249,7 +303,7 @@
 
 </div>
 
-    <a data-url="/2017/08/27/1/" data-id="cj6ur3mie00043cwq27kfkqhr" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="/2017/02/15/元素竖向的百分比设定/" data-id="cj6ur3mlb001s3cwq18bsrq1v" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -317,7 +371,7 @@
 
             
     
-        <a href="/2017/08/27/1/#comments" class="article-comment-link">评论</a>
+        <a href="/2017/02/15/元素竖向的百分比设定/#comments" class="article-comment-link">评论</a>
     
 
         </footer>
@@ -326,17 +380,17 @@
         
 <nav id="article-nav">
     
-        <a href="/2017/08/27/2/" id="article-nav-newer" class="article-nav-link-wrap">
+        <a href="/2017/02/20/link和import/" id="article-nav-newer" class="article-nav-link-wrap">
             <strong class="article-nav-caption">上一篇</strong>
             <div class="article-nav-title">
                 
-                    (no title)
+                    CSS兼容
                 
             </div>
         </a>
     
     
-        <a href="/2017/02/20/link和import/" id="article-nav-older" class="article-nav-link-wrap">
+        <a href="/2017/02/06/css兼容/" id="article-nav-older" class="article-nav-link-wrap">
             <strong class="article-nav-caption">下一篇</strong>
             <div class="article-nav-title">CSS兼容</div>
         </a>
