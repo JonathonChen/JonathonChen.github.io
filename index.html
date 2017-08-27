@@ -154,11 +154,11 @@
         </div>
         <div class="article-info profile-block">
             <div class="article-info-block">
-                22
+                25
                 <span>文章</span>
             </div>
             <div class="article-info-block">
-                17
+                16
                 <span>标签</span>
             </div>
         </div>
@@ -207,6 +207,597 @@
 
             
             <section id="main">
+    <article id="post-2" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <!--<!DOCTYPE html>-->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!--<meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+    <!--<meta http-equiv="X-UA-Compatible" content="ie=edge">-->
+    <title>Document</title>
+    <style>
+             #box {  
+      width: 600px;  
+      height:100px;  
+      margin:100px auto;  
+      background:blue;  
+    }  
+    #left {  
+      float: left;  
+      width: 50%;  
+      height:100px;  
+      background:red;  
+    }  
+    #right {  
+      width: 100px;  
+      height:100px;  
+      background:yellow;  
+    }  
+    *html #left {  
+      margin-right:-3px;  
+      /* 上面这句是重点 */  
+    }  
+
+    </style>
+</head>
+<body>
+      <div id="box">  
+      <div id="left">1</div>  
+      <div id="right">|2</div>  
+    </div>  
+     <script>
+         console.log(window.top.document.compatMode) ;  
+     </script>
+</body>
+</html>
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="/2017/08/27/2/" data-id="cj6uq0yl90002wwwqjnaku232" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+        <a href="/2017/08/27/2/#comments" class="article-comment-link">评论</a>
+    
+
+        </footer>
+    </div>
+    
+</article>
+
+
+
+    <article id="post-1" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+       #example { height:100px; width: 100px;background: red;} /* FF */
+
+ *#example { height:200px; } /* IE6 */
+
+*+#example { height:300px; } /* IE7 */
+
+    </style>
+</head>
+<body>
+   <div id="example"> 
+</div> 
+
+</body>
+</html>
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="/2017/08/27/1/" data-id="cj6uq0ylq0006wwwquvt4cko3" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+        <a href="/2017/08/27/1/#comments" class="article-comment-link">评论</a>
+    
+
+        </footer>
+    </div>
+    
+</article>
+
+
+
+    <article id="post-css兼容" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            
+	
+		<a href="/2017/02/05/css兼容/" itemprop="url">
+            <img src="http://www.gratisography.com/pictures/288_1.jpg" class="article-banner" />
+        </a>
+	
+
+
+
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/2017/02/05/css兼容/">CSS兼容</a>
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2017/02/05/css兼容/">
+            <time datetime="2017-02-04T16:00:00.000Z" itemprop="datePublished">2017-02-05</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/前端/">前端</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/css/">css</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <h1 id="一、基本的css兼容："><a href="#一、基本的css兼容：" class="headerlink" title="一、基本的css兼容："></a>一、基本的css兼容：</h1><h2 id="1-hack"><a href="#1-hack" class="headerlink" title="1.hack"></a>1.hack</h2><blockquote>
+<p>可能很多人喜欢用css hack的形式去兼容ie浏览器，但是我自己用起来感觉其实不好使 。ie7-就不考虑了，问题在哪呢，就在ie8的甑别上，你怎么让样式只对ie8起作用。<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="selector-class">.selector</span> &#123;</div><div class="line">　　<span class="attribute">color</span>: <span class="number">#ff0</span>\<span class="number">0</span>;<span class="comment">/*ie8*/</span></div><div class="line">　　<span class="attribute">color</span>: <span class="number">#f00</span>\<span class="number">9</span>\<span class="number">0</span>;<span class="comment">/*ie9+*/</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+</blockquote>
+<p>（这个hack是可以区分ie8和ie9的，之前由于未知原因导致浏览器测试不成功，重装系统后发现是可用的，后来又在多台机器上测试过，证明是正确的。很抱歉误导了大家，特此修正，仍然建议用文档注释的方式去独立写hack，当然最好是可以优雅降级，避免使用css hack。）<br><a href="http://www.cnblogs.com/mofish/p/3822879.html" target="_blank" rel="external">http://www.cnblogs.com/mofish/p/3822879.html</a></p>
+<h2 id="２．注释"><a href="#２．注释" class="headerlink" title="２．注释"></a>２．注释</h2><blockquote>
+<p>更好用的是什么呢，是用ie浏览器独有的文档注释的方式。像这样：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></div><div class="line"><span class="comment">&lt;!--[if IE 8 ]&gt; &lt;html class="ie8" lang="en"&gt; &lt;![endif]--&gt;</span></div><div class="line"><span class="comment">&lt;!--[if IE 9 ]&gt; &lt;html class="ie9" lang="en"&gt; &lt;![endif]--&gt;</span></div><div class="line"><span class="comment">&lt;!--[if (gt IE 9)|!(IE)]&gt;&lt;!--&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span> <span class="comment">&lt;!--&lt;![endif]--&gt;</span></div></pre></td></tr></table></figure></p>
+<p>好处：可以独立的维护处理兼容ie浏览器的样式表，又不会淹没在一大堆css hack标识中，只需要在独立对ie8应用样式规则的地方，copy该条规则，然后在前面加上 .ie8然后就能随便写了，对付ie9也一样。</p>
+</blockquote>
+<h2 id="3-对于360双核这种找抽浏览器，据说添加以下头部meta信息可以使得网页用webkit内核渲染："><a href="#3-对于360双核这种找抽浏览器，据说添加以下头部meta信息可以使得网页用webkit内核渲染：" class="headerlink" title="3. 对于360双核这种找抽浏览器，据说添加以下头部meta信息可以使得网页用webkit内核渲染："></a>3. 对于360双核这种找抽浏览器，据说添加以下头部meta信息可以使得网页用webkit内核渲染：</h2><figure class="highlight routeros"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;meta <span class="attribute">http-equiv</span>=<span class="string">"X-UA-Compatible"</span> <span class="attribute">content</span>=<span class="string">"IE=edge,chrome=1"</span>&gt;</div></pre></td></tr></table></figure>
+<p>IE=edge：保持使用最高级别模式显示内容；</p>
+<p>chrome=1：谷歌的外挂插件Google Chrome Frame（谷歌内嵌浏览器框架GCF），使用IE浏览网页时实际上是使用Chrome浏览器内核渲染，最低支持IE6，但前提是客户端已经安装GCF。</p>
+<p>但实际上这个meta标识是ie浏览器所识别的（详情：ies-compatibility-features-for-site-developers/)，并不是公认的标准，所以用双核的浏览器会傲娇。当然360也会傲娇，所以有时你会发现360并不能总是（也可能是我本人rp差）以chrome内核渲染你的按现代标准开发的网页。</p>
+<p>那么试试这个吧，添加：<meta name="renderer" content="webkit"></p>
+<p>这个meta标识是360自家实现的(详情：meta.html)，表示强制要求360这造福中国社会万千网民的浏览器用chrome的内核渲染网页。</p>
+<p>ok，一行代码搞定360绝大部分的兼容。</p>
+<p>————————以下转———————————————-</p>
+<h1 id="二、ie8的css兼容"><a href="#二、ie8的css兼容" class="headerlink" title="二、ie8的css兼容"></a>二、ie8的css兼容</h1><p>现在说说ie8下的css问题：</p>
+<h2 id="1、ie8支持-first-child-但不支持-last-child。因为前者是css2-1标准，后者是css3标准。参下："><a href="#1、ie8支持-first-child-但不支持-last-child。因为前者是css2-1标准，后者是css3标准。参下：" class="headerlink" title="1、ie8支持:first-child,但不支持:last-child。因为前者是css2.1标准，后者是css3标准。参下："></a>1、ie8支持:first-child,但不支持:last-child。因为前者是css2.1标准，后者是css3标准。参下：</h2><figure class="highlight less"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">CSS</span> <span class="selector-tag">2</span><span class="selector-class">.1</span> <span class="selector-tag">selectors</span>：<span class="selector-tag">Basic</span> <span class="selector-tag">CSS</span> <span class="selector-tag">selectors</span> <span class="selector-tag">including</span>: * (universal selector), &gt; (child selector), <span class="selector-pseudo">:first-child</span>, <span class="selector-pseudo">:link</span>, <span class="selector-pseudo">:visited</span>, <span class="selector-pseudo">:active</span>, <span class="selector-pseudo">:hover</span>, <span class="selector-pseudo">:focus</span>, <span class="selector-pseudo">:lang()</span>, + (adjacent sibling selector), <span class="selector-attr">[attr]</span>, <span class="selector-attr">[attr="val"]</span>, <span class="selector-attr">[attr~="val"]</span>, <span class="selector-attr">[attr|="bar"]</span>, <span class="selector-class">.foo</span> (class selector), <span class="selector-id">#foo</span> (id selector)</div></pre></td></tr></table></figure>
+<h2 id="2、-为什么会发现上面的奇怪的东西（怪我css2-1和css3分不清），因为编译sass文件后发现ie8下的样式基本全歇菜了。需要注意的是，如果浏览器-不支持的选择器和支持的选择器写在一起，那么整条规则就不起作用了。比如你不小心创造了一个伪元素（是真的伪哦）-bb-bb-child-cc-background-333-那么这整条规则就不起作用了，所有浏览器在此情况下都会歇菜-cc的样式就丢失了。"><a href="#2、-为什么会发现上面的奇怪的东西（怪我css2-1和css3分不清），因为编译sass文件后发现ie8下的样式基本全歇菜了。需要注意的是，如果浏览器-不支持的选择器和支持的选择器写在一起，那么整条规则就不起作用了。比如你不小心创造了一个伪元素（是真的伪哦）-bb-bb-child-cc-background-333-那么这整条规则就不起作用了，所有浏览器在此情况下都会歇菜-cc的样式就丢失了。" class="headerlink" title="2、 为什么会发现上面的奇怪的东西（怪我css2.1和css3分不清），因为编译sass文件后发现ie8下的样式基本全歇菜了。需要注意的是，如果浏览器 不支持的选择器和支持的选择器写在一起，那么整条规则就不起作用了。比如你不小心创造了一个伪元素（是真的伪哦）.bb:bb-child, .cc{background:#333;}那么这整条规则就不起作用了，所有浏览器在此情况下都会歇菜,.cc的样式就丢失了。"></a>2、 为什么会发现上面的奇怪的东西（怪我css2.1和css3分不清），因为编译sass文件后发现ie8下的样式基本全歇菜了。需要注意的是，如果浏览器 不支持的选择器和支持的选择器写在一起，那么整条规则就不起作用了。比如你不小心创造了一个伪元素（是真的伪哦）.bb:bb-child, .cc{background:#333;}那么这整条规则就不起作用了，所有浏览器在此情况下都会歇菜,.cc的样式就丢失了。</h2><h2 id="3、-input设置了左右padding，but输入较多内容时padding还是会消失。这个问题是无解的，ie浏览器她就是这么渲染input的，解决方法是在input-外面套一层div，用div设置左右padding，border，width和height，input只需要设置width和weight为100-即可。另外，正常来讲，如果没有明确设置height的值，那么设置的line-height值就是height的值，but对于ie8，如果input-设置了-line-height，那么input必须设置height，否则input的内容显示有问题，会上下隐藏部分内容，她就是要躲猫猫。"><a href="#3、-input设置了左右padding，but输入较多内容时padding还是会消失。这个问题是无解的，ie浏览器她就是这么渲染input的，解决方法是在input-外面套一层div，用div设置左右padding，border，width和height，input只需要设置width和weight为100-即可。另外，正常来讲，如果没有明确设置height的值，那么设置的line-height值就是height的值，but对于ie8，如果input-设置了-line-height，那么input必须设置height，否则input的内容显示有问题，会上下隐藏部分内容，她就是要躲猫猫。" class="headerlink" title="3、 input设置了左右padding，but输入较多内容时padding还是会消失。这个问题是无解的，ie浏览器她就是这么渲染input的，解决方法是在input 外面套一层div，用div设置左右padding，border，width和height，input只需要设置width和weight为100% 即可。另外，正常来讲，如果没有明确设置height的值，那么设置的line-height值就是height的值，but对于ie8，如果input 设置了 line-height，那么input必须设置height，否则input的内容显示有问题，会上下隐藏部分内容，她就是要躲猫猫。"></a>3、 input设置了左右padding，but输入较多内容时padding还是会消失。这个问题是无解的，ie浏览器她就是这么渲染input的，解决方法是在input 外面套一层div，用div设置左右padding，border，width和height，input只需要设置width和weight为100% 即可。另外，正常来讲，如果没有明确设置height的值，那么设置的line-height值就是height的值，but对于ie8，如果input 设置了 line-height，那么input必须设置height，否则input的内容显示有问题，会上下隐藏部分内容，她就是要躲猫猫。</h2><h2 id="4、-为什么上面我不用input的伪元素进行设置而要嵌套多一层div呢？因为input，img，iframe等元素不支持伪元素-。-before-和-after伪元素指定了一个元素文档树内容之前和之后的内容。与’content’属性联用-指定了插入的内容（也就是你必须显性设置content-属性这两个伪家伙才能在文档中显示出来，哪怕设置content属性为空字符串也行）。作为DOM元素，伪元素都是在容器内进行渲染的-input，img，iframe等元素都不能包含其他元素，也就是不是容器，所以不能通过伪元素插入内容。"><a href="#4、-为什么上面我不用input的伪元素进行设置而要嵌套多一层div呢？因为input，img，iframe等元素不支持伪元素-。-before-和-after伪元素指定了一个元素文档树内容之前和之后的内容。与’content’属性联用-指定了插入的内容（也就是你必须显性设置content-属性这两个伪家伙才能在文档中显示出来，哪怕设置content属性为空字符串也行）。作为DOM元素，伪元素都是在容器内进行渲染的-input，img，iframe等元素都不能包含其他元素，也就是不是容器，所以不能通过伪元素插入内容。" class="headerlink" title="4、 为什么上面我不用input的伪元素进行设置而要嵌套多一层div呢？因为input，img，iframe等元素不支持伪元素 -_-||。:before 和:after伪元素指定了一个元素文档树内容之前和之后的内容。与’content’属性联用,指定了插入的内容（也就是你必须显性设置content 属性这两个伪家伙才能在文档中显示出来，哪怕设置content属性为空字符串也行）。作为DOM元素，伪元素都是在容器内进行渲染的, input，img，iframe等元素都不能包含其他元素，也就是不是容器，所以不能通过伪元素插入内容。"></a>4、 为什么上面我不用input的伪元素进行设置而要嵌套多一层div呢？因为input，img，iframe等元素不支持伪元素 -_-||。:before 和:after伪元素指定了一个元素文档树内容之前和之后的内容。与’content’属性联用,指定了插入的内容（也就是你必须显性设置content 属性这两个伪家伙才能在文档中显示出来，哪怕设置content属性为空字符串也行）。作为DOM元素，伪元素都是在容器内进行渲染的, input，img，iframe等元素都不能包含其他元素，也就是不是容器，所以不能通过伪元素插入内容。</h2><h2 id="5、-table中如果不是严格的用于表格，而是用于奇葩的局部布局时（我也想问为什么用来布局。。），td设置成inline-block可以排成一行，但是-ie8和ie9-下，如果td中的内容很长，即使td设置了宽度，td也会撑开并占用td设置的margin（废话，td是没有margin可言的），直到挤占所有的td-宽度之和为tr的宽度。但是td设置成float：left；就能表现成block。这个不清楚为什么，但是管用。。"><a href="#5、-table中如果不是严格的用于表格，而是用于奇葩的局部布局时（我也想问为什么用来布局。。），td设置成inline-block可以排成一行，但是-ie8和ie9-下，如果td中的内容很长，即使td设置了宽度，td也会撑开并占用td设置的margin（废话，td是没有margin可言的），直到挤占所有的td-宽度之和为tr的宽度。但是td设置成float：left；就能表现成block。这个不清楚为什么，但是管用。。" class="headerlink" title="5、 table中如果不是严格的用于表格，而是用于奇葩的局部布局时（我也想问为什么用来布局。。），td设置成inline-block可以排成一行，但是 ie8和ie9 下，如果td中的内容很长，即使td设置了宽度，td也会撑开并占用td设置的margin（废话，td是没有margin可言的），直到挤占所有的td 宽度之和为tr的宽度。但是td设置成float：left；就能表现成block。这个不清楚为什么，但是管用。。"></a>5、 table中如果不是严格的用于表格，而是用于奇葩的局部布局时（我也想问为什么用来布局。。），td设置成inline-block可以排成一行，但是 ie8和ie9 下，如果td中的内容很长，即使td设置了宽度，td也会撑开并占用td设置的margin（废话，td是没有margin可言的），直到挤占所有的td 宽度之和为tr的宽度。但是td设置成float：left；就能表现成block。这个不清楚为什么，但是管用。。</h2><h2 id="6、父元素的左padding会和子元素的左margin重叠。这个是没有好好实现盒子模型的事情了，包容吧。。"><a href="#6、父元素的左padding会和子元素的左margin重叠。这个是没有好好实现盒子模型的事情了，包容吧。。" class="headerlink" title="6、父元素的左padding会和子元素的左margin重叠。这个是没有好好实现盒子模型的事情了，包容吧。。"></a>6、父元素的左padding会和子元素的左margin重叠。这个是没有好好实现盒子模型的事情了，包容吧。。</h2><h2 id="7、sprite图中的icons之间最好留空白间隔，哪怕间隔1px也好，否则ie8下会出现使用了某一个icon当背景，icon后面跟着的其他icon也顺带显示了一小部分的bug，所以icons之间还是要适当留白，不要太省。"><a href="#7、sprite图中的icons之间最好留空白间隔，哪怕间隔1px也好，否则ie8下会出现使用了某一个icon当背景，icon后面跟着的其他icon也顺带显示了一小部分的bug，所以icons之间还是要适当留白，不要太省。" class="headerlink" title="7、sprite图中的icons之间最好留空白间隔，哪怕间隔1px也好，否则ie8下会出现使用了某一个icon当背景，icon后面跟着的其他icon也顺带显示了一小部分的bug，所以icons之间还是要适当留白，不要太省。"></a>7、sprite图中的icons之间最好留空白间隔，哪怕间隔1px也好，否则ie8下会出现使用了某一个icon当背景，icon后面跟着的其他icon也顺带显示了一小部分的bug，所以icons之间还是要适当留白，不要太省。</h2><h1 id="三、ie11部分css问题"><a href="#三、ie11部分css问题" class="headerlink" title="三、ie11部分css问题"></a>三、ie11部分css问题</h1><h2 id="1、-ie11下很多元素表现和其他浏览器不一致，比如对应用了同一样式（不设置-高度）的div，其他浏览器解析的高度是一致的，但是ie11下该div有可能高度偏大，由此导致一些排版上的问题，所以，如果发现元素排版上下偏移的问题，查看此元素或其当代元素是否设置了高度，统一添上高度一切都ok了。"><a href="#1、-ie11下很多元素表现和其他浏览器不一致，比如对应用了同一样式（不设置-高度）的div，其他浏览器解析的高度是一致的，但是ie11下该div有可能高度偏大，由此导致一些排版上的问题，所以，如果发现元素排版上下偏移的问题，查看此元素或其当代元素是否设置了高度，统一添上高度一切都ok了。" class="headerlink" title="1、 ie11下很多元素表现和其他浏览器不一致，比如对应用了同一样式（不设置 高度）的div，其他浏览器解析的高度是一致的，但是ie11下该div有可能高度偏大，由此导致一些排版上的问题，所以，如果发现元素排版上下偏移的问题，查看此元素或其当代元素是否设置了高度，统一添上高度一切都ok了。"></a>1、 ie11下很多元素表现和其他浏览器不一致，比如对应用了同一样式（不设置 高度）的div，其他浏览器解析的高度是一致的，但是ie11下该div有可能高度偏大，由此导致一些排版上的问题，所以，如果发现元素排版上下偏移的问题，查看此元素或其当代元素是否设置了高度，统一添上高度一切都ok了。</h2><h2 id="2、抱歉，ie11问题确实不多。"><a href="#2、抱歉，ie11问题确实不多。" class="headerlink" title="2、抱歉，ie11问题确实不多。"></a>2、抱歉，ie11问题确实不多。</h2><h1 id="四、结尾附上一个关于css优先级的奇谈"><a href="#四、结尾附上一个关于css优先级的奇谈" class="headerlink" title="四、结尾附上一个关于css优先级的奇谈"></a>四、结尾附上一个关于css优先级的奇谈</h1><h2 id="首先我们知道："><a href="#首先我们知道：" class="headerlink" title="首先我们知道："></a>首先我们知道：</h2><blockquote>
+<p>1、id选择器优先级权重比class选择器大一个数量级，class选择器权重比标签选择器大一个数量级；<br>2、class选择器和属性选择器同优先级;<br>3、样式的优先程度需要根据第1条规则计算整体的优先级，按选择器权重计算各条样式规则中所有选择器优先级之和，哪条规则权重大，那条就说了算。如果相同那么后面的覆盖前面的。<br>4、像这种.dog &gt; p开挂，多了特殊符号的，并不会增加优势，还是和 .dog p优先级一样。<br>然后可以抛出一个问题了：</p>
+</blockquote>
+<p>对于下面的文档结构，分别对 p | .p | div p | .parent | #parent设置color属性，那么优先级如何呢？<br><figure class="highlight applescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;<span class="keyword">div</span> <span class="built_in">id</span>=<span class="string">"parent"</span> <span class="built_in">class</span>=<span class="string">"parent"</span>&gt;</div><div class="line">  &lt;p <span class="built_in">class</span>=<span class="string">"p"</span>&gt;p&lt;/p&gt;</div><div class="line">&lt;/<span class="keyword">div</span>&gt;</div></pre></td></tr></table></figure></p>
+<p>结果表现：也就是 .p &gt; div p &gt; p &gt; #parent &gt; .parent<br>id选择器居然比p选择器优先级还低！将p元素和div元素分开看，.p &gt; div p &gt; p 很正常， #parent &gt; .parent也很正常。所以问题关键在子级p和父级#parent, 子级的选择器优先级比父级的选择器优先级高，或者说继承的优先级程度比自身的优先级低！</p>
+<p>嵌套多一层看看就知道是不是了，分别对#parent | div | p设置color属性：<br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"></div><div class="line">&lt;div id="parent" class="parent"&gt;</div><div class="line">  &lt;div class="mid"&gt;</div><div class="line">    &lt;p id="p" class="p"&gt;p&lt;/p&gt; </div><div class="line">  &lt;div&gt;</div><div class="line">&lt;/div&gt;</div></pre></td></tr></table></figure></p>
+<p>结果确实是p &gt; div &gt; #parent：</p>
+<p>即使应用两个选择器也无济于事，依然是p &gt;#parent div</p>
+<blockquote>
+<p>只要能定位到p元素，那么父级选择器的权重就起作用了,一试便知，对#parent p | #p 设置同样的样式结果是这样的：<br>嗯，确实如此。所以：</p>
+</blockquote>
+<p>5、css样式优先级还和继承有关，继承的优先级不如本身应用的优先级高。 </p>
+
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="/2017/02/05/css兼容/" data-id="cj6uq1e6w0000g4wqrv7abqb6" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+        <a href="/2017/02/05/css兼容/#comments" class="article-comment-link">评论</a>
+    
+
+        </footer>
+    </div>
+    
+</article>
+
+
+
+    <article id="post-去除inline-block元素间间距的N种方法" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            
+	
+		<a href="/2017/02/05/去除inline-block元素间间距的N种方法/" itemprop="url">
+            <img src="http://www.gratisography.com/pictures/404_1.jpg" class="article-banner" />
+        </a>
+	
+
+
+
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/2017/02/05/去除inline-block元素间间距的N种方法/">去除inline-block元素间间距的N种方法(转)</a>
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2017/02/05/去除inline-block元素间间距的N种方法/">
+            <time datetime="2017-02-04T16:00:00.000Z" itemprop="datePublished">2017-02-05</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/前端/">前端</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/css/">css</a>, <a class="tag-link" href="/tags/html/">html</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <h1 id="一、现象描述"><a href="#一、现象描述" class="headerlink" title="一、现象描述"></a>一、现象描述</h1><p>真正意义上的inline-block水平呈现的元素间，换行显示或空格分隔的情况下会有间距，很简单的个例子：</p>
+<h1 id="二、移除空格"><a href="#二、移除空格" class="headerlink" title="二、移除空格"></a>二、移除空格</h1><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"> <span class="selector-id">#box</span>&#123; </div><div class="line">   <span class="attribute">width</span>:<span class="number">1000px</span>; </div><div class="line">   <span class="attribute">background</span>:<span class="number">#000</span>; </div><div class="line">   <span class="attribute">height</span>:<span class="number">1000px</span>;    </div><div class="line"> &#125; </div><div class="line"><span class="selector-class">.c</span>&#123;</div><div class="line">  <span class="attribute">display</span>: inline-block;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"box"</span>&gt;</span> </div><div class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"c"</span> <span class="attr">style</span>=<span class="string">"background-color: green;width: 50%;height: 100px;"</span> &gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"c"</span> <span class="attr">style</span>=<span class="string">"background-color: red;width: 50%;height: 100px;"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>这种效果是两个div不能并排<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"box"</span>&gt;</span> </div><div class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"c"</span> <span class="attr">style</span>=<span class="string">"background-color: green;width: 50%;height: 100px;"</span> &gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"c"</span> <span class="attr">style</span>=<span class="string">"background-color: red;width: 50%;height: 100px;"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>这种效果是两个div并排</p>
+<h1 id="三、使用margin负值"><a href="#三、使用margin负值" class="headerlink" title="三、使用margin负值"></a>三、使用margin负值</h1><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="selector-class">.space</span> <span class="selector-tag">a</span> &#123;</div><div class="line">    <span class="attribute">display</span>: inline-block;</div><div class="line">    <span class="attribute">margin-right</span>: -<span class="number">3px</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>margin负值的大小与上下文的字体和文字大小相关<br>例如，对于12像素大小的上下文，Arial字体的margin负值为-3像素，Tahoma和Verdana就是-4像素，而Geneva为-6像素。<br>由于外部环境的不确定性，以及最后一个元素多出的父margin值等问题，这个方法不适合大规模使用。<br><img src="http://image.zhangxinxu.com/image/blog/201204/2012-04-24_205406.png" alt="图片" title="margin负值"></p>
+<h1 id="四、让闭合标签吃胶囊"><a href="#四、让闭合标签吃胶囊" class="headerlink" title="四、让闭合标签吃胶囊"></a>四、让闭合标签吃胶囊</h1><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"space"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"##"</span>&gt;</span>惆怅</div><div class="line">    <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"##"</span>&gt;</span>淡定</div><div class="line">    <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"##"</span>&gt;</span>热血<span class="tag">&lt;/<span class="name">a</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>注意，为了向下兼容IE6/IE7等喝蒙牛长大的浏览器，最后一个列表的标签的结束（闭合）标签不能丢。</p>
+<p>在HTML5中，我们直接：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"space"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"##"</span>&gt;</span>惆怅</div><div class="line">    <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"##"</span>&gt;</span>淡定</div><div class="line">    <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"##"</span>&gt;</span>热血</div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<h1 id="五、使用font-size-0"><a href="#五、使用font-size-0" class="headerlink" title="五、使用font-size:0"></a>五、使用font-size:0</h1><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"> <span class="selector-class">.space</span> &#123;</div><div class="line">    <span class="attribute">font-size</span>: <span class="number">0</span>;</div><div class="line">&#125;</div><div class="line"><span class="selector-class">.space</span> <span class="selector-tag">a</span> &#123;</div><div class="line">    <span class="attribute">font-size</span>: <span class="number">12px</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这个方法，基本上可以解决大部分浏览器下inline-block元素之间的间距(IE7等浏览器有时候会有1像素的间距)。不过有个浏览器，就是Chrome, 其默认有最小字体大小限制，因为，考虑到兼容性，我们还需要添加：<br>类似下面的代码：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="selector-class">.space</span> &#123;</div><div class="line">    <span class="attribute">font-size</span>: <span class="number">0</span>;</div><div class="line">    <span class="attribute">-webkit-text-size-adjust</span>:none;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>补充：根据小杜在评论中中的说法，目前Chrome浏览器已经取消了最小字体限制。因此，上面的-webkit-text-size-adjust:none;代码估计时日不多了。</p>
+<h1 id="六、使用letter-spacing"><a href="#六、使用letter-spacing" class="headerlink" title="六、使用letter-spacing"></a>六、使用letter-spacing</h1><p>类似下面的代码：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="selector-class">.space</span> &#123;</div><div class="line">    <span class="attribute">letter-spacing</span>: -<span class="number">3px</span>;</div><div class="line">&#125;</div><div class="line"><span class="selector-class">.space</span> <span class="selector-tag">a</span> &#123;</div><div class="line">    <span class="attribute">letter-spacing</span>: <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>根据我去年的测试，该方法可以搞定基本上所有浏览器，包括吃“东鞋”、“西毒(胶囊)”、“南地(沟油)”、“北钙(三鹿)”的IE6/IE7浏览器，不过Opera浏览器下有蛋疼的问题：最小间距1像素，然后，letter-spacing再小就还原了。</p>
+<h1 id="七、使用word-spacing"><a href="#七、使用word-spacing" class="headerlink" title="七、使用word-spacing"></a>七、使用word-spacing</h1><p>类似下面代码：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="selector-class">.space</span> &#123;</div><div class="line">    <span class="attribute">word-spacing</span>: -<span class="number">6px</span>;</div><div class="line">&#125;</div><div class="line"><span class="selector-class">.space</span> <span class="selector-tag">a</span> &#123;</div><div class="line">    <span class="attribute">word-spacing</span>: <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>一个是字符间距(letter-spacing)一个是单词间距(word-spacing)，大同小异。据我测试，word-spacing的负值只要大到一定程度，其兼容性上的差异就可以被忽略。因为，貌似，word-spacing即使负值很大，也不会发生重叠。</p>
+<p>您可以狠狠地点击这里：word-spacing与元素间距去除demo</p>
+<p>与上面demo一样的效果，这里就不截图展示了。如果您使用Chrome浏览器，可能看到的是间距依旧存在。确实是有该问题，原因我是不清楚，不过我知道，可以添加display: table;或display:inline-table;让Chrome浏览器也变得乖巧。<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="selector-class">.space</span> &#123;</div><div class="line">    <span class="attribute">display</span>: inline-table;</div><div class="line">    <span class="attribute">word-spacing</span>: -<span class="number">6px</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h1 id="八、其他成品方法"><a href="#八、其他成品方法" class="headerlink" title="八、其他成品方法"></a>八、其他成品方法</h1><p>下面展示的是YUI 3 CSS Grids 使用letter-spacing和word-spacing去除格栅单元见间隔方法（注意，其针对的是block水平的元素，因此对IE8-浏览器做了hack处理）：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="selector-class">.yui3-g</span> &#123;</div><div class="line">    <span class="attribute">letter-spacing</span>: -<span class="number">0.31em</span>; <span class="comment">/* webkit */</span></div><div class="line">    *letter-spacing: normal; /* IE &lt; 8 重置 */</div><div class="line">    <span class="selector-tag">word-spacing</span>: <span class="selector-tag">-0</span><span class="selector-class">.43em</span>; <span class="comment">/* IE &lt; 8 &amp;&amp; gecko */</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="selector-class">.yui3-u</span> &#123;</div><div class="line">    <span class="attribute">display</span>: inline-block;</div><div class="line">    zoom: 1; *display: inline; /* IE &lt; 8: 伪造 inline-block */</div><div class="line">    <span class="selector-tag">letter-spacing</span>: <span class="selector-tag">normal</span>;</div><div class="line">    <span class="selector-tag">word-spacing</span>: <span class="selector-tag">normal</span>;</div><div class="line">    <span class="selector-tag">vertical-align</span>: <span class="selector-tag">top</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>以下是一个名叫RayM的人提供的方法：<br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">li</span> &#123;</div><div class="line">    <span class="attribute">display</span>:inline-block;</div><div class="line">    <span class="attribute">background</span>: orange;</div><div class="line">    <span class="attribute">padding</span>:<span class="number">10px</span>;</div><div class="line">    <span class="attribute">word-spacing</span>:<span class="number">0</span>;</div><div class="line">    &#125;</div><div class="line"><span class="selector-tag">ul</span> &#123;</div><div class="line">    <span class="attribute">width</span>:<span class="number">100%</span>;</div><div class="line">    <span class="attribute">display</span>:table;  <span class="comment">/* 调教webkit*/</span></div><div class="line">    <span class="attribute">word-spacing</span>:-<span class="number">1em</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line">.nav li &#123; *display:inline;&#125;</div></pre></td></tr></table></figure></p>
+<p>也就是上面一系列CSS方法的组组合合。</p>
+<h1 id="九、结语"><a href="#九、结语" class="headerlink" title="九、结语"></a>九、结语</h1><p>其他去除间距的方法肯定还有，欢迎大家通过评论方式进行补充。上文部分方法可能有测试不周全之处，因此，部分细节上可能会有纰漏，欢迎指正。</p>
+<p>参考文章：Fighting the Space Between Inline Block Elements</p>
+<p>转载来自张鑫旭-鑫空间-鑫生活[<a href="http://www.zhangxinxu.com" target="_blank" rel="external">http://www.zhangxinxu.com</a>]</p>
+
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="/2017/02/05/去除inline-block元素间间距的N种方法/" data-id="cj6uq0ynr001lwwwq3jqtuii1" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+        <a href="/2017/02/05/去除inline-block元素间间距的N种方法/#comments" class="article-comment-link">评论</a>
+    
+
+        </footer>
+    </div>
+    
+</article>
+
+
+
     <article id="post-js简单了解上下文" class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
@@ -273,7 +864,7 @@
 
 </div>
 
-    <a data-url="/2017/02/03/js简单了解上下文/" data-id="cj6uetnxw000vxswqmzu09fuc" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="/2017/02/03/js简单了解上下文/" data-id="cj6uq0yn70012wwwqd60t22ie" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -351,12 +942,12 @@
 
 
 
-    <article id="post-CSS样式表时总结下FF与IE的区别" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-DIV+CSS 与不同 IE 版本等的兼容性" class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
             
 	
-		<a href="/2017/02/01/CSS样式表时总结下FF与IE的区别/" itemprop="url">
+		<a href="/2017/02/01/DIV+CSS 与不同 IE 版本等的兼容性/" itemprop="url">
             <img src="http://www.gratisography.com/pictures/413_1.jpg" class="article-banner" />
         </a>
 	
@@ -369,7 +960,7 @@
                 
     
         <h1 itemprop="name">
-            <a class="article-title" href="/2017/02/01/CSS样式表时总结下FF与IE的区别/">FF与IE的CSS区别</a>
+            <a class="article-title" href="/2017/02/01/DIV+CSS 与不同 IE 版本等的兼容性/">DIV+CSS 与不同 IE 版本等的兼容性</a>
         </h1>
     
 
@@ -378,7 +969,7 @@
                         
     <div class="article-date">
         <i class="fa fa-calendar"></i>
-        <a href="/2017/02/01/CSS样式表时总结下FF与IE的区别/">
+        <a href="/2017/02/01/DIV+CSS 与不同 IE 版本等的兼容性/">
             <time datetime="2017-01-31T16:00:00.000Z" itemprop="datePublished">2017-02-01</time>
         </a>
     </div>
@@ -413,31 +1004,32 @@
 <blockquote>
 <p>在上述代码中，IE6及以下浏览器中div的文本颜色表现与其它浏览器一致，都为#f00</p>
 </blockquote>
-<p>二、CSS HACK 的方法（新手可以看看，高手就当路过吧）</p>
+<p>##　二、CSS HACK 的方法（新手可以看看，高手就当路过吧）</p>
 <p>首先需要知道的是：</p>
 <p>所有浏览器 通用 height: 100px;<br>IE6 专用 _height: 100px;<br>IE7 专用 <em>+height: 100px;<br>IE6、IE7 共用 </em>height: 100px;<br>IE7、FF 共用 height: 100px !important;</p>
-<p>例如：</p>
-<p>#example { height:100px; } /<em> FF </em>/</p>
-<ul>
-<li>html #example { height:200px; } /<em> IE6 </em>/</li>
-</ul>
-<p><em>+html #example { height:300px; } /</em> IE7 */</p>
+<p>例如：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="selector-id">#example</span> &#123; <span class="attribute">height</span>:<span class="number">100px</span>; &#125; <span class="comment">/* FF */</span></div><div class="line"></div><div class="line">*<span class="selector-tag">html</span> <span class="selector-id">#example</span> &#123; <span class="attribute">height</span>:<span class="number">200px</span>; &#125; <span class="comment">/* IE6 */</span></div><div class="line"></div><div class="line">*+<span class="selector-tag">html</span> <span class="selector-id">#example</span> &#123; <span class="attribute">height</span>:<span class="number">300px</span>; &#125; <span class="comment">/* IE7 */</span></div></pre></td></tr></table></figure></p>
 <p>下面的这种方法比较简单</p>
 <p>举几个例子：</p>
-<p>1、IE6 - IE7+FF</p>
-<p>#example {<br>height:100px; /<em> FF+IE7 </em>/<br>_height:200px; /<em> IE6 </em>/<br>}<br>其实这个用上面说的第一种方法也可以</p>
-<p>#example {<br>height:100px !important; /<em> FF+IE7 </em>/<br>height:200px; /<em> IE6 </em>/<br>}</p>
-<p>2、IE6+IE7 - FF</p>
-<p>#example {<br>height:100px; /<em> FF </em>/<br><em>height:200px; /</em> IE6+IE7 */<br>}</p>
-<p>3、IE6+FF - IE7</p>
-<p>#example {<br>height:100px; /<em> IE6+FF </em>/<br><em>+height:200px; /</em> IE7 */<br>}</p>
-<p>4、IE6 IE7 FF 各不相同</p>
-<p>#example {<br>height:100px; /<em> FF </em>/<br>_height:200px; /<em> IE6 </em>/<br><em>+height:300px; /</em> IE7 */<br>}<br>或：</p>
-<p>#example {<br>height:100px; /<em> FF </em>/<br><em>height:300px; /</em> IE7 <em>/<br>_height:200px; /</em> IE6 */<br>}</p>
+<ol>
+<li>IE6 - IE7+FF<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="selector-id">#example</span> &#123;</div><div class="line"><span class="attribute">height</span>:<span class="number">100px</span>; <span class="comment">/* FF+IE7 */</span></div><div class="line"><span class="attribute">_height</span>:<span class="number">200px</span>; <span class="comment">/* IE6 */</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>其实这个用上面说的第一种方法也可以<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="selector-id">#example</span> &#123;</div><div class="line"><span class="attribute">height</span>:<span class="number">100px</span> <span class="meta">!important</span>; <span class="comment">/* FF+IE7 */</span></div><div class="line"><span class="attribute">height</span>:<span class="number">200px</span>; <span class="comment">/* IE6 */</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<ol>
+<li><p>IE6+IE7 - FF</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="selector-id">#example</span> &#123;</div><div class="line"><span class="attribute">height</span>:<span class="number">100px</span>; <span class="comment">/* FF */</span></div><div class="line">*height:200px; /* IE6+IE7 */</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>IE6+FF - IE7</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="selector-id">#example</span> &#123;</div><div class="line"><span class="attribute">height</span>:<span class="number">100px</span>; <span class="comment">/* IE6+FF */</span></div><div class="line">*+height:200px; /* IE7 */</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>IE6 IE7 FF 各不相同</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="selector-id">#example</span> &#123;</div><div class="line"><span class="attribute">height</span>:<span class="number">100px</span>; <span class="comment">/* FF */</span></div><div class="line"><span class="attribute">_height</span>:<span class="number">200px</span>; <span class="comment">/* IE6 */</span></div><div class="line">*+height:300px; /* IE7 */</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>或：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="selector-id">#example</span> &#123;</div><div class="line"><span class="attribute">height</span>:<span class="number">100px</span>; <span class="comment">/* FF */</span></div><div class="line">*height:300px; /* IE7 */</div><div class="line">_<span class="selector-tag">height</span><span class="selector-pseudo">:200px</span>; <span class="comment">/* IE6 */</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p>需要注意的是，代码的顺序一定不能颠倒了，要不又前功尽弃了。因为浏览器在解释程序的时候，如果重名的话，会用后面的覆盖前面的，就象给变量赋值一个道理，所以我们把通用的放前面，越专用的越放后面。</p>
 <p>解释一下4的代码：</p>
-<p>读代码的时候，第一行 height:100px;  大家都通用，IE6 IE7 FF 都显示100px。到了第二行*height:300px; FF不认识这个属性，IE6 IE7 都认，所以FF还显示100px，而 IE6 IE7 把第一行得到的height属性给覆盖了，都显示300px。到了第三行 _height:200px; 只有IE6认识，所以 IE6 就又覆盖了在第二行得到的 height，最终显示200px。这样，三个浏览器都有自己的height属性了，各玩各的去吧。</p>
-<p>这样说要是你还不明白，要么你去撞墙，要么我去!不过还是你去比较好。</p>
+<p>读代码的时候，第一行 height:100px;  大家都通用，IE6 IE7 FF 都显示100px。到了第二行*height:300px; FF不认识这个属性，IE6 IE7 都认，所以FF还显示100px，而 IE6 IE7 把第一行得到的height属性给覆盖了，都显示300px。到了第三行 _height:200px; 只有IE6认识，所以 IE6 就又覆盖了在第二行得到的 height，最终显示200px。这样，三个浏览器都有自己的height属性了。</p>
 <p>哦，差点忘了说了：</p>
 <p>*+html 对 IE7 的兼容 必须保证HTML顶部有如下声明：<br>&lt;!DOCTYPE HTML PUBLIC “-//W3C//DTD HTML 4.01 Transitional//EN”　“<a href="http://www.w3.org/TR/html4/loose.dtd&quot;&gt;" target="_blank" rel="external">http://www.w3.org/TR/html4/loose.dtd&quot;&gt;</a></p>
 <p>三、使用IE专用的条件注释</p>
@@ -474,38 +1066,27 @@
 </blockquote>
 </li>
 </ol>
-<p>四、css filter的办法（据作者称是从国外某经典网站翻译过来的说）</p>
-<p>新建一个css样式如下：</p>
-<p>#item {</p>
-<p>width: 200px;</p>
-<p>height: 200px;</p>
-<p>background: red;</p>
-<p>}</p>
-<p>新建一个div,并使用前面定义的css的样式：</p>
-<div>some text here</div>
-
-<p>在body表现这里加入 lang 属性，中文为zh：</p>
-<body lang="en">
-
-<p>现在对div元素再定义一个样式：</p>
-<p>*:lang(en) #item{</p>
-<p>background:green !important;</p>
-<p>}</p>
-<p>这样做是为了用 !important 覆盖原来的 css 样式，由于:lang 选择器 ie7.0 并不支持，所以对这句话不会有任何作用，于是也达到了 ie6.0下同样的效果，但是很不幸地的是，safari 同样不支持此属性，所以需要加入以下 css 样式：</p>
-<p>#item:empty {</p>
-<p>background: green !important</p>
-<p>}</p>
+<h2 id="四、css-filter的办法（据作者称是从国外某经典网站翻译过来的说）"><a href="#四、css-filter的办法（据作者称是从国外某经典网站翻译过来的说）" class="headerlink" title="四、css filter的办法（据作者称是从国外某经典网站翻译过来的说）"></a>四、css filter的办法（据作者称是从国外某经典网站翻译过来的说）</h2><p>新建一个css样式如下：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="selector-id">#item</span> &#123;</div><div class="line"></div><div class="line"><span class="attribute">width</span>: <span class="number">200px</span>;</div><div class="line"></div><div class="line"><span class="attribute">height</span>: <span class="number">200px</span>;</div><div class="line"></div><div class="line"><span class="attribute">background</span>: red;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>新建一个div,并使用前面定义的css的样式：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span> &gt;</span>some text here<span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>在body表现这里加入 lang 属性，中文为zh：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">body</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>现在对div元素再定义一个样式：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">*<span class="selector-pseudo">:lang(en)</span> <span class="selector-id">#item</span>&#123;</div><div class="line"></div><div class="line"><span class="attribute">background</span>:green <span class="meta">!important</span>;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>这样做是为了用 !important 覆盖原来的 css 样式，由于:lang 选择器 ie7.0 并不支持，所以对这句话不会有任何作用，于是也达到了 ie6.0下同样的效果，但是很不幸地的是，safari 同样不支持此属性，所以需要加入以下 css 样式：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="selector-id">#item</span><span class="selector-pseudo">:empty</span> &#123;</div><div class="line"></div><div class="line"><span class="attribute">background</span>: green <span class="meta">!important</span></div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p>:empty选择器为 CSS3 的规范，尽管 safari 并不支持此规范，但是还是会选择此元素，不管是否此元素存在，现在绿色会现在在除 ie 各版本以外的浏览器上。</p>
-<p>五、FLOAT 闭合（clearing float）</p>
-<p>网页在某些浏览器上显示错位很多时候都是因为使用了 float 浮动而没有真正闭合，这也是 div 无法自适应高度的一个原因。如果父 div 没有设 float 而其子div却设了 float 的话,父div无法包住整个子 DIV，这种情况一般出现在一个父 DIV 下包含多个子 DIV。解决办法：</p>
-<p>1、给父 DIV 也设上 float (不要骂我，我知道是废话)</p>
-<p>2、在所有子 DIV 后新加一个空 DIV (不推荐，有些浏览器可以看见空 DIV 产生的空隙)</p>
+<h2 id="五、FLOAT-闭合（clearing-float）"><a href="#五、FLOAT-闭合（clearing-float）" class="headerlink" title="五、FLOAT 闭合（clearing float）"></a>五、FLOAT 闭合（clearing float）</h2><p>网页在某些浏览器上显示错位很多时候都是因为使用了 float 浮动而没有真正闭合，这也是 div 无法自适应高度的一个原因。如果父 div 没有设 float 而其子div却设了 float 的话,父div无法包住整个子 DIV，这种情况一般出现在一个父 DIV 下包含多个子 DIV。解决办法：</p>
+<ol>
+<li><p>给父 DIV 也设上 float (不要骂我，我知道是废话)</p>
+</li>
+<li><p>在所有子 DIV 后新加一个空 DIV (不推荐，有些浏览器可以看见空 DIV 产生的空隙)</p>
+</li>
+</ol>
 <p>比如：</p>
 <p>.parent{width:100px;}<br>.son1{float:left;width:20px;}<br>.son2{float:left;width:80px;}<br>.clear{clear:both;margin:0;parding0;height:0px;font-size:0px;}</p>
 <div><br><div></div><br><div></div><br><div></div><br></div>
 
-<p>3、万能 float 闭合</p>
-<p>将以下代码加入Global CSS 中,给需要闭合的div加上 class=”clearfix” 即可,屡试不爽.<br>代码:</p>
+<ol>
+<li>万能 float 闭合</li>
+</ol>
+<p><strong>float的破坏性主要是指它会使父容器的高度塌陷，也就是父元素在高度计算的时候会忽略浮动的元素</strong><br>因此下面是来用来解决高度崩塌的问题，使之不会对后面的元素布局造成影响<br>将以下代码加入Global CSS 中,给需要闭合的div加上 class=”clearfix” 即可,屡试不爽.<br>代码:</p>
 <style>
 /* Clear Fix */
 .clearfix:after {
@@ -516,34 +1097,32 @@ clear:both;
 visibility:hidden;
 }
 .clearfix {
-display:inline-block;
+display:inline-block; /*IE7+*/
 }
 /* Hide from IE Mac \*/
-.clearfix {display:block;}
+.clearfix {display:block;}/*IE6 IE7*/
 /* End hide from IE Mac */
 /* end of clearfix */
 </style>
 
 <p>:after（伪对象）,设置在对象后发生的内容，通常和 content 配合使用，IE 不支持此伪对象，非 Ie  浏览器支持，所以并不影响到IE/WIN浏览器。这种的最麻烦。</p>
-<p>4、overflow:auto（刚看到的，极力推荐）</p>
-<p>只要在父 DIV 的CSS中加上 overflow:auto 就搞定。</p>
-<p>举例：</p>
-<p>.parent{width:100px;overflow:auto}<br>.son1{float:left;width:20px;}<br>.son2{float:left;width:80px;}</p>
-<div><br><div></div><br><div></div><br></div>
-
+<ol>
+<li>overflow:auto（刚看到的，极力推荐）<br>.clear{clear:both;height:0px;overflow:hidden;}<br>只要在父 DIV 的CSS中加上 overflow:auto 就搞定。</li>
+</ol>
+<p>举例：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="selector-class">.parent</span>&#123;<span class="attribute">width</span>:<span class="number">100px</span>;<span class="attribute">overflow</span>:auto&#125;</div><div class="line"><span class="selector-class">.son1</span>&#123;<span class="attribute">float</span>:left;<span class="attribute">width</span>:<span class="number">20px</span>;&#125;</div><div class="line"><span class="selector-class">.son2</span>&#123;<span class="attribute">float</span>:left;<span class="attribute">width</span>:<span class="number">80px</span>;&#125;</div></pre></td></tr></table></figure></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure>
 <p>作者原话：原理是，外围元素之所以不能很好的延伸，问题出在了 overflow 上，因为 overflow 不可见（见W3C的解释）。现在只要将给外围元素添加一个“overflow:auto”，就可以解决问题，结果是除了IE，真的可以解决。下来就要解决IE的问题了，再加上“_height:1%”，这个问题就完全解决了。</p>
 <p>我试了一下，其实不加”_height:1%“在IE下也行，留着吧。</p>
-<p>六、需要注意的一些兼容细节</p>
-<p>1, FF 下给 div 设置 padding 后会导致 width 和 height 增加(DIV的实际宽度=DIV宽+Padding), 但IE不会.</p>
+<h2 id="六、需要注意的一些兼容细节"><a href="#六、需要注意的一些兼容细节" class="headerlink" title="六、需要注意的一些兼容细节"></a>六、需要注意的一些兼容细节</h2><p>1, FF 下给 div 设置 padding 后会导致 width 和 height 增加(DIV的实际宽度=DIV宽+Padding), 但IE不会.</p>
 <p>解决办法：给DIV设定IE、FF两个宽度，在IE的宽度前加上IE特有标记” * “号。</p>
 <p>2, 页面居中问题.</p>
 <p>body {TEXT-ALIGN: center;} 在IE下足够了，但 FF 下失效。</p>
 <p>解决办法：加上”MARGIN-RIGHT: auto; MARGIN-LEFT: auto; “</p>
-<p>3, 有的时候在IE6上看见一些奇怪的间隙，可我们高度明明设好了呀。</p>
+<p>3, 有的时候在IE6上看见一些奇怪的间隙，可我们高度明明设好了呀。(eg: inline-block)</p>
 <p>解决办法：试试在有空隙的DIV上加上”font-size:0px;”</p>
 <p>4, 关于手形光标. cursor: pointer. 而hand 只适用于 IE.</p>
-<p>5, 浮动IE6产生的双倍距离</p>
-<p>#box{ float:left;<br>width:100px;<br>margin:0 0 0 100px;<br>}<br>这种情况之下IE6会产生200px的距离</p>
+<p>5, 浮动IE6产生的双倍距离<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="selector-id">#box</span>&#123; <span class="attribute">float</span>:left;</div><div class="line"><span class="attribute">width</span>:<span class="number">100px</span>;</div><div class="line"><span class="attribute">margin</span>:<span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">100px</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>这种情况之下IE6会产生200px的距离</p>
 <p>解决办法：加上 display:inline，使浮动忽略</p>
 <p>这里细说一下block,inline两个元素,Block元素的特点是:总是在新行上开始,高度,宽度,行高,边距都可以控制(块元素);Inline元素的特点是:和其他元素在同一行上,…不可控制(内嵌元素);</p>
 <p>#box{ display:block; //可以为内嵌元素模拟为块元素 display:inline; //实现同一行排列的的效果</p>
@@ -556,18 +1135,14 @@ display:inline-block;
 <p>解决办法：css中首先都使用这样的样式ul,form{margin:0;padding:0;}给定义死了,后面就不会为这个头疼了.</p>
 <p>8 ,DIV浮动IE文本产生3象素的bug</p>
 <p>下面这段是我在网上粘过来的</p>
-<p>左边对象浮动，右边采用外补丁的左边距来定位，右边对象内的文本会离左边有3px的间距.</p>
-<p>#box{<br>float:left;<br>width:800px;}</p>
-<p>#left{<br>float:left;<br>width:50%;}</p>
-<p>#right{<br>width:50%;<br>}<br>*html #left{<br>margin-right:-3px;<br>//这句是关键<br>}<br>HTML代码</p>
-<div id="box"><br><div id="left"></div><br><div id="right"></div><br></div>
-
+<p>左边对象浮动，右边采用外补丁的左边距来定位，右边对象内的文本会离左边有3px的间距.<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="selector-id">#box</span>&#123;</div><div class="line"><span class="attribute">float</span>:left;</div><div class="line"><span class="attribute">width</span>:<span class="number">800px</span>;&#125;</div><div class="line"><span class="selector-id">#left</span>&#123;</div><div class="line"><span class="attribute">float</span>:left;</div><div class="line"><span class="attribute">width</span>:<span class="number">50%</span>;&#125;</div><div class="line"><span class="selector-id">#right</span>&#123;</div><div class="line"><span class="attribute">width</span>:<span class="number">50%</span>;</div><div class="line">&#125;</div><div class="line">*<span class="selector-tag">html</span> <span class="selector-id">#left</span>&#123;</div><div class="line"><span class="attribute">margin-right</span>:-<span class="number">3px</span>;</div><div class="line">//这句是关键</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>HTML代码<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">DIV</span> <span class="attr">id</span>=<span class="string">box</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">DIV</span> <span class="attr">id</span>=<span class="string">left</span>&gt;</span><span class="tag">&lt;/<span class="name">DIV</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">DIV</span> <span class="attr">id</span>=<span class="string">right</span>&gt;</span><span class="tag">&lt;/<span class="name">DIV</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">DIV</span>&gt;</span></div></pre></td></tr></table></figure></p>
 <p>针对上面这段代码，下面说一下我的理解：</p>
 <p>第一、只要right定义了width属性，在FF下绝对就会两行显示<br>第二、两个width都定义为百分比的话，就算都为100%在IE下也会一行显示。所以上面那句所谓“这句是关键”根本没用，不加也在一行，除非你width定义的是数值才用得上。</p>
 <p>所以说上面这段代码其实用处不大，至少在FF下不行。其实只要只定义left的width就行了，right不定义width就不管在IE还是FF 下都能成功，但这样的话父DIV BOX并没有真正的包含LEFT和RIGHT两子DIV,可以用我上面说的第5种办法解决。最简单的办法就是在RIGHT中加上float:left就 OK了，真磨叽！</p>
-<p>9,截字省略号</p>
-<p>.hh { -o-text-overflow:ellipsis;<br>text-overflow:ellipsis;<br>white-space:<br>nowrapoverflow:hidden;<br>}<br>这个是在越出长度后会自行的截掉多出部分的文字，并以省略号结尾。技术是好技术，很多人都喜欢乱用，但注意 Firefox 并不支持</p>
-</body>
+<p>9,截字省略号<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="selector-class">.hh</span> &#123; <span class="attribute">-o-text-overflow</span>:ellipsis;</div><div class="line"><span class="attribute">text-overflow</span>:ellipsis;</div><div class="line"><span class="attribute">white-space</span>:</div><div class="line">nowrapoverflow:hidden;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>这个是在越出长度后会自行的截掉多出部分的文字，并以省略号结尾。技术是好技术，很多人都喜欢乱用，但注意 Firefox 并不支持</p>
+
         
         </div>
         <footer class="article-footer">
@@ -577,7 +1152,7 @@ display:inline-block;
 
 </div>
 
-    <a data-url="/2017/02/01/CSS样式表时总结下FF与IE的区别/" data-id="cj6uetnwy0006xswqwb5ahfik" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="/2017/02/01/DIV+CSS 与不同 IE 版本等的兼容性/" data-id="cj6uq0yly0008wwwqxthcxsl1" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -645,7 +1220,7 @@ display:inline-block;
 
             
     
-        <a href="/2017/02/01/CSS样式表时总结下FF与IE的区别/#comments" class="article-comment-link">评论</a>
+        <a href="/2017/02/01/DIV+CSS 与不同 IE 版本等的兼容性/#comments" class="article-comment-link">评论</a>
     
 
         </footer>
@@ -729,7 +1304,7 @@ display:inline-block;
 
 </div>
 
-    <a data-url="/2017/02/01/js变量和函数的提升/" data-id="cj6uetnxi000ixswqdllriqp8" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="/2017/02/01/js变量和函数的提升/" data-id="cj6uq0ymh000iwwwqm6kwk4jc" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -874,7 +1449,7 @@ display:inline-block;
 
 </div>
 
-    <a data-url="/2017/01/30/js变量的只声明不赋值/" data-id="cj6uetnxn000nxswq00lp96nd" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="/2017/01/30/js变量的只声明不赋值/" data-id="cj6uq0yms000pwwwqll0c018v" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -1099,7 +1674,7 @@ display:inline-block;
 
 </div>
 
-    <a data-url="/2017/01/22/Ajax和Flash的优缺点/" data-id="cj6uetnwm0002xswql2cqpjnv" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="/2017/01/22/Ajax和Flash的优缺点/" data-id="cj6uq0yky0000wwwquzn5ukz3" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -1260,7 +1835,7 @@ display:inline-block;
 
 </div>
 
-    <a data-url="/2017/01/18/js存储/" data-id="cj6uetnxp000pxswqlpuu17u1" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="/2017/01/18/js存储/" data-id="cj6uq0ymy000uwwwq7mxy7o9e" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -1338,778 +1913,6 @@ display:inline-block;
 
 
 
-    <article id="post-js作用域和作用域链" class="article article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
-        
-            
-	
-		<a href="/2017/01/13/js作用域和作用域链/" itemprop="url">
-            <img src="http://www.gratisography.com/pictures/299_1.jpg" class="article-banner" />
-        </a>
-	
-
-
-
-        
-        
-            <header class="article-header">
-                
-    
-        <h1 itemprop="name">
-            <a class="article-title" href="/2017/01/13/js作用域和作用域链/">js作用域和作用域链</a>
-        </h1>
-    
-
-                
-                    <div class="article-meta">
-                        
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/2017/01/13/js作用域和作用域链/">
-            <time datetime="2017-01-12T16:00:00.000Z" itemprop="datePublished">2017-01-13</time>
-        </a>
-    </div>
-
-
-                        
-    <div class="article-category">
-    	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/categories/前端/">前端</a>
-    </div>
-
-                        
-    <div class="article-tag">
-        <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/js/">js</a>
-    </div>
-
-                    </div>
-                
-            </header>
-        
-        
-        <div class="article-entry" itemprop="articleBody">
-        
-            
-            <h1 id="一、先抛出一个笔试题目"><a href="#一、先抛出一个笔试题目" class="headerlink" title="一、先抛出一个笔试题目"></a>一、先抛出一个笔试题目</h1><figure class="highlight delphi"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> a = <span class="number">100</span>;</div><div class="line"> <span class="function"><span class="keyword">function</span> <span class="title">fn</span><span class="params">()</span> <span class="comment">&#123;</span></span></div><div class="line"><span class="function"><span class="comment">     alert(a);//undefined</span></span></div><div class="line"><span class="function"><span class="comment">     var a = 200;</span></span></div><div class="line"><span class="function"><span class="comment">     alert(a);//200</span></span></div><div class="line"><span class="function"><span class="comment"> &#125;</span></span></div><div class="line"><span class="function"> <span class="title">fn</span><span class="params">()</span>;</span></div><div class="line"> alert(a);<span class="comment">//100</span></div><div class="line"> <span class="keyword">var</span> a;</div><div class="line"> alert(a);<span class="comment">//100</span></div><div class="line"> <span class="keyword">var</span> a = <span class="number">300</span>;</div><div class="line"> alert(a);<span class="comment">//300</span></div></pre></td></tr></table></figure>
-<h2 id="知识点1-变量的提升"><a href="#知识点1-变量的提升" class="headerlink" title="知识点1 变量的提升"></a>知识点1 变量的提升</h2><blockquote>
-<p>上面的代码实际的执行顺序如下<br><figure class="highlight abnf"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">var a<span class="comment">;//全局作用域范围内，此时只是声明，并没有赋值</span></div><div class="line"><span class="attribute">a</span> = <span class="number">100</span><span class="comment">;</span></div><div class="line">function fn()&#123;</div><div class="line">    var a<span class="comment">;</span></div><div class="line">    alert(a)<span class="comment">;//undefined</span></div><div class="line">    a = <span class="number">200</span><span class="comment">;</span></div><div class="line">    alert(a)<span class="comment">;//200</span></div><div class="line">&#125;</div><div class="line">fn()<span class="comment">;</span></div><div class="line">alert(a)<span class="comment">;//100</span></div><div class="line">alert(a)<span class="comment">;//100</span></div><div class="line"><span class="attribute">a</span> = <span class="number">300</span><span class="comment">;</span></div><div class="line">alert(a)<span class="comment">;//300</span></div></pre></td></tr></table></figure></p>
-</blockquote>
-<h2 id="知识点2-函数的提升"><a href="#知识点2-函数的提升" class="headerlink" title="知识点2 函数的提升"></a>知识点2 函数的提升</h2><blockquote>
-<p>　　js中创建函数有两种方式：函数声明式和函数字面量式。只有函数声明才存在函数提升！如:<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">console</span>.log(f1); <span class="comment">// function f1() &#123;&#125;   </span></div><div class="line"><span class="built_in">console</span>.log(f2); <span class="comment">// undefined  </span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">f1</span>(<span class="params"></span>) </span>&#123;&#125;</div><div class="line"><span class="keyword">var</span> f2 = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;&#125;</div></pre></td></tr></table></figure></p>
-</blockquote>
-<p>只所以会有以上的打印结果，是由于js中的函数提升导致代码实际上是按照以下来执行的：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">f1</span>(<span class="params"></span>) </span>&#123;&#125; <span class="comment">// 函数提升，整个代码块提升到文件的最开始</span></div><div class="line"><span class="built_in">console</span>.log(f1);   </div><div class="line"><span class="built_in">console</span>.log(f2);   </div><div class="line"><span class="keyword">var</span> f2 = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;&#125;</div></pre></td></tr></table></figure></p>
-<p>结语：基本上就是这样，要熟练掌握的话可以多做些练习，test:<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">console</span>.log(f1); </div><div class="line"><span class="built_in">console</span>.log(f2);   </div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">f1</span>(<span class="params"></span>) </span>&#123;<span class="built_in">console</span>.log(<span class="string">'aa'</span>)&#125;</div><div class="line"><span class="keyword">var</span> f2 = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;&#125;</div></pre></td></tr></table></figure></p>
-<figure class="highlight scheme"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">(<span class="name">function</span>() &#123;</div><div class="line">　　console.log(<span class="name">a</span>)<span class="comment">;//undefined</span></div><div class="line">　　a = <span class="symbol">'aaa</span>'<span class="comment">;</span></div><div class="line">　　var a = <span class="symbol">'bbb</span>'<span class="comment">;</span></div><div class="line">　　console.log(<span class="name">a</span>)<span class="comment">;//bbb</span></div><div class="line">&#125;)()<span class="comment">;</span></div></pre></td></tr></table></figure>
-
-        
-        </div>
-        <footer class="article-footer">
-            <div class="share-container">
-
-
-
-</div>
-
-    <a data-url="/2017/01/13/js作用域和作用域链/" data-id="cj6uetnxd000dxswqrf4hyeto" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
-<script>
-    (function ($) {
-        // Prevent duplicate binding
-        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
-            __SHARE_BUTTON_BINDED__ = true;
-        } else {
-            return;
-        }
-        $('body').on('click', function() {
-            $('.article-share-box.on').removeClass('on');
-        }).on('click', '.article-share-link', function(e) {
-            e.stopPropagation();
-
-            var $this = $(this),
-                url = $this.attr('data-url'),
-                encodedUrl = encodeURIComponent(url),
-                id = 'article-share-box-' + $this.attr('data-id'),
-                offset = $this.offset(),
-                box;
-
-            if ($('#' + id).length) {
-                box = $('#' + id);
-
-                if (box.hasClass('on')){
-                    box.removeClass('on');
-                    return;
-                }
-            } else {
-                var html = [
-                    '<div id="' + id + '" class="article-share-box">',
-                        '<input class="article-share-input" value="' + url + '">',
-                        '<div class="article-share-links">',
-                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
-                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
-                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
-                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
-                        '</div>',
-                    '</div>'
-                ].join('');
-
-              box = $(html);
-
-              $('body').append(box);
-            }
-
-            $('.article-share-box.on').hide();
-
-            box.css({
-                top: offset.top + 25,
-                left: offset.left
-            }).addClass('on');
-
-        }).on('click', '.article-share-box', function (e) {
-            e.stopPropagation();
-        }).on('click', '.article-share-box-input', function () {
-            $(this).select();
-        }).on('click', '.article-share-box-link', function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-
-            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
-        });
-    })(jQuery);
-</script>
-
-            
-    
-        <a href="/2017/01/13/js作用域和作用域链/#comments" class="article-comment-link">评论</a>
-    
-
-        </footer>
-    </div>
-    
-</article>
-
-
-
-    <article id="post-js你所不知道的预编译" class="article article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
-        
-            
-	
-		<a href="/2016/12/29/js你所不知道的预编译/" itemprop="url">
-            <img src="http://st2.originoo.cn/2332949/5930/i/950/depositphotos_59309355-stock-photo-laptop-on-wooden-table-blue.jpg" class="article-banner" />
-        </a>
-	
-
-
-
-        
-        
-            <header class="article-header">
-                
-    
-        <h1 itemprop="name">
-            <a class="article-title" href="/2016/12/29/js你所不知道的预编译/">js你说不知道的编译</a>
-        </h1>
-    
-
-                
-                    <div class="article-meta">
-                        
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/2016/12/29/js你所不知道的预编译/">
-            <time datetime="2016-12-28T16:00:00.000Z" itemprop="datePublished">2016-12-29</time>
-        </a>
-    </div>
-
-
-                        
-    <div class="article-category">
-    	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/categories/前端/">前端</a>
-    </div>
-
-                        
-    <div class="article-tag">
-        <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/js/">js</a>
-    </div>
-
-                    </div>
-                
-            </header>
-        
-        
-        <div class="article-entry" itemprop="articleBody">
-        
-            
-            <h1 id="JavaScript三部曲"><a href="#JavaScript三部曲" class="headerlink" title="JavaScript三部曲"></a>JavaScript三部曲</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><ol>
-<li>在JavaScript中变量和函数的声明会提升到最顶部执行。</li>
-<li>函数的提升高于变量的提升。</li>
-<li>函数内部如果用var声明了相同名称的外部变量，函数将不再向上寻找。</li>
-<li>匿名函数不会提升。</li>
-<li>不同script脚本块中的函数互不影响。<h2 id="脚本执行引擎都做了什么"><a href="#脚本执行引擎都做了什么" class="headerlink" title="脚本执行引擎都做了什么"></a>脚本执行引擎都做了什么</h2><blockquote>
-</blockquote>
-</li>
-<li>语法分析</li>
-<li>预编译</li>
-<li>解释执行</li>
-</ol>
-<p>通俗讲就是</p>
-<blockquote>
-<p>在执行代码前，还有两个步骤</p>
-<ol>
-<li>语法分析很简单，就是引擎检查你的代码有没有什么低级的语法错误</li>
-<li>解释执行顾名思义便是执行代码了</li>
-</ol>
-</blockquote>
-<p>预编译简单理解就是在<strong>内存</strong>中开辟一些空间，存放一些<strong>变量</strong>与<strong>函数</strong><br>理解了预编译对大家理解作用域同样有帮助</p>
-<h2 id="JS预编译什么时候发生"><a href="#JS预编译什么时候发生" class="headerlink" title="JS预编译什么时候发生"></a>JS预编译什么时候发生</h2><blockquote>
-<ul>
-<li>我当初思维误区也发生在这里<ul>
-<li>预编译到底什么时候发生</li>
-<li>希望大家不要让上面的运行过程让你产生误会，</li>
-<li>误以为预编译仅仅发生在script内代码块执行前</li>
-<li>这倒并没有错</li>
-<li>预编译确确实实在script代码内执行前发生了</li>
-<li>但是它大部分会发生在函数执行前<h2 id="JS预编译实例"><a href="#JS预编译实例" class="headerlink" title="JS预编译实例"></a>JS预编译实例</h2>几个概念</li>
-</ul>
-</li>
-</ul>
-<ol>
-<li>变量声明 关键词<strong>var</strong></li>
-<li>函数声明 关键词<strong>function</strong><br>注意函数声明和函数表达是的区别<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"> &lt;script&gt;</div><div class="line">  <span class="keyword">var</span> a = <span class="number">1</span>;<span class="comment">// 变量声明</span></div><div class="line">  <span class="function"><span class="keyword">function</span> <span class="title">b</span>(<span class="params">y</span>)</span>&#123;<span class="comment">//函数声明</span></div><div class="line">      <span class="keyword">var</span> x = <span class="number">1</span>;</div><div class="line">      <span class="built_in">console</span>.log(<span class="string">'so easy'</span>);</div><div class="line">  &#125;;</div><div class="line">  <span class="keyword">var</span> c = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;<span class="comment">//是变量声明而不是函数声明！！</span></div><div class="line">      <span class="comment">//...</span></div><div class="line">  &#125;</div><div class="line">  b(<span class="number">100</span>);</div><div class="line">&lt;<span class="regexp">/script&gt;</span></div><div class="line"><span class="regexp">&lt;script&gt;</span></div><div class="line"><span class="regexp">  var d = 0;</span></div><div class="line"><span class="regexp">&lt;/</span>script&gt;</div></pre></td></tr></table></figure>
-</li>
-</ol>
-</blockquote>
-<p>让我们看看引擎对这段代码做了什么吧</p>
-<ul>
-<li>页面产生便创建了GO全局对象（Global Object）（也就是大家熟悉的window对象）</li>
-<li>第一个脚本文件加载</li>
-<li>脚本加载完毕后，分析语法是否合法</li>
-<li>开始预编译 <blockquote>
-<ul>
-<li>查找变量声明，作为GO属性，值赋予undefined</li>
-<li>查找函数声明，作为GO属性，值赋予函数体<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">  <span class="comment">//伪代码</span></div><div class="line">GO/<span class="built_in">window</span> = &#123;</div><div class="line">    <span class="comment">//页面加载创建GO同时，创建了document、navigator、screen等等属性，此处省略</span></div><div class="line">    a: <span class="literal">undefined</span>,</div><div class="line">    c: <span class="literal">undefined</span>，</div><div class="line">    b: <span class="function"><span class="keyword">function</span>(<span class="params">y</span>)</span>&#123;</div><div class="line">        <span class="keyword">var</span> x = <span class="number">1</span>;</div><div class="line">        <span class="built_in">console</span>.log(<span class="string">'so easy'</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-</ul>
-</blockquote>
-</li>
-</ul>
-<p>解释执行代码（直到执行函数b）<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//伪代码</span></div><div class="line">GO/<span class="built_in">window</span> = &#123;</div><div class="line">    <span class="comment">//变量随着执行流得到初始化</span></div><div class="line">    a: <span class="number">1</span>,</div><div class="line">    c: <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">        <span class="comment">//...</span></div><div class="line">    &#125;,</div><div class="line">    b: <span class="function"><span class="keyword">function</span>(<span class="params">y</span>)</span>&#123;</div><div class="line">        <span class="keyword">var</span> x = <span class="number">1</span>;</div><div class="line">        <span class="built_in">console</span>.log(<span class="string">'so easy'</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>执行函数b之前，发生预编译</p>
-<blockquote>
-<ul>
-<li>创建AO活动对象（Active Object）</li>
-<li>查找形参和变量声明，值赋予undefined</li>
-<li>实参值赋给形参</li>
-<li>查找函数声明，值赋予函数体<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//伪代码</span></div><div class="line">AO = &#123;</div><div class="line">  <span class="comment">//创建AO同时，创建了arguments等等属性，此处省略</span></div><div class="line">  y: <span class="number">100</span>,</div><div class="line">  x: <span class="literal">undefined</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<ul>
-<li>解释执行函数中代码</li>
-<li>第一个脚本文件执行完毕，加载第二个脚本文件<br><strong>注意每个script是独立的,不会预编译下一个scipt</strong></li>
-<li>第二个脚本文件加载完毕后，进行语法分析</li>
-<li>语法分析完毕，开始预编译</li>
-<li>重复最开始的预编译步骤……</li>
-</ul>
-</blockquote>
-<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>预编译阶段发生变量声明和函数声明，没有初始化行为（赋值），匿名函数不<br>参与预编译<br><br>只有在解释执行阶段才会进行变量初始化</p>
-<p>预编译(函数执行前)※</p>
-<ol>
-<li>创建AO对象（Active Object）</li>
-<li>查找函数形参及函数内变量声明，形参名及变量名作为AO对象的属性，值为undefined</li>
-<li>实参形参相统一，实参值赋给形参</li>
-<li>查找函数声明，函数名作为AO对象的属性，值为函数引用</li>
-</ol>
-<p>预编译(脚本代码块script执行前)</p>
-<ol>
-<li>查找全局变量声明（包括隐式全局变量声明，省略var声明），变量名作全局对象的属性，值为undefined</li>
-<li>查找函数声明，函数名作为全局对象的属性，值为函数引用</li>
-</ol>
-<p>理解了预编译对理解提升行为，this指向，作用域及性能等问题都有很大帮助</p>
-
-        
-        </div>
-        <footer class="article-footer">
-            <div class="share-container">
-
-
-
-</div>
-
-    <a data-url="/2016/12/29/js你所不知道的预编译/" data-id="cj6uetnxf000gxswq0dsqfrz4" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
-<script>
-    (function ($) {
-        // Prevent duplicate binding
-        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
-            __SHARE_BUTTON_BINDED__ = true;
-        } else {
-            return;
-        }
-        $('body').on('click', function() {
-            $('.article-share-box.on').removeClass('on');
-        }).on('click', '.article-share-link', function(e) {
-            e.stopPropagation();
-
-            var $this = $(this),
-                url = $this.attr('data-url'),
-                encodedUrl = encodeURIComponent(url),
-                id = 'article-share-box-' + $this.attr('data-id'),
-                offset = $this.offset(),
-                box;
-
-            if ($('#' + id).length) {
-                box = $('#' + id);
-
-                if (box.hasClass('on')){
-                    box.removeClass('on');
-                    return;
-                }
-            } else {
-                var html = [
-                    '<div id="' + id + '" class="article-share-box">',
-                        '<input class="article-share-input" value="' + url + '">',
-                        '<div class="article-share-links">',
-                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
-                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
-                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
-                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
-                        '</div>',
-                    '</div>'
-                ].join('');
-
-              box = $(html);
-
-              $('body').append(box);
-            }
-
-            $('.article-share-box.on').hide();
-
-            box.css({
-                top: offset.top + 25,
-                left: offset.left
-            }).addClass('on');
-
-        }).on('click', '.article-share-box', function (e) {
-            e.stopPropagation();
-        }).on('click', '.article-share-box-input', function () {
-            $(this).select();
-        }).on('click', '.article-share-box-link', function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-
-            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
-        });
-    })(jQuery);
-</script>
-
-            
-    
-        <a href="/2016/12/29/js你所不知道的预编译/#comments" class="article-comment-link">评论</a>
-    
-
-        </footer>
-    </div>
-    
-</article>
-
-
-
-    <article id="post-Node.js的学习--使用cheerio抓取网页数据" class="article article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
-        
-            
-	
-		<a href="/2016/12/18/Node.js的学习--使用cheerio抓取网页数据/" itemprop="url">
-            <img src="http://www.gratisography.com/pictures/421_1.jpg" class="article-banner" />
-        </a>
-	
-
-
-
-        
-        
-            <header class="article-header">
-                
-    
-        <h1 itemprop="name">
-            <a class="article-title" href="/2016/12/18/Node.js的学习--使用cheerio抓取网页数据/">Node.js的学习--使用cheerio抓取网页数据</a>
-        </h1>
-    
-
-                
-                    <div class="article-meta">
-                        
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/2016/12/18/Node.js的学习--使用cheerio抓取网页数据/">
-            <time datetime="2016-12-17T16:00:00.000Z" itemprop="datePublished">2016-12-18</time>
-        </a>
-    </div>
-
-
-                        
-    <div class="article-category">
-    	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/categories/Node/">Node</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/Node/爬虫/">爬虫</a>
-    </div>
-
-                        
-    <div class="article-tag">
-        <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/cheerio/">cheerio</a>, <a class="tag-link" href="/tags/爬虫/">爬虫</a>
-    </div>
-
-                    </div>
-                
-            </header>
-        
-        
-        <div class="article-entry" itemprop="articleBody">
-        
-            
-            <p>打算要写一个公开课网站，缺少数据，就决定去网易公开课去抓取一些数据。</p>
-<p>前一阵子看过一段时间的Node.js，而且Node.js也比较适合做这个事情，就打算用Node.js去抓取数据。</p>
-<p>关键是抓取到网页之后如何获取到想要的数据呢？然后就发现了cheerio，用来解析html非常方便，就像在浏览器中使用jquery一样。</p>
-<p>使用如下命令安装cheerio</p>
-<pre><code>npm install cheerio
-</code></pre><p>Cheerio安装完成， 我们就可以开始工作了。 首先让我们来看一段javascript代码 这段代码可以下载任意一个网页的内容。将其放入到curl.js中，并导出。<br><figure class="highlight qml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"> <span class="keyword">var</span> http = <span class="built_in">require</span>(<span class="string">"http"</span>);</div><div class="line"> </div><div class="line"><span class="comment">// Utility function that downloads a URL and invokes</span></div><div class="line"><span class="comment">// callback with the data.</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">download</span>(<span class="params">url, callback</span>) </span>&#123;</div><div class="line">  http.get(<span class="built_in">url</span>, <span class="function"><span class="keyword">function</span>(<span class="params">res</span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> data = <span class="string">""</span>;</div><div class="line">    res.on(<span class="string">'data'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">chunk</span>) </span>&#123;</div><div class="line">      data += chunk;</div><div class="line">    &#125;);</div><div class="line">    res.on(<span class="string">"end"</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">      callback(data);</div><div class="line">    &#125;);</div><div class="line">  &#125;).on(<span class="string">"error"</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    callback(<span class="literal">null</span>);</div><div class="line">  &#125;);</div><div class="line">&#125;</div><div class="line"></div><div class="line">exports.download = download;</div></pre></td></tr></table></figure></p>
-<p>然后是使用cheerio解析html，找到想要的数据。</p>
-<p>我们先来自己分析一下页面。我们要抓取<a href="http://v.163.com/special/opencourse/englishs1.html这个页面中的视频，视频的地址都在下载的按钮里。其中一个下载按钮的html的代码如下：" target="_blank" rel="external">http://v.163.com/special/opencourse/englishs1.html这个页面中的视频，视频的地址都在下载的按钮里。其中一个下载按钮的html的代码如下：</a><br><figure class="highlight routeros"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">&lt;a <span class="attribute">class</span>=<span class="string">"downbtn"</span> <span class="attribute">href</span>=<span class="string">"http://mov.bn.netease.com/mobilev/2013/1/F/G/S8KTEF7FG.mp4"</span> <span class="attribute">id</span>=<span class="string">"M8KTEKR84"</span> <span class="attribute">target</span>=<span class="string">"_blank"</span>&gt;&lt;/a&gt;</div></pre></td></tr></table></figure></p>
-<p>我们取到其中的href属性，只需要进行如下选择即可<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="meta">$</span><span class="bash">(<span class="string">"a.downbtn"</span>).attr(<span class="string">"href"</span>);</span></div></pre></td></tr></table></figure></p>
-<p>在是现实，我们可以在index.js中写入如下代码<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> cheerio = <span class="built_in">require</span>(<span class="string">"cheerio"</span>);</div><div class="line"><span class="keyword">var</span> server = <span class="built_in">require</span>(<span class="string">"./curl"</span>);</div><div class="line"> </div><div class="line"><span class="keyword">var</span> url = <span class="string">"http://v.163.com/special/opencourse/englishs1.html"</span></div><div class="line"></div><div class="line">server.download(url, <span class="function"><span class="keyword">function</span>(<span class="params">data</span>) </span>&#123;</div><div class="line">  <span class="keyword">if</span> (data) &#123;</div><div class="line">    <span class="comment">//console.log(data);</span></div><div class="line"> </div><div class="line">    <span class="keyword">var</span> $ = cheerio.load(data);</div><div class="line">    $(<span class="string">"a.downbtn"</span>).each(<span class="function"><span class="keyword">function</span>(<span class="params">i, e</span>) </span>&#123;</div><div class="line">        <span class="built_in">console</span>.log($(e).attr(<span class="string">"href"</span>));</div><div class="line">    &#125;);</div><div class="line"> </div><div class="line">    <span class="built_in">console</span>.log(<span class="string">"done"</span>);</div><div class="line">  &#125; <span class="keyword">else</span> &#123;</div><div class="line">      <span class="built_in">console</span>.log(<span class="string">"error"</span>);</div><div class="line">  &#125; </div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
-
-        
-        </div>
-        <footer class="article-footer">
-            <div class="share-container">
-
-
-
-</div>
-
-    <a data-url="/2016/12/18/Node.js的学习--使用cheerio抓取网页数据/" data-id="cj6uetnwf0000xswqo5dsj7l9" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
-<script>
-    (function ($) {
-        // Prevent duplicate binding
-        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
-            __SHARE_BUTTON_BINDED__ = true;
-        } else {
-            return;
-        }
-        $('body').on('click', function() {
-            $('.article-share-box.on').removeClass('on');
-        }).on('click', '.article-share-link', function(e) {
-            e.stopPropagation();
-
-            var $this = $(this),
-                url = $this.attr('data-url'),
-                encodedUrl = encodeURIComponent(url),
-                id = 'article-share-box-' + $this.attr('data-id'),
-                offset = $this.offset(),
-                box;
-
-            if ($('#' + id).length) {
-                box = $('#' + id);
-
-                if (box.hasClass('on')){
-                    box.removeClass('on');
-                    return;
-                }
-            } else {
-                var html = [
-                    '<div id="' + id + '" class="article-share-box">',
-                        '<input class="article-share-input" value="' + url + '">',
-                        '<div class="article-share-links">',
-                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
-                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
-                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
-                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
-                        '</div>',
-                    '</div>'
-                ].join('');
-
-              box = $(html);
-
-              $('body').append(box);
-            }
-
-            $('.article-share-box.on').hide();
-
-            box.css({
-                top: offset.top + 25,
-                left: offset.left
-            }).addClass('on');
-
-        }).on('click', '.article-share-box', function (e) {
-            e.stopPropagation();
-        }).on('click', '.article-share-box-input', function () {
-            $(this).select();
-        }).on('click', '.article-share-box-link', function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-
-            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
-        });
-    })(jQuery);
-</script>
-
-            
-    
-        <a href="/2016/12/18/Node.js的学习--使用cheerio抓取网页数据/#comments" class="article-comment-link">评论</a>
-    
-
-        </footer>
-    </div>
-    
-</article>
-
-
-
-    <article id="post-js深入理解JavaScript执行上下文、函数堆栈、提升的概念 " class="article article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
-        
-            
-	
-		<a href="/2016/12/02/js深入理解JavaScript执行上下文、函数堆栈、提升的概念 /" itemprop="url">
-            <img src="http://www.gratisography.com/pictures/211_1.jpg" class="article-banner" />
-        </a>
-	
-
-
-
-        
-        
-            <header class="article-header">
-                
-    
-        <h1 itemprop="name">
-            <a class="article-title" href="/2016/12/02/js深入理解JavaScript执行上下文、函数堆栈、提升的概念 /">深入理解JavaScript执行上下文、函数堆栈、提升的概念</a>
-        </h1>
-    
-
-                
-                    <div class="article-meta">
-                        
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/2016/12/02/js深入理解JavaScript执行上下文、函数堆栈、提升的概念 /">
-            <time datetime="2016-12-01T16:00:00.000Z" itemprop="datePublished">2016-12-02</time>
-        </a>
-    </div>
-
-
-                        
-    <div class="article-category">
-    	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/categories/前端/">前端</a>
-    </div>
-
-                        
-    <div class="article-tag">
-        <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/js/">js</a>
-    </div>
-
-                    </div>
-                
-            </header>
-        
-        
-        <div class="article-entry" itemprop="articleBody">
-        
-            
-            <h2 id="首先明确几个概念"><a href="#首先明确几个概念" class="headerlink" title="首先明确几个概念"></a>首先明确几个概念</h2><p>EC：函数执行环境（或执行上下文），Execution Context<br>ECS：执行环境栈，Execution Context Stack<br>VO：变量对象，Variable Object<br>AO：活动对象，Active Object<br>scope chain：作用域链</p>
-<h2 id="EC执行上下文"><a href="#EC执行上下文" class="headerlink" title="EC执行上下文"></a>EC执行上下文</h2><p>每次当控制器转到ECMAScript可执行代码的时候，就会进入到一个执行上下文。<br>那什么是可执行代码呢？</p>
-<h3 id="可执行代码的类型"><a href="#可执行代码的类型" class="headerlink" title="可执行代码的类型"></a>可执行代码的类型</h3><ol>
-<li>全局代码（Global code）<br>这种类型的代码是在”程序”级处理的：例如加载外部的js文件或者本地”<script></script>“标签内的代码。全局代码不包括任何function体内的代码。 这个是默认的代码运行环境，一旦代码被载入，引擎最先进入的就是这个环境。</li>
-<li>函数代码（Function code）<br>任何一个函数体内的代码，但是需要注意的是，具体的函数体内的代码是不包括内部函数的代码。</li>
-<li>Eval代码（Eval code）<br>eval内部的代码<h3 id="ECS（执行环境栈）"><a href="#ECS（执行环境栈）" class="headerlink" title="ECS（执行环境栈）"></a>ECS（执行环境栈）</h3>我们用MDN上的一个例子来引入函数执行栈的概念<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params">i</span>) </span>&#123;</div><div class="line">    <span class="keyword">if</span> (i &lt; <span class="number">0</span>) <span class="keyword">return</span>;</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">'begin:'</span> + i);</div><div class="line">    foo(i - <span class="number">1</span>);</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">'end:'</span> + i);</div><div class="line">&#125;</div><div class="line">foo(<span class="number">2</span>);</div><div class="line"></div><div class="line"><span class="comment">// 输出:</span></div><div class="line"></div><div class="line"><span class="comment">// begin:2</span></div><div class="line"><span class="comment">// begin:1</span></div><div class="line"><span class="comment">// begin:0</span></div><div class="line"><span class="comment">// end:0</span></div><div class="line"><span class="comment">// end:1</span></div><div class="line"><span class="comment">// end:2</span></div></pre></td></tr></table></figure>
-</li>
-</ol>
-<p>······························转·····························</p>
-<p>先了解一下函数执行上下文堆栈的概念<br>浏览器中的JS解释器被实现为单线程，这也就意味着同一时间只能发生一件事情，其他的行为或事件将会被放在叫做执行栈里面排队。下面的图是单线程栈的抽象视图：<br><img src="http://yanhaijing.com/blog/137.jpg" alt="图片"> </p>
-<p>当浏览器首次载入你的脚本，它将默认进入全局执行上下文。如果，你在你的全局代码中调用一个函数，你程序的时序将进入被调用的函数，并创建一个新的执行上下文，并将新创建的上下文压入执行栈的顶部。<br>如果你调用当前函数内部的其他函数，相同的事情会在此上演。代码的执行流程进入内部函数，创建一个新的执行上下文并把它压入执行栈的顶部。浏览器总会执行位于栈顶的执行上下文，一旦当前上下文函数执行结束，它将被从栈顶弹出，并将上下文控制权交给当前的栈。这样，堆栈中的上下文就会被依次执行并且弹出堆栈，直到回到全局的上下文。</p>
-<h2 id="VO（变量对象）-AO（活动对象）"><a href="#VO（变量对象）-AO（活动对象）" class="headerlink" title="VO（变量对象）/AO（活动对象）"></a>VO（变量对象）/AO（活动对象）</h2><p>这里为什么要用一个/呢？按照字面理解，AO其实就是被激活的VO，两个其实是一个东西。</p>
-<p>变量对象（Variable object）是说JS的执行上下文中都有个对象用来存放执行上下文中可被访问但是不能被delete的函数标示符、形参、变量声明等。它们会被挂在这个对象上，对象的属性对应它们的名字对象属性的值对应它们的值但这个对象是规范上或者说是引擎实现上的不可在JS环境中访问到活动对象</p>
-<p>激活对象（Activation object）有了变量对象存每个上下文中的东西，但是它什么时候能被访问到呢？就是每进入一个执行上下文时，这个执行上下文儿中的变量对象就被激活，也就是该上下文中的函数标示符、形参、变量声明等就可以被访问到了</p>
-<h2 id="EC建立的细节"><a href="#EC建立的细节" class="headerlink" title="EC建立的细节"></a>EC建立的细节</h2><ol>
-<li>创建阶段【当函数被调用，但未执行任何其内部代码之前】</li>
-</ol>
-<ul>
-<li>创建作用域链（Scope Chain）</li>
-<li>创建变量，函数和参数。</li>
-<li>求”this“的值</li>
-</ul>
-<ol>
-<li>执行阶段<br>初始化变量的值和函数的引用，解释/执行代码。<br>我们可以将每个执行上下文抽象为一个对象，这个对象具有三个属性<br>ECObj: {<br> scopeChain: { /<em> 变量对象（variableObject）+ 所有父级执行上下文的变量对象</em>/ },<br> variableObject: { /<em>函数 arguments/参数，内部变量和函数声明 </em>/ },<br> this: {}<br>}</li>
-</ol>
-<h2 id="解释器执行代码的伪逻辑"><a href="#解释器执行代码的伪逻辑" class="headerlink" title="解释器执行代码的伪逻辑"></a>解释器执行代码的伪逻辑</h2><ol>
-<li>查找调用函数的代码。</li>
-<li><p>执行代码之前，先进入创建上下文阶段：</p>
-<ul>
-<li>初始化作用域链</li>
-<li>创建变量对象：<ul>
-<li>创建arguments对象，检查上下文，初始化参数名称和值并创建引用的复制。</li>
-<li>扫描上下文的函数声明（而非函数表达式）：<ul>
-<li>为发现的每一个函数，在变量对象上创建一个属性——确切的说是函数的名字——其有一个指向函数在内存中的引用。</li>
-<li>如果函数的名字已经存在，引用指针将被重写。</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>扫描上下文的变量声明：<ul>
-<li>为发现的每个变量声明，在变量对象上创建一个属性——就是变量的名字，并且将变量的值初始化为undefined</li>
-<li>如果变量的名字已经在变量对象里存在，将不会进行任何操作并继续扫描。</li>
-</ul>
-</li>
-<li>求出上下文内部this的值。</li>
-</ul>
-</li>
-<li><p>激活/代码执行阶段：</p>
-</li>
-</ol>
-<ul>
-<li>在当前上下文上运行/解释函数代码，并随着代码一行行执行指派变量的值。</li>
-</ul>
-<p>VO — 对应上述第二个阶段<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params">i</span>)</span>&#123;</div><div class="line">    <span class="keyword">var</span> a = <span class="string">'hello'</span></div><div class="line">    <span class="keyword">var</span> b = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;</div><div class="line">    <span class="function"><span class="keyword">function</span> <span class="title">c</span>(<span class="params"></span>)</span>&#123;&#125;</div><div class="line">&#125;</div><div class="line">foo(<span class="number">22</span>)</div></pre></td></tr></table></figure></p>
-<p>当我们调用foo(22)时，整个创建阶段是下面这样的<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">ECObj = &#123;</div><div class="line">    scopChain： &#123;...&#125;,</div><div class="line">    variableObject: &#123;</div><div class="line">        <span class="built_in">arguments</span>: &#123;</div><div class="line">                <span class="number">0</span>: <span class="number">22</span>,</div><div class="line">                length: <span class="number">1</span></div><div class="line">        &#125;,</div><div class="line">        i: <span class="number">22</span>,</div><div class="line">        c: pointer to <span class="function"><span class="keyword">function</span> <span class="title">c</span>(<span class="params"></span>)</span></div><div class="line"><span class="function">        <span class="title">a</span>: <span class="title">undefined</span>,</span></div><div class="line"><span class="function">        <span class="title">b</span>: <span class="title">undefined</span></span></div><div class="line"><span class="function">    &#125;,</span></div><div class="line"><span class="function">    <span class="title">this</span>: </span>&#123; ... &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p> 正如我们看到的，在上下文创建阶段，VO的初始化过程如下（该过程是有先后顺序的：函数的形参==&gt;&gt;函数声明==&gt;&gt;变量声明）：</p>
-<pre><code>函数的形参（当进入函数执行上下文时） —— 变量对象的一个属性，其属性名就是形参的名字，其值就是实参的值；对于没有传递的参数，其值为undefined
-
-函数声明（FunctionDeclaration, FD） —— 变量对象的一个属性，其属性名和值都是函数对象创建出来的；如果变量对象已经包含了相同名字的属性，则替换它的值
-
-变量声明（var，VariableDeclaration） —— 变量对象的一个属性，其属性名即为变量名，其值为undefined;如果变量名和已经声明的函数名或者函数的参数名相同，**则不会影响已经存在的属性。**
-</code></pre><ol>
-<li>如何理解函数声明过程中如果变量对象已经包含了相同名字的属性，则替换它的值这句话？</li>
-</ol>
-<p>看如下这段代码：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo1</span>(<span class="params">a</span>)</span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(a)</div><div class="line">    <span class="function"><span class="keyword">function</span> <span class="title">a</span>(<span class="params"></span>)</span>&#123;&#125; </div><div class="line">&#125;</div><div class="line">foo1(<span class="number">20</span>)<span class="comment">//'function a()&#123;&#125;'</span></div></pre></td></tr></table></figure></p>
-<p>根据上面的介绍，我们知道VO创建过程中，函数形参的优先级是高于函数的声明的，结果是函数体内部声明的function a(){}覆盖了函数形参a的声明，因此最后输出a是一个function</p>
-<ol>
-<li>如何理解变量声明过程中如果变量名和已经声明的函数名或者函数的参数名相同，则不会影响已经存在的属性这句话？<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//情景一：与参数名相同</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo2</span>(<span class="params">a</span>)</span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(a)</div><div class="line">    <span class="keyword">var</span> a = <span class="number">10</span></div><div class="line">&#125;</div><div class="line">foo2(<span class="number">20</span>) <span class="comment">//'20'</span></div></pre></td></tr></table></figure>
-</li>
-</ol>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//情景二：与函数名相同</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo2</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(a)</div><div class="line">    <span class="keyword">var</span> a = <span class="number">10</span></div><div class="line">    <span class="function"><span class="keyword">function</span> <span class="title">a</span>(<span class="params"></span>)</span>&#123;&#125;</div><div class="line">&#125;</div><div class="line">foo2() <span class="comment">//'function a()&#123;&#125;'</span></div></pre></td></tr></table></figure>
-<p>下面是几个比较有趣的例子，当做加餐小菜，大家细细品味。这里给出一句话当做参考：</p>
-<pre><code>函数声明比变量优先级要高，并且定义过程不会被变量覆盖，除非是赋值
-</code></pre><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo3</span>(<span class="params">a</span>)</span>&#123;</div><div class="line">    <span class="keyword">var</span> a = <span class="number">10</span></div><div class="line">    <span class="function"><span class="keyword">function</span> <span class="title">a</span>(<span class="params"></span>)</span>&#123;&#125;</div><div class="line">    <span class="built_in">console</span>.log(a)</div><div class="line">&#125;</div><div class="line">foo3(<span class="number">20</span>) <span class="comment">//'10'</span></div></pre></td></tr></table></figure>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo3</span>(<span class="params">a</span>)</span>&#123;</div><div class="line">    <span class="keyword">var</span> a </div><div class="line">    <span class="function"><span class="keyword">function</span> <span class="title">a</span>(<span class="params"></span>)</span>&#123;&#125;</div><div class="line">    <span class="built_in">console</span>.log(a)</div><div class="line">&#125;</div><div class="line">foo3(<span class="number">20</span>) <span class="comment">//'function a()&#123;&#125;'</span></div></pre></td></tr></table></figure>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo2</span>(<span class="params">a</span>) </span>&#123;</div><div class="line">        <span class="built_in">console</span>.log(a)</div><div class="line">        <span class="keyword">var</span> a = <span class="number">10</span></div><div class="line">        <span class="function"><span class="keyword">function</span> <span class="title">a</span>(<span class="params"></span>) </span>&#123;&#125;</div><div class="line">&#125;</div><div class="line">foo2(<span class="number">20</span>) <span class="comment">//'function a()&#123;&#125;'</span></div></pre></td></tr></table></figure>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo2</span>(<span class="params">a</span>) </span>&#123;</div><div class="line">         <span class="keyword">var</span> a = <span class="number">10</span></div><div class="line">         <span class="function"><span class="keyword">function</span> <span class="title">a</span>(<span class="params"></span>) </span>&#123;&#125;</div><div class="line">         <span class="built_in">console</span>.log(a)</div><div class="line">     &#125;</div><div class="line"> foo2(<span class="number">20</span>) <span class="comment">//'10'</span></div></pre></td></tr></table></figure>
-<h3 id="小结：-gt-函数声明的提升-gt-赋值的优先级-gt-变量的提升"><a href="#小结：-gt-函数声明的提升-gt-赋值的优先级-gt-变量的提升" class="headerlink" title="小结：&gt;函数声明的提升&gt;赋值的优先级&gt;变量的提升"></a>小结：&gt;函数声明的提升&gt;赋值的优先级&gt;变量的提升</h3><ol>
-<li><p><strong>函数声明</strong>（FunctionDeclaration, FD） —— 变量对象的一个属性，其属性名和值都是函数对象创建出来的；如果变量对象已经包含了相同名字的属性，<strong>则替换它的值</strong>。可以理解为声明则赋值一个指针？</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo2</span>(<span class="params">a</span>) </span>&#123;</div><div class="line">          <span class="keyword">var</span> a = <span class="number">10</span></div><div class="line">          <span class="function"><span class="keyword">function</span> <span class="title">a</span>(<span class="params"></span>) </span>&#123;</div><div class="line">              <span class="comment">//</span></div><div class="line">          &#125;</div><div class="line">          <span class="built_in">console</span>.log(a)</div><div class="line">      &#125;</div><div class="line">      foo2(<span class="number">20</span>) <span class="comment">//'function a()'</span></div></pre></td></tr></table></figure>
-</li>
-<li><p><strong>变量声明</strong>（var，VariableDeclaration） —— 变量对象的一个属性，其属性名即为变量名，其值为undefined;如果变量名和已经声明的函数名或者函数的参数名相同，<strong>则不会影响已经存在的属性。</strong></p>
-</li>
-</ol>
-<h2 id="AO-—-对应第三个阶段"><a href="#AO-—-对应第三个阶段" class="headerlink" title="AO — 对应第三个阶段"></a>AO — 对应第三个阶段</h2><p>正如我们看到的，创建的过程仅负责处理定义属性的名字，而并不为他们指派具体的值，当然还有对形参/实参的处理。一旦创建阶段完成，执行流进入函数并且激活/代码执行阶段，看下函数执行完成后的样子：<br><figure class="highlight vim"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">  ECObj = &#123;</div><div class="line">    scopeChain: &#123; ... &#125;,</div><div class="line">    variableObjec<span class="variable">t:</span> &#123;</div><div class="line">        <span class="keyword">argument</span><span class="variable">s:</span> &#123;</div><div class="line">            <span class="number">0</span>: <span class="number">22</span>,</div><div class="line">            length: <span class="number">1</span></div><div class="line">        &#125;,</div><div class="line">        i: <span class="number">22</span>,</div><div class="line">        <span class="keyword">c</span>: pointer <span class="keyword">to</span> <span class="function"><span class="keyword">function</span> <span class="title">c</span><span class="params">()</span></span></div><div class="line">        <span class="variable">a:</span> <span class="string">'hello'</span>,</div><div class="line">        <span class="variable">b:</span> pointer <span class="keyword">to</span> <span class="function"><span class="keyword">function</span> <span class="title">privateB</span><span class="params">()</span></span></div><div class="line">    &#125;,</div><div class="line">    thi<span class="variable">s:</span> &#123; ... &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<h2 id="提升（Hoisting）"><a href="#提升（Hoisting）" class="headerlink" title="提升（Hoisting）"></a>提升（Hoisting）</h2><p>对于下面的代码，相信很多人都能一眼看出输出结果，但是却很少有人能给出为什么会产生这种输出结果的解释。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="keyword">typeof</span> foo); <span class="comment">// 函数指针</span></div><div class="line">    <span class="built_in">console</span>.log(<span class="keyword">typeof</span> bar); <span class="comment">// undefined</span></div><div class="line"></div><div class="line">    <span class="keyword">var</span> foo = <span class="string">'hello'</span>,</div><div class="line">        bar = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">            <span class="keyword">return</span> <span class="string">'world'</span>;</div><div class="line">        &#125;;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="string">'hello'</span>;</div><div class="line">    &#125;</div><div class="line">&#125;());</div></pre></td></tr></table></figure></p>
-<ol>
-<li><p>为什么我们能在foo声明之前访问它？<br>回想在VO的创建阶段，我们知道函数在该阶段就已经被创建在变量对象中。所以在函数开始执行之前，foo已经被定义了。</p>
-</li>
-<li><p>Foo被声明了两次，为什么foo显示为函数而不是undefined或字符串？<br>我们知道，在创建阶段，函数声明是优先于变量被创建的。而且在变量的创建过程中，如果发现VO中已经存在相同名称的属性，则不会影响已经存在的属性。<br>因此，对foo()函数的引用首先被创建在活动对象里，并且当我们解释到var foo时，我们看见foo属性名已经存在，所以代码什么都不做并继续执行。</p>
-</li>
-<li><p>为什么bar的值是undefined？<br>bar采用的是函数表达式的方式来定义的，所以bar实际上是一个变量，但变量的值是函数，并且我们知道变量在创建阶段被创建但他们被初始化为undefined，这也是为什么函数表达式不会被提升的原因。</p>
-</li>
-</ol>
-<p>总结：</p>
-<ol>
-<li>EC分为两个阶段，创建执行上下文和执行代码。</li>
-<li>每个EC可以抽象为一个对象，这个对象具有三个属性，分别为：作用域链Scope，VO|AO（AO，VO只能有一个）以及this。</li>
-<li>函数EC中的AO在进入函数EC时，确定了Arguments对象的属性；在执行函数EC时，其它变量属性具体化。</li>
-<li>EC创建的过程是由先后顺序的：参数声明 &gt; 函数声明 &gt; 变量声明</li>
-</ol>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo2</span>(<span class="params">a</span>) </span>&#123;</div><div class="line">      <span class="built_in">console</span>.log(a)<span class="comment">//function a()</span></div><div class="line">      <span class="keyword">var</span> a = <span class="number">10</span></div><div class="line">      <span class="function"><span class="keyword">function</span> <span class="title">a</span>(<span class="params"></span>) </span>&#123;</div><div class="line">          <span class="built_in">console</span>.log(fsdf);</div><div class="line">      &#125;</div><div class="line">      <span class="built_in">console</span>.log(a)<span class="comment">//10</span></div><div class="line">        <span class="built_in">console</span>.log(a())<span class="comment">//报错 a is not a function</span></div><div class="line">  &#125;</div><div class="line">  foo2(<span class="number">20</span>)</div></pre></td></tr></table></figure>
-<p>解释：提升的过程函数声明的优先级比形参和变量高，后面的执行代码的阶段赋值行为是在最后面,因此打印10，最后的console会报错</p>
-
-        
-        </div>
-        <footer class="article-footer">
-            <div class="share-container">
-
-
-
-</div>
-
-    <a data-url="/2016/12/02/js深入理解JavaScript执行上下文、函数堆栈、提升的概念 /" data-id="cj6uetnxu000txswqzxvxdp5w" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
-<script>
-    (function ($) {
-        // Prevent duplicate binding
-        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
-            __SHARE_BUTTON_BINDED__ = true;
-        } else {
-            return;
-        }
-        $('body').on('click', function() {
-            $('.article-share-box.on').removeClass('on');
-        }).on('click', '.article-share-link', function(e) {
-            e.stopPropagation();
-
-            var $this = $(this),
-                url = $this.attr('data-url'),
-                encodedUrl = encodeURIComponent(url),
-                id = 'article-share-box-' + $this.attr('data-id'),
-                offset = $this.offset(),
-                box;
-
-            if ($('#' + id).length) {
-                box = $('#' + id);
-
-                if (box.hasClass('on')){
-                    box.removeClass('on');
-                    return;
-                }
-            } else {
-                var html = [
-                    '<div id="' + id + '" class="article-share-box">',
-                        '<input class="article-share-input" value="' + url + '">',
-                        '<div class="article-share-links">',
-                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
-                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
-                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
-                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
-                        '</div>',
-                    '</div>'
-                ].join('');
-
-              box = $(html);
-
-              $('body').append(box);
-            }
-
-            $('.article-share-box.on').hide();
-
-            box.css({
-                top: offset.top + 25,
-                left: offset.left
-            }).addClass('on');
-
-        }).on('click', '.article-share-box', function (e) {
-            e.stopPropagation();
-        }).on('click', '.article-share-box-input', function () {
-            $(this).select();
-        }).on('click', '.article-share-box-link', function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-
-            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
-        });
-    })(jQuery);
-</script>
-
-            
-    
-        <a href="/2016/12/02/js深入理解JavaScript执行上下文、函数堆栈、提升的概念 /#comments" class="article-comment-link">评论</a>
-    
-
-        </footer>
-    </div>
-    
-</article>
-
-
-
     <nav id="page-nav">
         <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">下一页 &raquo;</a>
     </nav>
@@ -2123,6 +1926,82 @@ display:inline-block;
         <h3 class="widget-title">最新文章</h3>
         <div class="widget">
             <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2017/08/27/2/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2017/08/27/2/" class="title"></a></p>
+                            <p class="item-date"><time datetime="2017-08-27T09:09:42.359Z" itemprop="datePublished">2017-08-27</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2017/08/27/1/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2017/08/27/1/" class="title"></a></p>
+                            <p class="item-date"><time datetime="2017-08-27T08:25:48.546Z" itemprop="datePublished">2017-08-27</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2017/02/05/css兼容/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://www.gratisography.com/pictures/288_1.jpg)" alt="CSS兼容" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/前端/">前端</a></p>
+                            <p class="item-title"><a href="/2017/02/05/css兼容/" class="title">CSS兼容</a></p>
+                            <p class="item-date"><time datetime="2017-02-04T16:00:00.000Z" itemprop="datePublished">2017-02-05</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2017/02/05/去除inline-block元素间间距的N种方法/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://www.gratisography.com/pictures/404_1.jpg)" alt="去除inline-block元素间间距的N种方法(转)" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/前端/">前端</a></p>
+                            <p class="item-title"><a href="/2017/02/05/去除inline-block元素间间距的N种方法/" class="title">去除inline-block元素间间距的N种方法(转)</a></p>
+                            <p class="item-date"><time datetime="2017-02-04T16:00:00.000Z" itemprop="datePublished">2017-02-05</time></p>
+                        </div>
+                    </li>
                 
                     <li>
                         
@@ -2143,82 +2022,6 @@ display:inline-block;
                         </div>
                     </li>
                 
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2017/02/01/CSS样式表时总结下FF与IE的区别/" class="thumbnail">
-    
-    
-        <span style="background-image:url(http://www.gratisography.com/pictures/413_1.jpg)" alt="FF与IE的CSS区别" class="thumbnail-image"></span>
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/前端/">前端</a></p>
-                            <p class="item-title"><a href="/2017/02/01/CSS样式表时总结下FF与IE的区别/" class="title">FF与IE的CSS区别</a></p>
-                            <p class="item-date"><time datetime="2017-01-31T16:00:00.000Z" itemprop="datePublished">2017-02-01</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2017/02/01/js变量和函数的提升/" class="thumbnail">
-    
-    
-        <span style="background-image:url(http://st.originoo.cn/2632165/4026/i/950/depositphotos_40264933-stock-photo-young-plant.jpg)" alt="js变量提升和函数提升" class="thumbnail-image"></span>
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/前端/">前端</a></p>
-                            <p class="item-title"><a href="/2017/02/01/js变量和函数的提升/" class="title">js变量提升和函数提升</a></p>
-                            <p class="item-date"><time datetime="2017-01-31T16:00:00.000Z" itemprop="datePublished">2017-02-01</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2017/01/30/js变量的只声明不赋值/" class="thumbnail">
-    
-    
-        <span style="background-image:url(http://st3.originoo.cn/3591429/12987/i/950/depositphotos_129873842-stock-photo-best-friends-in-amusement-park.jpg)" alt="js变量的只声明不赋值" class="thumbnail-image"></span>
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/前端/">前端</a></p>
-                            <p class="item-title"><a href="/2017/01/30/js变量的只声明不赋值/" class="title">js变量的只声明不赋值</a></p>
-                            <p class="item-date"><time datetime="2017-01-29T16:00:00.000Z" itemprop="datePublished">2017-01-30</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2017/01/22/Ajax和Flash的优缺点/" class="thumbnail">
-    
-    
-        <span style="background-image:url(http://www.gratisography.com/pictures/333_1.jpg)" alt="Ajax和Flash优缺点" class="thumbnail-image"></span>
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/前端/">前端</a></p>
-                            <p class="item-title"><a href="/2017/01/22/Ajax和Flash的优缺点/" class="title">Ajax和Flash优缺点</a></p>
-                            <p class="item-date"><time datetime="2017-01-21T16:00:00.000Z" itemprop="datePublished">2017-01-22</time></p>
-                        </div>
-                    </li>
-                
             </ul>
         </div>
     </div>
@@ -2228,7 +2031,7 @@ display:inline-block;
     <div class="widget-wrap">
         <h3 class="widget-title">分类</h3>
         <div class="widget">
-            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Http/">Http</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Node/">Node</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Node/爬虫/">爬虫</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/js/">js</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端/">前端</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据库/">数据库</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/服务器/">服务器</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/版本管理/">版本管理</a><span class="category-list-count">1</span></li></ul>
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Http/">Http</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Node/">Node</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Node/爬虫/">爬虫</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/js/">js</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端/">前端</a><span class="category-list-count">15</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据库/">数据库</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/服务器/">服务器</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/版本管理/">版本管理</a><span class="category-list-count">1</span></li></ul>
         </div>
     </div>
 
@@ -2237,7 +2040,7 @@ display:inline-block;
     <div class="widget-wrap">
         <h3 class="widget-title">归档</h3>
         <div class="widget">
-            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">十二月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a><span class="archive-list-count">4</span></li></ul>
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">八月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">十二月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a><span class="archive-list-count">3</span></li></ul>
         </div>
     </div>
 
@@ -2246,7 +2049,7 @@ display:inline-block;
     <div class="widget-wrap">
         <h3 class="widget-title">标签</h3>
         <div class="widget">
-            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/">CSS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue/">Vue</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cheerio/">cheerio</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html/">html</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http请求/">http请求</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/">js</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lazyload/">lazyload</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongodb/">mongodb</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/中间件/">中间件</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/代理/">代理</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/存储/">存储</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/懒加载/">懒加载</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/爬虫/">爬虫</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/跨域/">跨域</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/页面请求/">页面请求</a><span class="tag-list-count">1</span></li></ul>
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue/">Vue</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cheerio/">cheerio</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html/">html</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http请求/">http请求</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/">js</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lazyload/">lazyload</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongodb/">mongodb</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/中间件/">中间件</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/代理/">代理</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/存储/">存储</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/懒加载/">懒加载</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/爬虫/">爬虫</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/跨域/">跨域</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/页面请求/">页面请求</a><span class="tag-list-count">1</span></li></ul>
         </div>
     </div>
 
@@ -2255,7 +2058,7 @@ display:inline-block;
     <div class="widget-wrap">
         <h3 class="widget-title">标签云</h3>
         <div class="widget tagcloud">
-            <a href="/tags/CSS/" style="font-size: 10px;">CSS</a> <a href="/tags/Vue/" style="font-size: 16.67px;">Vue</a> <a href="/tags/cheerio/" style="font-size: 10px;">cheerio</a> <a href="/tags/css/" style="font-size: 13.33px;">css</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/html/" style="font-size: 13.33px;">html</a> <a href="/tags/http请求/" style="font-size: 10px;">http请求</a> <a href="/tags/js/" style="font-size: 20px;">js</a> <a href="/tags/lazyload/" style="font-size: 10px;">lazyload</a> <a href="/tags/mongodb/" style="font-size: 10px;">mongodb</a> <a href="/tags/中间件/" style="font-size: 10px;">中间件</a> <a href="/tags/代理/" style="font-size: 10px;">代理</a> <a href="/tags/存储/" style="font-size: 10px;">存储</a> <a href="/tags/懒加载/" style="font-size: 10px;">懒加载</a> <a href="/tags/爬虫/" style="font-size: 10px;">爬虫</a> <a href="/tags/跨域/" style="font-size: 10px;">跨域</a> <a href="/tags/页面请求/" style="font-size: 10px;">页面请求</a>
+            <a href="/tags/Vue/" style="font-size: 13.33px;">Vue</a> <a href="/tags/cheerio/" style="font-size: 10px;">cheerio</a> <a href="/tags/css/" style="font-size: 16.67px;">css</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/html/" style="font-size: 13.33px;">html</a> <a href="/tags/http请求/" style="font-size: 10px;">http请求</a> <a href="/tags/js/" style="font-size: 20px;">js</a> <a href="/tags/lazyload/" style="font-size: 10px;">lazyload</a> <a href="/tags/mongodb/" style="font-size: 10px;">mongodb</a> <a href="/tags/中间件/" style="font-size: 10px;">中间件</a> <a href="/tags/代理/" style="font-size: 10px;">代理</a> <a href="/tags/存储/" style="font-size: 10px;">存储</a> <a href="/tags/懒加载/" style="font-size: 10px;">懒加载</a> <a href="/tags/爬虫/" style="font-size: 10px;">爬虫</a> <a href="/tags/跨域/" style="font-size: 10px;">跨域</a> <a href="/tags/页面请求/" style="font-size: 10px;">页面请求</a>
         </div>
     </div>
 

@@ -154,11 +154,11 @@
         </div>
         <div class="article-info profile-block">
             <div class="article-info-block">
-                22
+                25
                 <span>文章</span>
             </div>
             <div class="article-info-block">
-                17
+                16
                 <span>标签</span>
             </div>
         </div>
@@ -207,6 +207,778 @@
 
             
             <section id="main">
+    <article id="post-js作用域和作用域链" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            
+	
+		<a href="/2017/01/13/js作用域和作用域链/" itemprop="url">
+            <img src="http://www.gratisography.com/pictures/299_1.jpg" class="article-banner" />
+        </a>
+	
+
+
+
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/2017/01/13/js作用域和作用域链/">js作用域和作用域链</a>
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2017/01/13/js作用域和作用域链/">
+            <time datetime="2017-01-12T16:00:00.000Z" itemprop="datePublished">2017-01-13</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/前端/">前端</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/js/">js</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <h1 id="一、先抛出一个笔试题目"><a href="#一、先抛出一个笔试题目" class="headerlink" title="一、先抛出一个笔试题目"></a>一、先抛出一个笔试题目</h1><figure class="highlight delphi"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> a = <span class="number">100</span>;</div><div class="line"> <span class="function"><span class="keyword">function</span> <span class="title">fn</span><span class="params">()</span> <span class="comment">&#123;</span></span></div><div class="line"><span class="function"><span class="comment">     alert(a);//undefined</span></span></div><div class="line"><span class="function"><span class="comment">     var a = 200;</span></span></div><div class="line"><span class="function"><span class="comment">     alert(a);//200</span></span></div><div class="line"><span class="function"><span class="comment"> &#125;</span></span></div><div class="line"><span class="function"> <span class="title">fn</span><span class="params">()</span>;</span></div><div class="line"> alert(a);<span class="comment">//100</span></div><div class="line"> <span class="keyword">var</span> a;</div><div class="line"> alert(a);<span class="comment">//100</span></div><div class="line"> <span class="keyword">var</span> a = <span class="number">300</span>;</div><div class="line"> alert(a);<span class="comment">//300</span></div></pre></td></tr></table></figure>
+<h2 id="知识点1-变量的提升"><a href="#知识点1-变量的提升" class="headerlink" title="知识点1 变量的提升"></a>知识点1 变量的提升</h2><blockquote>
+<p>上面的代码实际的执行顺序如下<br><figure class="highlight abnf"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">var a<span class="comment">;//全局作用域范围内，此时只是声明，并没有赋值</span></div><div class="line"><span class="attribute">a</span> = <span class="number">100</span><span class="comment">;</span></div><div class="line">function fn()&#123;</div><div class="line">    var a<span class="comment">;</span></div><div class="line">    alert(a)<span class="comment">;//undefined</span></div><div class="line">    a = <span class="number">200</span><span class="comment">;</span></div><div class="line">    alert(a)<span class="comment">;//200</span></div><div class="line">&#125;</div><div class="line">fn()<span class="comment">;</span></div><div class="line">alert(a)<span class="comment">;//100</span></div><div class="line">alert(a)<span class="comment">;//100</span></div><div class="line"><span class="attribute">a</span> = <span class="number">300</span><span class="comment">;</span></div><div class="line">alert(a)<span class="comment">;//300</span></div></pre></td></tr></table></figure></p>
+</blockquote>
+<h2 id="知识点2-函数的提升"><a href="#知识点2-函数的提升" class="headerlink" title="知识点2 函数的提升"></a>知识点2 函数的提升</h2><blockquote>
+<p>　　js中创建函数有两种方式：函数声明式和函数字面量式。只有函数声明才存在函数提升！如:<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">console</span>.log(f1); <span class="comment">// function f1() &#123;&#125;   </span></div><div class="line"><span class="built_in">console</span>.log(f2); <span class="comment">// undefined  </span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">f1</span>(<span class="params"></span>) </span>&#123;&#125;</div><div class="line"><span class="keyword">var</span> f2 = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;&#125;</div></pre></td></tr></table></figure></p>
+</blockquote>
+<p>只所以会有以上的打印结果，是由于js中的函数提升导致代码实际上是按照以下来执行的：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">f1</span>(<span class="params"></span>) </span>&#123;&#125; <span class="comment">// 函数提升，整个代码块提升到文件的最开始</span></div><div class="line"><span class="built_in">console</span>.log(f1);   </div><div class="line"><span class="built_in">console</span>.log(f2);   </div><div class="line"><span class="keyword">var</span> f2 = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;&#125;</div></pre></td></tr></table></figure></p>
+<p>结语：基本上就是这样，要熟练掌握的话可以多做些练习，test:<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">console</span>.log(f1); </div><div class="line"><span class="built_in">console</span>.log(f2);   </div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">f1</span>(<span class="params"></span>) </span>&#123;<span class="built_in">console</span>.log(<span class="string">'aa'</span>)&#125;</div><div class="line"><span class="keyword">var</span> f2 = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;&#125;</div></pre></td></tr></table></figure></p>
+<figure class="highlight scheme"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">(<span class="name">function</span>() &#123;</div><div class="line">　　console.log(<span class="name">a</span>)<span class="comment">;//undefined</span></div><div class="line">　　a = <span class="symbol">'aaa</span>'<span class="comment">;</span></div><div class="line">　　var a = <span class="symbol">'bbb</span>'<span class="comment">;</span></div><div class="line">　　console.log(<span class="name">a</span>)<span class="comment">;//bbb</span></div><div class="line">&#125;)()<span class="comment">;</span></div></pre></td></tr></table></figure>
+
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="/2017/01/13/js作用域和作用域链/" data-id="cj6uq0ymn000mwwwqvcpy67lg" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+        <a href="/2017/01/13/js作用域和作用域链/#comments" class="article-comment-link">评论</a>
+    
+
+        </footer>
+    </div>
+    
+</article>
+
+
+
+    <article id="post-js你所不知道的预编译" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            
+	
+		<a href="/2016/12/29/js你所不知道的预编译/" itemprop="url">
+            <img src="http://st2.originoo.cn/2332949/5930/i/950/depositphotos_59309355-stock-photo-laptop-on-wooden-table-blue.jpg" class="article-banner" />
+        </a>
+	
+
+
+
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/2016/12/29/js你所不知道的预编译/">js你说不知道的编译</a>
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2016/12/29/js你所不知道的预编译/">
+            <time datetime="2016-12-28T16:00:00.000Z" itemprop="datePublished">2016-12-29</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/前端/">前端</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/js/">js</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <h1 id="JavaScript三部曲"><a href="#JavaScript三部曲" class="headerlink" title="JavaScript三部曲"></a>JavaScript三部曲</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><ol>
+<li>在JavaScript中变量和函数的声明会提升到最顶部执行。</li>
+<li>函数的提升高于变量的提升。</li>
+<li>函数内部如果用var声明了相同名称的外部变量，函数将不再向上寻找。</li>
+<li>匿名函数不会提升。</li>
+<li>不同script脚本块中的函数互不影响。<h2 id="脚本执行引擎都做了什么"><a href="#脚本执行引擎都做了什么" class="headerlink" title="脚本执行引擎都做了什么"></a>脚本执行引擎都做了什么</h2><blockquote>
+</blockquote>
+</li>
+<li>语法分析</li>
+<li>预编译</li>
+<li>解释执行</li>
+</ol>
+<p>通俗讲就是</p>
+<blockquote>
+<p>在执行代码前，还有两个步骤</p>
+<ol>
+<li>语法分析很简单，就是引擎检查你的代码有没有什么低级的语法错误</li>
+<li>解释执行顾名思义便是执行代码了</li>
+</ol>
+</blockquote>
+<p>预编译简单理解就是在<strong>内存</strong>中开辟一些空间，存放一些<strong>变量</strong>与<strong>函数</strong><br>理解了预编译对大家理解作用域同样有帮助</p>
+<h2 id="JS预编译什么时候发生"><a href="#JS预编译什么时候发生" class="headerlink" title="JS预编译什么时候发生"></a>JS预编译什么时候发生</h2><blockquote>
+<ul>
+<li>我当初思维误区也发生在这里<ul>
+<li>预编译到底什么时候发生</li>
+<li>希望大家不要让上面的运行过程让你产生误会，</li>
+<li>误以为预编译仅仅发生在script内代码块执行前</li>
+<li>这倒并没有错</li>
+<li>预编译确确实实在script代码内执行前发生了</li>
+<li>但是它大部分会发生在函数执行前<h2 id="JS预编译实例"><a href="#JS预编译实例" class="headerlink" title="JS预编译实例"></a>JS预编译实例</h2>几个概念</li>
+</ul>
+</li>
+</ul>
+<ol>
+<li>变量声明 关键词<strong>var</strong></li>
+<li>函数声明 关键词<strong>function</strong><br>注意函数声明和函数表达是的区别<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"> &lt;script&gt;</div><div class="line">  <span class="keyword">var</span> a = <span class="number">1</span>;<span class="comment">// 变量声明</span></div><div class="line">  <span class="function"><span class="keyword">function</span> <span class="title">b</span>(<span class="params">y</span>)</span>&#123;<span class="comment">//函数声明</span></div><div class="line">      <span class="keyword">var</span> x = <span class="number">1</span>;</div><div class="line">      <span class="built_in">console</span>.log(<span class="string">'so easy'</span>);</div><div class="line">  &#125;;</div><div class="line">  <span class="keyword">var</span> c = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;<span class="comment">//是变量声明而不是函数声明！！</span></div><div class="line">      <span class="comment">//...</span></div><div class="line">  &#125;</div><div class="line">  b(<span class="number">100</span>);</div><div class="line">&lt;<span class="regexp">/script&gt;</span></div><div class="line"><span class="regexp">&lt;script&gt;</span></div><div class="line"><span class="regexp">  var d = 0;</span></div><div class="line"><span class="regexp">&lt;/</span>script&gt;</div></pre></td></tr></table></figure>
+</li>
+</ol>
+</blockquote>
+<p>让我们看看引擎对这段代码做了什么吧</p>
+<ul>
+<li>页面产生便创建了GO全局对象（Global Object）（也就是大家熟悉的window对象）</li>
+<li>第一个脚本文件加载</li>
+<li>脚本加载完毕后，分析语法是否合法</li>
+<li>开始预编译 <blockquote>
+<ul>
+<li>查找变量声明，作为GO属性，值赋予undefined</li>
+<li>查找函数声明，作为GO属性，值赋予函数体<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">  <span class="comment">//伪代码</span></div><div class="line">GO/<span class="built_in">window</span> = &#123;</div><div class="line">    <span class="comment">//页面加载创建GO同时，创建了document、navigator、screen等等属性，此处省略</span></div><div class="line">    a: <span class="literal">undefined</span>,</div><div class="line">    c: <span class="literal">undefined</span>，</div><div class="line">    b: <span class="function"><span class="keyword">function</span>(<span class="params">y</span>)</span>&#123;</div><div class="line">        <span class="keyword">var</span> x = <span class="number">1</span>;</div><div class="line">        <span class="built_in">console</span>.log(<span class="string">'so easy'</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+</blockquote>
+</li>
+</ul>
+<p>解释执行代码（直到执行函数b）<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//伪代码</span></div><div class="line">GO/<span class="built_in">window</span> = &#123;</div><div class="line">    <span class="comment">//变量随着执行流得到初始化</span></div><div class="line">    a: <span class="number">1</span>,</div><div class="line">    c: <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">        <span class="comment">//...</span></div><div class="line">    &#125;,</div><div class="line">    b: <span class="function"><span class="keyword">function</span>(<span class="params">y</span>)</span>&#123;</div><div class="line">        <span class="keyword">var</span> x = <span class="number">1</span>;</div><div class="line">        <span class="built_in">console</span>.log(<span class="string">'so easy'</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>执行函数b之前，发生预编译</p>
+<blockquote>
+<ul>
+<li>创建AO活动对象（Active Object）</li>
+<li>查找形参和变量声明，值赋予undefined</li>
+<li>实参值赋给形参</li>
+<li>查找函数声明，值赋予函数体<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//伪代码</span></div><div class="line">AO = &#123;</div><div class="line">  <span class="comment">//创建AO同时，创建了arguments等等属性，此处省略</span></div><div class="line">  y: <span class="number">100</span>,</div><div class="line">  x: <span class="literal">undefined</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<ul>
+<li>解释执行函数中代码</li>
+<li>第一个脚本文件执行完毕，加载第二个脚本文件<br><strong>注意每个script是独立的,不会预编译下一个scipt</strong></li>
+<li>第二个脚本文件加载完毕后，进行语法分析</li>
+<li>语法分析完毕，开始预编译</li>
+<li>重复最开始的预编译步骤……</li>
+</ul>
+</blockquote>
+<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>预编译阶段发生变量声明和函数声明，没有初始化行为（赋值），匿名函数不<br>参与预编译<br><br>只有在解释执行阶段才会进行变量初始化</p>
+<p>预编译(函数执行前)※</p>
+<ol>
+<li>创建AO对象（Active Object）</li>
+<li>查找函数形参及函数内变量声明，形参名及变量名作为AO对象的属性，值为undefined</li>
+<li>实参形参相统一，实参值赋给形参</li>
+<li>查找函数声明，函数名作为AO对象的属性，值为函数引用</li>
+</ol>
+<p>预编译(脚本代码块script执行前)</p>
+<ol>
+<li>查找全局变量声明（包括隐式全局变量声明，省略var声明），变量名作全局对象的属性，值为undefined</li>
+<li>查找函数声明，函数名作为全局对象的属性，值为函数引用</li>
+</ol>
+<p>理解了预编译对理解提升行为，this指向，作用域及性能等问题都有很大帮助</p>
+
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="/2016/12/29/js你所不知道的预编译/" data-id="cj6uq0ymf000hwwwq372qfvrm" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+        <a href="/2016/12/29/js你所不知道的预编译/#comments" class="article-comment-link">评论</a>
+    
+
+        </footer>
+    </div>
+    
+</article>
+
+
+
+    <article id="post-Node.js的学习--使用cheerio抓取网页数据" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            
+	
+		<a href="/2016/12/18/Node.js的学习--使用cheerio抓取网页数据/" itemprop="url">
+            <img src="http://www.gratisography.com/pictures/421_1.jpg" class="article-banner" />
+        </a>
+	
+
+
+
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/2016/12/18/Node.js的学习--使用cheerio抓取网页数据/">Node.js的学习--使用cheerio抓取网页数据</a>
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2016/12/18/Node.js的学习--使用cheerio抓取网页数据/">
+            <time datetime="2016-12-17T16:00:00.000Z" itemprop="datePublished">2016-12-18</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/Node/">Node</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/Node/爬虫/">爬虫</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/cheerio/">cheerio</a>, <a class="tag-link" href="/tags/爬虫/">爬虫</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <p>打算要写一个公开课网站，缺少数据，就决定去网易公开课去抓取一些数据。</p>
+<p>前一阵子看过一段时间的Node.js，而且Node.js也比较适合做这个事情，就打算用Node.js去抓取数据。</p>
+<p>关键是抓取到网页之后如何获取到想要的数据呢？然后就发现了cheerio，用来解析html非常方便，就像在浏览器中使用jquery一样。</p>
+<p>使用如下命令安装cheerio</p>
+<pre><code>npm install cheerio
+</code></pre><p>Cheerio安装完成， 我们就可以开始工作了。 首先让我们来看一段javascript代码 这段代码可以下载任意一个网页的内容。将其放入到curl.js中，并导出。<br><figure class="highlight qml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"> <span class="keyword">var</span> http = <span class="built_in">require</span>(<span class="string">"http"</span>);</div><div class="line"> </div><div class="line"><span class="comment">// Utility function that downloads a URL and invokes</span></div><div class="line"><span class="comment">// callback with the data.</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">download</span>(<span class="params">url, callback</span>) </span>&#123;</div><div class="line">  http.get(<span class="built_in">url</span>, <span class="function"><span class="keyword">function</span>(<span class="params">res</span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> data = <span class="string">""</span>;</div><div class="line">    res.on(<span class="string">'data'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">chunk</span>) </span>&#123;</div><div class="line">      data += chunk;</div><div class="line">    &#125;);</div><div class="line">    res.on(<span class="string">"end"</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">      callback(data);</div><div class="line">    &#125;);</div><div class="line">  &#125;).on(<span class="string">"error"</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    callback(<span class="literal">null</span>);</div><div class="line">  &#125;);</div><div class="line">&#125;</div><div class="line"></div><div class="line">exports.download = download;</div></pre></td></tr></table></figure></p>
+<p>然后是使用cheerio解析html，找到想要的数据。</p>
+<p>我们先来自己分析一下页面。我们要抓取<a href="http://v.163.com/special/opencourse/englishs1.html这个页面中的视频，视频的地址都在下载的按钮里。其中一个下载按钮的html的代码如下：" target="_blank" rel="external">http://v.163.com/special/opencourse/englishs1.html这个页面中的视频，视频的地址都在下载的按钮里。其中一个下载按钮的html的代码如下：</a><br><figure class="highlight routeros"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">&lt;a <span class="attribute">class</span>=<span class="string">"downbtn"</span> <span class="attribute">href</span>=<span class="string">"http://mov.bn.netease.com/mobilev/2013/1/F/G/S8KTEF7FG.mp4"</span> <span class="attribute">id</span>=<span class="string">"M8KTEKR84"</span> <span class="attribute">target</span>=<span class="string">"_blank"</span>&gt;&lt;/a&gt;</div></pre></td></tr></table></figure></p>
+<p>我们取到其中的href属性，只需要进行如下选择即可<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="meta">$</span><span class="bash">(<span class="string">"a.downbtn"</span>).attr(<span class="string">"href"</span>);</span></div></pre></td></tr></table></figure></p>
+<p>在是现实，我们可以在index.js中写入如下代码<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> cheerio = <span class="built_in">require</span>(<span class="string">"cheerio"</span>);</div><div class="line"><span class="keyword">var</span> server = <span class="built_in">require</span>(<span class="string">"./curl"</span>);</div><div class="line"> </div><div class="line"><span class="keyword">var</span> url = <span class="string">"http://v.163.com/special/opencourse/englishs1.html"</span></div><div class="line"></div><div class="line">server.download(url, <span class="function"><span class="keyword">function</span>(<span class="params">data</span>) </span>&#123;</div><div class="line">  <span class="keyword">if</span> (data) &#123;</div><div class="line">    <span class="comment">//console.log(data);</span></div><div class="line"> </div><div class="line">    <span class="keyword">var</span> $ = cheerio.load(data);</div><div class="line">    $(<span class="string">"a.downbtn"</span>).each(<span class="function"><span class="keyword">function</span>(<span class="params">i, e</span>) </span>&#123;</div><div class="line">        <span class="built_in">console</span>.log($(e).attr(<span class="string">"href"</span>));</div><div class="line">    &#125;);</div><div class="line"> </div><div class="line">    <span class="built_in">console</span>.log(<span class="string">"done"</span>);</div><div class="line">  &#125; <span class="keyword">else</span> &#123;</div><div class="line">      <span class="built_in">console</span>.log(<span class="string">"error"</span>);</div><div class="line">  &#125; </div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
+
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="/2016/12/18/Node.js的学习--使用cheerio抓取网页数据/" data-id="cj6uq0ym50009wwwq8wr0zibg" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+        <a href="/2016/12/18/Node.js的学习--使用cheerio抓取网页数据/#comments" class="article-comment-link">评论</a>
+    
+
+        </footer>
+    </div>
+    
+</article>
+
+
+
+    <article id="post-js深入理解JavaScript执行上下文、函数堆栈、提升的概念 " class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            
+	
+		<a href="/2016/12/02/js深入理解JavaScript执行上下文、函数堆栈、提升的概念 /" itemprop="url">
+            <img src="http://www.gratisography.com/pictures/211_1.jpg" class="article-banner" />
+        </a>
+	
+
+
+
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/2016/12/02/js深入理解JavaScript执行上下文、函数堆栈、提升的概念 /">深入理解JavaScript执行上下文、函数堆栈、提升的概念</a>
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2016/12/02/js深入理解JavaScript执行上下文、函数堆栈、提升的概念 /">
+            <time datetime="2016-12-01T16:00:00.000Z" itemprop="datePublished">2016-12-02</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/前端/">前端</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/js/">js</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <h2 id="首先明确几个概念"><a href="#首先明确几个概念" class="headerlink" title="首先明确几个概念"></a>首先明确几个概念</h2><p>EC：函数执行环境（或执行上下文），Execution Context<br>ECS：执行环境栈，Execution Context Stack<br>VO：变量对象，Variable Object<br>AO：活动对象，Active Object<br>scope chain：作用域链</p>
+<h2 id="EC执行上下文"><a href="#EC执行上下文" class="headerlink" title="EC执行上下文"></a>EC执行上下文</h2><p>每次当控制器转到ECMAScript可执行代码的时候，就会进入到一个执行上下文。<br>那什么是可执行代码呢？</p>
+<h3 id="可执行代码的类型"><a href="#可执行代码的类型" class="headerlink" title="可执行代码的类型"></a>可执行代码的类型</h3><ol>
+<li>全局代码（Global code）<br>这种类型的代码是在”程序”级处理的：例如加载外部的js文件或者本地”<script></script>“标签内的代码。全局代码不包括任何function体内的代码。 这个是默认的代码运行环境，一旦代码被载入，引擎最先进入的就是这个环境。</li>
+<li>函数代码（Function code）<br>任何一个函数体内的代码，但是需要注意的是，具体的函数体内的代码是不包括内部函数的代码。</li>
+<li>Eval代码（Eval code）<br>eval内部的代码<h3 id="ECS（执行环境栈）"><a href="#ECS（执行环境栈）" class="headerlink" title="ECS（执行环境栈）"></a>ECS（执行环境栈）</h3>我们用MDN上的一个例子来引入函数执行栈的概念<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params">i</span>) </span>&#123;</div><div class="line">    <span class="keyword">if</span> (i &lt; <span class="number">0</span>) <span class="keyword">return</span>;</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">'begin:'</span> + i);</div><div class="line">    foo(i - <span class="number">1</span>);</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">'end:'</span> + i);</div><div class="line">&#125;</div><div class="line">foo(<span class="number">2</span>);</div><div class="line"></div><div class="line"><span class="comment">// 输出:</span></div><div class="line"></div><div class="line"><span class="comment">// begin:2</span></div><div class="line"><span class="comment">// begin:1</span></div><div class="line"><span class="comment">// begin:0</span></div><div class="line"><span class="comment">// end:0</span></div><div class="line"><span class="comment">// end:1</span></div><div class="line"><span class="comment">// end:2</span></div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>······························转·····························</p>
+<p>先了解一下函数执行上下文堆栈的概念<br>浏览器中的JS解释器被实现为单线程，这也就意味着同一时间只能发生一件事情，其他的行为或事件将会被放在叫做执行栈里面排队。下面的图是单线程栈的抽象视图：<br><img src="http://yanhaijing.com/blog/137.jpg" alt="图片"> </p>
+<p>当浏览器首次载入你的脚本，它将默认进入全局执行上下文。如果，你在你的全局代码中调用一个函数，你程序的时序将进入被调用的函数，并创建一个新的执行上下文，并将新创建的上下文压入执行栈的顶部。<br>如果你调用当前函数内部的其他函数，相同的事情会在此上演。代码的执行流程进入内部函数，创建一个新的执行上下文并把它压入执行栈的顶部。浏览器总会执行位于栈顶的执行上下文，一旦当前上下文函数执行结束，它将被从栈顶弹出，并将上下文控制权交给当前的栈。这样，堆栈中的上下文就会被依次执行并且弹出堆栈，直到回到全局的上下文。</p>
+<h2 id="VO（变量对象）-AO（活动对象）"><a href="#VO（变量对象）-AO（活动对象）" class="headerlink" title="VO（变量对象）/AO（活动对象）"></a>VO（变量对象）/AO（活动对象）</h2><p>这里为什么要用一个/呢？按照字面理解，AO其实就是被激活的VO，两个其实是一个东西。</p>
+<p>变量对象（Variable object）是说JS的执行上下文中都有个对象用来存放执行上下文中可被访问但是不能被delete的函数标示符、形参、变量声明等。它们会被挂在这个对象上，对象的属性对应它们的名字对象属性的值对应它们的值但这个对象是规范上或者说是引擎实现上的不可在JS环境中访问到活动对象</p>
+<p>激活对象（Activation object）有了变量对象存每个上下文中的东西，但是它什么时候能被访问到呢？就是每进入一个执行上下文时，这个执行上下文儿中的变量对象就被激活，也就是该上下文中的函数标示符、形参、变量声明等就可以被访问到了</p>
+<h2 id="EC建立的细节"><a href="#EC建立的细节" class="headerlink" title="EC建立的细节"></a>EC建立的细节</h2><ol>
+<li>创建阶段【当函数被调用，但未执行任何其内部代码之前】</li>
+</ol>
+<ul>
+<li>创建作用域链（Scope Chain）</li>
+<li>创建变量，函数和参数。</li>
+<li>求”this“的值</li>
+</ul>
+<ol>
+<li>执行阶段<br>初始化变量的值和函数的引用，解释/执行代码。<br>我们可以将每个执行上下文抽象为一个对象，这个对象具有三个属性<br>ECObj: {<br> scopeChain: { /<em> 变量对象（variableObject）+ 所有父级执行上下文的变量对象</em>/ },<br> variableObject: { /<em>函数 arguments/参数，内部变量和函数声明 </em>/ },<br> this: {}<br>}</li>
+</ol>
+<h2 id="解释器执行代码的伪逻辑"><a href="#解释器执行代码的伪逻辑" class="headerlink" title="解释器执行代码的伪逻辑"></a>解释器执行代码的伪逻辑</h2><ol>
+<li>查找调用函数的代码。</li>
+<li><p>执行代码之前，先进入创建上下文阶段：</p>
+<ul>
+<li>初始化作用域链</li>
+<li>创建变量对象：<ul>
+<li>创建arguments对象，检查上下文，初始化参数名称和值并创建引用的复制。</li>
+<li>扫描上下文的函数声明（而非函数表达式）：<ul>
+<li>为发现的每一个函数，在变量对象上创建一个属性——确切的说是函数的名字——其有一个指向函数在内存中的引用。</li>
+<li>如果函数的名字已经存在，引用指针将被重写。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>扫描上下文的变量声明：<ul>
+<li>为发现的每个变量声明，在变量对象上创建一个属性——就是变量的名字，并且将变量的值初始化为undefined</li>
+<li>如果变量的名字已经在变量对象里存在，将不会进行任何操作并继续扫描。</li>
+</ul>
+</li>
+<li>求出上下文内部this的值。</li>
+</ul>
+</li>
+<li><p>激活/代码执行阶段：</p>
+</li>
+</ol>
+<ul>
+<li>在当前上下文上运行/解释函数代码，并随着代码一行行执行指派变量的值。</li>
+</ul>
+<p>VO — 对应上述第二个阶段<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params">i</span>)</span>&#123;</div><div class="line">    <span class="keyword">var</span> a = <span class="string">'hello'</span></div><div class="line">    <span class="keyword">var</span> b = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;</div><div class="line">    <span class="function"><span class="keyword">function</span> <span class="title">c</span>(<span class="params"></span>)</span>&#123;&#125;</div><div class="line">&#125;</div><div class="line">foo(<span class="number">22</span>)</div></pre></td></tr></table></figure></p>
+<p>当我们调用foo(22)时，整个创建阶段是下面这样的<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">ECObj = &#123;</div><div class="line">    scopChain： &#123;...&#125;,</div><div class="line">    variableObject: &#123;</div><div class="line">        <span class="built_in">arguments</span>: &#123;</div><div class="line">                <span class="number">0</span>: <span class="number">22</span>,</div><div class="line">                length: <span class="number">1</span></div><div class="line">        &#125;,</div><div class="line">        i: <span class="number">22</span>,</div><div class="line">        c: pointer to <span class="function"><span class="keyword">function</span> <span class="title">c</span>(<span class="params"></span>)</span></div><div class="line"><span class="function">        <span class="title">a</span>: <span class="title">undefined</span>,</span></div><div class="line"><span class="function">        <span class="title">b</span>: <span class="title">undefined</span></span></div><div class="line"><span class="function">    &#125;,</span></div><div class="line"><span class="function">    <span class="title">this</span>: </span>&#123; ... &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p> 正如我们看到的，在上下文创建阶段，VO的初始化过程如下（该过程是有先后顺序的：函数的形参==&gt;&gt;函数声明==&gt;&gt;变量声明）：</p>
+<pre><code>函数的形参（当进入函数执行上下文时） —— 变量对象的一个属性，其属性名就是形参的名字，其值就是实参的值；对于没有传递的参数，其值为undefined
+
+函数声明（FunctionDeclaration, FD） —— 变量对象的一个属性，其属性名和值都是函数对象创建出来的；如果变量对象已经包含了相同名字的属性，则替换它的值
+
+变量声明（var，VariableDeclaration） —— 变量对象的一个属性，其属性名即为变量名，其值为undefined;如果变量名和已经声明的函数名或者函数的参数名相同，**则不会影响已经存在的属性。**
+</code></pre><ol>
+<li>如何理解函数声明过程中如果变量对象已经包含了相同名字的属性，则替换它的值这句话？</li>
+</ol>
+<p>看如下这段代码：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo1</span>(<span class="params">a</span>)</span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(a)</div><div class="line">    <span class="function"><span class="keyword">function</span> <span class="title">a</span>(<span class="params"></span>)</span>&#123;&#125; </div><div class="line">&#125;</div><div class="line">foo1(<span class="number">20</span>)<span class="comment">//'function a()&#123;&#125;'</span></div></pre></td></tr></table></figure></p>
+<p>根据上面的介绍，我们知道VO创建过程中，函数形参的优先级是高于函数的声明的，结果是函数体内部声明的function a(){}覆盖了函数形参a的声明，因此最后输出a是一个function</p>
+<ol>
+<li>如何理解变量声明过程中如果变量名和已经声明的函数名或者函数的参数名相同，则不会影响已经存在的属性这句话？<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//情景一：与参数名相同</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo2</span>(<span class="params">a</span>)</span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(a)</div><div class="line">    <span class="keyword">var</span> a = <span class="number">10</span></div><div class="line">&#125;</div><div class="line">foo2(<span class="number">20</span>) <span class="comment">//'20'</span></div></pre></td></tr></table></figure>
+</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//情景二：与函数名相同</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo2</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(a)</div><div class="line">    <span class="keyword">var</span> a = <span class="number">10</span></div><div class="line">    <span class="function"><span class="keyword">function</span> <span class="title">a</span>(<span class="params"></span>)</span>&#123;&#125;</div><div class="line">&#125;</div><div class="line">foo2() <span class="comment">//'function a()&#123;&#125;'</span></div></pre></td></tr></table></figure>
+<p>下面是几个比较有趣的例子，当做加餐小菜，大家细细品味。这里给出一句话当做参考：</p>
+<pre><code>函数声明比变量优先级要高，并且定义过程不会被变量覆盖，除非是赋值
+</code></pre><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo3</span>(<span class="params">a</span>)</span>&#123;</div><div class="line">    <span class="keyword">var</span> a = <span class="number">10</span></div><div class="line">    <span class="function"><span class="keyword">function</span> <span class="title">a</span>(<span class="params"></span>)</span>&#123;&#125;</div><div class="line">    <span class="built_in">console</span>.log(a)</div><div class="line">&#125;</div><div class="line">foo3(<span class="number">20</span>) <span class="comment">//'10'</span></div></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo3</span>(<span class="params">a</span>)</span>&#123;</div><div class="line">    <span class="keyword">var</span> a </div><div class="line">    <span class="function"><span class="keyword">function</span> <span class="title">a</span>(<span class="params"></span>)</span>&#123;&#125;</div><div class="line">    <span class="built_in">console</span>.log(a)</div><div class="line">&#125;</div><div class="line">foo3(<span class="number">20</span>) <span class="comment">//'function a()&#123;&#125;'</span></div></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo2</span>(<span class="params">a</span>) </span>&#123;</div><div class="line">        <span class="built_in">console</span>.log(a)</div><div class="line">        <span class="keyword">var</span> a = <span class="number">10</span></div><div class="line">        <span class="function"><span class="keyword">function</span> <span class="title">a</span>(<span class="params"></span>) </span>&#123;&#125;</div><div class="line">&#125;</div><div class="line">foo2(<span class="number">20</span>) <span class="comment">//'function a()&#123;&#125;'</span></div></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo2</span>(<span class="params">a</span>) </span>&#123;</div><div class="line">         <span class="keyword">var</span> a = <span class="number">10</span></div><div class="line">         <span class="function"><span class="keyword">function</span> <span class="title">a</span>(<span class="params"></span>) </span>&#123;&#125;</div><div class="line">         <span class="built_in">console</span>.log(a)</div><div class="line">     &#125;</div><div class="line"> foo2(<span class="number">20</span>) <span class="comment">//'10'</span></div></pre></td></tr></table></figure>
+<h3 id="小结：-gt-函数声明的提升-gt-赋值的优先级-gt-变量的提升"><a href="#小结：-gt-函数声明的提升-gt-赋值的优先级-gt-变量的提升" class="headerlink" title="小结：&gt;函数声明的提升&gt;赋值的优先级&gt;变量的提升"></a>小结：&gt;函数声明的提升&gt;赋值的优先级&gt;变量的提升</h3><ol>
+<li><p><strong>函数声明</strong>（FunctionDeclaration, FD） —— 变量对象的一个属性，其属性名和值都是函数对象创建出来的；如果变量对象已经包含了相同名字的属性，<strong>则替换它的值</strong>。可以理解为声明则赋值一个指针？</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo2</span>(<span class="params">a</span>) </span>&#123;</div><div class="line">          <span class="keyword">var</span> a = <span class="number">10</span></div><div class="line">          <span class="function"><span class="keyword">function</span> <span class="title">a</span>(<span class="params"></span>) </span>&#123;</div><div class="line">              <span class="comment">//</span></div><div class="line">          &#125;</div><div class="line">          <span class="built_in">console</span>.log(a)</div><div class="line">      &#125;</div><div class="line">      foo2(<span class="number">20</span>) <span class="comment">//'function a()'</span></div></pre></td></tr></table></figure>
+</li>
+<li><p><strong>变量声明</strong>（var，VariableDeclaration） —— 变量对象的一个属性，其属性名即为变量名，其值为undefined;如果变量名和已经声明的函数名或者函数的参数名相同，<strong>则不会影响已经存在的属性。</strong></p>
+</li>
+</ol>
+<h2 id="AO-—-对应第三个阶段"><a href="#AO-—-对应第三个阶段" class="headerlink" title="AO — 对应第三个阶段"></a>AO — 对应第三个阶段</h2><p>正如我们看到的，创建的过程仅负责处理定义属性的名字，而并不为他们指派具体的值，当然还有对形参/实参的处理。一旦创建阶段完成，执行流进入函数并且激活/代码执行阶段，看下函数执行完成后的样子：<br><figure class="highlight vim"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">  ECObj = &#123;</div><div class="line">    scopeChain: &#123; ... &#125;,</div><div class="line">    variableObjec<span class="variable">t:</span> &#123;</div><div class="line">        <span class="keyword">argument</span><span class="variable">s:</span> &#123;</div><div class="line">            <span class="number">0</span>: <span class="number">22</span>,</div><div class="line">            length: <span class="number">1</span></div><div class="line">        &#125;,</div><div class="line">        i: <span class="number">22</span>,</div><div class="line">        <span class="keyword">c</span>: pointer <span class="keyword">to</span> <span class="function"><span class="keyword">function</span> <span class="title">c</span><span class="params">()</span></span></div><div class="line">        <span class="variable">a:</span> <span class="string">'hello'</span>,</div><div class="line">        <span class="variable">b:</span> pointer <span class="keyword">to</span> <span class="function"><span class="keyword">function</span> <span class="title">privateB</span><span class="params">()</span></span></div><div class="line">    &#125;,</div><div class="line">    thi<span class="variable">s:</span> &#123; ... &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h2 id="提升（Hoisting）"><a href="#提升（Hoisting）" class="headerlink" title="提升（Hoisting）"></a>提升（Hoisting）</h2><p>对于下面的代码，相信很多人都能一眼看出输出结果，但是却很少有人能给出为什么会产生这种输出结果的解释。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="keyword">typeof</span> foo); <span class="comment">// 函数指针</span></div><div class="line">    <span class="built_in">console</span>.log(<span class="keyword">typeof</span> bar); <span class="comment">// undefined</span></div><div class="line"></div><div class="line">    <span class="keyword">var</span> foo = <span class="string">'hello'</span>,</div><div class="line">        bar = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">            <span class="keyword">return</span> <span class="string">'world'</span>;</div><div class="line">        &#125;;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="string">'hello'</span>;</div><div class="line">    &#125;</div><div class="line">&#125;());</div></pre></td></tr></table></figure></p>
+<ol>
+<li><p>为什么我们能在foo声明之前访问它？<br>回想在VO的创建阶段，我们知道函数在该阶段就已经被创建在变量对象中。所以在函数开始执行之前，foo已经被定义了。</p>
+</li>
+<li><p>Foo被声明了两次，为什么foo显示为函数而不是undefined或字符串？<br>我们知道，在创建阶段，函数声明是优先于变量被创建的。而且在变量的创建过程中，如果发现VO中已经存在相同名称的属性，则不会影响已经存在的属性。<br>因此，对foo()函数的引用首先被创建在活动对象里，并且当我们解释到var foo时，我们看见foo属性名已经存在，所以代码什么都不做并继续执行。</p>
+</li>
+<li><p>为什么bar的值是undefined？<br>bar采用的是函数表达式的方式来定义的，所以bar实际上是一个变量，但变量的值是函数，并且我们知道变量在创建阶段被创建但他们被初始化为undefined，这也是为什么函数表达式不会被提升的原因。</p>
+</li>
+</ol>
+<p>总结：</p>
+<ol>
+<li>EC分为两个阶段，创建执行上下文和执行代码。</li>
+<li>每个EC可以抽象为一个对象，这个对象具有三个属性，分别为：作用域链Scope，VO|AO（AO，VO只能有一个）以及this。</li>
+<li>函数EC中的AO在进入函数EC时，确定了Arguments对象的属性；在执行函数EC时，其它变量属性具体化。</li>
+<li>EC创建的过程是由先后顺序的：参数声明 &gt; 函数声明 &gt; 变量声明</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo2</span>(<span class="params">a</span>) </span>&#123;</div><div class="line">      <span class="built_in">console</span>.log(a)<span class="comment">//function a()</span></div><div class="line">      <span class="keyword">var</span> a = <span class="number">10</span></div><div class="line">      <span class="function"><span class="keyword">function</span> <span class="title">a</span>(<span class="params"></span>) </span>&#123;</div><div class="line">          <span class="built_in">console</span>.log(fsdf);</div><div class="line">      &#125;</div><div class="line">      <span class="built_in">console</span>.log(a)<span class="comment">//10</span></div><div class="line">        <span class="built_in">console</span>.log(a())<span class="comment">//报错 a is not a function</span></div><div class="line">  &#125;</div><div class="line">  foo2(<span class="number">20</span>)</div></pre></td></tr></table></figure>
+<p>解释：提升的过程函数声明的优先级比形参和变量高，后面的执行代码的阶段赋值行为是在最后面,因此打印10，最后的console会报错</p>
+
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="/2016/12/02/js深入理解JavaScript执行上下文、函数堆栈、提升的概念 /" data-id="cj6uq0yn3000xwwwqqxx3o6ei" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+        <a href="/2016/12/02/js深入理解JavaScript执行上下文、函数堆栈、提升的概念 /#comments" class="article-comment-link">评论</a>
+    
+
+        </footer>
+    </div>
+    
+</article>
+
+
+
     <article id="post-mongose中间件" class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
@@ -275,7 +1047,7 @@
 
 </div>
 
-    <a data-url="/2016/11/28/mongose中间件/" data-id="cj6uetnxy000yxswqo5zflxfr" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="/2016/11/28/mongose中间件/" data-id="cj6uq0yna0015wwwquwmusw76" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -427,7 +1199,7 @@
 
 </div>
 
-    <a data-url="/2016/11/15/vue.生命周期/" data-id="cj6uetny8001axswqm8gapetw" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="/2016/11/15/vue.生命周期/" data-id="cj6uq0ynm001gwwwqijgs22mc" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -582,7 +1354,7 @@
 
 </div>
 
-    <a data-url="/2016/11/02/vue loading组件/" data-id="cj6uetny40016xswq4gxq3iy5" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="/2016/11/02/vue loading组件/" data-id="cj6uq0ynh001dwwwqfri01ru5" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -727,7 +1499,7 @@
 
 </div>
 
-    <a data-url="/2016/10/25/v-model/" data-id="cj6uetny10012xswqdbzx4szc" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="/2016/10/25/v-model/" data-id="cj6uq0ynd0019wwwqklbmdjn3" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -879,7 +1651,7 @@
 
 </div>
 
-    <a data-url="/2016/10/03/iis部署/" data-id="cj6uetnxb000cxswqacmjs4om" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="/2016/10/03/iis部署/" data-id="cj6uq0ymd000ewwwq9dybfwgu" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -1097,7 +1869,7 @@
 
 </div>
 
-    <a data-url="/2016/09/21/深入理解HTTP协议（转）/" data-id="cj6uetnyi001lxswqrbjj6hp6" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="/2016/09/21/深入理解HTTP协议（转）/" data-id="cj6uq0yo2001vwwwq0o9zf42i" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -1175,730 +1947,6 @@
 
 
 
-    <article id="post-批处理HTTP模块SuperAgent" class="article article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
-        
-            
-	
-		<a href="/2016/09/10/批处理HTTP模块SuperAgent/" itemprop="url">
-            <img src="http://st2.originoo.cn/1729220/8289/i/950/depositphotos_82898848-stock-photo-woman-playing-with-pet.jpg" class="article-banner" />
-        </a>
-	
-
-
-
-        
-        
-            <header class="article-header">
-                
-    
-        <h1 itemprop="name">
-            <a class="article-title" href="/2016/09/10/批处理HTTP模块SuperAgent/">SUPERAGENT</a>
-        </h1>
-    
-
-                
-                    <div class="article-meta">
-                        
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/2016/09/10/批处理HTTP模块SuperAgent/">
-            <time datetime="2016-09-09T16:00:00.000Z" itemprop="datePublished">2016-09-10</time>
-        </a>
-    </div>
-
-
-                        
-    <div class="article-category">
-    	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/categories/Node/">Node</a>
-    </div>
-
-                        
-    <div class="article-tag">
-        <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/http请求/">http请求</a>, <a class="tag-link" href="/tags/中间件/">中间件</a>
-    </div>
-
-                    </div>
-                
-            </header>
-        
-        
-        <div class="article-entry" itemprop="articleBody">
-        
-            
-            <p>最近在写爬虫，看了下node里面有啥关于ajax的模块,发现superagent这个模块灰常的好用。好东西要和大家分享，话不多说，开始吧～</p>
-<h2 id="什么是SuperAgent"><a href="#什么是SuperAgent" class="headerlink" title="什么是SuperAgent"></a>什么是SuperAgent</h2><p>superagent它是一个强大并且可读性很好的轻量级ajaxAPI，是一个关于HTTP方面的一个库，而且它可以将链式写法玩的出神入化。<br><figure class="highlight lua"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">var superagent = <span class="built_in">require</span>(<span class="string">'superagent'</span>); superagent .post(<span class="string">'/api'</span>) .send(&#123; <span class="string">'key'</span>: <span class="string">'value'</span> &#125;) .set(<span class="string">'header_key'</span>, <span class="string">'header_value'</span>) .<span class="keyword">end</span>(<span class="function"><span class="keyword">function</span><span class="params">(err, res)</span></span> &#123; <span class="keyword">if</span> (err) &#123; //<span class="keyword">do</span> something &#125; <span class="keyword">else</span> &#123; //<span class="keyword">do</span> something &#125; &#125;)</div></pre></td></tr></table></figure></p>
-<p>接下来，让我们逐一的对SuperAgent的一些特性进行分析吧～🚀</p>
-<pre><code>设置请求头
-
-这一点在写爬虫的时候十分的有用,因为有些网站可能设置了一些限制条件,比如它会去匹配你的请求头里面的一些字段, 像User-Agent Referer等,如果你没有设置这些请求头的话，可能就抓取不到数据咯～
-
-SuperAgent里面设置请求头很简单,通过使用set()方法就可以设置了，有两种方式
-
-    单个单个的设置
-</code></pre><figure class="highlight haxe"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">superagent</div><div class="line">    .<span class="keyword">get</span>(<span class="string">'/api'</span>)</div><div class="line">    .<span class="keyword">set</span>(<span class="string">'Referer'</span>,<span class="string">'https://www.google.com'</span>)</div><div class="line">    .<span class="keyword">set</span>(<span class="string">'Accept'</span>,<span class="string">'image/webp,image/*,*/*;q=0.8'</span>)</div><div class="line">    .end(<span class="function"><span class="keyword">function</span></span>(req,res)&#123;</div><div class="line">        <span class="comment">//do something</span></div><div class="line">    &#125;)</div><div class="line"></div><div class="line">  放在一起设置</div><div class="line"></div><div class="line">  superagent</div><div class="line"></div><div class="line">      .<span class="keyword">get</span>(<span class="string">'/api'</span>)</div><div class="line">      .<span class="keyword">set</span>(&#123;</div><div class="line">          <span class="string">'Referer'</span>,<span class="string">'https://www.google.com'</span>,</div><div class="line">          <span class="string">'Accept'</span>,<span class="string">'image/webp,image/*,*/*;q=0.8'</span></div><div class="line">      &#125;)</div><div class="line">       .end(<span class="function"><span class="keyword">function</span></span>(req,res)&#123;</div><div class="line">          <span class="comment">//do something</span></div><div class="line">      &#125;)</div></pre></td></tr></table></figure>
-<pre><code>GET请求方式
-
-我相信大家都一定见过这样类型的URL:http://localhost:8080/api和http://localhost:8080/api?id=1&amp;price=10,就是GET方式可以带上参数,也可以不带上参数。不带参数的就不说了,相信大家都会,在superagent中我们可以通过query()方法给URL后面带上参数,有4种写法
-</code></pre><figure class="highlight less"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//接下来所形成的URL为/api?name=An&amp;age=20&amp;sex=male</span></div><div class="line"><span class="comment">//第一种</span></div><div class="line"><span class="selector-tag">superagent</span></div><div class="line">    <span class="selector-class">.get</span>(/api)</div><div class="line">    <span class="selector-class">.query</span>(&#123;<span class="attribute">name</span>:<span class="string">'An'</span>&#125;)</div><div class="line">    <span class="selector-class">.query</span>(&#123;<span class="attribute">age</span>:<span class="number">20</span>&#125;)</div><div class="line">    <span class="selector-class">.query</span>(&#123;<span class="attribute">sex</span>:<span class="string">'male'</span>&#125;)</div><div class="line">    <span class="selector-class">.end</span>(cb)</div><div class="line"><span class="comment">//第二种</span></div><div class="line"><span class="selector-tag">superagent</span></div><div class="line">    <span class="selector-class">.get</span>(/api)</div><div class="line">    <span class="selector-class">.query</span>(&#123;<span class="attribute">name</span>:<span class="string">'An'</span>,<span class="attribute">age</span>:<span class="number">20</span>,<span class="attribute">sex</span>:<span class="string">'male'</span>&#125;)</div><div class="line">    <span class="selector-class">.end</span>(cb)</div><div class="line"><span class="comment">//第三种 </span></div><div class="line"><span class="selector-tag">superagent</span></div><div class="line">    <span class="selector-class">.get</span>(/api)</div><div class="line">    <span class="selector-class">.query</span>(<span class="string">'name=An&amp;age=20&amp;sex=male'</span>)</div><div class="line">    <span class="selector-class">.end</span>(cb)</div><div class="line"><span class="comment">//第四种</span></div><div class="line">    <span class="selector-tag">superagent</span></div><div class="line">        <span class="selector-class">.get</span>(/api)</div><div class="line">        <span class="selector-class">.query</span>(<span class="string">'name=An'</span>)</div><div class="line">        <span class="selector-class">.query</span>(<span class="string">'age=20'</span>)</div><div class="line">        <span class="selector-class">.query</span>(<span class="string">'sex=male'</span>)</div><div class="line">        <span class="selector-class">.end</span>(cb)</div></pre></td></tr></table></figure>
-<pre><code>head请求
-
-head请求也可以通过query()的方式进行传递参数,大家可以参考👆的GET请求
-
-POST/PUT请求
-
-这两种请求，一般是要给服务端发送数据，现在文本数据的方式一般都以json的方式传递。我们可以在请求头里设置Accept=application/json，从而服务器可以根据请求头来生成json数据(在java开发后台时可以这样)
-
-在superagent里面，默认的数据传递格式是json，所以下面几种种方式是相同的。
-</code></pre><figure class="highlight less"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">superagent</span></div><div class="line">    <span class="selector-class">.post</span>(<span class="string">'/api'</span>)</div><div class="line">    <span class="selector-class">.set</span>(<span class="string">'Accept'</span>,<span class="string">'application/json'</span>)</div><div class="line">    <span class="selector-class">.send</span>(<span class="string">'&#123;"name":"An","age":20,"sex":"male"&#125;'</span>)</div><div class="line">    <span class="selector-class">.end</span>(cb)</div><div class="line"><span class="comment">//等价于 ==&gt;</span></div><div class="line"><span class="selector-tag">superagent</span></div><div class="line">    <span class="selector-class">.post</span>(<span class="string">'/api'</span>)</div><div class="line">    <span class="selector-class">.send</span>(&#123;<span class="attribute">name</span>:<span class="string">"An"</span>,<span class="attribute">age</span>:<span class="number">20</span>,<span class="attribute">sex</span>:<span class="string">"male"</span>&#125;)</div><div class="line">    <span class="selector-class">.end</span>(cb)</div><div class="line"><span class="comment">//等价于 ==&gt;</span></div><div class="line"><span class="selector-tag">superagent</span></div><div class="line">    <span class="selector-class">.post</span>(<span class="string">'/api'</span>)</div><div class="line">    <span class="selector-class">.send</span>(&#123;<span class="attribute">name</span>:<span class="string">"An"</span>&#125;)</div><div class="line">    <span class="selector-class">.send</span>(&#123;<span class="attribute">age</span>:<span class="number">20</span>&#125;)</div><div class="line">    <span class="selector-class">.sex</span>(&#123;<span class="attribute">sex</span>:<span class="string">'male'</span>&#125;)</div><div class="line">    <span class="selector-class">.end</span>(cb)</div></pre></td></tr></table></figure>
-<pre><code>当然，除了json的形式去传递，我们还有一种很常见的表单提交，在superagent里，也实现了模拟表单的提交数据类型application/x-www-form-urlencoded， 我们可以通过type(&apos;form&apos;)方法进行转换
-</code></pre><figure class="highlight less"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">superagent</span></div><div class="line">    <span class="selector-class">.post</span>(<span class="string">'/api'</span>)</div><div class="line">    <span class="selector-class">.type</span>(<span class="string">'form'</span>)</div><div class="line">    <span class="selector-class">.send</span>(&#123;<span class="attribute">name</span>:<span class="string">'An'</span>,<span class="attribute">age</span>:<span class="number">20</span>&#125;) <span class="comment">// name=An&amp;age=20</span></div><div class="line">    <span class="selector-class">.end</span>(cb)</div></pre></td></tr></table></figure>
-<pre><code>有时候，我们也会在POST请求时，将一些参数放在URL上面，那这个时候还是可以用query()方法
-
-设置Content-Type的两种快速方式
-    type()方法
-
-    accept()方法
-
-    这两种方法都可以接受规范的MIME格式,以及图片和xml等这些格式的数据。
-</code></pre><figure class="highlight less"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">superagent</span></div><div class="line"></div><div class="line">  <span class="selector-class">.post</span>(<span class="string">'/api'</span>)</div><div class="line">  <span class="selector-class">.type</span>(<span class="string">'application/json'</span>)</div><div class="line">  <span class="selector-class">.type</span>(<span class="string">'png'</span>)</div><div class="line"></div><div class="line"><span class="comment">// 等价于==&gt;</span></div><div class="line"><span class="selector-tag">superagent</span></div><div class="line"></div><div class="line">  <span class="selector-class">.post</span>(<span class="string">'/api'</span>)</div><div class="line">  <span class="selector-class">.accept</span>(<span class="string">'application/json'</span>)</div><div class="line">  <span class="selector-class">.accept</span>(<span class="string">'png'</span>)</div></pre></td></tr></table></figure>
-<pre><code>分析处理response body
-
-superagent可以帮你解析返回的数据,当前支持三种类型的数据application/x-www-form-urlencoded application/json 和multipart/form-data
-
-    JSON/Urlencoded
-    解析后的数据会以对象的形式存在,可以通过res.body来得到。
-
-      &apos;{&quot;name&quot;:&quot;An&quot;}&apos; //JSON String
-      //解析 ==&gt;
-      {
-          name:&quot;An&quot;    //JSON Object
-      }
-
-    Multipart
-    这种格式的数据的处理，superagent是通过Formidable模块，它是主要处理文件上传的模块，大家可以去了解下，也是Node里面十分常用的模块，也很简单易上手。上传的文件的信息可以在res.files去查看，当然，我觉得这个属性用的比较少，这只是个人观点了～
-
-Response的属性
-
-    res.text包含为被解析的响应数据
-
-    res.body上文提到了，包含解析的数据，但是目前只支持三种格式
-
-    res.header响应头,是一个Object
-
-    res.type &amp; res.charset 类型和编码格式
-
-    res.status状态码
-
-终止请求 req.abort() 暂停请求 req.timeout(ms) ms表示毫秒为单位的时间
-
-Basic Access Authentication
-
-首先先简单的介绍下Basic Access Authenication，它是在web应用中，通过直接提供用户名、密码来进行验证身份的一种优化的解决方案。
-
-原理是将用户名和密码通过:连接,形成username:password然后再进行base64加密，发送到服务器后再进行解密得到用户名和密码,进行进一步的匹配验证。参考文章:HTTP Basic Authentication认证。
-
-在superagent里，有两种方式进行验证
-</code></pre><figure class="highlight less"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">superagent</span></div><div class="line">    <span class="selector-class">.get</span>(<span class="string">'http://username:password@localhost'</span>)</div><div class="line">    <span class="selector-class">.end</span>(cb)</div><div class="line"><span class="comment">//等价于 ==&gt;</span></div><div class="line"><span class="selector-tag">superagent</span></div><div class="line">    <span class="selector-class">.get</span>(<span class="string">'http://localhost'</span>)</div><div class="line">    <span class="selector-class">.auth</span>(<span class="string">'username'</span>,<span class="string">'password'</span>)</div><div class="line">    <span class="selector-class">.end</span>(cb)</div></pre></td></tr></table></figure>
-<pre><code>可以通过pipe管道流入流出数据
-
-我想大家应该知道node里面有个核心特性就是stream，如果不知道的，可以参考:nodejs中流(stream)的理解,举两个栗子：
-</code></pre><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//第一个例子</span></div><div class="line"><span class="keyword">var</span> fs = <span class="built_in">require</span>(<span class="string">'fs'</span>);</div><div class="line"><span class="keyword">var</span> request = <span class="built_in">require</span>(<span class="string">'superagent'</span>);</div><div class="line"><span class="keyword">var</span> postJson = fs.createReadStream(<span class="string">'./postDataJson'</span>);</div><div class="line"><span class="keyword">var</span> req= request.post(<span class="string">'/api'</span>);</div><div class="line">req.accept(<span class="string">'json'</span>);</div><div class="line">stream.pipe(req);</div><div class="line"></div><div class="line"><span class="comment">//第二个例子</span></div><div class="line"><span class="keyword">var</span> fs = <span class="built_in">require</span>(<span class="string">'fs'</span>);</div><div class="line"><span class="keyword">var</span> request = <span class="built_in">require</span>(<span class="string">'superagent'</span>);</div><div class="line"><span class="keyword">var</span> getData = fs.createWriteStream(<span class="string">'./getData'</span>);</div><div class="line"><span class="keyword">var</span> res= request.get(<span class="string">'/api'</span>);</div><div class="line">res.pipe(getData);</div></pre></td></tr></table></figure>
-<pre><code>添加多个附件
-
-superagent也提供了一些高级的API，如果你想添加多个附件可以使用attach(name,[path],[filename]),其中你可以通过filename来自定义上传后文件的文件名
-</code></pre><figure class="highlight less"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">request</span></div><div class="line">    <span class="selector-class">.post</span>(<span class="string">'/upload'</span>)</div><div class="line">    <span class="selector-class">.attach</span>(<span class="string">'avator'</span>,<span class="string">'/path/a.png'</span>,<span class="string">'An.png'</span>)</div><div class="line">    <span class="selector-class">.attach</span>(<span class="string">'photo'</span>,<span class="string">'/path/b.png'</span>)</div><div class="line">    <span class="selector-class">.end</span>(cb)</div></pre></td></tr></table></figure>
-<pre><code>复合请求
-
-superagent也支持复合请求,比如你想上传一个带有你的姓名和邮箱的图片，那可以通过field(name,value)方法
-</code></pre><figure class="highlight less"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">request</span></div><div class="line">    <span class="selector-class">.post</span>(<span class="string">'/upload'</span>)</div><div class="line">    <span class="selector-class">.field</span>(<span class="string">'name'</span>,<span class="string">'An'</span>)</div><div class="line">    <span class="selector-class">.field</span>(<span class="string">'age'</span>:<span class="number">20</span>)</div><div class="line">    <span class="selector-class">.attach</span>(<span class="string">'avator'</span>,<span class="string">'/path/a.png'</span>,<span class="string">'An.png'</span>)</div><div class="line">    <span class="selector-class">.end</span>(cb)</div></pre></td></tr></table></figure>
-<pre><code>错误处理
-
-有时候我们可能会因为不同的原因得到4XX或者5XX的错误，这个时候我们确实是可以从end(function(err,res){...})里的err得到错误信息,比如er.status错误的状态码啥的，但是有些时候我们想去处理这些错误，重新发送一个别的请求啥的，那么这个时候我们可以通过on(&apos;error&apos;,handleFn)去处理了
-</code></pre><figure class="highlight less"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">request</span></div><div class="line">    <span class="selector-class">.post</span>(<span class="string">'/api'</span>)</div><div class="line">    <span class="selector-class">.send</span>(data)</div><div class="line">    <span class="selector-class">.on</span>(<span class="string">'error'</span>,handleFn)</div><div class="line">    <span class="selector-class">.end</span>(cb);</div></pre></td></tr></table></figure>
-
-        
-        </div>
-        <footer class="article-footer">
-            <div class="share-container">
-
-
-
-</div>
-
-    <a data-url="/2016/09/10/批处理HTTP模块SuperAgent/" data-id="cj6uetnyg001ixswqumjiybf6" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
-<script>
-    (function ($) {
-        // Prevent duplicate binding
-        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
-            __SHARE_BUTTON_BINDED__ = true;
-        } else {
-            return;
-        }
-        $('body').on('click', function() {
-            $('.article-share-box.on').removeClass('on');
-        }).on('click', '.article-share-link', function(e) {
-            e.stopPropagation();
-
-            var $this = $(this),
-                url = $this.attr('data-url'),
-                encodedUrl = encodeURIComponent(url),
-                id = 'article-share-box-' + $this.attr('data-id'),
-                offset = $this.offset(),
-                box;
-
-            if ($('#' + id).length) {
-                box = $('#' + id);
-
-                if (box.hasClass('on')){
-                    box.removeClass('on');
-                    return;
-                }
-            } else {
-                var html = [
-                    '<div id="' + id + '" class="article-share-box">',
-                        '<input class="article-share-input" value="' + url + '">',
-                        '<div class="article-share-links">',
-                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
-                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
-                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
-                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
-                        '</div>',
-                    '</div>'
-                ].join('');
-
-              box = $(html);
-
-              $('body').append(box);
-            }
-
-            $('.article-share-box.on').hide();
-
-            box.css({
-                top: offset.top + 25,
-                left: offset.left
-            }).addClass('on');
-
-        }).on('click', '.article-share-box', function (e) {
-            e.stopPropagation();
-        }).on('click', '.article-share-box-input', function () {
-            $(this).select();
-        }).on('click', '.article-share-box-link', function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-
-            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
-        });
-    })(jQuery);
-</script>
-
-            
-    
-        <a href="/2016/09/10/批处理HTTP模块SuperAgent/#comments" class="article-comment-link">评论</a>
-    
-
-        </footer>
-    </div>
-    
-</article>
-
-
-
-    <article id="post-懒加载" class="article article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
-        
-            
-	
-		<a href="/2016/09/05/懒加载/" itemprop="url">
-            <img src="http://static5.originoo.cn/1038117/462/i/950/depositphotos_4621883-stock-photo-field-of-daisy-flowers.jpg" class="article-banner" />
-        </a>
-	
-
-
-
-        
-        
-            <header class="article-header">
-                
-    
-        <h1 itemprop="name">
-            <a class="article-title" href="/2016/09/05/懒加载/">懒加载原理</a>
-        </h1>
-    
-
-                
-                    <div class="article-meta">
-                        
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/2016/09/05/懒加载/">
-            <time datetime="2016-09-04T16:00:00.000Z" itemprop="datePublished">2016-09-05</time>
-        </a>
-    </div>
-
-
-                        
-    <div class="article-category">
-    	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/categories/前端/">前端</a>
-    </div>
-
-                        
-    <div class="article-tag">
-        <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/lazyload/">lazyload</a>, <a class="tag-link" href="/tags/懒加载/">懒加载</a>
-    </div>
-
-                    </div>
-                
-            </header>
-        
-        
-        <div class="article-entry" itemprop="articleBody">
-        
-            
-            <h1 id="懒加载的原理"><a href="#懒加载的原理" class="headerlink" title="懒加载的原理"></a>懒加载的原理</h1><blockquote>
-<p>原理：先将img标签中的src链接设为同一张图片（空白图片），将其真正的图片地址存储再img标签的自定义属性中（比如data-src）。当js监听到该图片元素进入可视窗口时，即将自定义属性中的地址存储到src属性中，达到懒加载的效果。<br>    这样做能防止页面一次性向服务器响应大量请求导致服务器响应慢，页面卡顿或崩溃等问题。</p>
-<p>代码实现</p>
-</blockquote>
-<pre><code>既然懒加载的原理是基于判断元素是否出现在窗口可视范围内，首先我们写一个函数判断元素是否出现在可视范围内：
-</code></pre><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">isVisible</span>(<span class="params">$node</span>)</span>&#123;</div><div class="line">    <span class="keyword">var</span> winH = $(<span class="built_in">window</span>).height(),</div><div class="line">        scrollTop = $(<span class="built_in">window</span>).scrollTop(),</div><div class="line">        offSetTop = $(<span class="built_in">window</span>).offSet().top;</div><div class="line">    <span class="keyword">if</span> (offSetTop &lt; winH + scrollTop) &#123;</div><div class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<pre><code>再添加上浏览器的事件监听函数，让浏览器每次滚动就检查元素是否出现在窗口可视范围内：
-</code></pre><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">$(<span class="built_in">window</span>).on(<span class="string">"scroll"</span>, <span class="function"><span class="keyword">function</span></span>&#123;</div><div class="line">    <span class="keyword">if</span> (isVisible($node))&#123;</div><div class="line">        <span class="built_in">console</span>.log(<span class="literal">true</span>);</div><div class="line">    &#125;</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
-<pre><code>我们已经很接近了，现在我们要做的是，让元素只在第一次被检查到时打印true，之后就不再打印了
-</code></pre><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> hasShowed = <span class="literal">false</span>;</div><div class="line">$(<span class="built_in">window</span>).on(<span class="string">"sroll"</span>,<span class="function"><span class="keyword">function</span></span>&#123;</div><div class="line">    <span class="keyword">if</span> (hasShowed) &#123;</div><div class="line">        <span class="keyword">return</span>;</div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line">        <span class="keyword">if</span> (isVisible($node)) &#123;</div><div class="line">            hasShowed = !hasShowed;</div><div class="line">            <span class="built_in">console</span>.log(<span class="literal">true</span>);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
-
-        
-        </div>
-        <footer class="article-footer">
-            <div class="share-container">
-
-
-
-</div>
-
-    <a data-url="/2016/09/05/懒加载/" data-id="cj6uetnyd001dxswqepe7eqsd" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
-<script>
-    (function ($) {
-        // Prevent duplicate binding
-        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
-            __SHARE_BUTTON_BINDED__ = true;
-        } else {
-            return;
-        }
-        $('body').on('click', function() {
-            $('.article-share-box.on').removeClass('on');
-        }).on('click', '.article-share-link', function(e) {
-            e.stopPropagation();
-
-            var $this = $(this),
-                url = $this.attr('data-url'),
-                encodedUrl = encodeURIComponent(url),
-                id = 'article-share-box-' + $this.attr('data-id'),
-                offset = $this.offset(),
-                box;
-
-            if ($('#' + id).length) {
-                box = $('#' + id);
-
-                if (box.hasClass('on')){
-                    box.removeClass('on');
-                    return;
-                }
-            } else {
-                var html = [
-                    '<div id="' + id + '" class="article-share-box">',
-                        '<input class="article-share-input" value="' + url + '">',
-                        '<div class="article-share-links">',
-                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
-                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
-                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
-                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
-                        '</div>',
-                    '</div>'
-                ].join('');
-
-              box = $(html);
-
-              $('body').append(box);
-            }
-
-            $('.article-share-box.on').hide();
-
-            box.css({
-                top: offset.top + 25,
-                left: offset.left
-            }).addClass('on');
-
-        }).on('click', '.article-share-box', function (e) {
-            e.stopPropagation();
-        }).on('click', '.article-share-box-input', function () {
-            $(this).select();
-        }).on('click', '.article-share-box-link', function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-
-            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
-        });
-    })(jQuery);
-</script>
-
-            
-    
-        <a href="/2016/09/05/懒加载/#comments" class="article-comment-link">评论</a>
-    
-
-        </footer>
-    </div>
-    
-</article>
-
-
-
-    <article id="post-解决https请求下发送http请求问题 " class="article article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
-        
-            
-	
-		<a href="/2016/08/25/解决https请求下发送http请求问题 /" itemprop="url">
-            <img src="http://st2.originoo.cn/3840453/5472/i/950/depositphotos_54728161-stock-photo-musical-instrument-detail-of-a.jpg" class="article-banner" />
-        </a>
-	
-
-
-
-        
-        
-            <header class="article-header">
-                
-    
-        <h1 itemprop="name">
-            <a class="article-title" href="/2016/08/25/解决https请求下发送http请求问题 /">解决https请求下发送http请求问题</a>
-        </h1>
-    
-
-                
-                    <div class="article-meta">
-                        
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/2016/08/25/解决https请求下发送http请求问题 /">
-            <time datetime="2016-08-24T16:00:00.000Z" itemprop="datePublished">2016-08-25</time>
-        </a>
-    </div>
-
-
-                        
-    <div class="article-category">
-    	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/categories/Http/">Http</a>
-    </div>
-
-                        
-    <div class="article-tag">
-        <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/跨域/">跨域</a>
-    </div>
-
-                    </div>
-                
-            </header>
-        
-        
-        <div class="article-entry" itemprop="articleBody">
-        
-            
-            <p>在https页面下的带有相对路径的请求都会与页面的协议保持一致。如果想在https页面下发送http的请求，如果只把链接写死成为http的绝对路径是不够的，这样会导致http的请求与总页面https的请求的session不一致。</p>
-<p>为什么呢？原因是https的请求中服务器发回的cookie是标记为”secure”的，而http的请求时非”secure”,”由于在服务器端secure”的cookie不会兼容非”secure”的，所以当http的请求携带着同一jsessionid的cookie到达服务器时，服务器拒绝非”secure”，进而返回的结果是一个新的非”secure”的cookie，于是两个session就不同了。</p>
-<p> 怎么解决呢？由原因分析可知，两个session不同，更具体说是cookie的状态不同。那么办法是，在接收到第一个https请求的响应后 到 发送下面的http请求之前，将cookie去”secure”状态，但是又要保证jsessionid不变。具体操作可以新建一个cookie(新建的是非”secure”状态)，然后赋予同一个jessionid，然后加入response中。</p>
-<p> 代码如下：<br> <figure class="highlight pony"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="type">Cookie</span> cookie = <span class="function"><span class="keyword">new</span> <span class="title">Cookie</span>("<span class="type">JSESSIONID</span>", req.getSession().<span class="title">getId</span>());</span></div><div class="line"><span class="function"><span class="title">cookie</span>.<span class="title">setPath</span>(req.getContextPath());</span></div><div class="line"><span class="function"><span class="title">resp</span>.<span class="title">addCookie</span>(cookie);</span></div></pre></td></tr></table></figure></p>
-<p>本文转载自<a href="http://blog.csdn.NET/songgeabc/article/details/18192057" target="_blank" rel="external">http://blog.csdn.NET/songgeabc/article/details/18192057</a></p>
-
-        
-        </div>
-        <footer class="article-footer">
-            <div class="share-container">
-
-
-
-</div>
-
-    <a data-url="/2016/08/25/解决https请求下发送http请求问题 /" data-id="cj6uetnyp001sxswqt5p5qmmb" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
-<script>
-    (function ($) {
-        // Prevent duplicate binding
-        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
-            __SHARE_BUTTON_BINDED__ = true;
-        } else {
-            return;
-        }
-        $('body').on('click', function() {
-            $('.article-share-box.on').removeClass('on');
-        }).on('click', '.article-share-link', function(e) {
-            e.stopPropagation();
-
-            var $this = $(this),
-                url = $this.attr('data-url'),
-                encodedUrl = encodeURIComponent(url),
-                id = 'article-share-box-' + $this.attr('data-id'),
-                offset = $this.offset(),
-                box;
-
-            if ($('#' + id).length) {
-                box = $('#' + id);
-
-                if (box.hasClass('on')){
-                    box.removeClass('on');
-                    return;
-                }
-            } else {
-                var html = [
-                    '<div id="' + id + '" class="article-share-box">',
-                        '<input class="article-share-input" value="' + url + '">',
-                        '<div class="article-share-links">',
-                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
-                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
-                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
-                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
-                        '</div>',
-                    '</div>'
-                ].join('');
-
-              box = $(html);
-
-              $('body').append(box);
-            }
-
-            $('.article-share-box.on').hide();
-
-            box.css({
-                top: offset.top + 25,
-                left: offset.left
-            }).addClass('on');
-
-        }).on('click', '.article-share-box', function (e) {
-            e.stopPropagation();
-        }).on('click', '.article-share-box-input', function () {
-            $(this).select();
-        }).on('click', '.article-share-box-link', function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-
-            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
-        });
-    })(jQuery);
-</script>
-
-            
-    
-        <a href="/2016/08/25/解决https请求下发送http请求问题 /#comments" class="article-comment-link">评论</a>
-    
-
-        </footer>
-    </div>
-    
-</article>
-
-
-
-    <article id="post-闭包" class="article article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
-        
-            
-	
-		<a href="/2016/08/20/闭包/" itemprop="url">
-            <img src="http://st2.originoo.cn/1008768/8238/i/950/depositphotos_82386882-stock-photo-work-versus-life-road-sign.jpg" class="article-banner" />
-        </a>
-	
-
-
-
-        
-        
-            <header class="article-header">
-                
-    
-        <h1 itemprop="name">
-            <a class="article-title" href="/2016/08/20/闭包/">JavaScript深入之闭包(转)</a>
-        </h1>
-    
-
-                
-                    <div class="article-meta">
-                        
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/2016/08/20/闭包/">
-            <time datetime="2016-08-19T16:00:00.000Z" itemprop="datePublished">2016-08-20</time>
-        </a>
-    </div>
-
-
-                        
-    <div class="article-category">
-    	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/categories/前端/">前端</a>
-    </div>
-
-                        
-    <div class="article-tag">
-        <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/js/">js</a>
-    </div>
-
-                    </div>
-                
-            </header>
-        
-        
-        <div class="article-entry" itemprop="articleBody">
-        
-            
-            <h1 id="JavaScript深入之闭包"><a href="#JavaScript深入之闭包" class="headerlink" title="JavaScript深入之闭包"></a>JavaScript深入之闭包</h1><blockquote>
-<p>介绍理论上的闭包和实践上的闭包，以及从作用域链的角度解析经典的闭包题。</p>
-</blockquote>
-<h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><h3 id="MDN-对闭包的定义为："><a href="#MDN-对闭包的定义为：" class="headerlink" title="MDN 对闭包的定义为："></a>MDN 对闭包的定义为：</h3><blockquote>
-<p>闭包是指那些能够访问自由变量的函数。</p>
-</blockquote>
-<h2 id="那什么是自由变量呢？"><a href="#那什么是自由变量呢？" class="headerlink" title="那什么是自由变量呢？"></a>那什么是自由变量呢？</h2><blockquote>
-<p>自由变量是指在函数中使用的，但既不是函数参数也不是函数的局部变量的变量。</p>
-</blockquote>
-<p>由此，我们可以看出闭包共有两部分组成：</p>
-<blockquote>
-<p>闭包 = 函数 + 函数能够访问的自由变量</p>
-</blockquote>
-<h2 id="举个例子"><a href="#举个例子" class="headerlink" title="举个例子"></a>举个例子</h2><figure class="highlight delphi"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> a = <span class="number">1</span>;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span><span class="params">()</span> <span class="comment">&#123;</span></span></div><div class="line"><span class="function"><span class="comment">    console.log(a);</span></span></div><div class="line"><span class="function"><span class="comment">&#125;</span></span></div><div class="line"><span class="function"></span></div><div class="line"><span class="function"><span class="title">foo</span><span class="params">()</span>;</span></div></pre></td></tr></table></figure>
-<p>foo 函数可以访问变量 a，但是 a 既不是 foo 函数的局部变量，也不是 foo 函数的参数，所以 a 就是自由变量。</p>
-<p>那么，函数 foo + foo 函数访问的自由变量 a 不就是构成了一个闭包嘛……</p>
-<p>还真是这样的！</p>
-<p>所以在《JavaScript权威指南》中就讲到：从技术的角度讲，所有的JavaScript函数都是闭包。</p>
-<p>咦，这怎么跟我们平时看到的讲到的闭包不一样呢！？</p>
-<p>别着急，这是理论上的闭包，其实还有一个实践角度上的闭包，让我们看看汤姆大叔翻译的关于闭包的文章中的定义：</p>
-<p>ECMAScript中，闭包指的是：</p>
-<blockquote>
-<p>1.从理论角度：所有的函数。因为它们都在创建的时候就将上层上下文的数据保存起来了。哪怕是简单的全局变量也是如此，因为函数中访问全局变量就相当于是在访问自由变量，这个时候使用最外层的作用域。<br>  2.从实践角度：以下函数才算是闭包：<br>        (1).即使创建它的上下文已经销毁，它仍然存在（比如，内部函数从父函数中返回）<br>        (2).在代码中引用了自由变量</p>
-</blockquote>
-<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><figure class="highlight actionscript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> scope = <span class="string">"global scope"</span>;</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">checkscope</span><span class="params">()</span></span>&#123;</div><div class="line">    <span class="keyword">var</span> scope = <span class="string">"local scope"</span>;</div><div class="line">    <span class="function"><span class="keyword">function</span> <span class="title">f</span><span class="params">()</span></span>&#123;</div><div class="line">        <span class="keyword">return</span> scope;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> f;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">var</span> foo = checkscope();</div><div class="line">foo();</div></pre></td></tr></table></figure>
-<blockquote>
-<p>首先我们要分析一下这段代码中执行上下文栈和执行上下文的变化情况。</p>
-</blockquote>
-<p>另一个与这段代码相似的例子，在《JavaScript深入之执行上下文》中有着非常详细的分析。如果看不懂以下的执行过程，建议先阅读这篇文章。</p>
-<p>这里直接给出简要的执行过程：</p>
-<pre><code>进入全局代码，创建全局执行上下文，全局执行上下文压入执行上下文栈
-全局执行上下文初始化
-执行 checkscope 函数，创建 checkscope 函数执行上下文，checkscope 执行上下文被压入执行上下文栈
-checkscope 执行上下文初始化，创建变量对象、作用域链、this等
-checkscope 函数执行完毕，checkscope 执行上下文从执行上下文栈中弹出
-执行 f 函数，创建 f 函数执行上下文，f 执行上下文被压入执行上下文栈
-f 执行上下文初始化，创建变量对象、作用域链、this等
-f 函数执行完毕，f 函数上下文从执行上下文栈中弹出
-</code></pre><p>了解到这个过程，我们应该思考一个问题，那就是：</p>
-<p>当 f 函数执行的时候，checkscope 函数上下文已经被销毁了啊(即从执行上下文栈中被弹出)，怎么还会读取到 checkscope 作用域下的 scope 值呢？</p>
-<p>以上的代码，要是转换成 PHP，就会报错，因为在 PHP 中，f 函数只能读取到自己作用域和全局作用域里的值，所以读不到 checkscope 下的 scope 值。(这段我问的PHP同事……)</p>
-<p>然而 JavaScript 却是可以的！</p>
-<h2 id="必刷题"><a href="#必刷题" class="headerlink" title="必刷题"></a>必刷题</h2><figure class="highlight haskell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="title">var</span> <span class="class"><span class="keyword">data</span> = [];</span></div><div class="line"></div><div class="line"><span class="title">for</span> (var i = <span class="number">0</span>; i &lt; <span class="number">3</span>; i++) &#123;</div><div class="line">  <span class="class"><span class="keyword">data</span>[i] = function () &#123;</span></div><div class="line"><span class="class">    <span class="title">console</span>.<span class="title">log</span>(<span class="title">i</span>);</span></div><div class="line"><span class="class">  &#125;;</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">data</span>[0]();</span></div><div class="line"><span class="class"><span class="keyword">data</span>[1]();</span></div><div class="line"><span class="class"><span class="keyword">data</span>[2]();</span></div></pre></td></tr></table></figure>
-<p>答案是都是 3，让我们分析一下原因：</p>
-<p>当执行到 data[0] 函数之前，此时全局上下文的 VO 为：<br><figure class="highlight dts"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">globalContext = &#123;</div><div class="line"><span class="symbol">    VO:</span> &#123;</div><div class="line"><span class="symbol">        data:</span> [...],</div><div class="line"><span class="symbol">        i:</span> <span class="number">3</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>当执行 data[0] 函数的时候，data[0] 函数的作用域链为：<br><figure class="highlight haskell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">data</span>[0]<span class="type">Context</span> = &#123;</span></div><div class="line"><span class="class">    <span class="type">Scope</span>: [<span class="type">AO</span>, <span class="title">globalContext</span>.<span class="type">VO</span>]</span></div><div class="line"><span class="class">&#125;</span></div></pre></td></tr></table></figure></p>
-<p>data[0]Context 的 AO 并没有 i 值，所以会从 globalContext.VO 中查找，i 为 3，所以打印的结果就是 3。</p>
-<p>data[1] 和 data[2] 是一样的道理。</p>
-<p>所以让我们改成闭包看看：<br><figure class="highlight haskell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="title">var</span> <span class="class"><span class="keyword">data</span> = [];</span></div><div class="line"></div><div class="line"><span class="title">for</span> (var i = <span class="number">0</span>; i &lt; <span class="number">3</span>; i++) &#123;</div><div class="line">  <span class="class"><span class="keyword">data</span>[i] = (<span class="title">function</span> (<span class="title">i</span>) &#123;</span></div><div class="line"><span class="class">        <span class="title">return</span> <span class="title">function</span>()&#123;</span></div><div class="line"><span class="class">            <span class="title">console</span>.<span class="title">log</span>(<span class="title">i</span>);</span></div><div class="line"><span class="class">        &#125;</span></div><div class="line">  &#125;)(i);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">data</span>[0]();</span></div><div class="line"><span class="class"><span class="keyword">data</span>[1]();</span></div><div class="line"><span class="class"><span class="keyword">data</span>[2]();</span></div></pre></td></tr></table></figure></p>
-<p>当执行到 data[0] 函数之前，此时全局上下文的 VO 为：<br><figure class="highlight dts"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">globalContext = &#123;</div><div class="line"><span class="symbol">    VO:</span> &#123;</div><div class="line"><span class="symbol">        data:</span> [...],</div><div class="line"><span class="symbol">        i:</span> <span class="number">3</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>跟没改之前一模一样。</p>
-<p>当执行 data[0] 函数的时候，data[0] 函数的作用域链发生了改变：<br><figure class="highlight haskell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">data</span>[0]<span class="type">Context</span> = &#123;</span></div><div class="line"><span class="class">    <span class="type">Scope</span>: [<span class="type">AO</span>, 匿名函数<span class="type">Context</span>.<span class="type">AO</span> <span class="title">globalContext</span>.<span class="type">VO</span>]</span></div><div class="line"><span class="class">&#125;</span></div></pre></td></tr></table></figure></p>
-<p>匿名函数执行上下文的 AO 为：<br><figure class="highlight dts"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">匿名函数Context = &#123;</div><div class="line"><span class="symbol">    AO:</span> &#123;</div><div class="line"><span class="symbol">        arguments:</span> &#123;</div><div class="line">            <span class="number">0</span>: <span class="number">0</span>,</div><div class="line"><span class="symbol">            length:</span> <span class="number">1</span></div><div class="line">        &#125;,</div><div class="line"><span class="symbol">        i:</span> <span class="number">0</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>data[0]Context 的 AO 并没有 i 值，所以会沿着作用域链从匿名函数 Context.AO 中查找，这时候就会找 i 为 0，找到了就不会往 globalContext.VO 中查找了，即使 globalContext.VO 也有 i 的值(值为3)，所以打印的结果就是 0。</p>
-<p>data[1] 和 data[2] 是一样的道理。</p>
-<h2 id="转自-https-juejin-im-post-590159d8a22b9d0065c2d918"><a href="#转自-https-juejin-im-post-590159d8a22b9d0065c2d918" class="headerlink" title="转自 https://juejin.im/post/590159d8a22b9d0065c2d918"></a>转自 <a href="https://juejin.im/post/590159d8a22b9d0065c2d918" target="_blank" rel="external">https://juejin.im/post/590159d8a22b9d0065c2d918</a></h2>
-        
-        </div>
-        <footer class="article-footer">
-            <div class="share-container">
-
-
-
-</div>
-
-    <a data-url="/2016/08/20/闭包/" data-id="cj6uetnyn001pxswqixtbn97j" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
-<script>
-    (function ($) {
-        // Prevent duplicate binding
-        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
-            __SHARE_BUTTON_BINDED__ = true;
-        } else {
-            return;
-        }
-        $('body').on('click', function() {
-            $('.article-share-box.on').removeClass('on');
-        }).on('click', '.article-share-link', function(e) {
-            e.stopPropagation();
-
-            var $this = $(this),
-                url = $this.attr('data-url'),
-                encodedUrl = encodeURIComponent(url),
-                id = 'article-share-box-' + $this.attr('data-id'),
-                offset = $this.offset(),
-                box;
-
-            if ($('#' + id).length) {
-                box = $('#' + id);
-
-                if (box.hasClass('on')){
-                    box.removeClass('on');
-                    return;
-                }
-            } else {
-                var html = [
-                    '<div id="' + id + '" class="article-share-box">',
-                        '<input class="article-share-input" value="' + url + '">',
-                        '<div class="article-share-links">',
-                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
-                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
-                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
-                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
-                        '</div>',
-                    '</div>'
-                ].join('');
-
-              box = $(html);
-
-              $('body').append(box);
-            }
-
-            $('.article-share-box.on').hide();
-
-            box.css({
-                top: offset.top + 25,
-                left: offset.left
-            }).addClass('on');
-
-        }).on('click', '.article-share-box', function (e) {
-            e.stopPropagation();
-        }).on('click', '.article-share-box-input', function () {
-            $(this).select();
-        }).on('click', '.article-share-box-link', function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-
-            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
-        });
-    })(jQuery);
-</script>
-
-            
-    
-        <a href="/2016/08/20/闭包/#comments" class="article-comment-link">评论</a>
-    
-
-        </footer>
-    </div>
-    
-</article>
-
-
-
     <nav id="page-nav">
         <a class="extend prev" rel="prev" href="/">&laquo; 上一页</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/">下一页 &raquo;</a>
     </nav>
@@ -1912,6 +1960,82 @@ f 函数执行完毕，f 函数上下文从执行上下文栈中弹出
         <h3 class="widget-title">最新文章</h3>
         <div class="widget">
             <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2017/08/27/2/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2017/08/27/2/" class="title"></a></p>
+                            <p class="item-date"><time datetime="2017-08-27T09:09:42.359Z" itemprop="datePublished">2017-08-27</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2017/08/27/1/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2017/08/27/1/" class="title"></a></p>
+                            <p class="item-date"><time datetime="2017-08-27T08:25:48.546Z" itemprop="datePublished">2017-08-27</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2017/02/05/css兼容/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://www.gratisography.com/pictures/288_1.jpg)" alt="CSS兼容" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/前端/">前端</a></p>
+                            <p class="item-title"><a href="/2017/02/05/css兼容/" class="title">CSS兼容</a></p>
+                            <p class="item-date"><time datetime="2017-02-04T16:00:00.000Z" itemprop="datePublished">2017-02-05</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2017/02/05/去除inline-block元素间间距的N种方法/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://www.gratisography.com/pictures/404_1.jpg)" alt="去除inline-block元素间间距的N种方法(转)" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/前端/">前端</a></p>
+                            <p class="item-title"><a href="/2017/02/05/去除inline-block元素间间距的N种方法/" class="title">去除inline-block元素间间距的N种方法(转)</a></p>
+                            <p class="item-date"><time datetime="2017-02-04T16:00:00.000Z" itemprop="datePublished">2017-02-05</time></p>
+                        </div>
+                    </li>
                 
                     <li>
                         
@@ -1932,82 +2056,6 @@ f 函数执行完毕，f 函数上下文从执行上下文栈中弹出
                         </div>
                     </li>
                 
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2017/02/01/CSS样式表时总结下FF与IE的区别/" class="thumbnail">
-    
-    
-        <span style="background-image:url(http://www.gratisography.com/pictures/413_1.jpg)" alt="FF与IE的CSS区别" class="thumbnail-image"></span>
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/前端/">前端</a></p>
-                            <p class="item-title"><a href="/2017/02/01/CSS样式表时总结下FF与IE的区别/" class="title">FF与IE的CSS区别</a></p>
-                            <p class="item-date"><time datetime="2017-01-31T16:00:00.000Z" itemprop="datePublished">2017-02-01</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2017/02/01/js变量和函数的提升/" class="thumbnail">
-    
-    
-        <span style="background-image:url(http://st.originoo.cn/2632165/4026/i/950/depositphotos_40264933-stock-photo-young-plant.jpg)" alt="js变量提升和函数提升" class="thumbnail-image"></span>
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/前端/">前端</a></p>
-                            <p class="item-title"><a href="/2017/02/01/js变量和函数的提升/" class="title">js变量提升和函数提升</a></p>
-                            <p class="item-date"><time datetime="2017-01-31T16:00:00.000Z" itemprop="datePublished">2017-02-01</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2017/01/30/js变量的只声明不赋值/" class="thumbnail">
-    
-    
-        <span style="background-image:url(http://st3.originoo.cn/3591429/12987/i/950/depositphotos_129873842-stock-photo-best-friends-in-amusement-park.jpg)" alt="js变量的只声明不赋值" class="thumbnail-image"></span>
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/前端/">前端</a></p>
-                            <p class="item-title"><a href="/2017/01/30/js变量的只声明不赋值/" class="title">js变量的只声明不赋值</a></p>
-                            <p class="item-date"><time datetime="2017-01-29T16:00:00.000Z" itemprop="datePublished">2017-01-30</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2017/01/22/Ajax和Flash的优缺点/" class="thumbnail">
-    
-    
-        <span style="background-image:url(http://www.gratisography.com/pictures/333_1.jpg)" alt="Ajax和Flash优缺点" class="thumbnail-image"></span>
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/前端/">前端</a></p>
-                            <p class="item-title"><a href="/2017/01/22/Ajax和Flash的优缺点/" class="title">Ajax和Flash优缺点</a></p>
-                            <p class="item-date"><time datetime="2017-01-21T16:00:00.000Z" itemprop="datePublished">2017-01-22</time></p>
-                        </div>
-                    </li>
-                
             </ul>
         </div>
     </div>
@@ -2017,7 +2065,7 @@ f 函数执行完毕，f 函数上下文从执行上下文栈中弹出
     <div class="widget-wrap">
         <h3 class="widget-title">分类</h3>
         <div class="widget">
-            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Http/">Http</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Node/">Node</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Node/爬虫/">爬虫</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/js/">js</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端/">前端</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据库/">数据库</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/服务器/">服务器</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/版本管理/">版本管理</a><span class="category-list-count">1</span></li></ul>
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Http/">Http</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Node/">Node</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Node/爬虫/">爬虫</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/js/">js</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端/">前端</a><span class="category-list-count">15</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据库/">数据库</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/服务器/">服务器</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/版本管理/">版本管理</a><span class="category-list-count">1</span></li></ul>
         </div>
     </div>
 
@@ -2026,7 +2074,7 @@ f 函数执行完毕，f 函数上下文从执行上下文栈中弹出
     <div class="widget-wrap">
         <h3 class="widget-title">归档</h3>
         <div class="widget">
-            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">十二月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a><span class="archive-list-count">4</span></li></ul>
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">八月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">十二月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a><span class="archive-list-count">3</span></li></ul>
         </div>
     </div>
 
@@ -2035,7 +2083,7 @@ f 函数执行完毕，f 函数上下文从执行上下文栈中弹出
     <div class="widget-wrap">
         <h3 class="widget-title">标签</h3>
         <div class="widget">
-            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/">CSS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue/">Vue</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cheerio/">cheerio</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html/">html</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http请求/">http请求</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/">js</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lazyload/">lazyload</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongodb/">mongodb</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/中间件/">中间件</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/代理/">代理</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/存储/">存储</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/懒加载/">懒加载</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/爬虫/">爬虫</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/跨域/">跨域</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/页面请求/">页面请求</a><span class="tag-list-count">1</span></li></ul>
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue/">Vue</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cheerio/">cheerio</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html/">html</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http请求/">http请求</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/">js</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lazyload/">lazyload</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongodb/">mongodb</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/中间件/">中间件</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/代理/">代理</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/存储/">存储</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/懒加载/">懒加载</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/爬虫/">爬虫</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/跨域/">跨域</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/页面请求/">页面请求</a><span class="tag-list-count">1</span></li></ul>
         </div>
     </div>
 
@@ -2044,7 +2092,7 @@ f 函数执行完毕，f 函数上下文从执行上下文栈中弹出
     <div class="widget-wrap">
         <h3 class="widget-title">标签云</h3>
         <div class="widget tagcloud">
-            <a href="/tags/CSS/" style="font-size: 10px;">CSS</a> <a href="/tags/Vue/" style="font-size: 16.67px;">Vue</a> <a href="/tags/cheerio/" style="font-size: 10px;">cheerio</a> <a href="/tags/css/" style="font-size: 13.33px;">css</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/html/" style="font-size: 13.33px;">html</a> <a href="/tags/http请求/" style="font-size: 10px;">http请求</a> <a href="/tags/js/" style="font-size: 20px;">js</a> <a href="/tags/lazyload/" style="font-size: 10px;">lazyload</a> <a href="/tags/mongodb/" style="font-size: 10px;">mongodb</a> <a href="/tags/中间件/" style="font-size: 10px;">中间件</a> <a href="/tags/代理/" style="font-size: 10px;">代理</a> <a href="/tags/存储/" style="font-size: 10px;">存储</a> <a href="/tags/懒加载/" style="font-size: 10px;">懒加载</a> <a href="/tags/爬虫/" style="font-size: 10px;">爬虫</a> <a href="/tags/跨域/" style="font-size: 10px;">跨域</a> <a href="/tags/页面请求/" style="font-size: 10px;">页面请求</a>
+            <a href="/tags/Vue/" style="font-size: 13.33px;">Vue</a> <a href="/tags/cheerio/" style="font-size: 10px;">cheerio</a> <a href="/tags/css/" style="font-size: 16.67px;">css</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/html/" style="font-size: 13.33px;">html</a> <a href="/tags/http请求/" style="font-size: 10px;">http请求</a> <a href="/tags/js/" style="font-size: 20px;">js</a> <a href="/tags/lazyload/" style="font-size: 10px;">lazyload</a> <a href="/tags/mongodb/" style="font-size: 10px;">mongodb</a> <a href="/tags/中间件/" style="font-size: 10px;">中间件</a> <a href="/tags/代理/" style="font-size: 10px;">代理</a> <a href="/tags/存储/" style="font-size: 10px;">存储</a> <a href="/tags/懒加载/" style="font-size: 10px;">懒加载</a> <a href="/tags/爬虫/" style="font-size: 10px;">爬虫</a> <a href="/tags/跨域/" style="font-size: 10px;">跨域</a> <a href="/tags/页面请求/" style="font-size: 10px;">页面请求</a>
         </div>
     </div>
 
