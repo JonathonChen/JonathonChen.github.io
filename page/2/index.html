@@ -154,11 +154,11 @@
         </div>
         <div class="article-info profile-block">
             <div class="article-info-block">
-                19
+                22
                 <span>文章</span>
             </div>
             <div class="article-info-block">
-                14
+                17
                 <span>标签</span>
             </div>
         </div>
@@ -207,6 +207,458 @@
 
             
             <section id="main">
+    <article id="post-vue.生命周期" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            
+	
+		<a href="/2016/11/15/vue.生命周期/" itemprop="url">
+            <img src="http://st3.originoo.cn/3591429/12987/i/950/depositphotos_129873842-stock-photo-best-friends-in-amusement-park.jpg" class="article-banner" />
+        </a>
+	
+
+
+
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/2016/11/15/vue.生命周期/">Vue 生命周期</a>
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2016/11/15/vue.生命周期/">
+            <time datetime="2016-11-14T16:00:00.000Z" itemprop="datePublished">2016-11-15</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/前端/">前端</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/Vue/">Vue</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>  在使用vue一个多礼拜后，感觉现在还停留在初级阶段，虽然知道怎么和后端做数据交互，但是对于mounted这个挂载还不是很清楚的。放大之，对vue的生命周期不甚了解。只知道简单的使用，而不知道为什么，这对后面的踩坑是相当不利的。</p>
+<p>因为我们有时候会在几个钩子函数里做一些事情，什么时候做，在哪个函数里做，我们不清楚。</p>
+<h1 id="vue生命周期简介"><a href="#vue生命周期简介" class="headerlink" title="vue生命周期简介"></a>vue生命周期简介</h1><p><img src="vuelife.png" alt="vue生命周期"><br><img src="vuelife2.png" alt="vue生命周期"></p>
+<h1 id="生命周期探究"><a href="#生命周期探究" class="headerlink" title="生命周期探究"></a>生命周期探究</h1><p>&gt;<br><figure class="highlight django"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div></pre></td><td class="code"><pre><div class="line"><span class="xml"><span class="meta">&lt;!DOCTYPE html&gt;</span></span></div><div class="line"><span class="xml"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span></div><div class="line"><span class="xml"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span></div><div class="line"><span class="xml">    <span class="tag">&lt;<span class="name">title</span>&gt;</span><span class="tag">&lt;/<span class="name">title</span>&gt;</span></span></div><div class="line"><span class="xml">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span> <span class="attr">src</span>=<span class="string">"https://cdn.jsdelivr.net/vue/2.1.3/vue.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></div><div class="line"><span class="xml"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span></div><div class="line"><span class="xml"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span></div><div class="line"><span class="xml"></span></div><div class="line"><span class="xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"app"</span>&gt;</span></span></div><div class="line"><span class="xml">     <span class="tag">&lt;<span class="name">p</span>&gt;</span></span><span class="template-variable">&#123;&#123; message &#125;&#125;</span><span class="xml"><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></div><div class="line"><span class="xml"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></div><div class="line"><span class="xml"></span></div><div class="line"><span class="xml"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span><span class="undefined"></span></span></div><div class="line"><span class="xml">    </span></div><div class="line"><span class="xml">  var app = new Vue(&#123;</span></div><div class="line"><span class="xml">      el: '#app',</span></div><div class="line"><span class="xml">      data: &#123;</span></div><div class="line"><span class="xml">          message : "xuxiao is boy" </span></div><div class="line"><span class="xml">      &#125;,</span></div><div class="line"><span class="xml">       beforeCreate: function () &#123;</span></div><div class="line"><span class="xml">                console.group('beforeCreate 创建前状态===============》');</span></div><div class="line"><span class="xml">               console.log("%c%s", "color:red" , "el     : " + this.$el); //undefined</span></div><div class="line"><span class="xml">               console.log("%c%s", "color:red","data   : " + this.$data); //undefined </span></div><div class="line"><span class="xml">               console.log("%c%s", "color:red","message: " + this.message)  </span></div><div class="line"><span class="xml">        &#125;,</span></div><div class="line"><span class="xml">        created: function () &#123;</span></div><div class="line"><span class="xml">            console.group('created 创建完毕状态===============》');</span></div><div class="line"><span class="xml">            console.log("%c%s", "color:red","el     : " + this.$el); //undefined</span></div><div class="line"><span class="xml">               console.log("%c%s", "color:red","data   : " + this.$data); //已被初始化 </span></div><div class="line"><span class="xml">               console.log("%c%s", "color:red","message: " + this.message); //已被初始化</span></div><div class="line"><span class="xml">        &#125;,</span></div><div class="line"><span class="xml">        beforeMount: function () &#123;</span></div><div class="line"><span class="xml">            console.group('beforeMount 挂载前状态===============》');</span></div><div class="line"><span class="xml">            console.log("%c%s", "color:red","el     : " + (this.$el)); //已被初始化</span></div><div class="line"><span class="xml">            console.log(this.$el);</span></div><div class="line"><span class="xml">               console.log("%c%s", "color:red","data   : " + this.$data); //已被初始化  </span></div><div class="line"><span class="xml">               console.log("%c%s", "color:red","message: " + this.message); //已被初始化  </span></div><div class="line"><span class="xml">        &#125;,</span></div><div class="line"><span class="xml">        mounted: function () &#123;</span></div><div class="line"><span class="xml">            console.group('mounted 挂载结束状态===============》');</span></div><div class="line"><span class="xml">            console.log("%c%s", "color:red","el     : " + this.$el); //已被初始化</span></div><div class="line"><span class="xml">            console.log(this.$el);    </span></div><div class="line"><span class="xml">               console.log("%c%s", "color:red","data   : " + this.$data); //已被初始化</span></div><div class="line"><span class="xml">               console.log("%c%s", "color:red","message: " + this.message); //已被初始化 </span></div><div class="line"><span class="xml">        &#125;,</span></div><div class="line"><span class="xml">        beforeUpdate: function () &#123;</span></div><div class="line"><span class="xml">            console.group('beforeUpdate 更新前状态===============》');</span></div><div class="line"><span class="xml">            console.log("%c%s", "color:red","el     : " + this.$el);</span></div><div class="line"><span class="xml">            console.log(this.$el);   </span></div><div class="line"><span class="xml">               console.log("%c%s", "color:red","data   : " + this.$data); </span></div><div class="line"><span class="xml">               console.log("%c%s", "color:red","message: " + this.message); </span></div><div class="line"><span class="xml">        &#125;,</span></div><div class="line"><span class="xml">        updated: function () &#123;</span></div><div class="line"><span class="xml">            console.group('updated 更新完成状态===============》');</span></div><div class="line"><span class="xml">            console.log("%c%s", "color:red","el     : " + this.$el);</span></div><div class="line"><span class="xml">            console.log(this.$el); </span></div><div class="line"><span class="xml">               console.log("%c%s", "color:red","data   : " + this.$data); </span></div><div class="line"><span class="xml">               console.log("%c%s", "color:red","message: " + this.message); </span></div><div class="line"><span class="xml">        &#125;,</span></div><div class="line"><span class="xml">        beforeDestroy: function () &#123;</span></div><div class="line"><span class="xml">            console.group('beforeDestroy 销毁前状态===============》');</span></div><div class="line"><span class="xml">            console.log("%c%s", "color:red","el     : " + this.$el);</span></div><div class="line"><span class="xml">            console.log(this.$el);    </span></div><div class="line"><span class="xml">               console.log("%c%s", "color:red","data   : " + this.$data);</span></div></pre></td></tr></table></figure></p>
+<h2 id="create-和-mounted-相关"><a href="#create-和-mounted-相关" class="headerlink" title="create 和 mounted 相关"></a>create 和 mounted 相关</h2><blockquote>
+<p>beforecreated：el 和 data 并未初始化<br>created:完成了 data 数据的初始化，el没有<br>beforeMount：完成了 el 和 data 初始化<br>mounted ：完成挂载</p>
+</blockquote>
+<h2 id="生命周期总结"><a href="#生命周期总结" class="headerlink" title="生命周期总结"></a>生命周期总结</h2><blockquote>
+<p>beforecreate : 举个栗子：可以在这加个loading事件<br>created ：在这结束loading，还做一些初始化，实现函数自执行<br>mounted ： 在这发起后端请求，拿回数据，配合路由钩子做一些事情<br>beforeDestory： 你确认删除XX吗？ destoryed ：当前组件已被删除，清空相关内容</p>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><p>  <a href="https://segmentfault.com/q/10" target="_blank" rel="external">https://segmentfault.com/q/10</a>…<br>    <a href="http://www.cnblogs.com/gagag/" target="_blank" rel="external">http://www.cnblogs.com/gagag/</a>…</p>
+</blockquote>
+
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="/2016/11/15/vue.生命周期/" data-id="cj6uenfva001gs8wqo07p1sds" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+        <a href="/2016/11/15/vue.生命周期/#comments" class="article-comment-link">评论</a>
+    
+
+        </footer>
+    </div>
+    
+</article>
+
+
+
+    <article id="post-vue loading组件" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            
+	
+		<a href="/2016/11/02/vue loading组件/" itemprop="url">
+            <img src="http://www.gratisography.com/pictures/433_1.jpg" class="article-banner" />
+        </a>
+	
+
+
+
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/2016/11/02/vue loading组件/">Vue loading加载动画组件</a>
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2016/11/02/vue loading组件/">
+            <time datetime="2016-11-01T16:00:00.000Z" itemprop="datePublished">2016-11-02</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/前端/">前端</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/Vue/">Vue</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <blockquote>
+<h2 id="实现效果"><a href="#实现效果" class="headerlink" title="实现效果"></a>实现效果</h2><pre><code>实现了加载是颜色的变化以及进度条的变化
+</code></pre><p>下面是代码实现</p>
+<ol>
+<li>html页面测试</li>
+</ol>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="undefined"></span></div><div class="line"><span class="css">  <span class="selector-class">.spinner</span> &#123;</span></div><div class="line"><span class="undefined">    transform-origin: center;</span></div><div class="line"><span class="undefined">    animation: rotator 6s linear infinite;</span></div><div class="line"><span class="css">	<span class="selector-tag">background-color</span>:<span class="selector-id">#cccccc</span>;</span></div><div class="line"><span class="css">	<span class="selector-tag">width</span><span class="selector-pseudo">:150px</span>;</span></div><div class="line"><span class="css">	<span class="selector-tag">height</span><span class="selector-pseudo">:150px</span>;</span></div><div class="line"><span class="undefined">  &#125;</span></div><div class="line"><span class="css">  @<span class="keyword">keyframes</span> rotator &#123;</span></div><div class="line"><span class="css">    0% &#123; <span class="attribute">transform</span>: <span class="built_in">rotate</span>(0deg); &#125;</span></div><div class="line"><span class="css">    100% &#123; <span class="attribute">transform</span>: <span class="built_in">rotate</span>(270deg); &#125;</span></div><div class="line"><span class="undefined">  &#125;</span></div><div class="line"><span class="css">  <span class="selector-class">.path</span> &#123;</span></div><div class="line"><span class="undefined">    stroke-dasharray: 187;</span></div><div class="line"><span class="undefined">    stroke-dashoffset: 0;</span></div><div class="line"><span class="undefined">    transform-origin: center;</span></div><div class="line"><span class="undefined">    animation: dash 2s ease-in-out infinite, colors 4s ease-in-out infinite;</span></div><div class="line"><span class="undefined">  &#125;</span></div><div class="line"><span class="undefined"></span></div><div class="line"><span class="css">  @<span class="keyword">keyframes</span> colors &#123;</span></div><div class="line"><span class="css">    0% &#123; <span class="attribute">stroke</span>: <span class="number">#4285F4</span>; &#125;</span></div><div class="line"><span class="css">    25% &#123; <span class="attribute">stroke</span>: <span class="number">#DE3E35</span>; &#125;</span></div><div class="line"><span class="css">    50% &#123; <span class="attribute">stroke</span>: <span class="number">#F7C223</span>; &#125;</span></div><div class="line"><span class="css">    75% &#123; <span class="attribute">stroke</span>: <span class="number">#1B9A59</span>; &#125;</span></div><div class="line"><span class="css">    100% &#123; <span class="attribute">stroke</span>: <span class="number">#4285F4</span>; &#125;</span></div><div class="line"><span class="undefined">  &#125;</span></div><div class="line"><span class="css">  @<span class="keyword">keyframes</span> dash &#123;</span></div><div class="line"><span class="css">    0% &#123; <span class="attribute">stroke-dashoffset</span>: <span class="number">187</span>; &#125;</span></div><div class="line"><span class="undefined">    50% &#123;</span></div><div class="line"><span class="css">      <span class="selector-tag">stroke-dashoffset</span>: 93<span class="selector-class">.5</span>;</span></div><div class="line"><span class="undefined">    &#125;</span></div><div class="line"><span class="undefined">    100% &#123;</span></div><div class="line"><span class="undefined">      stroke-dashoffset: 0;</span></div><div class="line"><span class="undefined">    &#125;</span></div><div class="line"><span class="undefined">  &#125;</span></div><div class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line"> <span class="tag">&lt;<span class="name">svg</span> <span class="attr">class</span>=<span class="string">"spinner"</span> <span class="attr">xmlns</span>=<span class="string">"http://www.w3.org/2000/svg"</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">circle</span> <span class="attr">class</span>=<span class="string">"path"</span>  <span class="attr">stroke</span>=<span class="string">"red"</span> <span class="attr">fill</span>=<span class="string">"none"</span> <span class="attr">stroke-width</span>=<span class="string">"6"</span>  <span class="attr">cx</span>=<span class="string">"75"</span> <span class="attr">cy</span>=<span class="string">"75"</span> <span class="attr">r</span>=<span class="string">"30"</span>&gt;</span><span class="tag">&lt;/<span class="name">circle</span>&gt;</span></div><div class="line"> <span class="tag">&lt;/<span class="name">svg</span>&gt;</span></div><div class="line"> </div><div class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure>
+</blockquote>
+<p><img src="/2017/02/01/vue loading组件/Video_2017-08-19_213646.gif"></p>
+<blockquote>
+<ol>
+<li>vue Loading组件</li>
+</ol>
+<figure class="highlight arduino"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div></pre></td><td class="code"><pre><div class="line">&lt;<span class="keyword">template</span>&gt;</div><div class="line">  &lt;div class=<span class="string">"loading-component"</span>&gt;</div><div class="line">    &lt;svg class=<span class="string">"spinner"</span> :style=<span class="string">"loadingSize"</span> viewBox=<span class="string">"0 0 66 66"</span> xmlns=<span class="string">"http://www.w3.org/2000/svg"</span>&gt;</div><div class="line">      &lt;<span class="built_in">circle</span> class=<span class="string">"path"</span> :style=<span class="string">"loadingColor"</span> <span class="built_in">fill</span>=<span class="string">"none"</span> :<span class="built_in">stroke</span>-<span class="built_in">width</span>=<span class="string">"stroke"</span>  cx=<span class="string">"33"</span> cy=<span class="string">"33"</span> r=<span class="string">"30"</span>&gt;&lt;/<span class="built_in">circle</span>&gt;</div><div class="line">    &lt;/svg&gt;</div><div class="line">  &lt;/div&gt;</div><div class="line">&lt;/<span class="keyword">template</span>&gt;</div><div class="line"></div><div class="line">&lt;script type=<span class="string">"text/ecmascript-6"</span>&gt;</div><div class="line">  <span class="keyword">export</span> <span class="built_in">default</span> &#123;</div><div class="line">    props: &#123;</div><div class="line">      <span class="built_in">size</span>: &#123;</div><div class="line">        type: Number,</div><div class="line">        <span class="built_in">default</span>: <span class="number">50</span></div><div class="line">      &#125;,</div><div class="line">      <span class="built_in">stroke</span>: &#123;</div><div class="line">        type: Number,</div><div class="line">        <span class="built_in">default</span>: <span class="number">3.5</span></div><div class="line">      &#125;,</div><div class="line">      color: &#123;</div><div class="line">        type: <span class="keyword">String</span>,</div><div class="line">        <span class="built_in">default</span>: <span class="string">'#ed424b'</span></div><div class="line">      &#125;</div><div class="line">    &#125;,</div><div class="line">    computed: &#123;</div><div class="line">      loadingSize() &#123;</div><div class="line">        <span class="keyword">const</span> newSize = <span class="keyword">this</span>.<span class="built_in">size</span> + <span class="string">'px'</span></div><div class="line">        <span class="built_in">return</span> &#123;</div><div class="line">          <span class="built_in">width</span>: newSize,</div><div class="line">          <span class="built_in">height</span>: newSize</div><div class="line">        &#125;</div><div class="line">      &#125;,</div><div class="line">      loadingColor() &#123;</div><div class="line">        <span class="built_in">return</span> &#123;</div><div class="line">          <span class="built_in">stroke</span>: <span class="keyword">this</span>.color</div><div class="line">        &#125;</div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&lt;/script&gt;</div><div class="line"></div><div class="line">&lt;style lang=<span class="string">"less"</span> type=<span class="string">"text/less"</span>&gt;</div><div class="line"></div><div class="line">  .loading-component &#123;</div><div class="line">    <span class="built_in">display</span>: <span class="keyword">inline</span>-block;</div><div class="line">    pointer-events: none;</div><div class="line">    will-change: transform, opacity;</div><div class="line">    <span class="built_in">position</span>: fixed;</div><div class="line">    left: <span class="number">50</span>%;</div><div class="line">    top: <span class="number">50</span>%;</div><div class="line">    transform: translate(<span class="number">-50</span>%, <span class="number">-50</span>%);</div><div class="line">  &#125;</div><div class="line">  <span class="comment">//2 * pi * r = 188.4</span></div><div class="line">  @offset: <span class="number">187</span>;</div><div class="line">  @duration: <span class="number">1.4</span>s;</div><div class="line">  <span class="comment">//设置外层旋转形成加载的效果</span></div><div class="line">  .spinner &#123;</div><div class="line">    transform-origin: center;</div><div class="line">    animation: rotator @duration linear infinite;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  @keyframes rotator &#123;</div><div class="line">    <span class="number">0</span>% &#123; transform: rotate(<span class="number">0</span>deg); &#125;</div><div class="line">    <span class="number">100</span>% &#123; transform: rotate(<span class="number">270</span>deg); &#125;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  .path &#123;</div><div class="line">    <span class="built_in">stroke</span>-dasharray: @offset;</div><div class="line">    <span class="built_in">stroke</span>-dashoffset: <span class="number">0</span>;</div><div class="line">    transform-origin: center;</div><div class="line">    <span class="comment">// 设置颜色变化以及dash长度的变化</span></div><div class="line">    animation: dash @duration ease-in-out infinite, colors @duration ease-in-out infinite;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  @keyframes colors &#123;</div><div class="line">    <span class="number">0</span>% &#123; <span class="built_in">stroke</span>: #<span class="number">4285</span>F4; &#125;</div><div class="line">    <span class="number">25</span>% &#123; <span class="built_in">stroke</span>: #DE3E35; &#125;</div><div class="line">    <span class="number">50</span>% &#123; <span class="built_in">stroke</span>: #F7C223; &#125;</div><div class="line">    <span class="number">75</span>% &#123; <span class="built_in">stroke</span>: #<span class="number">1</span>B9A59; &#125;</div><div class="line">    <span class="number">100</span>% &#123; <span class="built_in">stroke</span>: #<span class="number">4285</span>F4; &#125;</div><div class="line">  &#125;</div><div class="line"> <span class="comment">//让空白部分慢慢减少</span></div><div class="line">  @keyframes dash &#123;</div><div class="line">    <span class="number">0</span>% &#123; <span class="built_in">stroke</span>-dashoffset: @offset; &#125;</div><div class="line">    <span class="number">50</span>% &#123;</div><div class="line">      <span class="built_in">stroke</span>-dashoffset: @offset/<span class="number">4</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="number">100</span>% &#123;</div><div class="line">      <span class="built_in">stroke</span>-dashoffset: @offset;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&lt;/style&gt;</div></pre></td></tr></table></figure></blockquote>
+
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="/2016/11/02/vue loading组件/" data-id="cj6uenfva001os8wqbxb13syg" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+        <a href="/2016/11/02/vue loading组件/#comments" class="article-comment-link">评论</a>
+    
+
+        </footer>
+    </div>
+    
+</article>
+
+
+
+    <article id="post-v-model" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            
+	
+		<a href="/2016/10/25/v-model/" itemprop="url">
+            <img src="http://www.gratisography.com/pictures/410_1.jpg" class="article-banner" />
+        </a>
+	
+
+
+
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/2016/10/25/v-model/">v-model本质（以底部导航切换为例子）</a>
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2016/10/25/v-model/">
+            <time datetime="2016-10-24T16:00:00.000Z" itemprop="datePublished">2016-10-25</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/前端/">前端</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/Vue/">Vue</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <h1 id="v-model"><a href="#v-model" class="headerlink" title="v-model"></a>v-model</h1><h3 id="v-model本质是"><a href="#v-model本质是" class="headerlink" title="v-model本质是"></a>v-model本质是</h3><figure class="highlight routeros"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;input <span class="attribute">type</span>=<span class="string">"text"</span> v-bind:<span class="attribute">value</span>=<span class="string">"dataA"</span> v-on:<span class="attribute">input</span>=<span class="string">"dataA = <span class="variable">$event</span>.target.value"</span> /&gt;</div></pre></td></tr></table></figure>
+<h2 id="1-Index页面"><a href="#1-Index页面" class="headerlink" title="1.Index页面"></a>1.Index页面</h2><h3 id="该页面包含了m-tabbar和m-tabbar-item组件，目的是实现底部tab切换"><a href="#该页面包含了m-tabbar和m-tabbar-item组件，目的是实现底部tab切换" class="headerlink" title="该页面包含了m-tabbar和m-tabbar-item组件，目的是实现底部tab切换"></a>该页面包含了m-tabbar和m-tabbar-item组件，目的是实现底部tab切换</h3><h3 id="m-tabbar传入-v-mode-”select”实际上是v-bind-value-”select”-v-on-input-”select-event-target-value”"><a href="#m-tabbar传入-v-mode-”select”实际上是v-bind-value-”select”-v-on-input-”select-event-target-value”" class="headerlink" title="m-tabbar传入 v-mode:”select”实际上是v-bind:value=”select” v-on:input=”select = $event.target.value”"></a>m-tabbar传入 v-mode:”select”实际上是v-bind:value=”select” v-on:input=”select = $event.target.value”</h3><h4 id="v-bind-value-”select”传入的props-父-gt-子"><a href="#v-bind-value-”select”传入的props-父-gt-子" class="headerlink" title="v-bind:value=”select”传入的props(父-&gt;子)"></a>v-bind:value=”select”传入的props(父-&gt;子)</h4><h4 id="v-on-input-”select-event-target-value”-监听-emit-‘input’-…"><a href="#v-on-input-”select-event-target-value”-监听-emit-‘input’-…" class="headerlink" title="v-on:input=”select = $event.target.value” 监听$emit(‘input’,…)"></a>v-on:input=”select = $event.target.value” 监听$emit(‘input’,…)</h4><h4 id="v-model-数据双向绑定"><a href="#v-model-数据双向绑定" class="headerlink" title="v-model 数据双向绑定"></a>v-model 数据双向绑定</h4><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">div</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">m-tabbar</span> <span class="attr">v-model</span>=<span class="string">"select"</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">m-tabbar-item</span> <span class="attr">id</span>=<span class="string">'tab1'</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"../assets/images/ic_tab_home_normal.png"</span> <span class="attr">alt</span>=<span class="string">""</span> <span class="attr">slot</span>=<span class="string">"icon-normal"</span>&gt;</span> </div><div class="line">        <span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"../assets/images/ic_tab_home_active.png"</span> <span class="attr">alt</span>=<span class="string">""</span> <span class="attr">slot</span>=<span class="string">"icon-active"</span>&gt;</span></div><div class="line">        首页</div><div class="line">      <span class="tag">&lt;/<span class="name">m-tabbar-item</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">m-tabbar-item</span> <span class="attr">id</span>=<span class="string">'tab2'</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"../assets/images/ic_tab_subject_normal.png"</span> <span class="attr">alt</span>=<span class="string">""</span> <span class="attr">slot</span>=<span class="string">"icon-normal"</span>&gt;</span> </div><div class="line">        <span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"../assets/images/ic_tab_subject_active.png"</span> <span class="attr">alt</span>=<span class="string">""</span> <span class="attr">slot</span>=<span class="string">"icon-active"</span>&gt;</span> </div><div class="line">        书影音</div><div class="line">      <span class="tag">&lt;/<span class="name">m-tabbar-item</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">m-tabbar-item</span> <span class="attr">id</span>=<span class="string">'tab3'</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"../assets/images/ic_tab_status_normal.png"</span> <span class="attr">alt</span>=<span class="string">""</span> <span class="attr">slot</span>=<span class="string">"icon-normal"</span>&gt;</span> </div><div class="line">        <span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"../assets/images/ic_tab_status_active.png"</span> <span class="attr">alt</span>=<span class="string">""</span> <span class="attr">slot</span>=<span class="string">"icon-active"</span>&gt;</span> </div><div class="line">        广播</div><div class="line">      <span class="tag">&lt;/<span class="name">m-tabbar-item</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">m-tabbar-item</span> <span class="attr">id</span>=<span class="string">'tab4'</span>&gt;</span></div><div class="line">          <span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"../assets/images/ic_tab_group_normal.png"</span> <span class="attr">alt</span>=<span class="string">""</span> <span class="attr">slot</span>=<span class="string">"icon-normal"</span>&gt;</span> </div><div class="line">          <span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"../assets/images/ic_tab_group_active.png"</span> <span class="attr">alt</span>=<span class="string">""</span> <span class="attr">slot</span>=<span class="string">"icon-active"</span>&gt;</span> </div><div class="line">        小组</div><div class="line">      <span class="tag">&lt;/<span class="name">m-tabbar-item</span>&gt;</span></div><div class="line">       <span class="tag">&lt;<span class="name">m-tabbar-item</span> <span class="attr">id</span>=<span class="string">'tab5'</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"../assets/images/ic_tab_profile_normal.png"</span> <span class="attr">alt</span>=<span class="string">""</span> <span class="attr">slot</span>=<span class="string">"icon-normal"</span>&gt;</span> </div><div class="line">        <span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"../assets/images/ic_tab_profile_active.png"</span> <span class="attr">alt</span>=<span class="string">""</span> <span class="attr">slot</span>=<span class="string">"icon-active"</span>&gt;</span> </div><div class="line">        我的</div><div class="line">      <span class="tag">&lt;/<span class="name">m-tabbar-item</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">m-tabbar</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined"></span></div><div class="line"><span class="javascript">  <span class="keyword">import</span> mTabbar <span class="keyword">from</span> <span class="string">'../components/tabbar'</span></span></div><div class="line"><span class="javascript">  <span class="keyword">import</span> mTabbarItem <span class="keyword">from</span> <span class="string">'../components/tabbar-item'</span></span></div><div class="line"><span class="javascript">  <span class="keyword">export</span> <span class="keyword">default</span> &#123;</span></div><div class="line"><span class="actionscript">    name: <span class="string">'index'</span>,</span></div><div class="line"><span class="undefined">    components: &#123;</span></div><div class="line"><span class="undefined">      mTabbar,</span></div><div class="line"><span class="undefined">      mTabbarItem</span></div><div class="line"><span class="undefined">    &#125;,</span></div><div class="line"><span class="undefined">    data()&#123;</span></div><div class="line"><span class="actionscript">        <span class="keyword">return</span>&#123;</span></div><div class="line"><span class="actionscript">            select:<span class="string">'tab1'</span></span></div><div class="line"><span class="undefined">        &#125;</span></div><div class="line"><span class="undefined">    &#125;,</span></div><div class="line"><span class="undefined">    watch:&#123;</span></div><div class="line"><span class="actionscript">        select:<span class="function"><span class="keyword">function</span><span class="params">()</span></span>&#123;</span></div><div class="line"><span class="javascript">            <span class="built_in">console</span>.log(<span class="keyword">this</span>.select);</span></div><div class="line"><span class="undefined">        &#125;</span></div><div class="line"><span class="undefined">    &#125;</span></div><div class="line"><span class="undefined">  &#125;</span></div><div class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div></pre></td></tr></table></figure>
+<h2 id="1-父组件"><a href="#1-父组件" class="headerlink" title="1.父组件"></a>1.父组件</h2><h3 id="接收v-bind-value属性"><a href="#接收v-bind-value属性" class="headerlink" title="接收v-bind:value属性"></a>接收v-bind:value属性</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"m-tabbar"</span>&gt;</span></div><div class="line">       <span class="tag">&lt;<span class="name">slot</span>&gt;</span><span class="tag">&lt;/<span class="name">slot</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined"></span></div><div class="line"><span class="undefined"></span></div><div class="line"><span class="javascript"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span></div><div class="line"><span class="actionscript">    props:[<span class="string">'value'</span>]</span></div><div class="line"><span class="undefined">&#125;</span></div><div class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">style</span> <span class="attr">lang</span>=<span class="string">"less"</span>&gt;</span><span class="undefined"></span></div><div class="line"><span class="css"><span class="selector-class">.m-tabbar</span>&#123;</span></div><div class="line"><span class="undefined">    display: flex;</span></div><div class="line"><span class="undefined">    flex-direction: row;</span></div><div class="line"><span class="undefined">    position: fixed;</span></div><div class="line"><span class="undefined">    bottom: 0;</span></div><div class="line"><span class="undefined">    left: 0;</span></div><div class="line"><span class="undefined">    right: 0;</span></div><div class="line"><span class="undefined">    width: 100%;</span></div><div class="line"><span class="undefined">    overflow: hidden;</span></div><div class="line"><span class="undefined">    height: 50px;</span></div><div class="line"><span class="css">    <span class="selector-tag">background</span>: <span class="selector-id">#fff</span>;</span></div><div class="line"><span class="css">    <span class="selector-tag">border-top</span>: 1<span class="selector-tag">px</span> <span class="selector-tag">solid</span> <span class="selector-id">#e4e4e4</span>;</span></div><div class="line"><span class="undefined">&#125;</span></div><div class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></div></pre></td></tr></table></figure>
+<h2 id="2-子组件"><a href="#2-子组件" class="headerlink" title="2.子组件"></a>2.子组件</h2><h3 id="接收id属性值，通过-parent-emit-‘input’-id-向父组件传递当前点击id的值，父组件由on来接收"><a href="#接收id属性值，通过-parent-emit-‘input’-id-向父组件传递当前点击id的值，父组件由on来接收" class="headerlink" title="接收id属性值，通过$parent.$emit(‘input’,id)向父组件传递当前点击id的值，父组件由on来接收"></a>接收id属性值，通过$parent.$emit(‘input’,id)向父组件传递当前点击id的值，父组件由on来接收</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></div><div class="line">     <span class="tag">&lt;<span class="name">a</span> <span class="attr">class</span>=<span class="string">"m-tabbar-item"</span> <span class="attr">:class</span>=<span class="string">"&#123;'is-active':isActive&#125;"</span> @<span class="attr">click</span>=<span class="string">"$parent.$emit('input',id)"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"m-tabbar-item-icon"</span> <span class="attr">v-show</span>=<span class="string">"!isActive"</span>&gt;</span><span class="tag">&lt;<span class="name">slot</span> <span class="attr">name</span>=<span class="string">"icon-normal"</span>&gt;</span><span class="tag">&lt;/<span class="name">slot</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"m-tabbar-item-icon"</span> <span class="attr">v-show</span>=<span class="string">"isActive"</span>&gt;</span><span class="tag">&lt;<span class="name">slot</span> <span class="attr">name</span>=<span class="string">"icon-active"</span>&gt;</span><span class="tag">&lt;/<span class="name">slot</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"m-tabbar-item-text"</span>&gt;</span><span class="tag">&lt;<span class="name">slot</span>&gt;</span><span class="tag">&lt;/<span class="name">slot</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">a</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined"></span></div><div class="line"><span class="javascript"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span></div><div class="line"><span class="actionscript">  props:[<span class="string">'id'</span>],</span></div><div class="line"><span class="undefined">  computed: &#123;</span></div><div class="line"><span class="undefined">    isActive()&#123;</span></div><div class="line"><span class="actionscript">      <span class="keyword">if</span>(<span class="keyword">this</span>.$parent.value===<span class="keyword">this</span>.id)&#123;</span></div><div class="line"><span class="actionscript">        <span class="keyword">return</span> <span class="literal">true</span>;</span></div><div class="line"><span class="undefined">      &#125;</span></div><div class="line"><span class="undefined">    &#125;</span></div><div class="line"><span class="undefined">  &#125;</span></div><div class="line"><span class="undefined">&#125;</span></div><div class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">style</span> <span class="attr">lang</span>=<span class="string">"less"</span>&gt;</span><span class="undefined"></span></div><div class="line"><span class="css"><span class="selector-class">.m-tabbar-item</span>&#123;</span></div><div class="line"><span class="undefined">    flex: 1;</span></div><div class="line"><span class="undefined">    text-align: center;</span></div><div class="line"><span class="css">    <span class="selector-class">.m-tabbar-item-icon</span>&#123;</span></div><div class="line"><span class="undefined">        display: block;</span></div><div class="line"><span class="undefined">        padding-top: 2px;</span></div><div class="line"><span class="undefined">        img&#123;</span></div><div class="line"><span class="undefined">            width: 28px;</span></div><div class="line"><span class="undefined">            height: 28px;</span></div><div class="line"><span class="undefined">        &#125;</span></div><div class="line"><span class="undefined"></span></div><div class="line"><span class="undefined">    &#125;</span></div><div class="line"><span class="css">    <span class="selector-class">.m-tabbar-item-text</span>&#123;</span></div><div class="line"><span class="undefined">        display: block;</span></div><div class="line"><span class="undefined">        font-size: 10px;</span></div><div class="line"><span class="css">        <span class="selector-tag">color</span>:<span class="selector-id">#949494</span>;</span></div><div class="line"><span class="undefined">    &#125;</span></div><div class="line"><span class="css">    &amp;<span class="selector-class">.is-active</span>&#123;</span></div><div class="line"><span class="css">        <span class="selector-class">.m-tabbar-item-text</span>&#123;</span></div><div class="line"><span class="css">            <span class="selector-tag">color</span>: <span class="selector-id">#42bd56</span>;</span></div><div class="line"><span class="undefined">        &#125;</span></div><div class="line"><span class="undefined">    &#125;</span></div><div class="line"><span class="undefined">&#125;</span></div><div class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></div></pre></td></tr></table></figure>
+
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="/2016/10/25/v-model/" data-id="cj6uenfva001bs8wqi6yz6n6k" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+        <a href="/2016/10/25/v-model/#comments" class="article-comment-link">评论</a>
+    
+
+        </footer>
+    </div>
+    
+</article>
+
+
+
     <article id="post-iis部署" class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
@@ -281,7 +733,7 @@
 
 </div>
 
-    <a data-url="/2016/10/03/iis部署/" data-id="cj6rzsm6l0006c8wqxzkxaeds" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="/2016/10/03/iis部署/" data-id="cj6uenfuu0014s8wqb68sn3mk" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -499,7 +951,7 @@
 
 </div>
 
-    <a data-url="/2016/09/21/深入理解HTTP协议（转）/" data-id="cj6rzsm850015c8wqick3b0y7" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="/2016/09/21/深入理解HTTP协议（转）/" data-id="cj6uenfw50022s8wqxsaz60zf" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -730,7 +1182,7 @@ superagent也支持复合请求,比如你想上传一个带有你的姓名和邮
 
 </div>
 
-    <a data-url="/2016/09/10/批处理HTTP模块SuperAgent/" data-id="cj6rzsm8a0019c8wqmus8pydv" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="/2016/09/10/批处理HTTP模块SuperAgent/" data-id="cj6uenfw50026s8wqcyauj7iy" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -881,7 +1333,7 @@ superagent也支持复合请求,比如你想上传一个带有你的姓名和邮
 
 </div>
 
-    <a data-url="/2016/09/05/懒加载/" data-id="cj6rzsm830013c8wqg4yguvdq" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="/2016/09/05/懒加载/" data-id="cj6uenfva001ks8wqg9q6k62x" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -1027,7 +1479,7 @@ superagent也支持复合请求,比如你想上传一个带有你的姓名和邮
 
 </div>
 
-    <a data-url="/2016/08/25/解决https请求下发送http请求问题 /" data-id="cj6rzsm8h001cc8wq7mdcuyw2" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="/2016/08/25/解决https请求下发送http请求问题 /" data-id="cj6uenfvq001ws8wq3hxxfbuy" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -1182,7 +1634,7 @@ superagent也支持复合请求,比如你想上传一个带有你的姓名和邮
 <blockquote>
 <p>1.从理论角度：所有的函数。因为它们都在创建的时候就将上层上下文的数据保存起来了。哪怕是简单的全局变量也是如此，因为函数中访问全局变量就相当于是在访问自由变量，这个时候使用最外层的作用域。<br>  2.从实践角度：以下函数才算是闭包：<br>        (1).即使创建它的上下文已经销毁，它仍然存在（比如，内部函数从父函数中返回）<br>        (2).在代码中引用了自由变量</p>
 </blockquote>
-<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><figure class="highlight actionscript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> scope = <span class="string">"global scope"</span>;</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">checkscope</span><span class="params">()</span></span>&#123;</div><div class="line">    <span class="keyword">var</span> scope = <span class="string">"local scope"</span>;</div><div class="line">    <span class="function"><span class="keyword">function</span> <span class="title">f</span><span class="params">()</span></span>&#123;</div><div class="line">        <span class="keyword">return</span> scope;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> f;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">var</span> foo = checkscope();</div><div class="line">foo();</div></pre></td></tr></table></figure>
+<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> scope = <span class="string">"global scope"</span>;</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">checkscope</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="keyword">var</span> scope = <span class="string">"local scope"</span>;</div><div class="line">    <span class="function"><span class="keyword">function</span> <span class="title">f</span>(<span class="params"></span>)</span>&#123;</div><div class="line">        <span class="keyword">return</span> scope;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> f;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">var</span> foo = checkscope();</div><div class="line">foo();</div></pre></td></tr></table></figure>
 <blockquote>
 <p>首先我们要分析一下这段代码中执行上下文栈和执行上下文的变化情况。</p>
 </blockquote>
@@ -1223,7 +1675,7 @@ f 函数执行完毕，f 函数上下文从执行上下文栈中弹出
 
 </div>
 
-    <a data-url="/2016/08/20/闭包/" data-id="cj6rzsm8k001gc8wq3vlp7ba7" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="/2016/08/20/闭包/" data-id="cj6uenfvq0020s8wq2kcp6kv0" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -1456,7 +1908,7 @@ f 函数执行完毕，f 函数上下文从执行上下文栈中弹出
 
 </div>
 
-    <a data-url="/2016/08/15/git远程操作/" data-id="cj6rzsm6a0002c8wqxewpd5ge" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="/2016/08/15/git远程操作/" data-id="cj6uenfso000as8wqr3xlu8ho" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -1534,323 +1986,8 @@ f 函数执行完毕，f 函数上下文从执行上下文栈中弹出
 
 
 
-    <article id="post-css兼容" class="article article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
-        
-            
-	
-		<a href="/2016/08/12/css兼容/" itemprop="url">
-            <img src="http://st.originoo.cn/1765488/1272/i/950/depositphotos_12727997-stock-photo-school-supplies.jpg" class="article-banner" />
-        </a>
-	
-
-
-
-        
-        
-            <header class="article-header">
-                
-    
-        <h1 itemprop="name">
-            <a class="article-title" href="/2016/08/12/css兼容/">CSS兼容</a>
-        </h1>
-    
-
-                
-                    <div class="article-meta">
-                        
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/2016/08/12/css兼容/">
-            <time datetime="2016-08-11T16:00:00.000Z" itemprop="datePublished">2016-08-12</time>
-        </a>
-    </div>
-
-
-                        
-    <div class="article-category">
-    	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/categories/前端/">前端</a>
-    </div>
-
-                        
-    <div class="article-tag">
-        <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/CSS/">CSS</a>
-    </div>
-
-                    </div>
-                
-            </header>
-        
-        
-        <div class="article-entry" itemprop="articleBody">
-        
-            
-            <h1 id="一、基本的css兼容："><a href="#一、基本的css兼容：" class="headerlink" title="一、基本的css兼容："></a>一、基本的css兼容：</h1><h2 id="1-hack"><a href="#1-hack" class="headerlink" title="1.hack"></a>1.hack</h2><blockquote>
-<p>可能很多人喜欢用css hack的形式去兼容ie浏览器，但是我自己用起来感觉其实不好使 。ie7-就不考虑了，问题在哪呢，就在ie8的甑别上，你怎么让样式只对ie8起作用。<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="selector-class">.selector</span> &#123;</div><div class="line">　　<span class="attribute">color</span>: <span class="number">#ff0</span>\<span class="number">0</span>;<span class="comment">/*ie8*/</span></div><div class="line">　　<span class="attribute">color</span>: <span class="number">#f00</span>\<span class="number">9</span>\<span class="number">0</span>;<span class="comment">/*ie9+*/</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-</blockquote>
-<p>（这个hack是可以区分ie8和ie9的，之前由于未知原因导致浏览器测试不成功，重装系统后发现是可用的，后来又在多台机器上测试过，证明是正确的。很抱歉误导了大家，特此修正，仍然建议用文档注释的方式去独立写hack，当然最好是可以优雅降级，避免使用css hack。）</p>
-<h2 id="２．注释"><a href="#２．注释" class="headerlink" title="２．注释"></a>２．注释</h2><blockquote>
-<p>更好用的是什么呢，是用ie浏览器独有的文档注释的方式。像这样：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></div><div class="line"><span class="comment">&lt;!--[if IE 8 ]&gt; &lt;html class="ie8" lang="en"&gt; &lt;![endif]--&gt;</span></div><div class="line"><span class="comment">&lt;!--[if IE 9 ]&gt; &lt;html class="ie9" lang="en"&gt; &lt;![endif]--&gt;</span></div><div class="line"><span class="comment">&lt;!--[if (gt IE 9)|!(IE)]&gt;&lt;!--&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span> <span class="comment">&lt;!--&lt;![endif]--&gt;</span></div></pre></td></tr></table></figure></p>
-<p>好处：可以独立的维护处理兼容ie浏览器的样式表，又不会淹没在一大堆css hack标识中，只需要在独立对ie8应用样式规则的地方，copy该条规则，然后在前面加上 .ie8然后就能随便写了，对付ie9也一样。</p>
-</blockquote>
-<h2 id="3-对于360双核这种找抽浏览器，据说添加以下头部meta信息可以使得网页用webkit内核渲染："><a href="#3-对于360双核这种找抽浏览器，据说添加以下头部meta信息可以使得网页用webkit内核渲染：" class="headerlink" title="3. 对于360双核这种找抽浏览器，据说添加以下头部meta信息可以使得网页用webkit内核渲染："></a>3. 对于360双核这种找抽浏览器，据说添加以下头部meta信息可以使得网页用webkit内核渲染：</h2><figure class="highlight routeros"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;meta <span class="attribute">http-equiv</span>=<span class="string">"X-UA-Compatible"</span> <span class="attribute">content</span>=<span class="string">"IE=edge,chrome=1"</span>&gt;</div></pre></td></tr></table></figure>
-<p>IE=edge：保持使用最高级别模式显示内容；</p>
-<p>chrome=1：谷歌的外挂插件Google Chrome Frame（谷歌内嵌浏览器框架GCF），使用IE浏览网页时实际上是使用Chrome浏览器内核渲染，最低支持IE6，但前提是客户端已经安装GCF。</p>
-<p>但实际上这个meta标识是ie浏览器所识别的（详情：ies-compatibility-features-for-site-developers/)，并不是公认的标准，所以用双核的浏览器会傲娇。当然360也会傲娇，所以有时你会发现360并不能总是（也可能是我本人rp差）以chrome内核渲染你的按现代标准开发的网页。</p>
-<p>那么试试这个吧，添加：<meta name="renderer" content="webkit"></p>
-<p>这个meta标识是360自家实现的(详情：meta.html)，表示强制要求360这造福中国社会万千网民的浏览器用chrome的内核渲染网页。</p>
-<p>ok，一行代码搞定360绝大部分的兼容。</p>
-<p>————————以下转———————————————-</p>
-<h1 id="二、ie8的css兼容"><a href="#二、ie8的css兼容" class="headerlink" title="二、ie8的css兼容"></a>二、ie8的css兼容</h1><p>现在说说ie8下的css问题：</p>
-<h2 id="1、ie8支持-first-child-但不支持-last-child。因为前者是css2-1标准，后者是css3标准。参下："><a href="#1、ie8支持-first-child-但不支持-last-child。因为前者是css2-1标准，后者是css3标准。参下：" class="headerlink" title="1、ie8支持:first-child,但不支持:last-child。因为前者是css2.1标准，后者是css3标准。参下："></a>1、ie8支持:first-child,但不支持:last-child。因为前者是css2.1标准，后者是css3标准。参下：</h2><figure class="highlight less"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">CSS</span> <span class="selector-tag">2</span><span class="selector-class">.1</span> <span class="selector-tag">selectors</span>：<span class="selector-tag">Basic</span> <span class="selector-tag">CSS</span> <span class="selector-tag">selectors</span> <span class="selector-tag">including</span>: * (universal selector), &gt; (child selector), <span class="selector-pseudo">:first-child</span>, <span class="selector-pseudo">:link</span>, <span class="selector-pseudo">:visited</span>, <span class="selector-pseudo">:active</span>, <span class="selector-pseudo">:hover</span>, <span class="selector-pseudo">:focus</span>, <span class="selector-pseudo">:lang()</span>, + (adjacent sibling selector), <span class="selector-attr">[attr]</span>, <span class="selector-attr">[attr="val"]</span>, <span class="selector-attr">[attr~="val"]</span>, <span class="selector-attr">[attr|="bar"]</span>, <span class="selector-class">.foo</span> (class selector), <span class="selector-id">#foo</span> (id selector)</div></pre></td></tr></table></figure>
-<h2 id="2、-为什么会发现上面的奇怪的东西（怪我css2-1和css3分不清），因为编译sass文件后发现ie8下的样式基本全歇菜了。需要注意的是，如果浏览器-不支持的选择器和支持的选择器写在一起，那么整条规则就不起作用了。比如你不小心创造了一个伪元素（是真的伪哦）-bb-bb-child-cc-background-333-那么这整条规则就不起作用了，所有浏览器在此情况下都会歇菜-cc的样式就丢失了。"><a href="#2、-为什么会发现上面的奇怪的东西（怪我css2-1和css3分不清），因为编译sass文件后发现ie8下的样式基本全歇菜了。需要注意的是，如果浏览器-不支持的选择器和支持的选择器写在一起，那么整条规则就不起作用了。比如你不小心创造了一个伪元素（是真的伪哦）-bb-bb-child-cc-background-333-那么这整条规则就不起作用了，所有浏览器在此情况下都会歇菜-cc的样式就丢失了。" class="headerlink" title="2、 为什么会发现上面的奇怪的东西（怪我css2.1和css3分不清），因为编译sass文件后发现ie8下的样式基本全歇菜了。需要注意的是，如果浏览器 不支持的选择器和支持的选择器写在一起，那么整条规则就不起作用了。比如你不小心创造了一个伪元素（是真的伪哦）.bb:bb-child, .cc{background:#333;}那么这整条规则就不起作用了，所有浏览器在此情况下都会歇菜,.cc的样式就丢失了。"></a>2、 为什么会发现上面的奇怪的东西（怪我css2.1和css3分不清），因为编译sass文件后发现ie8下的样式基本全歇菜了。需要注意的是，如果浏览器 不支持的选择器和支持的选择器写在一起，那么整条规则就不起作用了。比如你不小心创造了一个伪元素（是真的伪哦）.bb:bb-child, .cc{background:#333;}那么这整条规则就不起作用了，所有浏览器在此情况下都会歇菜,.cc的样式就丢失了。</h2><h2 id="3、-input设置了左右padding，but输入较多内容时padding还是会消失。这个问题是无解的，ie浏览器她就是这么渲染input的，解决方法是在input-外面套一层div，用div设置左右padding，border，width和height，input只需要设置width和weight为100-即可。另外，正常来讲，如果没有明确设置height的值，那么设置的line-height值就是height的值，but对于ie8，如果input-设置了-line-height，那么input必须设置height，否则input的内容显示有问题，会上下隐藏部分内容，她就是要躲猫猫。"><a href="#3、-input设置了左右padding，but输入较多内容时padding还是会消失。这个问题是无解的，ie浏览器她就是这么渲染input的，解决方法是在input-外面套一层div，用div设置左右padding，border，width和height，input只需要设置width和weight为100-即可。另外，正常来讲，如果没有明确设置height的值，那么设置的line-height值就是height的值，but对于ie8，如果input-设置了-line-height，那么input必须设置height，否则input的内容显示有问题，会上下隐藏部分内容，她就是要躲猫猫。" class="headerlink" title="3、 input设置了左右padding，but输入较多内容时padding还是会消失。这个问题是无解的，ie浏览器她就是这么渲染input的，解决方法是在input 外面套一层div，用div设置左右padding，border，width和height，input只需要设置width和weight为100% 即可。另外，正常来讲，如果没有明确设置height的值，那么设置的line-height值就是height的值，but对于ie8，如果input 设置了 line-height，那么input必须设置height，否则input的内容显示有问题，会上下隐藏部分内容，她就是要躲猫猫。"></a>3、 input设置了左右padding，but输入较多内容时padding还是会消失。这个问题是无解的，ie浏览器她就是这么渲染input的，解决方法是在input 外面套一层div，用div设置左右padding，border，width和height，input只需要设置width和weight为100% 即可。另外，正常来讲，如果没有明确设置height的值，那么设置的line-height值就是height的值，but对于ie8，如果input 设置了 line-height，那么input必须设置height，否则input的内容显示有问题，会上下隐藏部分内容，她就是要躲猫猫。</h2><h2 id="4、-为什么上面我不用input的伪元素进行设置而要嵌套多一层div呢？因为input，img，iframe等元素不支持伪元素-。-before-和-after伪元素指定了一个元素文档树内容之前和之后的内容。与’content’属性联用-指定了插入的内容（也就是你必须显性设置content-属性这两个伪家伙才能在文档中显示出来，哪怕设置content属性为空字符串也行）。作为DOM元素，伪元素都是在容器内进行渲染的-input，img，iframe等元素都不能包含其他元素，也就是不是容器，所以不能通过伪元素插入内容。"><a href="#4、-为什么上面我不用input的伪元素进行设置而要嵌套多一层div呢？因为input，img，iframe等元素不支持伪元素-。-before-和-after伪元素指定了一个元素文档树内容之前和之后的内容。与’content’属性联用-指定了插入的内容（也就是你必须显性设置content-属性这两个伪家伙才能在文档中显示出来，哪怕设置content属性为空字符串也行）。作为DOM元素，伪元素都是在容器内进行渲染的-input，img，iframe等元素都不能包含其他元素，也就是不是容器，所以不能通过伪元素插入内容。" class="headerlink" title="4、 为什么上面我不用input的伪元素进行设置而要嵌套多一层div呢？因为input，img，iframe等元素不支持伪元素 -_-||。:before 和:after伪元素指定了一个元素文档树内容之前和之后的内容。与’content’属性联用,指定了插入的内容（也就是你必须显性设置content 属性这两个伪家伙才能在文档中显示出来，哪怕设置content属性为空字符串也行）。作为DOM元素，伪元素都是在容器内进行渲染的, input，img，iframe等元素都不能包含其他元素，也就是不是容器，所以不能通过伪元素插入内容。"></a>4、 为什么上面我不用input的伪元素进行设置而要嵌套多一层div呢？因为input，img，iframe等元素不支持伪元素 -_-||。:before 和:after伪元素指定了一个元素文档树内容之前和之后的内容。与’content’属性联用,指定了插入的内容（也就是你必须显性设置content 属性这两个伪家伙才能在文档中显示出来，哪怕设置content属性为空字符串也行）。作为DOM元素，伪元素都是在容器内进行渲染的, input，img，iframe等元素都不能包含其他元素，也就是不是容器，所以不能通过伪元素插入内容。</h2><h2 id="5、-table中如果不是严格的用于表格，而是用于奇葩的局部布局时（我也想问为什么用来布局。。），td设置成inline-block可以排成一行，但是-ie8和ie9-下，如果td中的内容很长，即使td设置了宽度，td也会撑开并占用td设置的margin（废话，td是没有margin可言的），直到挤占所有的td-宽度之和为tr的宽度。但是td设置成float：left；就能表现成block。这个不清楚为什么，但是管用。。"><a href="#5、-table中如果不是严格的用于表格，而是用于奇葩的局部布局时（我也想问为什么用来布局。。），td设置成inline-block可以排成一行，但是-ie8和ie9-下，如果td中的内容很长，即使td设置了宽度，td也会撑开并占用td设置的margin（废话，td是没有margin可言的），直到挤占所有的td-宽度之和为tr的宽度。但是td设置成float：left；就能表现成block。这个不清楚为什么，但是管用。。" class="headerlink" title="5、 table中如果不是严格的用于表格，而是用于奇葩的局部布局时（我也想问为什么用来布局。。），td设置成inline-block可以排成一行，但是 ie8和ie9 下，如果td中的内容很长，即使td设置了宽度，td也会撑开并占用td设置的margin（废话，td是没有margin可言的），直到挤占所有的td 宽度之和为tr的宽度。但是td设置成float：left；就能表现成block。这个不清楚为什么，但是管用。。"></a>5、 table中如果不是严格的用于表格，而是用于奇葩的局部布局时（我也想问为什么用来布局。。），td设置成inline-block可以排成一行，但是 ie8和ie9 下，如果td中的内容很长，即使td设置了宽度，td也会撑开并占用td设置的margin（废话，td是没有margin可言的），直到挤占所有的td 宽度之和为tr的宽度。但是td设置成float：left；就能表现成block。这个不清楚为什么，但是管用。。</h2><h2 id="6、父元素的左padding会和子元素的左margin重叠。这个是没有好好实现盒子模型的事情了，包容吧。。"><a href="#6、父元素的左padding会和子元素的左margin重叠。这个是没有好好实现盒子模型的事情了，包容吧。。" class="headerlink" title="6、父元素的左padding会和子元素的左margin重叠。这个是没有好好实现盒子模型的事情了，包容吧。。"></a>6、父元素的左padding会和子元素的左margin重叠。这个是没有好好实现盒子模型的事情了，包容吧。。</h2><h2 id="7、sprite图中的icons之间最好留空白间隔，哪怕间隔1px也好，否则ie8下会出现使用了某一个icon当背景，icon后面跟着的其他icon也顺带显示了一小部分的bug，所以icons之间还是要适当留白，不要太省。"><a href="#7、sprite图中的icons之间最好留空白间隔，哪怕间隔1px也好，否则ie8下会出现使用了某一个icon当背景，icon后面跟着的其他icon也顺带显示了一小部分的bug，所以icons之间还是要适当留白，不要太省。" class="headerlink" title="7、sprite图中的icons之间最好留空白间隔，哪怕间隔1px也好，否则ie8下会出现使用了某一个icon当背景，icon后面跟着的其他icon也顺带显示了一小部分的bug，所以icons之间还是要适当留白，不要太省。"></a>7、sprite图中的icons之间最好留空白间隔，哪怕间隔1px也好，否则ie8下会出现使用了某一个icon当背景，icon后面跟着的其他icon也顺带显示了一小部分的bug，所以icons之间还是要适当留白，不要太省。</h2><h1 id="三、ie11部分css问题"><a href="#三、ie11部分css问题" class="headerlink" title="三、ie11部分css问题"></a>三、ie11部分css问题</h1><h2 id="1、-ie11下很多元素表现和其他浏览器不一致，比如对应用了同一样式（不设置-高度）的div，其他浏览器解析的高度是一致的，但是ie11下该div有可能高度偏大，由此导致一些排版上的问题，所以，如果发现元素排版上下偏移的问题，查看此元素或其当代元素是否设置了高度，统一添上高度一切都ok了。"><a href="#1、-ie11下很多元素表现和其他浏览器不一致，比如对应用了同一样式（不设置-高度）的div，其他浏览器解析的高度是一致的，但是ie11下该div有可能高度偏大，由此导致一些排版上的问题，所以，如果发现元素排版上下偏移的问题，查看此元素或其当代元素是否设置了高度，统一添上高度一切都ok了。" class="headerlink" title="1、 ie11下很多元素表现和其他浏览器不一致，比如对应用了同一样式（不设置 高度）的div，其他浏览器解析的高度是一致的，但是ie11下该div有可能高度偏大，由此导致一些排版上的问题，所以，如果发现元素排版上下偏移的问题，查看此元素或其当代元素是否设置了高度，统一添上高度一切都ok了。"></a>1、 ie11下很多元素表现和其他浏览器不一致，比如对应用了同一样式（不设置 高度）的div，其他浏览器解析的高度是一致的，但是ie11下该div有可能高度偏大，由此导致一些排版上的问题，所以，如果发现元素排版上下偏移的问题，查看此元素或其当代元素是否设置了高度，统一添上高度一切都ok了。</h2><h2 id="2、抱歉，ie11问题确实不多。"><a href="#2、抱歉，ie11问题确实不多。" class="headerlink" title="2、抱歉，ie11问题确实不多。"></a>2、抱歉，ie11问题确实不多。</h2><h1 id="四、结尾附上一个关于css优先级的奇谈"><a href="#四、结尾附上一个关于css优先级的奇谈" class="headerlink" title="四、结尾附上一个关于css优先级的奇谈"></a>四、结尾附上一个关于css优先级的奇谈</h1><h2 id="首先我们知道："><a href="#首先我们知道：" class="headerlink" title="首先我们知道："></a>首先我们知道：</h2><blockquote>
-<p>1、id选择器优先级权重比class选择器大一个数量级，class选择器权重比标签选择器大一个数量级；<br>2、class选择器和属性选择器同优先级;<br>3、样式的优先程度需要根据第1条规则计算整体的优先级，按选择器权重计算各条样式规则中所有选择器优先级之和，哪条规则权重大，那条就说了算。如果相同那么后面的覆盖前面的。<br>4、像这种.dog &gt; p开挂，多了特殊符号的，并不会增加优势，还是和 .dog p优先级一样。<br>然后可以抛出一个问题了：</p>
-</blockquote>
-<p>对于下面的文档结构，分别对 p | .p | div p | .parent | #parent设置color属性，那么优先级如何呢？<br><figure class="highlight applescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;<span class="keyword">div</span> <span class="built_in">id</span>=<span class="string">"parent"</span> <span class="built_in">class</span>=<span class="string">"parent"</span>&gt;</div><div class="line">  &lt;p <span class="built_in">class</span>=<span class="string">"p"</span>&gt;p&lt;/p&gt;</div><div class="line">&lt;/<span class="keyword">div</span>&gt;</div></pre></td></tr></table></figure></p>
-<p>结果表现：也就是 .p &gt; div p &gt; p &gt; #parent &gt; .parent<br>id选择器居然比p选择器优先级还低！将p元素和div元素分开看，.p &gt; div p &gt; p 很正常， #parent &gt; .parent也很正常。所以问题关键在子级p和父级#parent, 子级的选择器优先级比父级的选择器优先级高，或者说继承的优先级程度比自身的优先级低！</p>
-<p>嵌套多一层看看就知道是不是了，分别对#parent | div | p设置color属性：<br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"></div><div class="line">&lt;div id="parent" class="parent"&gt;</div><div class="line">  &lt;div class="mid"&gt;</div><div class="line">    &lt;p id="p" class="p"&gt;p&lt;/p&gt; </div><div class="line">  &lt;div&gt;</div><div class="line">&lt;/div&gt;</div></pre></td></tr></table></figure></p>
-<p>结果确实是p &gt; div &gt; #parent：</p>
-<p>即使应用两个选择器也无济于事，依然是p &gt;#parent div</p>
-<blockquote>
-<p>只要能定位到p元素，那么父级选择器的权重就起作用了,一试便知，对#parent p | #p 设置同样的样式结果是这样的：<br>嗯，确实如此。所以：</p>
-</blockquote>
-<p>5、css样式优先级还和继承有关，继承的优先级不如本身应用的优先级高。</p>
-
-        
-        </div>
-        <footer class="article-footer">
-            <div class="share-container">
-
-
-
-</div>
-
-    <a data-url="/2016/08/12/css兼容/" data-id="cj6rzsm6r0008c8wqe0ytfo8w" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
-<script>
-    (function ($) {
-        // Prevent duplicate binding
-        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
-            __SHARE_BUTTON_BINDED__ = true;
-        } else {
-            return;
-        }
-        $('body').on('click', function() {
-            $('.article-share-box.on').removeClass('on');
-        }).on('click', '.article-share-link', function(e) {
-            e.stopPropagation();
-
-            var $this = $(this),
-                url = $this.attr('data-url'),
-                encodedUrl = encodeURIComponent(url),
-                id = 'article-share-box-' + $this.attr('data-id'),
-                offset = $this.offset(),
-                box;
-
-            if ($('#' + id).length) {
-                box = $('#' + id);
-
-                if (box.hasClass('on')){
-                    box.removeClass('on');
-                    return;
-                }
-            } else {
-                var html = [
-                    '<div id="' + id + '" class="article-share-box">',
-                        '<input class="article-share-input" value="' + url + '">',
-                        '<div class="article-share-links">',
-                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
-                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
-                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
-                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
-                        '</div>',
-                    '</div>'
-                ].join('');
-
-              box = $(html);
-
-              $('body').append(box);
-            }
-
-            $('.article-share-box.on').hide();
-
-            box.css({
-                top: offset.top + 25,
-                left: offset.left
-            }).addClass('on');
-
-        }).on('click', '.article-share-box', function (e) {
-            e.stopPropagation();
-        }).on('click', '.article-share-box-input', function () {
-            $(this).select();
-        }).on('click', '.article-share-box-link', function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-
-            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
-        });
-    })(jQuery);
-</script>
-
-            
-    
-        <a href="/2016/08/12/css兼容/#comments" class="article-comment-link">评论</a>
-    
-
-        </footer>
-    </div>
-    
-</article>
-
-
-
-    <article id="post-js简单了解上下文" class="article article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
-        
-            
-	
-		<a href="/2016/02/03/js简单了解上下文/" itemprop="url">
-            <img src="http://st2.originoo.cn/4002815/7329/i/950/depositphotos_73298599-stock-photo-asparagus-on-a-dark-surface.jpg" class="article-banner" />
-        </a>
-	
-
-
-
-        
-        
-            <header class="article-header">
-                
-    
-        <h1 itemprop="name">
-            <a class="article-title" href="/2016/02/03/js简单了解上下文/">js简单了解上下文</a>
-        </h1>
-    
-
-                
-                    <div class="article-meta">
-                        
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/2016/02/03/js简单了解上下文/">
-            <time datetime="2016-02-02T16:00:00.000Z" itemprop="datePublished">2016-02-03</time>
-        </a>
-    </div>
-
-
-                        
-    <div class="article-category">
-    	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/categories/前端/">前端</a>
-    </div>
-
-                        
-    <div class="article-tag">
-        <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/js/">js</a>
-    </div>
-
-                    </div>
-                
-            </header>
-        
-        
-        <div class="article-entry" itemprop="articleBody">
-        
-            
-            <h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><blockquote>
-<p>在JavaScript中，你的代码将总是有着某种形式的上下文(代码在其内部工作的 对象)。这也是其它面向对象语言所共有的功能，但它们都不如JavaScript处理得这样极端。上下文是通过变量this工作。变量this总是引用代 码当前所在的那个对象。记住全局对象实际上是window对象的属性。这意味着即使是在全局上下文里，this 变量仍然引用一个对象。上下文可以成为一个强大的工具，是面向对象代码不可或缺的一环。程序1展示了一些关于上下文的简单例子。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">代码</div><div class="line"> <span class="keyword">var</span>  obj  =  &#123;</div><div class="line"> yes:  <span class="function"><span class="keyword">function</span> (<span class="params"></span>)</span>&#123;</div><div class="line"> <span class="comment">//  this == obj </span></div><div class="line"> <span class="keyword">this</span> .val  =   <span class="literal">true</span> ;</div><div class="line"> &#125;,</div><div class="line"> no:  <span class="function"><span class="keyword">function</span> (<span class="params"></span>)</span>&#123;</div><div class="line"> <span class="keyword">this</span> .val  =   <span class="literal">false</span> ;</div><div class="line"> &#125;</div><div class="line"> &#125;;</div><div class="line"> <span class="comment">// 我们看到，obj对象没有"val"的属性 </span></div><div class="line"> alert( obj.val  ==   <span class="literal">null</span>  );</div><div class="line"> <span class="comment">// 我们运行yes函数，它将改变附着在obj 对象的val属性 </span></div><div class="line"> obj.yes();</div><div class="line"> alert( obj.val  ==   <span class="literal">true</span>  );</div><div class="line"> <span class="comment">// 然而，我们现在让window.no指向obj.no方法，并运行之 </span></div><div class="line"> <span class="built_in">window</span>.no  =  obj.no;</div><div class="line"> <span class="built_in">window</span>.no();</div><div class="line"> <span class="comment">// 这导致obj对象保持不变(上下文则切换到了window对象)， </span></div><div class="line"> alert( obj.val  ==   <span class="literal">true</span>  );</div><div class="line"> <span class="comment">// 而window的val属性被更新 </span></div><div class="line"> alert( <span class="built_in">window</span>.val  ==   <span class="literal">false</span>  );</div></pre></td></tr></table></figure></p>
-</blockquote>
-
-        
-        </div>
-        <footer class="article-footer">
-            <div class="share-container">
-
-
-
-</div>
-
-    <a data-url="/2016/02/03/js简单了解上下文/" data-id="cj6rzsm7k000nc8wqk1jiliy9" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
-<script>
-    (function ($) {
-        // Prevent duplicate binding
-        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
-            __SHARE_BUTTON_BINDED__ = true;
-        } else {
-            return;
-        }
-        $('body').on('click', function() {
-            $('.article-share-box.on').removeClass('on');
-        }).on('click', '.article-share-link', function(e) {
-            e.stopPropagation();
-
-            var $this = $(this),
-                url = $this.attr('data-url'),
-                encodedUrl = encodeURIComponent(url),
-                id = 'article-share-box-' + $this.attr('data-id'),
-                offset = $this.offset(),
-                box;
-
-            if ($('#' + id).length) {
-                box = $('#' + id);
-
-                if (box.hasClass('on')){
-                    box.removeClass('on');
-                    return;
-                }
-            } else {
-                var html = [
-                    '<div id="' + id + '" class="article-share-box">',
-                        '<input class="article-share-input" value="' + url + '">',
-                        '<div class="article-share-links">',
-                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
-                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
-                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
-                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
-                        '</div>',
-                    '</div>'
-                ].join('');
-
-              box = $(html);
-
-              $('body').append(box);
-            }
-
-            $('.article-share-box.on').hide();
-
-            box.css({
-                top: offset.top + 25,
-                left: offset.left
-            }).addClass('on');
-
-        }).on('click', '.article-share-box', function (e) {
-            e.stopPropagation();
-        }).on('click', '.article-share-box-input', function () {
-            $(this).select();
-        }).on('click', '.article-share-box-link', function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-
-            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
-        });
-    })(jQuery);
-</script>
-
-            
-    
-        <a href="/2016/02/03/js简单了解上下文/#comments" class="article-comment-link">评论</a>
-    
-
-        </footer>
-    </div>
-    
-</article>
-
-
-
     <nav id="page-nav">
-        <a class="extend prev" rel="prev" href="/">&laquo; 上一页</a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
+        <a class="extend prev" rel="prev" href="/">&laquo; 上一页</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/">下一页 &raquo;</a>
     </nav>
 </section>
             
@@ -1862,6 +1999,25 @@ f 函数执行完毕，f 函数上下文从执行上下文栈中弹出
         <h3 class="widget-title">最新文章</h3>
         <div class="widget">
             <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2017/02/01/CSS样式表时总结下FF与IE的区别/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://www.gratisography.com/pictures/413_1.jpg)" alt="Ajax和Flash优缺点" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/前端/">前端</a></p>
+                            <p class="item-title"><a href="/2017/02/01/CSS样式表时总结下FF与IE的区别/" class="title">Ajax和Flash优缺点</a></p>
+                            <p class="item-date"><time datetime="2017-01-31T16:00:00.000Z" itemprop="datePublished">2017-02-01</time></p>
+                        </div>
+                    </li>
                 
                     <li>
                         
@@ -1904,29 +2060,10 @@ f 函数执行完毕，f 函数上下文从执行上下文栈中弹出
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/2017/01/13/js作用域和作用域链/" class="thumbnail">
+                            <a href="/2017/01/22/Ajax和Flash的优缺点/" class="thumbnail">
     
     
-        <span style="background-image:url(http://www.gratisography.com/pictures/299_1.jpg)" alt="js作用域和作用域链" class="thumbnail-image"></span>
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/前端/">前端</a></p>
-                            <p class="item-title"><a href="/2017/01/13/js作用域和作用域链/" class="title">js作用域和作用域链</a></p>
-                            <p class="item-date"><time datetime="2017-01-12T16:00:00.000Z" itemprop="datePublished">2017-01-13</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2016/12/29/js你所不知道的预编译/" class="thumbnail">
-    
-    
-        <span style="background-image:url(http://st2.originoo.cn/2332949/5930/i/950/depositphotos_59309355-stock-photo-laptop-on-wooden-table-blue.jpg)" alt="js你说不知道的编译" class="thumbnail-image"></span>
+        <span style="background-image:url(http://www.gratisography.com/pictures/333_1.jpg)" alt="Ajax和Flash优缺点" class="thumbnail-image"></span>
     
 </a>
 
@@ -1934,27 +2071,27 @@ f 函数执行完毕，f 函数上下文从执行上下文栈中弹出
                         
                         <div class="item-inner">
                             <p class="item-category"><a class="article-category-link" href="/categories/前端/">前端</a></p>
-                            <p class="item-title"><a href="/2016/12/29/js你所不知道的预编译/" class="title">js你说不知道的编译</a></p>
-                            <p class="item-date"><time datetime="2016-12-28T16:00:00.000Z" itemprop="datePublished">2016-12-29</time></p>
+                            <p class="item-title"><a href="/2017/01/22/Ajax和Flash的优缺点/" class="title">Ajax和Flash优缺点</a></p>
+                            <p class="item-date"><time datetime="2017-01-21T16:00:00.000Z" itemprop="datePublished">2017-01-22</time></p>
                         </div>
                     </li>
                 
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/2016/12/18/Node.js的学习--使用cheerio抓取网页数据/" class="thumbnail">
+                            <a href="/2017/01/18/js存储/" class="thumbnail">
     
     
-        <span style="background-image:url(http://www.gratisography.com/pictures/421_1.jpg)" alt="Node.js的学习--使用cheerio抓取网页数据" class="thumbnail-image"></span>
+        <span style="background-image:url(http://www.gratisography.com/pictures/221_1.jpg)" alt="js存储" class="thumbnail-image"></span>
     
 </a>
 
                         </div>
                         
                         <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/Node/">Node</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/Node/爬虫/">爬虫</a></p>
-                            <p class="item-title"><a href="/2016/12/18/Node.js的学习--使用cheerio抓取网页数据/" class="title">Node.js的学习--使用cheerio抓取网页数据</a></p>
-                            <p class="item-date"><time datetime="2016-12-17T16:00:00.000Z" itemprop="datePublished">2016-12-18</time></p>
+                            <p class="item-category"><a class="article-category-link" href="/categories/js/">js</a></p>
+                            <p class="item-title"><a href="/2017/01/18/js存储/" class="title">js存储</a></p>
+                            <p class="item-date"><time datetime="2017-01-17T16:00:00.000Z" itemprop="datePublished">2017-01-18</time></p>
                         </div>
                     </li>
                 
@@ -1967,7 +2104,7 @@ f 函数执行完毕，f 函数上下文从执行上下文栈中弹出
     <div class="widget-wrap">
         <h3 class="widget-title">分类</h3>
         <div class="widget">
-            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Http/">Http</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Node/">Node</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Node/爬虫/">爬虫</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端/">前端</a><span class="category-list-count">12</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据库/">数据库</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/服务器/">服务器</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/版本管理/">版本管理</a><span class="category-list-count">1</span></li></ul>
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Http/">Http</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Node/">Node</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Node/爬虫/">爬虫</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/js/">js</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端/">前端</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据库/">数据库</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/服务器/">服务器</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/版本管理/">版本管理</a><span class="category-list-count">1</span></li></ul>
         </div>
     </div>
 
@@ -1976,7 +2113,7 @@ f 函数执行完毕，f 函数上下文从执行上下文栈中弹出
     <div class="widget-wrap">
         <h3 class="widget-title">归档</h3>
         <div class="widget">
-            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">十二月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">二月 2016</a><span class="archive-list-count">1</span></li></ul>
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">十二月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">二月 2016</a><span class="archive-list-count">1</span></li></ul>
         </div>
     </div>
 
@@ -1985,7 +2122,7 @@ f 函数执行完毕，f 函数上下文从执行上下文栈中弹出
     <div class="widget-wrap">
         <h3 class="widget-title">标签</h3>
         <div class="widget">
-            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/">CSS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue/">Vue</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cheerio/">cheerio</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http请求/">http请求</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/">js</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lazyload/">lazyload</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongodb/">mongodb</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/中间件/">中间件</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/代理/">代理</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/懒加载/">懒加载</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/爬虫/">爬虫</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/跨域/">跨域</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/页面请求/">页面请求</a><span class="tag-list-count">1</span></li></ul>
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/">CSS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue/">Vue</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cheerio/">cheerio</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html/">html</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http请求/">http请求</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/">js</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lazyload/">lazyload</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongodb/">mongodb</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/中间件/">中间件</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/代理/">代理</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/存储/">存储</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/懒加载/">懒加载</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/爬虫/">爬虫</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/跨域/">跨域</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/页面请求/">页面请求</a><span class="tag-list-count">1</span></li></ul>
         </div>
     </div>
 
@@ -1994,7 +2131,7 @@ f 函数执行完毕，f 函数上下文从执行上下文栈中弹出
     <div class="widget-wrap">
         <h3 class="widget-title">标签云</h3>
         <div class="widget tagcloud">
-            <a href="/tags/CSS/" style="font-size: 10px;">CSS</a> <a href="/tags/Vue/" style="font-size: 15px;">Vue</a> <a href="/tags/cheerio/" style="font-size: 10px;">cheerio</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/http请求/" style="font-size: 10px;">http请求</a> <a href="/tags/js/" style="font-size: 20px;">js</a> <a href="/tags/lazyload/" style="font-size: 10px;">lazyload</a> <a href="/tags/mongodb/" style="font-size: 10px;">mongodb</a> <a href="/tags/中间件/" style="font-size: 10px;">中间件</a> <a href="/tags/代理/" style="font-size: 10px;">代理</a> <a href="/tags/懒加载/" style="font-size: 10px;">懒加载</a> <a href="/tags/爬虫/" style="font-size: 10px;">爬虫</a> <a href="/tags/跨域/" style="font-size: 10px;">跨域</a> <a href="/tags/页面请求/" style="font-size: 10px;">页面请求</a>
+            <a href="/tags/CSS/" style="font-size: 10px;">CSS</a> <a href="/tags/Vue/" style="font-size: 16.67px;">Vue</a> <a href="/tags/cheerio/" style="font-size: 10px;">cheerio</a> <a href="/tags/css/" style="font-size: 13.33px;">css</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/html/" style="font-size: 13.33px;">html</a> <a href="/tags/http请求/" style="font-size: 10px;">http请求</a> <a href="/tags/js/" style="font-size: 20px;">js</a> <a href="/tags/lazyload/" style="font-size: 10px;">lazyload</a> <a href="/tags/mongodb/" style="font-size: 10px;">mongodb</a> <a href="/tags/中间件/" style="font-size: 10px;">中间件</a> <a href="/tags/代理/" style="font-size: 10px;">代理</a> <a href="/tags/存储/" style="font-size: 10px;">存储</a> <a href="/tags/懒加载/" style="font-size: 10px;">懒加载</a> <a href="/tags/爬虫/" style="font-size: 10px;">爬虫</a> <a href="/tags/跨域/" style="font-size: 10px;">跨域</a> <a href="/tags/页面请求/" style="font-size: 10px;">页面请求</a>
         </div>
     </div>
 

@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <meta charset="utf-8">
+    
+    <title>Ajax和Flash优缺点 | 博客</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="为了方便自己查询，省得每次遇到问题都要满世界搜，转篇实用的：DIV+CSS 与不同 IE 版本等的兼容性。一、!important (功能有限)随着 IE7 对 !important 的支持， !important 方法现在只针对 IE6 的兼容。（注意写法，记得该声明位置需要提前。）例如：1234#example &amp;#123;width: 100px !important; /* IE7+FF">
+<meta name="keywords" content="html,css">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Ajax和Flash优缺点">
+<meta property="og:url" content="/2017/02/01/CSS样式表时总结下FF与IE的区别/index.html">
+<meta property="og:site_name" content="博客">
+<meta property="og:description" content="为了方便自己查询，省得每次遇到问题都要满世界搜，转篇实用的：DIV+CSS 与不同 IE 版本等的兼容性。一、!important (功能有限)随着 IE7 对 !important 的支持， !important 方法现在只针对 IE6 的兼容。（注意写法，记得该声明位置需要提前。）例如：1234#example &amp;#123;width: 100px !important; /* IE7+FF">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://www.gratisography.com/pictures/413_1.jpg">
+<meta property="og:updated_time" content="2017-08-26T10:02:56.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Ajax和Flash优缺点">
+<meta name="twitter:description" content="为了方便自己查询，省得每次遇到问题都要满世界搜，转篇实用的：DIV+CSS 与不同 IE 版本等的兼容性。一、!important (功能有限)随着 IE7 对 !important 的支持， !important 方法现在只针对 IE6 的兼容。（注意写法，记得该声明位置需要提前。）例如：1234#example &amp;#123;width: 100px !important; /* IE7+FF">
+<meta name="twitter:image" content="http://www.gratisography.com/pictures/413_1.jpg">
+    
+
+    
+        <link rel="alternate" href="/" title="博客" type="application/atom+xml" />
+    
+
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/open-sans/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/2.1.3/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+    
+    
+
+
+</head>
+
+<body>
+    <div id="container">
+        <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="/" id="logo">
+                <i class="logo"></i>
+                <span class="site-title">博客</span>
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="/.">首页</a>
+                
+                    <a class="main-nav-link" href="/archives">归档</a>
+                
+                    <a class="main-nav-link" href="/categories">目录</a>
+                
+                    <a class="main-nav-link" href="/tags">标签</a>
+                
+                    <a class="main-nav-link" href="/about">关于</a>
+                
+            </nav>
+            
+                
+                <nav id="sub-nav">
+                    <div class="profile" id="profile-nav">
+                        <a id="profile-anchor" href="javascript:;">
+                            <img class="avatar" src="https://timgsa.baidu.com/timg?image&amp;quality=80&amp;size=b9999_10000&amp;sec=1503671977721&amp;di=ffb3d003d1c3e3585ee6e6887ad86963&amp;imgtype=0&amp;src=http%3A%2F%2F2t.5068.com%2Fuploads%2Fallimg%2F151126%2F1-151126164146-50.jpg" />
+                            <i class="fa fa-caret-down"></i>
+                        </a>
+                    </div>
+                </nav>
+            
+            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="想要查找什么..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="/.">首页</a></td>
+                
+                    <td><a class="main-nav-link" href="/archives">归档</a></td>
+                
+                    <td><a class="main-nav-link" href="/categories">目录</a></td>
+                
+                    <td><a class="main-nav-link" href="/tags">标签</a></td>
+                
+                    <td><a class="main-nav-link" href="/about">关于</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</header>
+
+        <div class="outer">
+            
+                
+
+<aside id="profile">
+    <div class="inner profile-inner">
+        <div class="base-info profile-block">
+            <img id="avatar" src="https://timgsa.baidu.com/timg?image&amp;quality=80&amp;size=b9999_10000&amp;sec=1503671977721&amp;di=ffb3d003d1c3e3585ee6e6887ad86963&amp;imgtype=0&amp;src=http%3A%2F%2F2t.5068.com%2Fuploads%2Fallimg%2F151126%2F1-151126164146-50.jpg" />
+            <h2 id="name">陈志远</h2>
+            <h3 id="title">Web前端开发</h3>
+            <span id="location"><i class="fa fa-map-marker"></i>中国厦门</span>
+            <a id="follow" target="_blank" href="">关注我</a>
+        </div>
+        <div class="article-info profile-block">
+            <div class="article-info-block">
+                22
+                <span>文章</span>
+            </div>
+            <div class="article-info-block">
+                17
+                <span>标签</span>
+            </div>
+        </div>
+        
+        <div class="profile-block social-links">
+            <table>
+                <tr>
+                    
+                    
+                    <td>
+                        <a href="https://github.com/JonathonChen" target="_blank" title="github" class=tooltip>
+                            <i class="fa fa-github"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/" target="_blank" title="twitter" class=tooltip>
+                            <i class="fa fa-twitter"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/" target="_blank" title="facebook" class=tooltip>
+                            <i class="fa fa-facebook"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/" target="_blank" title="dribbble" class=tooltip>
+                            <i class="fa fa-dribbble"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/" target="_blank" title="rss" class=tooltip>
+                            <i class="fa fa-rss"></i>
+                        </a>
+                    </td>
+                    
+                </tr>
+            </table>
+        </div>
+        
+    </div>
+</aside>
+
+            
+            <section id="main"><article id="post-CSS样式表时总结下FF与IE的区别" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            
+	
+		<img src="http://www.gratisography.com/pictures/413_1.jpg" class="article-banner" />
+	
+
+
+
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+            Ajax和Flash优缺点
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2017/02/01/CSS样式表时总结下FF与IE的区别/">
+            <time datetime="2017-01-31T16:00:00.000Z" itemprop="datePublished">2017-02-01</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/前端/">前端</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/css/">css</a>, <a class="tag-link" href="/tags/html/">html</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <h2 id="为了方便自己查询，省得每次遇到问题都要满世界搜，转篇实用的：DIV-CSS-与不同-IE-版本等的兼容性。"><a href="#为了方便自己查询，省得每次遇到问题都要满世界搜，转篇实用的：DIV-CSS-与不同-IE-版本等的兼容性。" class="headerlink" title="为了方便自己查询，省得每次遇到问题都要满世界搜，转篇实用的：DIV+CSS 与不同 IE 版本等的兼容性。"></a>为了方便自己查询，省得每次遇到问题都要满世界搜，转篇实用的：DIV+CSS 与不同 IE 版本等的兼容性。</h2><h3 id="一、-important-功能有限"><a href="#一、-important-功能有限" class="headerlink" title="一、!important (功能有限)"></a>一、!important (功能有限)</h3><p>随着 IE7 对 !important 的支持， !important 方法现在只针对 IE6 的兼容。（注意写法，记得该声明位置需要提前。）例如：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="selector-id">#example</span> &#123;</div><div class="line"><span class="attribute">width</span>: <span class="number">100px</span> <span class="meta">!important</span>; <span class="comment">/* IE7+FF */</span></div><div class="line"><span class="attribute">width</span>: <span class="number">200px</span>; <span class="comment">/* IE6 */</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>注意：<br>IE6及以下浏览器有个比较显式的支持问题存在，!important并不覆盖掉在同一条样式的后面的规则。请看下述代码：<br>示例代码：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">div</span>&#123;<span class="attribute">color</span>:<span class="number">#f00</span><span class="meta">!important</span>;<span class="attribute">color</span>:<span class="number">#000</span>;&#125;</div></pre></td></tr></table></figure></p>
+<blockquote>
+<p>在上述代码中，IE6及以下浏览器div的文本颜色为#000，!important并没有覆盖后面的规则；其它浏览器下div的文本颜色为#f00</p>
+</blockquote>
+<p>IE6及以下浏览器要使!important生效，可用以下代码：<br>示例代码：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">div</span>&#123;<span class="attribute">color</span>:<span class="number">#f00</span><span class="meta">!important</span>;&#125;</div><div class="line"><span class="selector-tag">div</span>&#123;<span class="attribute">color</span>:<span class="number">#000</span>;&#125;</div></pre></td></tr></table></figure></p>
+<blockquote>
+<p>在上述代码中，IE6及以下浏览器中div的文本颜色表现与其它浏览器一致，都为#f00</p>
+</blockquote>
+<p>二、CSS HACK 的方法（新手可以看看，高手就当路过吧）</p>
+<p>首先需要知道的是：</p>
+<p>所有浏览器 通用 height: 100px;<br>IE6 专用 _height: 100px;<br>IE7 专用 <em>+height: 100px;<br>IE6、IE7 共用 </em>height: 100px;<br>IE7、FF 共用 height: 100px !important;</p>
+<p>例如：</p>
+<p>#example { height:100px; } /<em> FF </em>/</p>
+<ul>
+<li>html #example { height:200px; } /<em> IE6 </em>/</li>
+</ul>
+<p><em>+html #example { height:300px; } /</em> IE7 */</p>
+<p>下面的这种方法比较简单</p>
+<p>举几个例子：</p>
+<p>1、IE6 - IE7+FF</p>
+<p>#example {<br>height:100px; /<em> FF+IE7 </em>/<br>_height:200px; /<em> IE6 </em>/<br>}<br>其实这个用上面说的第一种方法也可以</p>
+<p>#example {<br>height:100px !important; /<em> FF+IE7 </em>/<br>height:200px; /<em> IE6 </em>/<br>}</p>
+<p>2、IE6+IE7 - FF</p>
+<p>#example {<br>height:100px; /<em> FF </em>/<br><em>height:200px; /</em> IE6+IE7 */<br>}</p>
+<p>3、IE6+FF - IE7</p>
+<p>#example {<br>height:100px; /<em> IE6+FF </em>/<br><em>+height:200px; /</em> IE7 */<br>}</p>
+<p>4、IE6 IE7 FF 各不相同</p>
+<p>#example {<br>height:100px; /<em> FF </em>/<br>_height:200px; /<em> IE6 </em>/<br><em>+height:300px; /</em> IE7 */<br>}<br>或：</p>
+<p>#example {<br>height:100px; /<em> FF </em>/<br><em>height:300px; /</em> IE7 <em>/<br>_height:200px; /</em> IE6 */<br>}</p>
+<p>需要注意的是，代码的顺序一定不能颠倒了，要不又前功尽弃了。因为浏览器在解释程序的时候，如果重名的话，会用后面的覆盖前面的，就象给变量赋值一个道理，所以我们把通用的放前面，越专用的越放后面。</p>
+<p>解释一下4的代码：</p>
+<p>读代码的时候，第一行 height:100px;  大家都通用，IE6 IE7 FF 都显示100px。到了第二行*height:300px; FF不认识这个属性，IE6 IE7 都认，所以FF还显示100px，而 IE6 IE7 把第一行得到的height属性给覆盖了，都显示300px。到了第三行 _height:200px; 只有IE6认识，所以 IE6 就又覆盖了在第二行得到的 height，最终显示200px。这样，三个浏览器都有自己的height属性了，各玩各的去吧。</p>
+<p>这样说要是你还不明白，要么你去撞墙，要么我去!不过还是你去比较好。</p>
+<p>哦，差点忘了说了：</p>
+<p>*+html 对 IE7 的兼容 必须保证HTML顶部有如下声明：<br>&lt;!DOCTYPE HTML PUBLIC “-//W3C//DTD HTML 4.01 Transitional//EN”　“<a href="http://www.w3.org/TR/html4/loose.dtd&quot;&gt;" target="_blank" rel="external">http://www.w3.org/TR/html4/loose.dtd&quot;&gt;</a></p>
+<p>三、使用IE专用的条件注释</p>
+<!--其他浏览器 -->
+<link rel="stylesheet" type="text/css" href="css.css">
+
+<!--[if IE 7]>
+
+<!-- 适合于IE7 -->
+<link rel="stylesheet" type="text/css" href="ie7.css">
+
+<p>&lt;![endif]–&gt;</p>
+<!--[if lte IE 6]>
+
+<!-- 适合于IE6及以下 -->
+<link rel="stylesheet" type="text/css" href="ie.css">
+
+<p>&lt;![endif]–&gt;</p>
+<p>貌似要编三套 css，我还没用过，先粘过来再说</p>
+<p>IE 的 if 条件 Hack</p>
+<ol>
+<li><!--[if !IE]><!--> 除IE外都可识别 <!--<![endif]--></li>
+<li><!--[if IE]> 所有的IE可识别 <![endif]--></li>
+<li><!--[if IE 5.0]> 只有IE5.0可以识别 <![endif]--></li>
+<li><!--[if IE 5]> 仅IE5.0与IE5.5可以识别 <![endif]--></li>
+<li><!--[if gt IE 5.0]> IE5.0以及IE5.0以上版本都可以识别 <![endif]--></li>
+<li><!--[if IE 6]> 仅IE6可识别 <![endif]--></li>
+<li><!--[if lt IE 6]> IE6以及IE6以下版本可识别 <![endif]--></li>
+<li><!--[if gte IE 6]> IE6以及IE6以上版本可识别 <![endif]--></li>
+<li><!--[if IE 7]> 仅IE7可识别 <![endif]--></li>
+<li><!--[if lt IE 7]> IE7以及IE7以下版本可识别 <![endif]--></li>
+<li><!--[if gte IE 7]> IE7以及IE7以上版本可识别 <![endif]-->注:gt = Great Then 大于<blockquote>
+<p>= &gt; 大于号<br>lt = Less Then 小于<br>&lt; = &lt; 小于号<br>gte = Great Then or Equal 大于或等于<br>lte = Less Then or Equal 小于或等于</p>
+</blockquote>
+</li>
+</ol>
+<p>四、css filter的办法（据作者称是从国外某经典网站翻译过来的说）</p>
+<p>新建一个css样式如下：</p>
+<p>#item {</p>
+<p>width: 200px;</p>
+<p>height: 200px;</p>
+<p>background: red;</p>
+<p>}</p>
+<p>新建一个div,并使用前面定义的css的样式：</p>
+<div>some text here</div>
+
+<p>在body表现这里加入 lang 属性，中文为zh：</p>
+<body lang="en">
+
+<p>现在对div元素再定义一个样式：</p>
+<p>*:lang(en) #item{</p>
+<p>background:green !important;</p>
+<p>}</p>
+<p>这样做是为了用 !important 覆盖原来的 css 样式，由于:lang 选择器 ie7.0 并不支持，所以对这句话不会有任何作用，于是也达到了 ie6.0下同样的效果，但是很不幸地的是，safari 同样不支持此属性，所以需要加入以下 css 样式：</p>
+<p>#item:empty {</p>
+<p>background: green !important</p>
+<p>}</p>
+<p>:empty选择器为 CSS3 的规范，尽管 safari 并不支持此规范，但是还是会选择此元素，不管是否此元素存在，现在绿色会现在在除 ie 各版本以外的浏览器上。</p>
+<p>五、FLOAT 闭合（clearing float）</p>
+<p>网页在某些浏览器上显示错位很多时候都是因为使用了 float 浮动而没有真正闭合，这也是 div 无法自适应高度的一个原因。如果父 div 没有设 float 而其子div却设了 float 的话,父div无法包住整个子 DIV，这种情况一般出现在一个父 DIV 下包含多个子 DIV。解决办法：</p>
+<p>1、给父 DIV 也设上 float (不要骂我，我知道是废话)</p>
+<p>2、在所有子 DIV 后新加一个空 DIV (不推荐，有些浏览器可以看见空 DIV 产生的空隙)</p>
+<p>比如：</p>
+<p>.parent{width:100px;}<br>.son1{float:left;width:20px;}<br>.son2{float:left;width:80px;}<br>.clear{clear:both;margin:0;parding0;height:0px;font-size:0px;}</p>
+<div><br><div></div><br><div></div><br><div></div><br></div>
+
+<p>3、万能 float 闭合</p>
+<p>将以下代码加入Global CSS 中,给需要闭合的div加上 class=”clearfix” 即可,屡试不爽.<br>代码:</p>
+<style>
+/* Clear Fix */
+.clearfix:after {
+content:".";
+display:block;
+height:0;
+clear:both;
+visibility:hidden;
+}
+.clearfix {
+display:inline-block;
+}
+/* Hide from IE Mac \*/
+.clearfix {display:block;}
+/* End hide from IE Mac */
+/* end of clearfix */
+</style>
+
+<p>:after（伪对象）,设置在对象后发生的内容，通常和 content 配合使用，IE 不支持此伪对象，非 Ie  浏览器支持，所以并不影响到IE/WIN浏览器。这种的最麻烦。</p>
+<p>4、overflow:auto（刚看到的，极力推荐）</p>
+<p>只要在父 DIV 的CSS中加上 overflow:auto 就搞定。</p>
+<p>举例：</p>
+<p>.parent{width:100px;overflow:auto}<br>.son1{float:left;width:20px;}<br>.son2{float:left;width:80px;}</p>
+<div><br><div></div><br><div></div><br></div>
+
+<p>作者原话：原理是，外围元素之所以不能很好的延伸，问题出在了 overflow 上，因为 overflow 不可见（见W3C的解释）。现在只要将给外围元素添加一个“overflow:auto”，就可以解决问题，结果是除了IE，真的可以解决。下来就要解决IE的问题了，再加上“_height:1%”，这个问题就完全解决了。</p>
+<p>我试了一下，其实不加”_height:1%“在IE下也行，留着吧。</p>
+<p>六、需要注意的一些兼容细节</p>
+<p>1, FF 下给 div 设置 padding 后会导致 width 和 height 增加(DIV的实际宽度=DIV宽+Padding), 但IE不会.</p>
+<p>解决办法：给DIV设定IE、FF两个宽度，在IE的宽度前加上IE特有标记” * “号。</p>
+<p>2, 页面居中问题.</p>
+<p>body {TEXT-ALIGN: center;} 在IE下足够了，但 FF 下失效。</p>
+<p>解决办法：加上”MARGIN-RIGHT: auto; MARGIN-LEFT: auto; “</p>
+<p>3, 有的时候在IE6上看见一些奇怪的间隙，可我们高度明明设好了呀。</p>
+<p>解决办法：试试在有空隙的DIV上加上”font-size:0px;”</p>
+<p>4, 关于手形光标. cursor: pointer. 而hand 只适用于 IE.</p>
+<p>5, 浮动IE6产生的双倍距离</p>
+<p>#box{ float:left;<br>width:100px;<br>margin:0 0 0 100px;<br>}<br>这种情况之下IE6会产生200px的距离</p>
+<p>解决办法：加上 display:inline，使浮动忽略</p>
+<p>这里细说一下block,inline两个元素,Block元素的特点是:总是在新行上开始,高度,宽度,行高,边距都可以控制(块元素);Inline元素的特点是:和其他元素在同一行上,…不可控制(内嵌元素);</p>
+<p>#box{ display:block; //可以为内嵌元素模拟为块元素 display:inline; //实现同一行排列的的效果</p>
+<p>6 页面的最小宽度</p>
+<p>min-width是个非常方便的CSS命令，它可以指定元素最小也不能小于某个宽度，这样就能保证排版一直正确。但IE不认得min-这个定义，但实际上它把正常的width和height当作有min的情况来使。这样问题就大了，如果只用宽度和高度，正常的浏览器里这两个值就不会变，如果只用min-width和min-height的话，IE下面根本等于没有设置宽度和高度。比如要设置背景图片，这个宽度是比较重要的。</p>
+<p>解决办法：为了让这一命令在IE上也能用，可以把一个<div> 放到 <body> 标签下，然后为div指定一个类：<br>然后CSS这样设计：</body></div></p>
+<p>#Container{<br>min-width: 600px;<br>width:e-xpression(document.body.clientWidth &lt; 600? “600px”: “auto” );<br>}<br>第一个min-width是正常的；但第2行的width使用了JavaScript，这只有IE才认得，这也会让你的HTML文档不太正规。它实际上通过javascript的判断来实现最小宽度。</p>
+<p>7、UL和FORM标签的padding与margin</p>
+<p>ul标签在FF中默认是有padding值的,而在IE中只有margin默认有值。FORM标签在IE中,将会自动margin一些边距,而在FF中margin则是0；</p>
+<p>解决办法：css中首先都使用这样的样式ul,form{margin:0;padding:0;}给定义死了,后面就不会为这个头疼了.</p>
+<p>8 ,DIV浮动IE文本产生3象素的bug</p>
+<p>下面这段是我在网上粘过来的</p>
+<p>左边对象浮动，右边采用外补丁的左边距来定位，右边对象内的文本会离左边有3px的间距.</p>
+<p>#box{<br>float:left;<br>width:800px;}</p>
+<p>#left{<br>float:left;<br>width:50%;}</p>
+<p>#right{<br>width:50%;<br>}<br>*html #left{<br>margin-right:-3px;<br>//这句是关键<br>}<br>HTML代码</p>
+<div id="box"><br><div id="left"></div><br><div id="right"></div><br></div>
+
+<p>针对上面这段代码，下面说一下我的理解：</p>
+<p>第一、只要right定义了width属性，在FF下绝对就会两行显示<br>第二、两个width都定义为百分比的话，就算都为100%在IE下也会一行显示。所以上面那句所谓“这句是关键”根本没用，不加也在一行，除非你width定义的是数值才用得上。</p>
+<p>所以说上面这段代码其实用处不大，至少在FF下不行。其实只要只定义left的width就行了，right不定义width就不管在IE还是FF 下都能成功，但这样的话父DIV BOX并没有真正的包含LEFT和RIGHT两子DIV,可以用我上面说的第5种办法解决。最简单的办法就是在RIGHT中加上float:left就 OK了，真磨叽！</p>
+<p>9,截字省略号</p>
+<p>.hh { -o-text-overflow:ellipsis;<br>text-overflow:ellipsis;<br>white-space:<br>nowrapoverflow:hidden;<br>}<br>这个是在越出长度后会自行的截掉多出部分的文字，并以省略号结尾。技术是好技术，很多人都喜欢乱用，但注意 Firefox 并不支持</p>
+</body>
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="/2017/02/01/CSS样式表时总结下FF与IE的区别/" data-id="cj6uenfrt0000s8wq9rymn5mu" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+        <a href="/2017/02/01/CSS样式表时总结下FF与IE的区别/#comments" class="article-comment-link">评论</a>
+    
+
+        </footer>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+    
+        <a href="/2017/02/01/js变量和函数的提升/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">下一篇</strong>
+            <div class="article-nav-title">js变量提升和函数提升</div>
+        </a>
+    
+</nav>
+
+
+    
+</article>
+
+
+    
+    
+        <section id="comments">
+    <div id="lv-container" data-id="city" data-uid=MTAyMC8zMDIyOC82Nzgz></div>
+</section>
+	
+
+</section>
+            
+                
+<aside id="sidebar">
+   
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">最新文章</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2017/02/01/CSS样式表时总结下FF与IE的区别/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://www.gratisography.com/pictures/413_1.jpg)" alt="Ajax和Flash优缺点" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/前端/">前端</a></p>
+                            <p class="item-title"><a href="/2017/02/01/CSS样式表时总结下FF与IE的区别/" class="title">Ajax和Flash优缺点</a></p>
+                            <p class="item-date"><time datetime="2017-01-31T16:00:00.000Z" itemprop="datePublished">2017-02-01</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2017/02/01/js变量和函数的提升/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://st.originoo.cn/2632165/4026/i/950/depositphotos_40264933-stock-photo-young-plant.jpg)" alt="js变量提升和函数提升" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/前端/">前端</a></p>
+                            <p class="item-title"><a href="/2017/02/01/js变量和函数的提升/" class="title">js变量提升和函数提升</a></p>
+                            <p class="item-date"><time datetime="2017-01-31T16:00:00.000Z" itemprop="datePublished">2017-02-01</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2017/01/30/js变量的只声明不赋值/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://st3.originoo.cn/3591429/12987/i/950/depositphotos_129873842-stock-photo-best-friends-in-amusement-park.jpg)" alt="js变量的只声明不赋值" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/前端/">前端</a></p>
+                            <p class="item-title"><a href="/2017/01/30/js变量的只声明不赋值/" class="title">js变量的只声明不赋值</a></p>
+                            <p class="item-date"><time datetime="2017-01-29T16:00:00.000Z" itemprop="datePublished">2017-01-30</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2017/01/22/Ajax和Flash的优缺点/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://www.gratisography.com/pictures/333_1.jpg)" alt="Ajax和Flash优缺点" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/前端/">前端</a></p>
+                            <p class="item-title"><a href="/2017/01/22/Ajax和Flash的优缺点/" class="title">Ajax和Flash优缺点</a></p>
+                            <p class="item-date"><time datetime="2017-01-21T16:00:00.000Z" itemprop="datePublished">2017-01-22</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2017/01/18/js存储/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://www.gratisography.com/pictures/221_1.jpg)" alt="js存储" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/js/">js</a></p>
+                            <p class="item-title"><a href="/2017/01/18/js存储/" class="title">js存储</a></p>
+                            <p class="item-date"><time datetime="2017-01-17T16:00:00.000Z" itemprop="datePublished">2017-01-18</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">分类</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Http/">Http</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Node/">Node</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Node/爬虫/">爬虫</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/js/">js</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端/">前端</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据库/">数据库</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/服务器/">服务器</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/版本管理/">版本管理</a><span class="category-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">归档</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">十二月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">二月 2016</a><span class="archive-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">标签</h3>
+        <div class="widget">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/">CSS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue/">Vue</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cheerio/">cheerio</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html/">html</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http请求/">http请求</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/">js</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lazyload/">lazyload</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongodb/">mongodb</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/中间件/">中间件</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/代理/">代理</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/存储/">存储</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/懒加载/">懒加载</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/爬虫/">爬虫</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/跨域/">跨域</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/页面请求/">页面请求</a><span class="tag-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">标签云</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/CSS/" style="font-size: 10px;">CSS</a> <a href="/tags/Vue/" style="font-size: 16.67px;">Vue</a> <a href="/tags/cheerio/" style="font-size: 10px;">cheerio</a> <a href="/tags/css/" style="font-size: 13.33px;">css</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/html/" style="font-size: 13.33px;">html</a> <a href="/tags/http请求/" style="font-size: 10px;">http请求</a> <a href="/tags/js/" style="font-size: 20px;">js</a> <a href="/tags/lazyload/" style="font-size: 10px;">lazyload</a> <a href="/tags/mongodb/" style="font-size: 10px;">mongodb</a> <a href="/tags/中间件/" style="font-size: 10px;">中间件</a> <a href="/tags/代理/" style="font-size: 10px;">代理</a> <a href="/tags/存储/" style="font-size: 10px;">存储</a> <a href="/tags/懒加载/" style="font-size: 10px;">懒加载</a> <a href="/tags/爬虫/" style="font-size: 10px;">爬虫</a> <a href="/tags/跨域/" style="font-size: 10px;">跨域</a> <a href="/tags/页面请求/" style="font-size: 10px;">页面请求</a>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">链接</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="http://hexo.io">Hexo</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+    
+    <div id="toTop" class="fa fa-angle-up"></div>
+</aside>
+
+            
+        </div>
+        <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            &copy; 2017 陈志远<br>
+            Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="http://github.com/ppoffice">PPOffice</a>
+        </div>
+    </div>
+</footer>
+        
+    
+    
+    <!-- 来必力City版安装代码 -->
+    <script type="text/javascript">
+     (function(d, s) {
+         var j, e = d.getElementsByTagName(s)[0];
+
+         if (typeof LivereTower === 'function') { return; }
+
+         j = d.createElement(s);
+         j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+         j.async = true;
+
+         e.parentNode.insertBefore(j, e);
+     })(document, 'script');
+    </script>
+  <noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
+  <!-- City版安装代码已完成 -->
+
+
+
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+</html>
