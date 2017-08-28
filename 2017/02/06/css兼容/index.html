@@ -161,7 +161,7 @@
         </div>
         <div class="article-info profile-block">
             <div class="article-info-block">
-                27
+                25
                 <span>文章</span>
             </div>
             <div class="article-info-block">
@@ -285,7 +285,7 @@
 <h2 id="2、-为什么会发现上面的奇怪的东西（怪我css2-1和css3分不清），因为编译sass文件后发现ie8下的样式基本全歇菜了。需要注意的是，如果浏览器-不支持的选择器和支持的选择器写在一起，那么整条规则就不起作用了。比如你不小心创造了一个伪元素（是真的伪哦）-bb-bb-child-cc-background-333-那么这整条规则就不起作用了，所有浏览器在此情况下都会歇菜-cc的样式就丢失了。"><a href="#2、-为什么会发现上面的奇怪的东西（怪我css2-1和css3分不清），因为编译sass文件后发现ie8下的样式基本全歇菜了。需要注意的是，如果浏览器-不支持的选择器和支持的选择器写在一起，那么整条规则就不起作用了。比如你不小心创造了一个伪元素（是真的伪哦）-bb-bb-child-cc-background-333-那么这整条规则就不起作用了，所有浏览器在此情况下都会歇菜-cc的样式就丢失了。" class="headerlink" title="2、 为什么会发现上面的奇怪的东西（怪我css2.1和css3分不清），因为编译sass文件后发现ie8下的样式基本全歇菜了。需要注意的是，如果浏览器 不支持的选择器和支持的选择器写在一起，那么整条规则就不起作用了。比如你不小心创造了一个伪元素（是真的伪哦）.bb:bb-child, .cc{background:#333;}那么这整条规则就不起作用了，所有浏览器在此情况下都会歇菜,.cc的样式就丢失了。"></a>2、 为什么会发现上面的奇怪的东西（怪我css2.1和css3分不清），因为编译sass文件后发现ie8下的样式基本全歇菜了。需要注意的是，如果浏览器 不支持的选择器和支持的选择器写在一起，那么整条规则就不起作用了。比如你不小心创造了一个伪元素（是真的伪哦）.bb:bb-child, .cc{background:#333;}那么这整条规则就不起作用了，所有浏览器在此情况下都会歇菜,.cc的样式就丢失了。</h2><h2 id="3、-input设置了左右padding，but输入较多内容时padding还是会消失。这个问题是无解的，ie浏览器她就是这么渲染input的，解决方法是在input-外面套一层div，用div设置左右padding，border，width和height，input只需要设置width和weight为100-即可。另外，正常来讲，如果没有明确设置height的值，那么设置的line-height值就是height的值，but对于ie8，如果input-设置了-line-height，那么input必须设置height，否则input的内容显示有问题，会上下隐藏部分内容，她就是要躲猫猫。"><a href="#3、-input设置了左右padding，but输入较多内容时padding还是会消失。这个问题是无解的，ie浏览器她就是这么渲染input的，解决方法是在input-外面套一层div，用div设置左右padding，border，width和height，input只需要设置width和weight为100-即可。另外，正常来讲，如果没有明确设置height的值，那么设置的line-height值就是height的值，but对于ie8，如果input-设置了-line-height，那么input必须设置height，否则input的内容显示有问题，会上下隐藏部分内容，她就是要躲猫猫。" class="headerlink" title="3、 input设置了左右padding，but输入较多内容时padding还是会消失。这个问题是无解的，ie浏览器她就是这么渲染input的，解决方法是在input 外面套一层div，用div设置左右padding，border，width和height，input只需要设置width和weight为100% 即可。另外，正常来讲，如果没有明确设置height的值，那么设置的line-height值就是height的值，but对于ie8，如果input 设置了 line-height，那么input必须设置height，否则input的内容显示有问题，会上下隐藏部分内容，她就是要躲猫猫。"></a>3、 input设置了左右padding，but输入较多内容时padding还是会消失。这个问题是无解的，ie浏览器她就是这么渲染input的，解决方法是在input 外面套一层div，用div设置左右padding，border，width和height，input只需要设置width和weight为100% 即可。另外，正常来讲，如果没有明确设置height的值，那么设置的line-height值就是height的值，but对于ie8，如果input 设置了 line-height，那么input必须设置height，否则input的内容显示有问题，会上下隐藏部分内容，她就是要躲猫猫。</h2><h2 id="4、-为什么上面我不用input的伪元素进行设置而要嵌套多一层div呢？因为input，img，iframe等元素不支持伪元素-。-before-和-after伪元素指定了一个元素文档树内容之前和之后的内容。与’content’属性联用-指定了插入的内容（也就是你必须显性设置content-属性这两个伪家伙才能在文档中显示出来，哪怕设置content属性为空字符串也行）。作为DOM元素，伪元素都是在容器内进行渲染的-input，img，iframe等元素都不能包含其他元素，也就是不是容器，所以不能通过伪元素插入内容。"><a href="#4、-为什么上面我不用input的伪元素进行设置而要嵌套多一层div呢？因为input，img，iframe等元素不支持伪元素-。-before-和-after伪元素指定了一个元素文档树内容之前和之后的内容。与’content’属性联用-指定了插入的内容（也就是你必须显性设置content-属性这两个伪家伙才能在文档中显示出来，哪怕设置content属性为空字符串也行）。作为DOM元素，伪元素都是在容器内进行渲染的-input，img，iframe等元素都不能包含其他元素，也就是不是容器，所以不能通过伪元素插入内容。" class="headerlink" title="4、 为什么上面我不用input的伪元素进行设置而要嵌套多一层div呢？因为input，img，iframe等元素不支持伪元素 -_-||。:before 和:after伪元素指定了一个元素文档树内容之前和之后的内容。与’content’属性联用,指定了插入的内容（也就是你必须显性设置content 属性这两个伪家伙才能在文档中显示出来，哪怕设置content属性为空字符串也行）。作为DOM元素，伪元素都是在容器内进行渲染的, input，img，iframe等元素都不能包含其他元素，也就是不是容器，所以不能通过伪元素插入内容。"></a>4、 为什么上面我不用input的伪元素进行设置而要嵌套多一层div呢？因为input，img，iframe等元素不支持伪元素 -_-||。:before 和:after伪元素指定了一个元素文档树内容之前和之后的内容。与’content’属性联用,指定了插入的内容（也就是你必须显性设置content 属性这两个伪家伙才能在文档中显示出来，哪怕设置content属性为空字符串也行）。作为DOM元素，伪元素都是在容器内进行渲染的, input，img，iframe等元素都不能包含其他元素，也就是不是容器，所以不能通过伪元素插入内容。</h2><h2 id="5、-table中如果不是严格的用于表格，而是用于奇葩的局部布局时（我也想问为什么用来布局。。），td设置成inline-block可以排成一行，但是-ie8和ie9-下，如果td中的内容很长，即使td设置了宽度，td也会撑开并占用td设置的margin（废话，td是没有margin可言的），直到挤占所有的td-宽度之和为tr的宽度。但是td设置成float：left；就能表现成block。这个不清楚为什么，但是管用。。"><a href="#5、-table中如果不是严格的用于表格，而是用于奇葩的局部布局时（我也想问为什么用来布局。。），td设置成inline-block可以排成一行，但是-ie8和ie9-下，如果td中的内容很长，即使td设置了宽度，td也会撑开并占用td设置的margin（废话，td是没有margin可言的），直到挤占所有的td-宽度之和为tr的宽度。但是td设置成float：left；就能表现成block。这个不清楚为什么，但是管用。。" class="headerlink" title="5、 table中如果不是严格的用于表格，而是用于奇葩的局部布局时（我也想问为什么用来布局。。），td设置成inline-block可以排成一行，但是 ie8和ie9 下，如果td中的内容很长，即使td设置了宽度，td也会撑开并占用td设置的margin（废话，td是没有margin可言的），直到挤占所有的td 宽度之和为tr的宽度。但是td设置成float：left；就能表现成block。这个不清楚为什么，但是管用。。"></a>5、 table中如果不是严格的用于表格，而是用于奇葩的局部布局时（我也想问为什么用来布局。。），td设置成inline-block可以排成一行，但是 ie8和ie9 下，如果td中的内容很长，即使td设置了宽度，td也会撑开并占用td设置的margin（废话，td是没有margin可言的），直到挤占所有的td 宽度之和为tr的宽度。但是td设置成float：left；就能表现成block。这个不清楚为什么，但是管用。。</h2><h2 id="6、父元素的左padding会和子元素的左margin重叠。这个是没有好好实现盒子模型的事情了，包容吧。。"><a href="#6、父元素的左padding会和子元素的左margin重叠。这个是没有好好实现盒子模型的事情了，包容吧。。" class="headerlink" title="6、父元素的左padding会和子元素的左margin重叠。这个是没有好好实现盒子模型的事情了，包容吧。。"></a>6、父元素的左padding会和子元素的左margin重叠。这个是没有好好实现盒子模型的事情了，包容吧。。</h2><h2 id="7、sprite图中的icons之间最好留空白间隔，哪怕间隔1px也好，否则ie8下会出现使用了某一个icon当背景，icon后面跟着的其他icon也顺带显示了一小部分的bug，所以icons之间还是要适当留白，不要太省。"><a href="#7、sprite图中的icons之间最好留空白间隔，哪怕间隔1px也好，否则ie8下会出现使用了某一个icon当背景，icon后面跟着的其他icon也顺带显示了一小部分的bug，所以icons之间还是要适当留白，不要太省。" class="headerlink" title="7、sprite图中的icons之间最好留空白间隔，哪怕间隔1px也好，否则ie8下会出现使用了某一个icon当背景，icon后面跟着的其他icon也顺带显示了一小部分的bug，所以icons之间还是要适当留白，不要太省。"></a>7、sprite图中的icons之间最好留空白间隔，哪怕间隔1px也好，否则ie8下会出现使用了某一个icon当背景，icon后面跟着的其他icon也顺带显示了一小部分的bug，所以icons之间还是要适当留白，不要太省。</h2><h1 id="三、ie11部分css问题"><a href="#三、ie11部分css问题" class="headerlink" title="三、ie11部分css问题"></a>三、ie11部分css问题</h1><h2 id="1、-ie11下很多元素表现和其他浏览器不一致，比如对应用了同一样式（不设置-高度）的div，其他浏览器解析的高度是一致的，但是ie11下该div有可能高度偏大，由此导致一些排版上的问题，所以，如果发现元素排版上下偏移的问题，查看此元素或其当代元素是否设置了高度，统一添上高度一切都ok了。"><a href="#1、-ie11下很多元素表现和其他浏览器不一致，比如对应用了同一样式（不设置-高度）的div，其他浏览器解析的高度是一致的，但是ie11下该div有可能高度偏大，由此导致一些排版上的问题，所以，如果发现元素排版上下偏移的问题，查看此元素或其当代元素是否设置了高度，统一添上高度一切都ok了。" class="headerlink" title="1、 ie11下很多元素表现和其他浏览器不一致，比如对应用了同一样式（不设置 高度）的div，其他浏览器解析的高度是一致的，但是ie11下该div有可能高度偏大，由此导致一些排版上的问题，所以，如果发现元素排版上下偏移的问题，查看此元素或其当代元素是否设置了高度，统一添上高度一切都ok了。"></a>1、 ie11下很多元素表现和其他浏览器不一致，比如对应用了同一样式（不设置 高度）的div，其他浏览器解析的高度是一致的，但是ie11下该div有可能高度偏大，由此导致一些排版上的问题，所以，如果发现元素排版上下偏移的问题，查看此元素或其当代元素是否设置了高度，统一添上高度一切都ok了。</h2><h2 id="2、抱歉，ie11问题确实不多。"><a href="#2、抱歉，ie11问题确实不多。" class="headerlink" title="2、抱歉，ie11问题确实不多。"></a>2、抱歉，ie11问题确实不多。</h2><h1 id="四、结尾附上一个关于css优先级的奇谈"><a href="#四、结尾附上一个关于css优先级的奇谈" class="headerlink" title="四、结尾附上一个关于css优先级的奇谈"></a>四、结尾附上一个关于css优先级的奇谈</h1><h2 id="首先我们知道："><a href="#首先我们知道：" class="headerlink" title="首先我们知道："></a>首先我们知道：</h2><blockquote>
 <p>1、id选择器优先级权重比class选择器大一个数量级，class选择器权重比标签选择器大一个数量级；<br>2、class选择器和属性选择器同优先级;<br>3、样式的优先程度需要根据第1条规则计算整体的优先级，按选择器权重计算各条样式规则中所有选择器优先级之和，哪条规则权重大，那条就说了算。如果相同那么后面的覆盖前面的。<br>4、像这种.dog &gt; p开挂，多了特殊符号的，并不会增加优势，还是和 .dog p优先级一样。<br>然后可以抛出一个问题了：</p>
 </blockquote>
-<p>对于下面的文档结构，分别对 p | .p | div p | .parent | #parent设置color属性，那么优先级如何呢？<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;div id=<span class="string">"parent"</span> <span class="class"><span class="keyword">class</span></span>=<span class="string">"parent"</span>&gt;</div><div class="line">  &lt;p <span class="class"><span class="keyword">class</span></span>=<span class="string">"p"</span>&gt;p&lt;<span class="regexp">/p&gt;</span></div><div class="line"><span class="regexp">&lt;/</span>div&gt;</div></pre></td></tr></table></figure></p>
+<p>对于下面的文档结构，分别对 p | .p | div p | .parent | #parent设置color属性，那么优先级如何呢？<br><figure class="highlight applescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;<span class="keyword">div</span> <span class="built_in">id</span>=<span class="string">"parent"</span> <span class="built_in">class</span>=<span class="string">"parent"</span>&gt;</div><div class="line">  &lt;p <span class="built_in">class</span>=<span class="string">"p"</span>&gt;p&lt;/p&gt;</div><div class="line">&lt;/<span class="keyword">div</span>&gt;</div></pre></td></tr></table></figure></p>
 <p>结果表现：也就是 .p &gt; div p &gt; p &gt; #parent &gt; .parent<br>id选择器居然比p选择器优先级还低！将p元素和div元素分开看，.p &gt; div p &gt; p 很正常， #parent &gt; .parent也很正常。所以问题关键在子级p和父级#parent, 子级的选择器优先级比父级的选择器优先级高，或者说继承的优先级程度比自身的优先级低！</p>
 <p>嵌套多一层看看就知道是不是了，分别对#parent | div | p设置color属性：<br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"></div><div class="line">&lt;div id="parent" class="parent"&gt;</div><div class="line">  &lt;div class="mid"&gt;</div><div class="line">    &lt;p id="p" class="p"&gt;p&lt;/p&gt; </div><div class="line">  &lt;div&gt;</div><div class="line">&lt;/div&gt;</div></pre></td></tr></table></figure></p>
 <p>结果确实是p &gt; div &gt; #parent：</p>
@@ -305,7 +305,7 @@
 
 </div>
 
-    <a data-url="/2017/02/06/css兼容/" data-id="cj6ureqk4000a2wwqr4qwo13f" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="/2017/02/06/css兼容/" data-id="cj6vwq38c0009ukwq0oy77wwp" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -425,44 +425,6 @@
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/2017/08/27/2/" class="thumbnail">
-    
-    
-        <span class="thumbnail-image thumbnail-none"></span>
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"></p>
-                            <p class="item-title"><a href="/2017/08/27/2/" class="title"></a></p>
-                            <p class="item-date"><time datetime="2017-08-27T09:09:42.359Z" itemprop="datePublished">2017-08-27</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2017/08/27/1/" class="thumbnail">
-    
-    
-        <span class="thumbnail-image thumbnail-none"></span>
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"></p>
-                            <p class="item-title"><a href="/2017/08/27/1/" class="title"></a></p>
-                            <p class="item-date"><time datetime="2017-08-27T08:25:48.546Z" itemprop="datePublished">2017-08-27</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
                             <a href="/2017/02/20/link和import/" class="thumbnail">
     
     
@@ -517,6 +479,44 @@
                         </div>
                     </li>
                 
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2017/02/05/去除inline-block元素间间距的N种方法/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://www.gratisography.com/pictures/404_1.jpg)" alt="去除inline-block元素间间距的N种方法(转)" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/前端/">前端</a></p>
+                            <p class="item-title"><a href="/2017/02/05/去除inline-block元素间间距的N种方法/" class="title">去除inline-block元素间间距的N种方法(转)</a></p>
+                            <p class="item-date"><time datetime="2017-02-04T16:00:00.000Z" itemprop="datePublished">2017-02-05</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2017/02/05/DIV+CSS 与不同 IE 版本等的兼容性/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://www.gratisography.com/pictures/413_1.jpg)" alt="DIV+CSS 与不同 IE 版本等的兼容性" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/前端/">前端</a></p>
+                            <p class="item-title"><a href="/2017/02/05/DIV+CSS 与不同 IE 版本等的兼容性/" class="title">DIV+CSS 与不同 IE 版本等的兼容性</a></p>
+                            <p class="item-date"><time datetime="2017-02-04T16:00:00.000Z" itemprop="datePublished">2017-02-05</time></p>
+                        </div>
+                    </li>
+                
             </ul>
         </div>
     </div>
@@ -535,7 +535,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">归档</h3>
         <div class="widget">
-            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">八月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">十二月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a><span class="archive-list-count">3</span></li></ul>
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">十二月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a><span class="archive-list-count">3</span></li></ul>
         </div>
     </div>
 

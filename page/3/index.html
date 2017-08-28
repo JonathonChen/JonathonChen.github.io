@@ -154,7 +154,7 @@
         </div>
         <div class="article-info profile-block">
             <div class="article-info-block">
-                27
+                25
                 <span>文章</span>
             </div>
             <div class="article-info-block">
@@ -207,376 +207,6 @@
 
             
             <section id="main">
-    <article id="post-iis部署" class="article article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
-        
-            
-	
-		<a href="/2016/10/03/iis部署/" itemprop="url">
-            <img src="http://www.gratisography.com/pictures/313_1.jpg" class="article-banner" />
-        </a>
-	
-
-
-
-        
-        
-            <header class="article-header">
-                
-    
-        <h1 itemprop="name">
-            <a class="article-title" href="/2016/10/03/iis部署/">IIS部署</a>
-        </h1>
-    
-
-                
-                    <div class="article-meta">
-                        
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/2016/10/03/iis部署/">
-            <time datetime="2016-10-02T16:00:00.000Z" itemprop="datePublished">2016-10-03</time>
-        </a>
-    </div>
-
-
-                        
-    <div class="article-category">
-    	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/categories/服务器/">服务器</a>
-    </div>
-
-                        
-    <div class="article-tag">
-        <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/代理/">代理</a>
-    </div>
-
-                    </div>
-                
-            </header>
-        
-        
-        <div class="article-entry" itemprop="articleBody">
-        
-            
-            <h3 id="IIS"><a href="#IIS" class="headerlink" title="IIS"></a>IIS</h3><h4 id="名词介绍"><a href="#名词介绍" class="headerlink" title="名词介绍"></a>名词介绍</h4><h5 id="1-IIS简介"><a href="#1-IIS简介" class="headerlink" title="1.IIS简介"></a>1.IIS简介</h5><blockquote>
-<p>Internet Information Service</p>
-<p>微软服务器，windows系统都自带这个功能</p>
-</blockquote>
-<h5 id="2-互联网相关名词介绍"><a href="#2-互联网相关名词介绍" class="headerlink" title="2.互联网相关名词介绍"></a>2.互联网相关名词介绍</h5><blockquote>
-<p>服务器Server;通常是指服务器硬件。还有服务器软件（程序）<br>  服务器软件是运行在电脑上的程序，电脑也可以当做一个服务器</p>
-<p>URL：统一资源定位符 <a href="https://timgsa.baidu.com/timg?image&amp;quality=80&amp;size=b9999_10000&amp;sec=1492594445597&amp;di=1b28e8ff63505088aff8a1f3567bd44e&amp;imgtype=0&amp;src=http%3A%2F%2Fmvimg2.meitudata.com%2F55713dd0165c89055.jpg" target="_blank" rel="external">https://timgsa.baidu.com/timg?image&amp;quality=80&amp;size=b9999_10000&amp;sec=1492594445597&amp;di=1b28e8ff63505088aff8a1f3567bd44e&amp;imgtype=0&amp;src=http%3A%2F%2Fmvimg2.meitudata.com%2F55713dd0165c89055.jpg</a></p>
-<p>域名domain name address: www.baidu.com</p>
-<p>ip地址：命令提示符 –&gt; ipconfig 使用ping www.baidu.com可以把域名转换成ip地址</p>
-<p>DNS： Domain name system域名解析服务</p>
-</blockquote>
-<h4 id="开启IIS服务器"><a href="#开启IIS服务器" class="headerlink" title="开启IIS服务器"></a>开启IIS服务器</h4><figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="bullet">* </span>1.打开控制面板--&gt;程序--&gt;启用或关闭windows功能--&gt;internet information service--&gt;全部勾选</div><div class="line"><span class="bullet">* </span>2.使用localhost或者127.0.0.1访问本地服务器</div><div class="line"><span class="bullet">* </span>3.默认站点，IIS服务器默认站点在c:\inetpub\wwwroot文件夹下</div><div class="line"><span class="bullet">* </span>4.默认文档，打开服务器的时候加载显示的页面。可以上移提高优先级，也可以添加自己想要显示的页面。</div><div class="line"><span class="bullet">* </span>5.注意浏览器缓存，可能会加载以前缓存的页面，而没有加载自己添加的页面</div><div class="line"><span class="bullet">* </span>6.目录浏览，把服务器下的文件以目录的形式展示，这种方式很不安全，因为会把所有文件暴露出来</div><div class="line"><span class="bullet">* </span>7.开启目录浏览，需要把默认文档关掉或者删除所有的默认文档</div><div class="line"><span class="bullet">* </span>8.如果被人通过ip地址访问你的电脑。需要把防火墙关闭</div><div class="line"><span class="bullet">* </span>9.添加站点，端口需要改，要指定路径，如果不能访问，没有权限，需要修改权限</div><div class="line"><span class="bullet">* </span>10.文件夹--&gt;右键属性--&gt;安全--&gt;编辑--&gt;添加--&gt;everyone--&gt;全部控制--&gt;应用</div><div class="line"><span class="bullet">* </span>11.ftp文件传输协议，上传下载文件</div><div class="line"><span class="bullet">* </span>12.http超文本传输协议</div></pre></td></tr></table></figure>
-        
-        </div>
-        <footer class="article-footer">
-            <div class="share-container">
-
-
-
-</div>
-
-    <a data-url="/2016/10/03/iis部署/" data-id="cj6ureqkb000f2wwqnr38luxa" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
-<script>
-    (function ($) {
-        // Prevent duplicate binding
-        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
-            __SHARE_BUTTON_BINDED__ = true;
-        } else {
-            return;
-        }
-        $('body').on('click', function() {
-            $('.article-share-box.on').removeClass('on');
-        }).on('click', '.article-share-link', function(e) {
-            e.stopPropagation();
-
-            var $this = $(this),
-                url = $this.attr('data-url'),
-                encodedUrl = encodeURIComponent(url),
-                id = 'article-share-box-' + $this.attr('data-id'),
-                offset = $this.offset(),
-                box;
-
-            if ($('#' + id).length) {
-                box = $('#' + id);
-
-                if (box.hasClass('on')){
-                    box.removeClass('on');
-                    return;
-                }
-            } else {
-                var html = [
-                    '<div id="' + id + '" class="article-share-box">',
-                        '<input class="article-share-input" value="' + url + '">',
-                        '<div class="article-share-links">',
-                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
-                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
-                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
-                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
-                        '</div>',
-                    '</div>'
-                ].join('');
-
-              box = $(html);
-
-              $('body').append(box);
-            }
-
-            $('.article-share-box.on').hide();
-
-            box.css({
-                top: offset.top + 25,
-                left: offset.left
-            }).addClass('on');
-
-        }).on('click', '.article-share-box', function (e) {
-            e.stopPropagation();
-        }).on('click', '.article-share-box-input', function () {
-            $(this).select();
-        }).on('click', '.article-share-box-link', function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-
-            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
-        });
-    })(jQuery);
-</script>
-
-            
-    
-        <a href="/2016/10/03/iis部署/#comments" class="article-comment-link">评论</a>
-    
-
-        </footer>
-    </div>
-    
-</article>
-
-
-
-    <article id="post-深入理解HTTP协议（转）" class="article article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
-        
-            
-	
-		<a href="/2016/09/21/深入理解HTTP协议（转）/" itemprop="url">
-            <img src="http://static8.originoo.cn/1149789/1043/i/950/depositphotos_10430797-stock-photo-vintage-paper-texture.jpg" class="article-banner" />
-        </a>
-	
-
-
-
-        
-        
-            <header class="article-header">
-                
-    
-        <h1 itemprop="name">
-            <a class="article-title" href="/2016/09/21/深入理解HTTP协议（转）/">深入理解HTTP协议（转）</a>
-        </h1>
-    
-
-                
-                    <div class="article-meta">
-                        
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/2016/09/21/深入理解HTTP协议（转）/">
-            <time datetime="2016-09-20T16:00:00.000Z" itemprop="datePublished">2016-09-21</time>
-        </a>
-    </div>
-
-
-                        
-    <div class="article-category">
-    	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/categories/Http/">Http</a>
-    </div>
-
-                        
-    <div class="article-tag">
-        <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/页面请求/">页面请求</a>
-    </div>
-
-                    </div>
-                
-            </header>
-        
-        
-        <div class="article-entry" itemprop="articleBody">
-        
-            
-            <h3 id="从浏览器地址栏输入url到显示页面的步骤-以HTTP为例"><a href="#从浏览器地址栏输入url到显示页面的步骤-以HTTP为例" class="headerlink" title="从浏览器地址栏输入url到显示页面的步骤(以HTTP为例)"></a>从浏览器地址栏输入url到显示页面的步骤(以HTTP为例)</h3><ol>
-<li>在浏览器地址栏输入URL</li>
-<li>浏览器查看<strong>缓存</strong>，如果请求资源在缓存中并且新鲜，跳转到转码步骤<ol>
-<li>如果资源未缓存，发起新请求</li>
-<li>如果已缓存，检验是否足够新鲜，足够新鲜直接提供给客户端，否则与服务器进行验证。</li>
-<li>检验新鲜通常有两个HTTP头进行控制<code>Expires</code>和<code>Cache-Control</code>：<ul>
-<li>HTTP1.0提供Expires，值为一个绝对时间表示缓存新鲜日期</li>
-<li>HTTP1.1增加了Cache-Control: max-age=,值为以秒为单位的最大新鲜时间</li>
-</ul>
-</li>
-</ol>
-</li>
-<li>浏览器<strong>解析URL</strong>获取协议，主机，端口，path</li>
-<li>浏览器<strong>组装一个HTTP（GET）请求报文</strong></li>
-<li>浏览器<strong>获取主机ip地址</strong>，过程如下：<ol>
-<li>浏览器缓存</li>
-<li>本机缓存</li>
-<li>hosts文件</li>
-<li>路由器缓存</li>
-<li>ISP DNS缓存</li>
-<li>DNS递归查询（可能存在负载均衡导致每次IP不一样）</li>
-</ol>
-</li>
-<li><strong>打开一个socket与目标IP地址，端口建立TCP链接</strong>，三次握手如下：<ol>
-<li>客户端发送一个TCP的<strong>SYN=1，Seq=X</strong>的包到服务器端口</li>
-<li>服务器发回<strong>SYN=1， ACK=X+1， Seq=Y</strong>的响应包</li>
-<li>客户端发送<strong>ACK=Y+1， Seq=Z</strong></li>
-</ol>
-</li>
-<li>TCP链接建立后<strong>发送HTTP请求</strong></li>
-<li>服务器接受请求并解析，将请求转发到服务程序，如虚拟主机使用HTTP Host头部判断请求的服务程序</li>
-<li>服务器检查<strong>HTTP请求头是否包含缓存验证信息</strong>如果验证缓存新鲜，返回<strong>304</strong>等对应状态码</li>
-<li>处理程序读取完整请求并准备HTTP响应，可能需要查询数据库等操作</li>
-<li>服务器将<strong>响应报文通过TCP连接发送回浏览器</strong></li>
-<li>浏览器接收HTTP响应，然后根据情况选择<strong>关闭TCP连接或者保留重用，关闭TCP连接的四次握手如下</strong>：<ol>
-<li>主动方发送<strong>Fin=1， Ack=Z， Seq= X</strong>报文</li>
-<li>被动方发送<strong>ACK=X+1， Seq=Z</strong>报文</li>
-<li>被动方发送<strong>Fin=1， ACK=X， Seq=Y</strong>报文</li>
-<li>主动方发送<strong>ACK=Y， Seq=X</strong>报文</li>
-</ol>
-</li>
-<li>浏览器检查响应状态吗：是否为1XX，3XX， 4XX， 5XX，这些情况处理与2XX不同</li>
-<li>如果资源可缓存，<strong>进行缓存</strong></li>
-<li>对响应进行<strong>解码</strong>（例如gzip压缩）</li>
-<li>根据资源类型决定如何处理（假设资源为HTML文档）</li>
-<li><strong>解析HTML文档，构件DOM树，下载资源，构造CSSOM树，执行js脚本</strong>，这些操作没有严格的先后顺序，以下分别解释</li>
-<li><strong>构建DOM树</strong>：<ol>
-<li><strong>Tokenizing</strong>：根据HTML规范将字符流解析为标记</li>
-<li><strong>Lexing</strong>：词法分析将标记转换为对象并定义属性和规则</li>
-<li><strong>DOM construction</strong>：根据HTML标记关系将对象组成DOM树</li>
-</ol>
-</li>
-<li>解析过程中遇到图片、样式表、js文件，<strong>启动下载</strong></li>
-<li>构建<strong>CSSOM树</strong>：<ol>
-<li><strong>Tokenizing</strong>：字符流转换为标记流</li>
-<li><strong>Node</strong>：根据标记创建节点</li>
-<li><strong>CSSOM</strong>：节点创建CSSOM树</li>
-</ol>
-</li>
-<li><strong><a href="https://developers.google.com/web/fundamentals/performance/critical-rendering-path/render-tree-construction" target="_blank" rel="external">根据DOM树和CSSOM树构建渲染树</a></strong>:<ol>
-<li>从DOM树的根节点遍历所有<strong>可见节点</strong>，不可见节点包括：1）<code>script</code>,<code>meta</code>这样本身不可见的标签。2)被css隐藏的节点，如<code>display: none</code></li>
-<li>对每一个可见节点，找到恰当的CSSOM规则并应用</li>
-<li>发布可视节点的内容和计算样式</li>
-</ol>
-</li>
-<li><strong>js解析如下</strong>：<ol>
-<li>浏览器创建Document对象并解析HTML，将解析到的元素和文本节点添加到文档中，此时<strong>document.readystate为loading</strong></li>
-<li>HTML解析器遇到<strong>没有async和defer的script时</strong>，将他们添加到文档中，然后执行行内或外部脚本。这些脚本会同步执行，并且在脚本下载和执行时解析器会暂停。这样就可以用document.write()把文本插入到输入流中。<strong>同步脚本经常简单定义函数和注册事件处理程序，他们可以遍历和操作script和他们之前的文档内容</strong></li>
-<li>当解析器遇到设置了<strong>async</strong>属性的script时，开始下载脚本并继续解析文档。脚本会在它<strong>下载完成后尽快执行</strong>，但是<strong>解析器不会停下来等它下载</strong>。异步脚本<strong>禁止使用document.write()</strong>，它们可以访问自己script和之前的文档元素</li>
-<li>当文档完成解析，document.readState变成interactive</li>
-<li>所有<strong>defer</strong>脚本会<strong>按照在文档出现的顺序执行</strong>，延迟脚本<strong>能访问完整文档树</strong>，禁止使用document.write()</li>
-<li>浏览器<strong>在Document对象上触发DOMContentLoaded事件</strong></li>
-<li>此时文档完全解析完成，浏览器可能还在等待如图片等内容加载，等这些<strong>内容完成载入并且所有异步脚本完成载入和执行</strong>，document.readState变为complete,window触发load事件</li>
-</ol>
-</li>
-<li><strong>显示页面</strong>（HTML解析过程中会逐步显示页面）</li>
-</ol>
-
-        
-        </div>
-        <footer class="article-footer">
-            <div class="share-container">
-
-
-
-</div>
-
-    <a data-url="/2016/09/21/深入理解HTTP协议（转）/" data-id="cj6ureqm500252wwq2ndynr6a" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
-<script>
-    (function ($) {
-        // Prevent duplicate binding
-        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
-            __SHARE_BUTTON_BINDED__ = true;
-        } else {
-            return;
-        }
-        $('body').on('click', function() {
-            $('.article-share-box.on').removeClass('on');
-        }).on('click', '.article-share-link', function(e) {
-            e.stopPropagation();
-
-            var $this = $(this),
-                url = $this.attr('data-url'),
-                encodedUrl = encodeURIComponent(url),
-                id = 'article-share-box-' + $this.attr('data-id'),
-                offset = $this.offset(),
-                box;
-
-            if ($('#' + id).length) {
-                box = $('#' + id);
-
-                if (box.hasClass('on')){
-                    box.removeClass('on');
-                    return;
-                }
-            } else {
-                var html = [
-                    '<div id="' + id + '" class="article-share-box">',
-                        '<input class="article-share-input" value="' + url + '">',
-                        '<div class="article-share-links">',
-                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
-                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
-                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
-                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
-                        '</div>',
-                    '</div>'
-                ].join('');
-
-              box = $(html);
-
-              $('body').append(box);
-            }
-
-            $('.article-share-box.on').hide();
-
-            box.css({
-                top: offset.top + 25,
-                left: offset.left
-            }).addClass('on');
-
-        }).on('click', '.article-share-box', function (e) {
-            e.stopPropagation();
-        }).on('click', '.article-share-box-input', function () {
-            $(this).select();
-        }).on('click', '.article-share-box-link', function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-
-            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
-        });
-    })(jQuery);
-</script>
-
-            
-    
-        <a href="/2016/09/21/深入理解HTTP协议（转）/#comments" class="article-comment-link">评论</a>
-    
-
-        </footer>
-    </div>
-    
-</article>
-
-
-
     <article id="post-批处理HTTP模块SuperAgent" class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
@@ -730,7 +360,7 @@ superagent也支持复合请求,比如你想上传一个带有你的姓名和邮
 
 </div>
 
-    <a data-url="/2016/09/10/批处理HTTP模块SuperAgent/" data-id="cj6ureqm200222wwqmzx6idtq" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="/2016/09/10/批处理HTTP模块SuperAgent/" data-id="cj6vwq3ai001qukwqwc478zqk" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -881,7 +511,7 @@ superagent也支持复合请求,比如你想上传一个带有你的姓名和邮
 
 </div>
 
-    <a data-url="/2016/09/05/懒加载/" data-id="cj6ureqlx001y2wwqhfncqqyd" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="/2016/09/05/懒加载/" data-id="cj6vwq3ai001iukwqs73nyv78" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -1027,7 +657,7 @@ superagent也支持复合请求,比如你想上传一个带有你的姓名和邮
 
 </div>
 
-    <a data-url="/2016/08/25/解决https请求下发送http请求问题 /" data-id="cj6ureqm700292wwqyutyln71" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="/2016/08/25/解决https请求下发送http请求问题 /" data-id="cj6vwq3ai0021ukwq7gw3d5j1" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -1182,7 +812,7 @@ superagent也支持复合请求,比如你想上传一个带有你的姓名和邮
 <blockquote>
 <p>1.从理论角度：所有的函数。因为它们都在创建的时候就将上层上下文的数据保存起来了。哪怕是简单的全局变量也是如此，因为函数中访问全局变量就相当于是在访问自由变量，这个时候使用最外层的作用域。<br>  2.从实践角度：以下函数才算是闭包：<br>        (1).即使创建它的上下文已经销毁，它仍然存在（比如，内部函数从父函数中返回）<br>        (2).在代码中引用了自由变量</p>
 </blockquote>
-<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> scope = <span class="string">"global scope"</span>;</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">checkscope</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="keyword">var</span> scope = <span class="string">"local scope"</span>;</div><div class="line">    <span class="function"><span class="keyword">function</span> <span class="title">f</span>(<span class="params"></span>)</span>&#123;</div><div class="line">        <span class="keyword">return</span> scope;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> f;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">var</span> foo = checkscope();</div><div class="line">foo();</div></pre></td></tr></table></figure>
+<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><figure class="highlight actionscript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> scope = <span class="string">"global scope"</span>;</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">checkscope</span><span class="params">()</span></span>&#123;</div><div class="line">    <span class="keyword">var</span> scope = <span class="string">"local scope"</span>;</div><div class="line">    <span class="function"><span class="keyword">function</span> <span class="title">f</span><span class="params">()</span></span>&#123;</div><div class="line">        <span class="keyword">return</span> scope;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> f;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">var</span> foo = checkscope();</div><div class="line">foo();</div></pre></td></tr></table></figure>
 <blockquote>
 <p>首先我们要分析一下这段代码中执行上下文栈和执行上下文的变化情况。</p>
 </blockquote>
@@ -1223,7 +853,7 @@ f 函数执行完毕，f 函数上下文从执行上下文栈中弹出
 
 </div>
 
-    <a data-url="/2016/08/20/闭包/" data-id="cj6ureqm9002d2wwqagcmgine" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="/2016/08/20/闭包/" data-id="cj6vwq3ai001yukwqxjq4sj40" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -1456,7 +1086,7 @@ f 函数执行完毕，f 函数上下文从执行上下文栈中弹出
 
 </div>
 
-    <a data-url="/2016/08/15/git远程操作/" data-id="cj6ureqk8000d2wwqp35aoz9i" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="/2016/08/15/git远程操作/" data-id="cj6vwq39n000uukwq584qoa2i" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -1551,44 +1181,6 @@ f 函数执行完毕，f 函数上下文从执行上下文栈中弹出
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/2017/08/27/2/" class="thumbnail">
-    
-    
-        <span class="thumbnail-image thumbnail-none"></span>
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"></p>
-                            <p class="item-title"><a href="/2017/08/27/2/" class="title"></a></p>
-                            <p class="item-date"><time datetime="2017-08-27T09:09:42.359Z" itemprop="datePublished">2017-08-27</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2017/08/27/1/" class="thumbnail">
-    
-    
-        <span class="thumbnail-image thumbnail-none"></span>
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"></p>
-                            <p class="item-title"><a href="/2017/08/27/1/" class="title"></a></p>
-                            <p class="item-date"><time datetime="2017-08-27T08:25:48.546Z" itemprop="datePublished">2017-08-27</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
                             <a href="/2017/02/20/link和import/" class="thumbnail">
     
     
@@ -1643,6 +1235,44 @@ f 函数执行完毕，f 函数上下文从执行上下文栈中弹出
                         </div>
                     </li>
                 
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2017/02/05/去除inline-block元素间间距的N种方法/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://www.gratisography.com/pictures/404_1.jpg)" alt="去除inline-block元素间间距的N种方法(转)" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/前端/">前端</a></p>
+                            <p class="item-title"><a href="/2017/02/05/去除inline-block元素间间距的N种方法/" class="title">去除inline-block元素间间距的N种方法(转)</a></p>
+                            <p class="item-date"><time datetime="2017-02-04T16:00:00.000Z" itemprop="datePublished">2017-02-05</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2017/02/05/DIV+CSS 与不同 IE 版本等的兼容性/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://www.gratisography.com/pictures/413_1.jpg)" alt="DIV+CSS 与不同 IE 版本等的兼容性" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/前端/">前端</a></p>
+                            <p class="item-title"><a href="/2017/02/05/DIV+CSS 与不同 IE 版本等的兼容性/" class="title">DIV+CSS 与不同 IE 版本等的兼容性</a></p>
+                            <p class="item-date"><time datetime="2017-02-04T16:00:00.000Z" itemprop="datePublished">2017-02-05</time></p>
+                        </div>
+                    </li>
+                
             </ul>
         </div>
     </div>
@@ -1661,7 +1291,7 @@ f 函数执行完毕，f 函数上下文从执行上下文栈中弹出
     <div class="widget-wrap">
         <h3 class="widget-title">归档</h3>
         <div class="widget">
-            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">八月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">十二月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a><span class="archive-list-count">3</span></li></ul>
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">十二月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a><span class="archive-list-count">3</span></li></ul>
         </div>
     </div>
 
