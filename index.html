@@ -216,8 +216,8 @@
         
             
             <hr>
-<p>  title: js原型链和继承<br>  categories: 前端<br>  tags: [meta,html]<br>  date: 2017/5/10<br>  banner: <a href="http://www.gratisography.com/pictures/351_1.jpg" target="_blank" rel="external">http://www.gratisography.com/pictures/351_1.jpg</a></p>
-<h2 id="thumbnail-http-www-gratisography-com-pictures-351-1-jpg"><a href="#thumbnail-http-www-gratisography-com-pictures-351-1-jpg" class="headerlink" title="  thumbnail: http://www.gratisography.com/pictures/351_1.jpg"></a>  thumbnail: <a href="http://www.gratisography.com/pictures/351_1.jpg" target="_blank" rel="external">http://www.gratisography.com/pictures/351_1.jpg</a></h2><h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>真正意义上来说Javascript并不是一门面向对象的语言，没有提供传统的继承方式，但是它提供了一种原型继承的方式，利用自身提供的原型属性来实现继承。Javascript原型继承是一个被说烂掉了的话题，但是自己对于这个问题一直没有彻底理解，今天花了点时间又看了一遍《Javascript模式》中关于原型实现继承的几种方法，下面来一一说明下，在最后我根据自己的理解提出了一个关于继承比较完整的实现，如果大家有不同意见，欢迎建议。</p>
+<p>  title: js原型链和继承<br>  categories: 前端<br>  tags: [meta,html]<br>  date: 2017/5/10<br>  banner: <a href="http://www.gratisography.com/pictures/317_1.jpg" target="_blank" rel="external">http://www.gratisography.com/pictures/317_1.jpg</a></p>
+<h2 id="thumbnail-http-www-gratisography-com-pictures-317-1-jpg"><a href="#thumbnail-http-www-gratisography-com-pictures-317-1-jpg" class="headerlink" title="  thumbnail: http://www.gratisography.com/pictures/317_1.jpg"></a>  thumbnail: <a href="http://www.gratisography.com/pictures/317_1.jpg" target="_blank" rel="external">http://www.gratisography.com/pictures/317_1.jpg</a></h2><h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>真正意义上来说Javascript并不是一门面向对象的语言，没有提供传统的继承方式，但是它提供了一种原型继承的方式，利用自身提供的原型属性来实现继承。Javascript原型继承是一个被说烂掉了的话题，但是自己对于这个问题一直没有彻底理解，今天花了点时间又看了一遍《Javascript模式》中关于原型实现继承的几种方法，下面来一一说明下，在最后我根据自己的理解提出了一个关于继承比较完整的实现，如果大家有不同意见，欢迎建议。</p>
 <h1 id="原型与原型链"><a href="#原型与原型链" class="headerlink" title="原型与原型链"></a>原型与原型链</h1><p>说原型继承之前还是要先说说原型和原型链，毕竟这是实现原型继承的基础。<br>在Javascript中，每个函数都有一个原型属性prototype指向自身的原型，而由这个函数创建的对象也有一个<strong>proto</strong>属性指向这个原型，而函数的原型是一个对象，所以这个对象也会有一个<strong>proto</strong>指向自己的原型的原型，这样逐层深入直到Object对象的原型，这样就形成了原型链。下面这张图很好的解释了Javascript中的原型和原型链的关系。<br><img src="http://sfault-image.b0.upaiyun.com/e4/65/e46508fbcd140db304232aba89f41c83" alt="原型链"></p>
 <h1 id="js实现继承的5种方式"><a href="#js实现继承的5种方式" class="headerlink" title="js实现继承的5种方式"></a>js实现继承的5种方式</h1><ol>
 <li>使用对象冒充实现继承(该种实现方式可以实现多继承)<br>实现原理:让父类的构造函数成为子类的方法,然后调用该子类的方法,通过this关键字给所有的属性和方法赋值</li>
@@ -254,7 +254,7 @@
 
 </div>
 
-    <a data-url="/2017/08/29/js原型链和继承/" data-id="cj6x31j59000s2wwqplbf57l7" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="/2017/08/29/js原型链和继承/" data-id="cj6x36tzy000sgkwqi3p6ntqy" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -402,7 +402,7 @@
 
 </div>
 
-    <a data-url="/2017/05/01/js跨域/" data-id="cj6x31j5s001c2wwqag9thcfd" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="/2017/05/01/js跨域/" data-id="cj6x36u1m001jgkwqw3kfna5p" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -548,7 +548,7 @@
 
 </div>
 
-    <a data-url="/2017/04/21/vw、vh兼容/" data-id="cj6x31j6m00242wwq8hsr36x4" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="/2017/04/21/vw、vh兼容/" data-id="cj6x36u33002cgkwqiybaapxh" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -704,7 +704,7 @@
 
 </div>
 
-    <a data-url="/2017/04/06/meta标签和作用/" data-id="cj6x31j5y001i2wwqaj4ktgvi" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="/2017/04/06/meta标签和作用/" data-id="cj6x36u1s001ngkwqe12p6kef" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -892,7 +892,7 @@
 
 </div>
 
-    <a data-url="/2017/04/05/viewport的深入理解/" data-id="cj6x31j65001p2wwq04wgnvso" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="/2017/04/05/viewport的深入理解/" data-id="cj6x36u2d001ygkwqtssea9qr" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -1049,7 +1049,7 @@
 
 </div>
 
-    <a data-url="/2017/03/11/深度克隆/" data-id="cj6x31j74002q2wwqi0kco2yf" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="/2017/03/11/深度克隆/" data-id="cj6x36u40002ugkwq2ak17ju0" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -1193,7 +1193,7 @@
 
 </div>
 
-    <a data-url="/2017/03/10/X-UA-Compatible/" data-id="cj6x31j4g00082wwqf89kezna" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="/2017/03/10/X-UA-Compatible/" data-id="cj6x36tyc0008gkwqkc1p9prd" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -1345,7 +1345,7 @@
 
 </div>
 
-    <a data-url="/2017/03/05/html5shiv.js的工作原理/" data-id="cj6x31j4p000c2wwqqrefwy6h" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="/2017/03/05/html5shiv.js的工作原理/" data-id="cj6x36tyn000cgkwq2scjrt13" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -1492,7 +1492,7 @@
 
 </div>
 
-    <a data-url="/2017/02/20/link和import/" data-id="cj6x31j5v001e2wwq6db57oqz" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="/2017/02/20/link和import/" data-id="cj6x36u14001ggkwqoce6zlc5" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -1662,7 +1662,7 @@
 
 </div>
 
-    <a data-url="/2017/02/15/元素竖向的百分比设定/" data-id="cj6x31j6o00272wwqjgtwqevw" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="/2017/02/15/元素竖向的百分比设定/" data-id="cj6x36u300029gkwqtu3gdvfn" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
