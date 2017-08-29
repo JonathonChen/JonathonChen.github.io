@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <meta charset="utf-8">
+    
+    <title>js原型链和继承 | 博客</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="前言真正意义上来说Javascript并不是一门面向对象的语言，没有提供传统的继承方式，但是它提供了一种原型继承的方式，利用自身提供的原型属性来实现继承。Javascript原型继承是一个被说烂掉了的话题，但是自己对于这个问题一直没有彻底理解，今天花了点时间又看了一遍《Javascript模式》中关于原型实现继承的几种方法，下面来一一说明下，在最后我根据自己的理解提出了一个关于继承比较完整的实现，">
+<meta name="keywords" content="js">
+<meta property="og:type" content="article">
+<meta property="og:title" content="js原型链和继承">
+<meta property="og:url" content="/2017/05/10/js原型链和继承/index.html">
+<meta property="og:site_name" content="博客">
+<meta property="og:description" content="前言真正意义上来说Javascript并不是一门面向对象的语言，没有提供传统的继承方式，但是它提供了一种原型继承的方式，利用自身提供的原型属性来实现继承。Javascript原型继承是一个被说烂掉了的话题，但是自己对于这个问题一直没有彻底理解，今天花了点时间又看了一遍《Javascript模式》中关于原型实现继承的几种方法，下面来一一说明下，在最后我根据自己的理解提出了一个关于继承比较完整的实现，">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://www.gratisography.com/pictures/317_1.jpg">
+<meta property="og:updated_time" content="2017-08-29T04:25:23.975Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="js原型链和继承">
+<meta name="twitter:description" content="前言真正意义上来说Javascript并不是一门面向对象的语言，没有提供传统的继承方式，但是它提供了一种原型继承的方式，利用自身提供的原型属性来实现继承。Javascript原型继承是一个被说烂掉了的话题，但是自己对于这个问题一直没有彻底理解，今天花了点时间又看了一遍《Javascript模式》中关于原型实现继承的几种方法，下面来一一说明下，在最后我根据自己的理解提出了一个关于继承比较完整的实现，">
+<meta name="twitter:image" content="http://www.gratisography.com/pictures/317_1.jpg">
+    
+
+    
+        <link rel="alternate" href="/" title="博客" type="application/atom+xml" />
+    
+
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/open-sans/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/2.1.3/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+    
+    
+
+
+</head>
+
+<body>
+    <div id="container">
+        <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="/" id="logo">
+                <i class="logo"></i>
+                <span class="site-title">博客</span>
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="/.">首页</a>
+                
+                    <a class="main-nav-link" href="/archives">归档</a>
+                
+                    <a class="main-nav-link" href="/categories">目录</a>
+                
+                    <a class="main-nav-link" href="/tags">标签</a>
+                
+                    <a class="main-nav-link" href="/about">关于</a>
+                
+            </nav>
+            
+                
+                <nav id="sub-nav">
+                    <div class="profile" id="profile-nav">
+                        <a id="profile-anchor" href="javascript:;">
+                            <img class="avatar" src="https://timgsa.baidu.com/timg?image&amp;quality=80&amp;size=b9999_10000&amp;sec=1503671977721&amp;di=ffb3d003d1c3e3585ee6e6887ad86963&amp;imgtype=0&amp;src=http%3A%2F%2F2t.5068.com%2Fuploads%2Fallimg%2F151126%2F1-151126164146-50.jpg" />
+                            <i class="fa fa-caret-down"></i>
+                        </a>
+                    </div>
+                </nav>
+            
+            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="想要查找什么..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="/.">首页</a></td>
+                
+                    <td><a class="main-nav-link" href="/archives">归档</a></td>
+                
+                    <td><a class="main-nav-link" href="/categories">目录</a></td>
+                
+                    <td><a class="main-nav-link" href="/tags">标签</a></td>
+                
+                    <td><a class="main-nav-link" href="/about">关于</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</header>
+
+        <div class="outer">
+            
+                
+
+<aside id="profile">
+    <div class="inner profile-inner">
+        <div class="base-info profile-block">
+            <img id="avatar" src="https://timgsa.baidu.com/timg?image&amp;quality=80&amp;size=b9999_10000&amp;sec=1503671977721&amp;di=ffb3d003d1c3e3585ee6e6887ad86963&amp;imgtype=0&amp;src=http%3A%2F%2F2t.5068.com%2Fuploads%2Fallimg%2F151126%2F1-151126164146-50.jpg" />
+            <h2 id="name">陈志远</h2>
+            <h3 id="title">Web前端开发</h3>
+            <span id="location"><i class="fa fa-map-marker"></i>中国厦门</span>
+            <a id="follow" target="_blank" href="">关注我</a>
+        </div>
+        <div class="article-info profile-block">
+            <div class="article-info-block">
+                33
+                <span>文章</span>
+            </div>
+            <div class="article-info-block">
+                17
+                <span>标签</span>
+            </div>
+        </div>
+        
+        <div class="profile-block social-links">
+            <table>
+                <tr>
+                    
+                    
+                    <td>
+                        <a href="https://github.com/JonathonChen" target="_blank" title="github" class=tooltip>
+                            <i class="fa fa-github"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/" target="_blank" title="twitter" class=tooltip>
+                            <i class="fa fa-twitter"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/" target="_blank" title="facebook" class=tooltip>
+                            <i class="fa fa-facebook"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/" target="_blank" title="dribbble" class=tooltip>
+                            <i class="fa fa-dribbble"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/" target="_blank" title="rss" class=tooltip>
+                            <i class="fa fa-rss"></i>
+                        </a>
+                    </td>
+                    
+                </tr>
+            </table>
+        </div>
+        
+    </div>
+</aside>
+
+            
+            <section id="main"><article id="post-js原型链和继承" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            
+	
+		<img src="http://www.gratisography.com/pictures/317_1.jpg" class="article-banner" />
+	
+
+
+
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+            js原型链和继承
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2017/05/10/js原型链和继承/">
+            <time datetime="2017-05-09T16:00:00.000Z" itemprop="datePublished">2017-05-10</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/前端/">前端</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/js/">js</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>真正意义上来说Javascript并不是一门面向对象的语言，没有提供传统的继承方式，但是它提供了一种原型继承的方式，利用自身提供的原型属性来实现继承。Javascript原型继承是一个被说烂掉了的话题，但是自己对于这个问题一直没有彻底理解，今天花了点时间又看了一遍《Javascript模式》中关于原型实现继承的几种方法，下面来一一说明下，在最后我根据自己的理解提出了一个关于继承比较完整的实现，如果大家有不同意见，欢迎建议。</p>
+<h1 id="原型与原型链"><a href="#原型与原型链" class="headerlink" title="原型与原型链"></a>原型与原型链</h1><p>说原型继承之前还是要先说说原型和原型链，毕竟这是实现原型继承的基础。<br>在Javascript中，每个函数都有一个原型属性prototype指向自身的原型，而由这个函数创建的对象也有一个<strong>proto</strong>属性指向这个原型，而函数的原型是一个对象，所以这个对象也会有一个<strong>proto</strong>指向自己的原型的原型，这样逐层深入直到Object对象的原型，这样就形成了原型链。下面这张图很好的解释了Javascript中的原型和原型链的关系。<br><img src="http://sfault-image.b0.upaiyun.com/e4/65/e46508fbcd140db304232aba89f41c83" alt="原型链"></p>
+<h1 id="js实现继承的5种方式"><a href="#js实现继承的5种方式" class="headerlink" title="js实现继承的5种方式"></a>js实现继承的5种方式</h1><ol>
+<li>使用对象冒充实现继承(该种实现方式可以实现多继承)<br>实现原理:让父类的构造函数成为子类的方法,然后调用该子类的方法,通过this关键字给所有的属性和方法赋值</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Parent</span>(<span class="params">firstname</span>)  </span></div><div class="line"><span class="function"></span>&#123;  </div><div class="line">    <span class="keyword">this</span>.fname=firstname;  </div><div class="line">    <span class="keyword">this</span>.age=<span class="number">40</span>;  </div><div class="line">    <span class="keyword">this</span>.sayAge=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)  </span></div><div class="line"><span class="function">    </span>&#123;  </div><div class="line">        <span class="built_in">console</span>.log(<span class="keyword">this</span>.age);  </div><div class="line">    &#125;  </div><div class="line">&#125;  </div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Child</span>(<span class="params">firstname</span>)  </span></div><div class="line"><span class="function"></span>&#123;  </div><div class="line">    <span class="keyword">this</span>.parent=Parent;  </div><div class="line">    <span class="keyword">this</span>.parent(firstname);  </div><div class="line">    <span class="keyword">delete</span> <span class="keyword">this</span>.parent;  </div><div class="line">    <span class="keyword">this</span>.saySomeThing=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)  </span></div><div class="line"><span class="function">    </span>&#123;  </div><div class="line">        <span class="built_in">console</span>.log(<span class="keyword">this</span>.fname);  </div><div class="line">        <span class="keyword">this</span>.sayAge();  </div><div class="line">    &#125;  </div><div class="line">&#125;  </div><div class="line"><span class="keyword">var</span> mychild=<span class="keyword">new</span>  Child(<span class="string">"李"</span>);  </div><div class="line">mychild.saySomeThing();</div></pre></td></tr></table></figure>
+<ol>
+<li>采用call方法改变函数上下文实现继承(该种方式不能继承原型链,若想继承原型链，则采用5混合模式)<br>实现原理:改变函数内部的函数上下文this,使它指向传入函数的具体对象</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Parent</span>(<span class="params">firstname</span>)  </span></div><div class="line"><span class="function"></span>&#123;  </div><div class="line">    <span class="keyword">this</span>.fname=firstname;  </div><div class="line">    <span class="keyword">this</span>.age=<span class="number">40</span>;  </div><div class="line">    <span class="keyword">this</span>.sayAge=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)  </span></div><div class="line"><span class="function">    </span>&#123;  </div><div class="line">        <span class="built_in">console</span>.log(<span class="keyword">this</span>.age);  </div><div class="line">    &#125;  </div><div class="line">&#125;  </div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Child</span>(<span class="params">firstname</span>)  </span></div><div class="line"><span class="function"></span>&#123;  </div><div class="line">  </div><div class="line">    <span class="keyword">this</span>.saySomeThing=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)  </span></div><div class="line"><span class="function">    </span>&#123;  </div><div class="line">        <span class="built_in">console</span>.log(<span class="keyword">this</span>.fname);  </div><div class="line">        <span class="keyword">this</span>.sayAge();  </div><div class="line">    &#125;  </div><div class="line">   <span class="keyword">this</span>.getName=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)  </span></div><div class="line"><span class="function">   </span>&#123;  </div><div class="line">       <span class="keyword">return</span> firstname;  </div><div class="line">   &#125;  </div><div class="line">  </div><div class="line">&#125;  </div><div class="line"><span class="keyword">var</span> child=<span class="keyword">new</span> Child(<span class="string">"张"</span>);  </div><div class="line">Parent.call(child,child.getName());  </div><div class="line">child.saySomeThing();</div></pre></td></tr></table></figure>
+<ol>
+<li>采用Apply方法改变函数上下文实现继承(该种方式不能继承原型链,若想继承原型链，则采用5混合模式)<br>实现原理:改变函数内部的函数上下文this,使它指向传入函数的具体对象</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Parent</span>(<span class="params">firstname</span>)  </span></div><div class="line"><span class="function"></span>&#123;  </div><div class="line">    <span class="keyword">this</span>.fname=firstname;  </div><div class="line">    <span class="keyword">this</span>.age=<span class="number">40</span>;  </div><div class="line">    <span class="keyword">this</span>.sayAge=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)  </span></div><div class="line"><span class="function">    </span>&#123;  </div><div class="line">        <span class="built_in">console</span>.log(<span class="keyword">this</span>.age);  </div><div class="line">    &#125;  </div><div class="line">&#125;  </div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Child</span>(<span class="params">firstname</span>)  </span></div><div class="line"><span class="function"></span>&#123;  </div><div class="line">  </div><div class="line">    <span class="keyword">this</span>.saySomeThing=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)  </span></div><div class="line"><span class="function">    </span>&#123;  </div><div class="line">        <span class="built_in">console</span>.log(<span class="keyword">this</span>.fname);  </div><div class="line">        <span class="keyword">this</span>.sayAge();  </div><div class="line">    &#125;  </div><div class="line">    <span class="keyword">this</span>.getName=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)  </span></div><div class="line"><span class="function">    </span>&#123;  </div><div class="line">        <span class="keyword">return</span> firstname;  </div><div class="line">    &#125;  </div><div class="line">  </div><div class="line">&#125;  </div><div class="line"><span class="keyword">var</span> child=<span class="keyword">new</span> Child(<span class="string">"张"</span>);  </div><div class="line">Parent.apply(child,[child.getName()]);  </div><div class="line">child.saySomeThing();</div></pre></td></tr></table></figure>
+<ol>
+<li>采用原型链的方式实现继承<br>实现原理:使子类原型对象指向父类的实例以实现继承,即重写类的原型,弊端是不能直接实现多继承<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Parent</span>(<span class="params"></span>)  </span></div><div class="line"><span class="function"></span>&#123;  </div><div class="line">  </div><div class="line">    <span class="keyword">this</span>.sayAge=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)  </span></div><div class="line"><span class="function">    </span>&#123;  </div><div class="line">        <span class="built_in">console</span>.log(<span class="keyword">this</span>.age);  </div><div class="line">    &#125;  </div><div class="line">&#125;  </div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Child</span>(<span class="params">firstname</span>)  </span></div><div class="line"><span class="function"></span>&#123;  </div><div class="line">    <span class="keyword">this</span>.fname=firstname;  </div><div class="line">    <span class="keyword">this</span>.age=<span class="number">40</span>;  </div><div class="line">    <span class="keyword">this</span>.saySomeThing=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)  </span></div><div class="line"><span class="function">    </span>&#123;  </div><div class="line">        <span class="built_in">console</span>.log(<span class="keyword">this</span>.fname);  </div><div class="line">        <span class="keyword">this</span>.sayAge();  </div><div class="line">    &#125;  </div><div class="line">&#125;  </div><div class="line">  </div><div class="line">Child.prototype=<span class="keyword">new</span>  Parent();  </div><div class="line"><span class="keyword">var</span> child=<span class="keyword">new</span> Child(<span class="string">"张"</span>);  </div><div class="line">child.saySomeThing();</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>5.采用混合模式实现继承</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Parent</span>(<span class="params"></span>)  </span></div><div class="line"><span class="function"></span>&#123;  </div><div class="line">  </div><div class="line">    <span class="keyword">this</span>.sayAge=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)  </span></div><div class="line"><span class="function">    </span>&#123;  </div><div class="line">        <span class="built_in">console</span>.log(<span class="keyword">this</span>.age);  </div><div class="line">    &#125;  </div><div class="line">&#125;  </div><div class="line">  </div><div class="line">Parent.prototype.sayParent=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)  </span></div><div class="line"><span class="function"></span>&#123;  </div><div class="line">   alert(<span class="string">"this is parentmethod!!!"</span>);  </div><div class="line">&#125;  </div><div class="line">  </div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Child</span>(<span class="params">firstname</span>)  </span></div><div class="line"><span class="function"></span>&#123;  </div><div class="line">    Parent.call(<span class="keyword">this</span>);  <span class="comment">//改变this</span></div><div class="line">    <span class="keyword">this</span>.fname=firstname;  </div><div class="line">    <span class="keyword">this</span>.age=<span class="number">40</span>;  </div><div class="line">    <span class="keyword">this</span>.saySomeThing=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)  </span></div><div class="line"><span class="function">    </span>&#123;  </div><div class="line">        <span class="built_in">console</span>.log(<span class="keyword">this</span>.fname);  </div><div class="line">        <span class="keyword">this</span>.sayAge();  </div><div class="line">    &#125;  </div><div class="line">&#125;  </div><div class="line">  </div><div class="line">Child.prototype=<span class="keyword">new</span>  Parent();  <span class="comment">//原型继承</span></div><div class="line"><span class="comment">//Object.create(Parent.prototype)</span></div><div class="line"><span class="comment">//Child.prototype.constructor = Child</span></div><div class="line"><span class="keyword">var</span> child=<span class="keyword">new</span> Child(<span class="string">"张"</span>);  </div><div class="line">child.saySomeThing();  </div><div class="line">child.sayParent();</div></pre></td></tr></table></figure>
+<p>constructor是原型对象上的一个属性，默认指向这个原型的构造函数。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params">area</span>)</span>&#123;</div><div class="line">  <span class="keyword">this</span>.type = <span class="string">'person'</span>;</div><div class="line">  <span class="keyword">this</span>.area = area;</div><div class="line">&#125;</div><div class="line">Person.prototype.sayArea = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">  <span class="built_in">console</span>.log(<span class="keyword">this</span>.area);</div><div class="line">&#125;</div><div class="line"><span class="keyword">var</span> Father = <span class="function"><span class="keyword">function</span>(<span class="params">age</span>)</span>&#123;</div><div class="line">  <span class="keyword">this</span>.age = age;</div><div class="line">&#125; </div><div class="line">Father.prototype = <span class="keyword">new</span> Person(<span class="string">'Beijin'</span>);</div><div class="line"><span class="built_in">console</span>.log(Person.prototype.constructor) <span class="comment">//function person()</span></div><div class="line"><span class="built_in">console</span>.log(Father.prototype.constructor); <span class="comment">//function person()</span></div><div class="line">Father.prototype.constructor = Father;<span class="comment">//修正</span></div><div class="line"><span class="built_in">console</span>.log(Father.prototype.constructor); <span class="comment">//function father()</span></div><div class="line"><span class="keyword">var</span> one = <span class="keyword">new</span> father(<span class="number">25</span>);</div></pre></td></tr></table></figure></p>
+<p>看到一些资料，对原型继承进行一个修正，让子对象的prototype.constructor正确指向自身。我在火狐测试，在没有Father.prototype.constructor = Father时，one实例的第一个<strong>proto</strong>是没有constructor属性的，需要向第二个<strong>proto</strong>查找constructor属性。<br>首先，constructor是原型对象上的一个属性，默认指向这个原型的构造函数。<br>当你没有进行斧正的时候，<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> one = <span class="keyword">new</span> Father(<span class="number">25</span>)</div><div class="line"><span class="built_in">console</span>.log(one.constructor) <span class="comment">// function Person() &#123;&#125;</span></div></pre></td></tr></table></figure></p>
+<p>由Father构建出来的对象one的构造函数指向是Person，而不是你new它的时候用的构造函数Father。这就导致了原型链的错乱。<br>因为在<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Father.prototype = <span class="keyword">new</span> Person(<span class="string">'Beijin'</span>);</div></pre></td></tr></table></figure></p>
+<p>这一步的时候，原型指向了一个新对象，这个新对象的constructor指向的是Person。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Father.prototype.constructor = Father; <span class="comment">// 修正</span></div></pre></td></tr></table></figure></p>
+<p>这一步的修正，也就相当于在new Person()的对象上添加一个constructor属性，重新指向Father，保证原型链的正确。</p>
+<p>prototype是函数的一个属性（每个函数都有一个prototype属性），这个属性是一个指针，指向一个对象。它是显示修改对象的原型的属性。</p>
+<p><strong>proto</strong>是一个对象拥有的内置属性（请注意：prototype是函数的内置属性，<strong>proto</strong>是对象的内置属性），是JS内部使用寻找原型链的属性。</p>
+
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="/2017/05/10/js原型链和继承/" data-id="cj6x3anxx000wekwq9hutra4w" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+        <a href="/2017/05/10/js原型链和继承/#comments" class="article-comment-link">评论</a>
+    
+
+        </footer>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+    
+        <a href="/2017/05/01/js跨域/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">下一篇</strong>
+            <div class="article-nav-title">跨域请求</div>
+        </a>
+    
+</nav>
+
+
+    
+</article>
+
+
+    
+    
+        <section id="comments">
+    <div id="lv-container" data-id="city" data-uid=MTAyMC8zMDIyOC82Nzgz></div>
+</section>
+	
+
+</section>
+            
+                
+<aside id="sidebar">
+   
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">最新文章</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2017/05/10/js原型链和继承/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://www.gratisography.com/pictures/317_1.jpg)" alt="js原型链和继承" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/前端/">前端</a></p>
+                            <p class="item-title"><a href="/2017/05/10/js原型链和继承/" class="title">js原型链和继承</a></p>
+                            <p class="item-date"><time datetime="2017-05-09T16:00:00.000Z" itemprop="datePublished">2017-05-10</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2017/05/01/js跨域/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://www.gratisography.com/pictures/77_1.jpg)" alt="跨域请求" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/前端/">前端</a></p>
+                            <p class="item-title"><a href="/2017/05/01/js跨域/" class="title">跨域请求</a></p>
+                            <p class="item-date"><time datetime="2017-04-30T16:00:00.000Z" itemprop="datePublished">2017-05-01</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2017/04/21/vw、vh兼容/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://www.gratisography.com/pictures/341_1.jpg)" alt="vw、vh兼容" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/前端/">前端</a></p>
+                            <p class="item-title"><a href="/2017/04/21/vw、vh兼容/" class="title">vw、vh兼容</a></p>
+                            <p class="item-date"><time datetime="2017-04-20T16:00:00.000Z" itemprop="datePublished">2017-04-21</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2017/04/06/meta标签和作用/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://www.gratisography.com/pictures/351_1.jpg)" alt="meta标签和作用（转）" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/前端/">前端</a></p>
+                            <p class="item-title"><a href="/2017/04/06/meta标签和作用/" class="title">meta标签和作用（转）</a></p>
+                            <p class="item-date"><time datetime="2017-04-05T16:00:00.000Z" itemprop="datePublished">2017-04-06</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2017/04/05/viewport的深入理解/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://www.gratisography.com/pictures/317_1.jpg)" alt="viewport的深入理解" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/前端/">前端</a></p>
+                            <p class="item-title"><a href="/2017/04/05/viewport的深入理解/" class="title">viewport的深入理解</a></p>
+                            <p class="item-date"><time datetime="2017-04-04T16:00:00.000Z" itemprop="datePublished">2017-04-05</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">分类</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Http/">Http</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Node/">Node</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Node/爬虫/">爬虫</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/js/">js</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端/">前端</a><span class="category-list-count">25</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据库/">数据库</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/服务器/">服务器</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/版本管理/">版本管理</a><span class="category-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">归档</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">四月 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">十二月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a><span class="archive-list-count">3</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">标签</h3>
+        <div class="widget">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue/">Vue</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cheerio/">cheerio</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html/">html</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http请求/">http请求</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/">js</a><span class="tag-list-count">11</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lazyload/">lazyload</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/meta/">meta</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongodb/">mongodb</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/中间件/">中间件</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/代理/">代理</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/存储/">存储</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/懒加载/">懒加载</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/爬虫/">爬虫</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/跨域/">跨域</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/页面请求/">页面请求</a><span class="tag-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">标签云</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/Vue/" style="font-size: 12.5px;">Vue</a> <a href="/tags/cheerio/" style="font-size: 10px;">cheerio</a> <a href="/tags/css/" style="font-size: 17.5px;">css</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/html/" style="font-size: 15px;">html</a> <a href="/tags/http请求/" style="font-size: 10px;">http请求</a> <a href="/tags/js/" style="font-size: 20px;">js</a> <a href="/tags/lazyload/" style="font-size: 10px;">lazyload</a> <a href="/tags/meta/" style="font-size: 12.5px;">meta</a> <a href="/tags/mongodb/" style="font-size: 10px;">mongodb</a> <a href="/tags/中间件/" style="font-size: 10px;">中间件</a> <a href="/tags/代理/" style="font-size: 10px;">代理</a> <a href="/tags/存储/" style="font-size: 10px;">存储</a> <a href="/tags/懒加载/" style="font-size: 10px;">懒加载</a> <a href="/tags/爬虫/" style="font-size: 10px;">爬虫</a> <a href="/tags/跨域/" style="font-size: 10px;">跨域</a> <a href="/tags/页面请求/" style="font-size: 10px;">页面请求</a>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">链接</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="http://hexo.io">Hexo</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+    
+    <div id="toTop" class="fa fa-angle-up"></div>
+</aside>
+
+            
+        </div>
+        <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            &copy; 2017 陈志远<br>
+            Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="http://github.com/ppoffice">PPOffice</a>
+        </div>
+    </div>
+</footer>
+        
+    
+    
+    <!-- 来必力City版安装代码 -->
+    <script type="text/javascript">
+     (function(d, s) {
+         var j, e = d.getElementsByTagName(s)[0];
+
+         if (typeof LivereTower === 'function') { return; }
+
+         j = d.createElement(s);
+         j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+         j.async = true;
+
+         e.parentNode.insertBefore(j, e);
+     })(document, 'script');
+    </script>
+  <noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
+  <!-- City版安装代码已完成 -->
+
+
+
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+</html>
