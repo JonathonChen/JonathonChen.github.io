@@ -161,11 +161,11 @@
         </div>
         <div class="article-info profile-block">
             <div class="article-info-block">
-                25
+                33
                 <span>文章</span>
             </div>
             <div class="article-info-block">
-                16
+                17
                 <span>标签</span>
             </div>
         </div>
@@ -288,7 +288,7 @@
 <blockquote>
 <p>1.从理论角度：所有的函数。因为它们都在创建的时候就将上层上下文的数据保存起来了。哪怕是简单的全局变量也是如此，因为函数中访问全局变量就相当于是在访问自由变量，这个时候使用最外层的作用域。<br>  2.从实践角度：以下函数才算是闭包：<br>        (1).即使创建它的上下文已经销毁，它仍然存在（比如，内部函数从父函数中返回）<br>        (2).在代码中引用了自由变量</p>
 </blockquote>
-<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><figure class="highlight actionscript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> scope = <span class="string">"global scope"</span>;</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">checkscope</span><span class="params">()</span></span>&#123;</div><div class="line">    <span class="keyword">var</span> scope = <span class="string">"local scope"</span>;</div><div class="line">    <span class="function"><span class="keyword">function</span> <span class="title">f</span><span class="params">()</span></span>&#123;</div><div class="line">        <span class="keyword">return</span> scope;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> f;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">var</span> foo = checkscope();</div><div class="line">foo();</div></pre></td></tr></table></figure>
+<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> scope = <span class="string">"global scope"</span>;</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">checkscope</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="keyword">var</span> scope = <span class="string">"local scope"</span>;</div><div class="line">    <span class="function"><span class="keyword">function</span> <span class="title">f</span>(<span class="params"></span>)</span>&#123;</div><div class="line">        <span class="keyword">return</span> scope;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> f;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">var</span> foo = checkscope();</div><div class="line">foo();</div></pre></td></tr></table></figure>
 <blockquote>
 <p>首先我们要分析一下这段代码中执行上下文栈和执行上下文的变化情况。</p>
 </blockquote>
@@ -329,7 +329,7 @@ f 函数执行完毕，f 函数上下文从执行上下文栈中弹出
 
 </div>
 
-    <a data-url="/2016/08/20/闭包/" data-id="cj6vxopv600282kwqdjkztm59" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="/2016/08/20/闭包/" data-id="cj6x2vuaq003xf8wqlu9csdmo" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -449,29 +449,29 @@ f 函数执行完毕，f 函数上下文从执行上下文栈中弹出
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/2017/02/20/link和import/" class="thumbnail">
+                            <a href="/2017/08/29/js原型链和继承/" class="thumbnail">
     
     
-        <span style="background-image:url(http://www.gratisography.com/pictures/88_1.jpg)" alt="link和import" class="thumbnail-image"></span>
+        <span class="thumbnail-image thumbnail-none"></span>
     
 </a>
 
                         </div>
                         
                         <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/前端/">前端</a></p>
-                            <p class="item-title"><a href="/2017/02/20/link和import/" class="title">link和import</a></p>
-                            <p class="item-date"><time datetime="2017-02-19T16:00:00.000Z" itemprop="datePublished">2017-02-20</time></p>
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2017/08/29/js原型链和继承/" class="title"></a></p>
+                            <p class="item-date"><time datetime="2017-08-29T04:13:21.509Z" itemprop="datePublished">2017-08-29</time></p>
                         </div>
                     </li>
                 
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/2017/02/15/元素竖向的百分比设定/" class="thumbnail">
+                            <a href="/2017/05/01/js跨域/" class="thumbnail">
     
     
-        <span style="background-image:url(http://www.gratisography.com/pictures/188_1.jpg)" alt="元素竖向的百分比设定" class="thumbnail-image"></span>
+        <span style="background-image:url(http://www.gratisography.com/pictures/77_1.jpg)" alt="跨域请求" class="thumbnail-image"></span>
     
 </a>
 
@@ -479,18 +479,18 @@ f 函数执行完毕，f 函数上下文从执行上下文栈中弹出
                         
                         <div class="item-inner">
                             <p class="item-category"><a class="article-category-link" href="/categories/前端/">前端</a></p>
-                            <p class="item-title"><a href="/2017/02/15/元素竖向的百分比设定/" class="title">元素竖向的百分比设定</a></p>
-                            <p class="item-date"><time datetime="2017-02-14T16:00:00.000Z" itemprop="datePublished">2017-02-15</time></p>
+                            <p class="item-title"><a href="/2017/05/01/js跨域/" class="title">跨域请求</a></p>
+                            <p class="item-date"><time datetime="2017-04-30T16:00:00.000Z" itemprop="datePublished">2017-05-01</time></p>
                         </div>
                     </li>
                 
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/2017/02/06/css兼容/" class="thumbnail">
+                            <a href="/2017/04/21/vw、vh兼容/" class="thumbnail">
     
     
-        <span style="background-image:url(http://www.gratisography.com/pictures/288_1.jpg)" alt="CSS兼容" class="thumbnail-image"></span>
+        <span style="background-image:url(http://www.gratisography.com/pictures/341_1.jpg)" alt="vw、vh兼容" class="thumbnail-image"></span>
     
 </a>
 
@@ -498,18 +498,18 @@ f 函数执行完毕，f 函数上下文从执行上下文栈中弹出
                         
                         <div class="item-inner">
                             <p class="item-category"><a class="article-category-link" href="/categories/前端/">前端</a></p>
-                            <p class="item-title"><a href="/2017/02/06/css兼容/" class="title">CSS兼容</a></p>
-                            <p class="item-date"><time datetime="2017-02-05T16:00:00.000Z" itemprop="datePublished">2017-02-06</time></p>
+                            <p class="item-title"><a href="/2017/04/21/vw、vh兼容/" class="title">vw、vh兼容</a></p>
+                            <p class="item-date"><time datetime="2017-04-20T16:00:00.000Z" itemprop="datePublished">2017-04-21</time></p>
                         </div>
                     </li>
                 
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/2017/02/05/去除inline-block元素间间距的N种方法/" class="thumbnail">
+                            <a href="/2017/04/06/meta标签和作用/" class="thumbnail">
     
     
-        <span style="background-image:url(http://www.gratisography.com/pictures/404_1.jpg)" alt="去除inline-block元素间间距的N种方法(转)" class="thumbnail-image"></span>
+        <span style="background-image:url(http://www.gratisography.com/pictures/351_1.jpg)" alt="meta标签和作用（转）" class="thumbnail-image"></span>
     
 </a>
 
@@ -517,18 +517,18 @@ f 函数执行完毕，f 函数上下文从执行上下文栈中弹出
                         
                         <div class="item-inner">
                             <p class="item-category"><a class="article-category-link" href="/categories/前端/">前端</a></p>
-                            <p class="item-title"><a href="/2017/02/05/去除inline-block元素间间距的N种方法/" class="title">去除inline-block元素间间距的N种方法(转)</a></p>
-                            <p class="item-date"><time datetime="2017-02-04T16:00:00.000Z" itemprop="datePublished">2017-02-05</time></p>
+                            <p class="item-title"><a href="/2017/04/06/meta标签和作用/" class="title">meta标签和作用（转）</a></p>
+                            <p class="item-date"><time datetime="2017-04-05T16:00:00.000Z" itemprop="datePublished">2017-04-06</time></p>
                         </div>
                     </li>
                 
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/2017/02/05/DIV+CSS 与不同 IE 版本等的兼容性/" class="thumbnail">
+                            <a href="/2017/04/05/viewport的深入理解/" class="thumbnail">
     
     
-        <span style="background-image:url(http://www.gratisography.com/pictures/413_1.jpg)" alt="DIV+CSS 与不同 IE 版本等的兼容性" class="thumbnail-image"></span>
+        <span style="background-image:url(http://www.gratisography.com/pictures/706_1.jpg)" alt="viewport的深入理解" class="thumbnail-image"></span>
     
 </a>
 
@@ -536,8 +536,8 @@ f 函数执行完毕，f 函数上下文从执行上下文栈中弹出
                         
                         <div class="item-inner">
                             <p class="item-category"><a class="article-category-link" href="/categories/前端/">前端</a></p>
-                            <p class="item-title"><a href="/2017/02/05/DIV+CSS 与不同 IE 版本等的兼容性/" class="title">DIV+CSS 与不同 IE 版本等的兼容性</a></p>
-                            <p class="item-date"><time datetime="2017-02-04T16:00:00.000Z" itemprop="datePublished">2017-02-05</time></p>
+                            <p class="item-title"><a href="/2017/04/05/viewport的深入理解/" class="title">viewport的深入理解</a></p>
+                            <p class="item-date"><time datetime="2017-04-04T16:00:00.000Z" itemprop="datePublished">2017-04-05</time></p>
                         </div>
                     </li>
                 
@@ -550,7 +550,7 @@ f 函数执行完毕，f 函数上下文从执行上下文栈中弹出
     <div class="widget-wrap">
         <h3 class="widget-title">分类</h3>
         <div class="widget">
-            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Http/">Http</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Node/">Node</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Node/爬虫/">爬虫</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/js/">js</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端/">前端</a><span class="category-list-count">17</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据库/">数据库</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/服务器/">服务器</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/版本管理/">版本管理</a><span class="category-list-count">1</span></li></ul>
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Http/">Http</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Node/">Node</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Node/爬虫/">爬虫</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/js/">js</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端/">前端</a><span class="category-list-count">24</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据库/">数据库</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/服务器/">服务器</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/版本管理/">版本管理</a><span class="category-list-count">1</span></li></ul>
         </div>
     </div>
 
@@ -559,7 +559,7 @@ f 函数执行完毕，f 函数上下文从执行上下文栈中弹出
     <div class="widget-wrap">
         <h3 class="widget-title">归档</h3>
         <div class="widget">
-            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">十二月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a><span class="archive-list-count">3</span></li></ul>
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">八月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">四月 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">十二月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a><span class="archive-list-count">3</span></li></ul>
         </div>
     </div>
 
@@ -568,7 +568,7 @@ f 函数执行完毕，f 函数上下文从执行上下文栈中弹出
     <div class="widget-wrap">
         <h3 class="widget-title">标签</h3>
         <div class="widget">
-            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue/">Vue</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cheerio/">cheerio</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html/">html</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http请求/">http请求</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/">js</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lazyload/">lazyload</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongodb/">mongodb</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/中间件/">中间件</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/代理/">代理</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/存储/">存储</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/懒加载/">懒加载</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/爬虫/">爬虫</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/跨域/">跨域</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/页面请求/">页面请求</a><span class="tag-list-count">1</span></li></ul>
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue/">Vue</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cheerio/">cheerio</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html/">html</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http请求/">http请求</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/">js</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lazyload/">lazyload</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/meta/">meta</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongodb/">mongodb</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/中间件/">中间件</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/代理/">代理</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/存储/">存储</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/懒加载/">懒加载</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/爬虫/">爬虫</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/跨域/">跨域</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/页面请求/">页面请求</a><span class="tag-list-count">1</span></li></ul>
         </div>
     </div>
 
@@ -577,7 +577,7 @@ f 函数执行完毕，f 函数上下文从执行上下文栈中弹出
     <div class="widget-wrap">
         <h3 class="widget-title">标签云</h3>
         <div class="widget tagcloud">
-            <a href="/tags/Vue/" style="font-size: 13.33px;">Vue</a> <a href="/tags/cheerio/" style="font-size: 10px;">cheerio</a> <a href="/tags/css/" style="font-size: 16.67px;">css</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/html/" style="font-size: 13.33px;">html</a> <a href="/tags/http请求/" style="font-size: 10px;">http请求</a> <a href="/tags/js/" style="font-size: 20px;">js</a> <a href="/tags/lazyload/" style="font-size: 10px;">lazyload</a> <a href="/tags/mongodb/" style="font-size: 10px;">mongodb</a> <a href="/tags/中间件/" style="font-size: 10px;">中间件</a> <a href="/tags/代理/" style="font-size: 10px;">代理</a> <a href="/tags/存储/" style="font-size: 10px;">存储</a> <a href="/tags/懒加载/" style="font-size: 10px;">懒加载</a> <a href="/tags/爬虫/" style="font-size: 10px;">爬虫</a> <a href="/tags/跨域/" style="font-size: 10px;">跨域</a> <a href="/tags/页面请求/" style="font-size: 10px;">页面请求</a>
+            <a href="/tags/Vue/" style="font-size: 12.5px;">Vue</a> <a href="/tags/cheerio/" style="font-size: 10px;">cheerio</a> <a href="/tags/css/" style="font-size: 17.5px;">css</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/html/" style="font-size: 15px;">html</a> <a href="/tags/http请求/" style="font-size: 10px;">http请求</a> <a href="/tags/js/" style="font-size: 20px;">js</a> <a href="/tags/lazyload/" style="font-size: 10px;">lazyload</a> <a href="/tags/meta/" style="font-size: 12.5px;">meta</a> <a href="/tags/mongodb/" style="font-size: 10px;">mongodb</a> <a href="/tags/中间件/" style="font-size: 10px;">中间件</a> <a href="/tags/代理/" style="font-size: 10px;">代理</a> <a href="/tags/存储/" style="font-size: 10px;">存储</a> <a href="/tags/懒加载/" style="font-size: 10px;">懒加载</a> <a href="/tags/爬虫/" style="font-size: 10px;">爬虫</a> <a href="/tags/跨域/" style="font-size: 10px;">跨域</a> <a href="/tags/页面请求/" style="font-size: 10px;">页面请求</a>
         </div>
     </div>
 

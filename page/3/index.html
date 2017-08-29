@@ -154,11 +154,11 @@
         </div>
         <div class="article-info profile-block">
             <div class="article-info-block">
-                25
+                33
                 <span>文章</span>
             </div>
             <div class="article-info-block">
-                16
+                17
                 <span>标签</span>
             </div>
         </div>
@@ -207,6 +207,1369 @@
 
             
             <section id="main">
+    <article id="post-Node.js的学习--使用cheerio抓取网页数据" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            
+	
+		<a href="/2016/12/18/Node.js的学习--使用cheerio抓取网页数据/" itemprop="url">
+            <img src="http://www.gratisography.com/pictures/421_1.jpg" class="article-banner" />
+        </a>
+	
+
+
+
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/2016/12/18/Node.js的学习--使用cheerio抓取网页数据/">Node.js的学习--使用cheerio抓取网页数据</a>
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2016/12/18/Node.js的学习--使用cheerio抓取网页数据/">
+            <time datetime="2016-12-17T16:00:00.000Z" itemprop="datePublished">2016-12-18</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/Node/">Node</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/Node/爬虫/">爬虫</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/cheerio/">cheerio</a>, <a class="tag-link" href="/tags/爬虫/">爬虫</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <p>打算要写一个公开课网站，缺少数据，就决定去网易公开课去抓取一些数据。</p>
+<p>前一阵子看过一段时间的Node.js，而且Node.js也比较适合做这个事情，就打算用Node.js去抓取数据。</p>
+<p>关键是抓取到网页之后如何获取到想要的数据呢？然后就发现了cheerio，用来解析html非常方便，就像在浏览器中使用jquery一样。</p>
+<p>使用如下命令安装cheerio</p>
+<pre><code>npm install cheerio
+</code></pre><p>Cheerio安装完成， 我们就可以开始工作了。 首先让我们来看一段javascript代码 这段代码可以下载任意一个网页的内容。将其放入到curl.js中，并导出。<br><figure class="highlight qml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"> <span class="keyword">var</span> http = <span class="built_in">require</span>(<span class="string">"http"</span>);</div><div class="line"> </div><div class="line"><span class="comment">// Utility function that downloads a URL and invokes</span></div><div class="line"><span class="comment">// callback with the data.</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">download</span>(<span class="params">url, callback</span>) </span>&#123;</div><div class="line">  http.get(<span class="built_in">url</span>, <span class="function"><span class="keyword">function</span>(<span class="params">res</span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> data = <span class="string">""</span>;</div><div class="line">    res.on(<span class="string">'data'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">chunk</span>) </span>&#123;</div><div class="line">      data += chunk;</div><div class="line">    &#125;);</div><div class="line">    res.on(<span class="string">"end"</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">      callback(data);</div><div class="line">    &#125;);</div><div class="line">  &#125;).on(<span class="string">"error"</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    callback(<span class="literal">null</span>);</div><div class="line">  &#125;);</div><div class="line">&#125;</div><div class="line"></div><div class="line">exports.download = download;</div></pre></td></tr></table></figure></p>
+<p>然后是使用cheerio解析html，找到想要的数据。</p>
+<p>我们先来自己分析一下页面。我们要抓取<a href="http://v.163.com/special/opencourse/englishs1.html这个页面中的视频，视频的地址都在下载的按钮里。其中一个下载按钮的html的代码如下：" target="_blank" rel="external">http://v.163.com/special/opencourse/englishs1.html这个页面中的视频，视频的地址都在下载的按钮里。其中一个下载按钮的html的代码如下：</a><br><figure class="highlight routeros"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">&lt;a <span class="attribute">class</span>=<span class="string">"downbtn"</span> <span class="attribute">href</span>=<span class="string">"http://mov.bn.netease.com/mobilev/2013/1/F/G/S8KTEF7FG.mp4"</span> <span class="attribute">id</span>=<span class="string">"M8KTEKR84"</span> <span class="attribute">target</span>=<span class="string">"_blank"</span>&gt;&lt;/a&gt;</div></pre></td></tr></table></figure></p>
+<p>我们取到其中的href属性，只需要进行如下选择即可<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="meta">$</span><span class="bash">(<span class="string">"a.downbtn"</span>).attr(<span class="string">"href"</span>);</span></div></pre></td></tr></table></figure></p>
+<p>在是现实，我们可以在index.js中写入如下代码<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> cheerio = <span class="built_in">require</span>(<span class="string">"cheerio"</span>);</div><div class="line"><span class="keyword">var</span> server = <span class="built_in">require</span>(<span class="string">"./curl"</span>);</div><div class="line"> </div><div class="line"><span class="keyword">var</span> url = <span class="string">"http://v.163.com/special/opencourse/englishs1.html"</span></div><div class="line"></div><div class="line">server.download(url, <span class="function"><span class="keyword">function</span>(<span class="params">data</span>) </span>&#123;</div><div class="line">  <span class="keyword">if</span> (data) &#123;</div><div class="line">    <span class="comment">//console.log(data);</span></div><div class="line"> </div><div class="line">    <span class="keyword">var</span> $ = cheerio.load(data);</div><div class="line">    $(<span class="string">"a.downbtn"</span>).each(<span class="function"><span class="keyword">function</span>(<span class="params">i, e</span>) </span>&#123;</div><div class="line">        <span class="built_in">console</span>.log($(e).attr(<span class="string">"href"</span>));</div><div class="line">    &#125;);</div><div class="line"> </div><div class="line">    <span class="built_in">console</span>.log(<span class="string">"done"</span>);</div><div class="line">  &#125; <span class="keyword">else</span> &#123;</div><div class="line">      <span class="built_in">console</span>.log(<span class="string">"error"</span>);</div><div class="line">  &#125; </div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
+
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="/2016/12/18/Node.js的学习--使用cheerio抓取网页数据/" data-id="cj6x2vu5c000lf8wqj9nat74y" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+        <a href="/2016/12/18/Node.js的学习--使用cheerio抓取网页数据/#comments" class="article-comment-link">评论</a>
+    
+
+        </footer>
+    </div>
+    
+</article>
+
+
+
+    <article id="post-js深入理解JavaScript执行上下文、函数堆栈、提升的概念 " class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            
+	
+		<a href="/2016/12/02/js深入理解JavaScript执行上下文、函数堆栈、提升的概念 /" itemprop="url">
+            <img src="http://www.gratisography.com/pictures/211_1.jpg" class="article-banner" />
+        </a>
+	
+
+
+
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/2016/12/02/js深入理解JavaScript执行上下文、函数堆栈、提升的概念 /">深入理解JavaScript执行上下文、函数堆栈、提升的概念</a>
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2016/12/02/js深入理解JavaScript执行上下文、函数堆栈、提升的概念 /">
+            <time datetime="2016-12-01T16:00:00.000Z" itemprop="datePublished">2016-12-02</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/前端/">前端</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/js/">js</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <h2 id="首先明确几个概念"><a href="#首先明确几个概念" class="headerlink" title="首先明确几个概念"></a>首先明确几个概念</h2><p>EC：函数执行环境（或执行上下文），Execution Context<br>ECS：执行环境栈，Execution Context Stack<br>VO：变量对象，Variable Object<br>AO：活动对象，Active Object<br>scope chain：作用域链</p>
+<h2 id="EC执行上下文"><a href="#EC执行上下文" class="headerlink" title="EC执行上下文"></a>EC执行上下文</h2><p>每次当控制器转到ECMAScript可执行代码的时候，就会进入到一个执行上下文。<br>那什么是可执行代码呢？</p>
+<h3 id="可执行代码的类型"><a href="#可执行代码的类型" class="headerlink" title="可执行代码的类型"></a>可执行代码的类型</h3><ol>
+<li>全局代码（Global code）<br>这种类型的代码是在”程序”级处理的：例如加载外部的js文件或者本地”<script></script>“标签内的代码。全局代码不包括任何function体内的代码。 这个是默认的代码运行环境，一旦代码被载入，引擎最先进入的就是这个环境。</li>
+<li>函数代码（Function code）<br>任何一个函数体内的代码，但是需要注意的是，具体的函数体内的代码是不包括内部函数的代码。</li>
+<li>Eval代码（Eval code）<br>eval内部的代码<h3 id="ECS（执行环境栈）"><a href="#ECS（执行环境栈）" class="headerlink" title="ECS（执行环境栈）"></a>ECS（执行环境栈）</h3>我们用MDN上的一个例子来引入函数执行栈的概念<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params">i</span>) </span>&#123;</div><div class="line">    <span class="keyword">if</span> (i &lt; <span class="number">0</span>) <span class="keyword">return</span>;</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">'begin:'</span> + i);</div><div class="line">    foo(i - <span class="number">1</span>);</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">'end:'</span> + i);</div><div class="line">&#125;</div><div class="line">foo(<span class="number">2</span>);</div><div class="line"></div><div class="line"><span class="comment">// 输出:</span></div><div class="line"></div><div class="line"><span class="comment">// begin:2</span></div><div class="line"><span class="comment">// begin:1</span></div><div class="line"><span class="comment">// begin:0</span></div><div class="line"><span class="comment">// end:0</span></div><div class="line"><span class="comment">// end:1</span></div><div class="line"><span class="comment">// end:2</span></div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>······························转·····························</p>
+<p>先了解一下函数执行上下文堆栈的概念<br>浏览器中的JS解释器被实现为单线程，这也就意味着同一时间只能发生一件事情，其他的行为或事件将会被放在叫做执行栈里面排队。下面的图是单线程栈的抽象视图：<br><img src="http://yanhaijing.com/blog/137.jpg" alt="图片"> </p>
+<p>当浏览器首次载入你的脚本，它将默认进入全局执行上下文。如果，你在你的全局代码中调用一个函数，你程序的时序将进入被调用的函数，并创建一个新的执行上下文，并将新创建的上下文压入执行栈的顶部。<br>如果你调用当前函数内部的其他函数，相同的事情会在此上演。代码的执行流程进入内部函数，创建一个新的执行上下文并把它压入执行栈的顶部。浏览器总会执行位于栈顶的执行上下文，一旦当前上下文函数执行结束，它将被从栈顶弹出，并将上下文控制权交给当前的栈。这样，堆栈中的上下文就会被依次执行并且弹出堆栈，直到回到全局的上下文。</p>
+<h2 id="VO（变量对象）-AO（活动对象）"><a href="#VO（变量对象）-AO（活动对象）" class="headerlink" title="VO（变量对象）/AO（活动对象）"></a>VO（变量对象）/AO（活动对象）</h2><p>这里为什么要用一个/呢？按照字面理解，AO其实就是被激活的VO，两个其实是一个东西。</p>
+<p>变量对象（Variable object）是说JS的执行上下文中都有个对象用来存放执行上下文中可被访问但是不能被delete的函数标示符、形参、变量声明等。它们会被挂在这个对象上，对象的属性对应它们的名字对象属性的值对应它们的值但这个对象是规范上或者说是引擎实现上的不可在JS环境中访问到活动对象</p>
+<p>激活对象（Activation object）有了变量对象存每个上下文中的东西，但是它什么时候能被访问到呢？就是每进入一个执行上下文时，这个执行上下文儿中的变量对象就被激活，也就是该上下文中的函数标示符、形参、变量声明等就可以被访问到了</p>
+<h2 id="EC建立的细节"><a href="#EC建立的细节" class="headerlink" title="EC建立的细节"></a>EC建立的细节</h2><ol>
+<li>创建阶段【当函数被调用，但未执行任何其内部代码之前】</li>
+</ol>
+<ul>
+<li>创建作用域链（Scope Chain）</li>
+<li>创建变量，函数和参数。</li>
+<li>求”this“的值</li>
+</ul>
+<ol>
+<li>执行阶段<br>初始化变量的值和函数的引用，解释/执行代码。<br>我们可以将每个执行上下文抽象为一个对象，这个对象具有三个属性<br>ECObj: {<br> scopeChain: { /<em> 变量对象（variableObject）+ 所有父级执行上下文的变量对象</em>/ },<br> variableObject: { /<em>函数 arguments/参数，内部变量和函数声明 </em>/ },<br> this: {}<br>}</li>
+</ol>
+<h2 id="解释器执行代码的伪逻辑"><a href="#解释器执行代码的伪逻辑" class="headerlink" title="解释器执行代码的伪逻辑"></a>解释器执行代码的伪逻辑</h2><ol>
+<li>查找调用函数的代码。</li>
+<li><p>执行代码之前，先进入创建上下文阶段：</p>
+<ul>
+<li>初始化作用域链</li>
+<li>创建变量对象：<ul>
+<li>创建arguments对象，检查上下文，初始化参数名称和值并创建引用的复制。</li>
+<li>扫描上下文的函数声明（而非函数表达式）：<ul>
+<li>为发现的每一个函数，在变量对象上创建一个属性——确切的说是函数的名字——其有一个指向函数在内存中的引用。</li>
+<li>如果函数的名字已经存在，引用指针将被重写。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>扫描上下文的变量声明：<ul>
+<li>为发现的每个变量声明，在变量对象上创建一个属性——就是变量的名字，并且将变量的值初始化为undefined</li>
+<li>如果变量的名字已经在变量对象里存在，将不会进行任何操作并继续扫描。</li>
+</ul>
+</li>
+<li>求出上下文内部this的值。</li>
+</ul>
+</li>
+<li><p>激活/代码执行阶段：</p>
+</li>
+</ol>
+<ul>
+<li>在当前上下文上运行/解释函数代码，并随着代码一行行执行指派变量的值。</li>
+</ul>
+<p>VO — 对应上述第二个阶段<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params">i</span>)</span>&#123;</div><div class="line">    <span class="keyword">var</span> a = <span class="string">'hello'</span></div><div class="line">    <span class="keyword">var</span> b = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;</div><div class="line">    <span class="function"><span class="keyword">function</span> <span class="title">c</span>(<span class="params"></span>)</span>&#123;&#125;</div><div class="line">&#125;</div><div class="line">foo(<span class="number">22</span>)</div></pre></td></tr></table></figure></p>
+<p>当我们调用foo(22)时，整个创建阶段是下面这样的<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">ECObj = &#123;</div><div class="line">    scopChain： &#123;...&#125;,</div><div class="line">    variableObject: &#123;</div><div class="line">        <span class="built_in">arguments</span>: &#123;</div><div class="line">                <span class="number">0</span>: <span class="number">22</span>,</div><div class="line">                length: <span class="number">1</span></div><div class="line">        &#125;,</div><div class="line">        i: <span class="number">22</span>,</div><div class="line">        c: pointer to <span class="function"><span class="keyword">function</span> <span class="title">c</span>(<span class="params"></span>)</span></div><div class="line"><span class="function">        <span class="title">a</span>: <span class="title">undefined</span>,</span></div><div class="line"><span class="function">        <span class="title">b</span>: <span class="title">undefined</span></span></div><div class="line"><span class="function">    &#125;,</span></div><div class="line"><span class="function">    <span class="title">this</span>: </span>&#123; ... &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p> 正如我们看到的，在上下文创建阶段，VO的初始化过程如下（该过程是有先后顺序的：函数的形参==&gt;&gt;函数声明==&gt;&gt;变量声明）：</p>
+<pre><code>函数的形参（当进入函数执行上下文时） —— 变量对象的一个属性，其属性名就是形参的名字，其值就是实参的值；对于没有传递的参数，其值为undefined
+
+函数声明（FunctionDeclaration, FD） —— 变量对象的一个属性，其属性名和值都是函数对象创建出来的；如果变量对象已经包含了相同名字的属性，则替换它的值
+
+变量声明（var，VariableDeclaration） —— 变量对象的一个属性，其属性名即为变量名，其值为undefined;如果变量名和已经声明的函数名或者函数的参数名相同，**则不会影响已经存在的属性。**
+</code></pre><ol>
+<li>如何理解函数声明过程中如果变量对象已经包含了相同名字的属性，则替换它的值这句话？</li>
+</ol>
+<p>看如下这段代码：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo1</span>(<span class="params">a</span>)</span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(a)</div><div class="line">    <span class="function"><span class="keyword">function</span> <span class="title">a</span>(<span class="params"></span>)</span>&#123;&#125; </div><div class="line">&#125;</div><div class="line">foo1(<span class="number">20</span>)<span class="comment">//'function a()&#123;&#125;'</span></div></pre></td></tr></table></figure></p>
+<p>根据上面的介绍，我们知道VO创建过程中，函数形参的优先级是高于函数的声明的，结果是函数体内部声明的function a(){}覆盖了函数形参a的声明，因此最后输出a是一个function</p>
+<ol>
+<li>如何理解变量声明过程中如果变量名和已经声明的函数名或者函数的参数名相同，则不会影响已经存在的属性这句话？<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//情景一：与参数名相同</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo2</span>(<span class="params">a</span>)</span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(a)</div><div class="line">    <span class="keyword">var</span> a = <span class="number">10</span></div><div class="line">&#125;</div><div class="line">foo2(<span class="number">20</span>) <span class="comment">//'20'</span></div></pre></td></tr></table></figure>
+</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//情景二：与函数名相同</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo2</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(a)</div><div class="line">    <span class="keyword">var</span> a = <span class="number">10</span></div><div class="line">    <span class="function"><span class="keyword">function</span> <span class="title">a</span>(<span class="params"></span>)</span>&#123;&#125;</div><div class="line">&#125;</div><div class="line">foo2() <span class="comment">//'function a()&#123;&#125;'</span></div></pre></td></tr></table></figure>
+<p>下面是几个比较有趣的例子，当做加餐小菜，大家细细品味。这里给出一句话当做参考：</p>
+<pre><code>函数声明比变量优先级要高，并且定义过程不会被变量覆盖，除非是赋值
+</code></pre><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo3</span>(<span class="params">a</span>)</span>&#123;</div><div class="line">    <span class="keyword">var</span> a = <span class="number">10</span></div><div class="line">    <span class="function"><span class="keyword">function</span> <span class="title">a</span>(<span class="params"></span>)</span>&#123;&#125;</div><div class="line">    <span class="built_in">console</span>.log(a)</div><div class="line">&#125;</div><div class="line">foo3(<span class="number">20</span>) <span class="comment">//'10'</span></div></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo3</span>(<span class="params">a</span>)</span>&#123;</div><div class="line">    <span class="keyword">var</span> a </div><div class="line">    <span class="function"><span class="keyword">function</span> <span class="title">a</span>(<span class="params"></span>)</span>&#123;&#125;</div><div class="line">    <span class="built_in">console</span>.log(a)</div><div class="line">&#125;</div><div class="line">foo3(<span class="number">20</span>) <span class="comment">//'function a()&#123;&#125;'</span></div></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo2</span>(<span class="params">a</span>) </span>&#123;</div><div class="line">        <span class="built_in">console</span>.log(a)</div><div class="line">        <span class="keyword">var</span> a = <span class="number">10</span></div><div class="line">        <span class="function"><span class="keyword">function</span> <span class="title">a</span>(<span class="params"></span>) </span>&#123;&#125;</div><div class="line">&#125;</div><div class="line">foo2(<span class="number">20</span>) <span class="comment">//'function a()&#123;&#125;'</span></div></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo2</span>(<span class="params">a</span>) </span>&#123;</div><div class="line">         <span class="keyword">var</span> a = <span class="number">10</span></div><div class="line">         <span class="function"><span class="keyword">function</span> <span class="title">a</span>(<span class="params"></span>) </span>&#123;&#125;</div><div class="line">         <span class="built_in">console</span>.log(a)</div><div class="line">     &#125;</div><div class="line"> foo2(<span class="number">20</span>) <span class="comment">//'10'</span></div></pre></td></tr></table></figure>
+<h3 id="小结：-gt-函数声明的提升-gt-赋值的优先级-gt-变量的提升"><a href="#小结：-gt-函数声明的提升-gt-赋值的优先级-gt-变量的提升" class="headerlink" title="小结：&gt;函数声明的提升&gt;赋值的优先级&gt;变量的提升"></a>小结：&gt;函数声明的提升&gt;赋值的优先级&gt;变量的提升</h3><ol>
+<li><p><strong>函数声明</strong>（FunctionDeclaration, FD） —— 变量对象的一个属性，其属性名和值都是函数对象创建出来的；如果变量对象已经包含了相同名字的属性，<strong>则替换它的值</strong>。可以理解为声明则赋值一个指针？</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo2</span>(<span class="params">a</span>) </span>&#123;</div><div class="line">          <span class="keyword">var</span> a = <span class="number">10</span></div><div class="line">          <span class="function"><span class="keyword">function</span> <span class="title">a</span>(<span class="params"></span>) </span>&#123;</div><div class="line">              <span class="comment">//</span></div><div class="line">          &#125;</div><div class="line">          <span class="built_in">console</span>.log(a)</div><div class="line">      &#125;</div><div class="line">      foo2(<span class="number">20</span>) <span class="comment">//'function a()'</span></div></pre></td></tr></table></figure>
+</li>
+<li><p><strong>变量声明</strong>（var，VariableDeclaration） —— 变量对象的一个属性，其属性名即为变量名，其值为undefined;如果变量名和已经声明的函数名或者函数的参数名相同，<strong>则不会影响已经存在的属性。</strong></p>
+</li>
+</ol>
+<h2 id="AO-—-对应第三个阶段"><a href="#AO-—-对应第三个阶段" class="headerlink" title="AO — 对应第三个阶段"></a>AO — 对应第三个阶段</h2><p>正如我们看到的，创建的过程仅负责处理定义属性的名字，而并不为他们指派具体的值，当然还有对形参/实参的处理。一旦创建阶段完成，执行流进入函数并且激活/代码执行阶段，看下函数执行完成后的样子：<br><figure class="highlight vim"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">  ECObj = &#123;</div><div class="line">    scopeChain: &#123; ... &#125;,</div><div class="line">    variableObjec<span class="variable">t:</span> &#123;</div><div class="line">        <span class="keyword">argument</span><span class="variable">s:</span> &#123;</div><div class="line">            <span class="number">0</span>: <span class="number">22</span>,</div><div class="line">            length: <span class="number">1</span></div><div class="line">        &#125;,</div><div class="line">        i: <span class="number">22</span>,</div><div class="line">        <span class="keyword">c</span>: pointer <span class="keyword">to</span> <span class="function"><span class="keyword">function</span> <span class="title">c</span><span class="params">()</span></span></div><div class="line">        <span class="variable">a:</span> <span class="string">'hello'</span>,</div><div class="line">        <span class="variable">b:</span> pointer <span class="keyword">to</span> <span class="function"><span class="keyword">function</span> <span class="title">privateB</span><span class="params">()</span></span></div><div class="line">    &#125;,</div><div class="line">    thi<span class="variable">s:</span> &#123; ... &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h2 id="提升（Hoisting）"><a href="#提升（Hoisting）" class="headerlink" title="提升（Hoisting）"></a>提升（Hoisting）</h2><p>对于下面的代码，相信很多人都能一眼看出输出结果，但是却很少有人能给出为什么会产生这种输出结果的解释。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="keyword">typeof</span> foo); <span class="comment">// 函数指针</span></div><div class="line">    <span class="built_in">console</span>.log(<span class="keyword">typeof</span> bar); <span class="comment">// undefined</span></div><div class="line"></div><div class="line">    <span class="keyword">var</span> foo = <span class="string">'hello'</span>,</div><div class="line">        bar = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">            <span class="keyword">return</span> <span class="string">'world'</span>;</div><div class="line">        &#125;;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="string">'hello'</span>;</div><div class="line">    &#125;</div><div class="line">&#125;());</div></pre></td></tr></table></figure></p>
+<ol>
+<li><p>为什么我们能在foo声明之前访问它？<br>回想在VO的创建阶段，我们知道函数在该阶段就已经被创建在变量对象中。所以在函数开始执行之前，foo已经被定义了。</p>
+</li>
+<li><p>Foo被声明了两次，为什么foo显示为函数而不是undefined或字符串？<br>我们知道，在创建阶段，函数声明是优先于变量被创建的。而且在变量的创建过程中，如果发现VO中已经存在相同名称的属性，则不会影响已经存在的属性。<br>因此，对foo()函数的引用首先被创建在活动对象里，并且当我们解释到var foo时，我们看见foo属性名已经存在，所以代码什么都不做并继续执行。</p>
+</li>
+<li><p>为什么bar的值是undefined？<br>bar采用的是函数表达式的方式来定义的，所以bar实际上是一个变量，但变量的值是函数，并且我们知道变量在创建阶段被创建但他们被初始化为undefined，这也是为什么函数表达式不会被提升的原因。</p>
+</li>
+</ol>
+<p>总结：</p>
+<ol>
+<li>EC分为两个阶段，创建执行上下文和执行代码。</li>
+<li>每个EC可以抽象为一个对象，这个对象具有三个属性，分别为：作用域链Scope，VO|AO（AO，VO只能有一个）以及this。</li>
+<li>函数EC中的AO在进入函数EC时，确定了Arguments对象的属性；在执行函数EC时，其它变量属性具体化。</li>
+<li>EC创建的过程是由先后顺序的：参数声明 &gt; 函数声明 &gt; 变量声明</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo2</span>(<span class="params">a</span>) </span>&#123;</div><div class="line">      <span class="built_in">console</span>.log(a)<span class="comment">//function a()</span></div><div class="line">      <span class="keyword">var</span> a = <span class="number">10</span></div><div class="line">      <span class="function"><span class="keyword">function</span> <span class="title">a</span>(<span class="params"></span>) </span>&#123;</div><div class="line">          <span class="built_in">console</span>.log(fsdf);</div><div class="line">      &#125;</div><div class="line">      <span class="built_in">console</span>.log(a)<span class="comment">//10</span></div><div class="line">        <span class="built_in">console</span>.log(a())<span class="comment">//报错 a is not a function</span></div><div class="line">  &#125;</div><div class="line">  foo2(<span class="number">20</span>)</div></pre></td></tr></table></figure>
+<p>解释：提升的过程函数声明的优先级比形参和变量高，后面的执行代码的阶段赋值行为是在最后面,因此打印10，最后的console会报错</p>
+
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="/2016/12/02/js深入理解JavaScript执行上下文、函数堆栈、提升的概念 /" data-id="cj6x2vu6t0020f8wqn7v1dcdv" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+        <a href="/2016/12/02/js深入理解JavaScript执行上下文、函数堆栈、提升的概念 /#comments" class="article-comment-link">评论</a>
+    
+
+        </footer>
+    </div>
+    
+</article>
+
+
+
+    <article id="post-mongose中间件" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            
+	
+		<a href="/2016/11/28/mongose中间件/" itemprop="url">
+            <img src="http://www.gratisography.com/pictures/316_1.jpg" class="article-banner" />
+        </a>
+	
+
+
+
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/2016/11/28/mongose中间件/">mongodb mongoose node中间件增删改查方法</a>
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2016/11/28/mongose中间件/">
+            <time datetime="2016-11-27T16:00:00.000Z" itemprop="datePublished">2016-11-28</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/数据库/">数据库</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/mongodb/">mongodb</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <h1 id="官网"><a href="#官网" class="headerlink" title="官网"></a>官网</h1><blockquote>
+<p><a href="http://mongoosejs.com/docs/api.html#model_Model.update" target="_blank" rel="external">http://mongoosejs.com/docs/api.html#model_Model.update</a></p>
+</blockquote>
+<h1 id="命令"><a href="#命令" class="headerlink" title="命令"></a>命令</h1><blockquote>
+<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#model.js</span></div><div class="line">$where</div><div class="line">increment</div><div class="line">model</div><div class="line">Model</div><div class="line">remove</div><div class="line">save</div><div class="line">aggregate</div><div class="line"><span class="keyword">bulkWrite</span></div><div class="line"><span class="keyword">count</span></div><div class="line"><span class="keyword">create</span></div><div class="line"><span class="keyword">deleteMany</span></div><div class="line"><span class="keyword">deleteOne</span></div><div class="line"><span class="keyword">discriminator</span></div><div class="line"><span class="keyword">distinct</span></div><div class="line"><span class="keyword">ensureIndexes</span></div><div class="line"><span class="keyword">find</span></div><div class="line"><span class="keyword">findById</span></div><div class="line"><span class="keyword">findByIdAndRemove</span></div><div class="line"><span class="keyword">findByIdAndUpdate</span></div><div class="line"><span class="keyword">findOne</span></div><div class="line"><span class="keyword">findOneAndRemove</span></div><div class="line"><span class="keyword">findOneAndUpdate</span></div><div class="line"><span class="keyword">geoNear</span></div><div class="line"><span class="keyword">geoSearch</span></div><div class="line"><span class="keyword">hydrate</span></div><div class="line"><span class="keyword">insertMany</span></div><div class="line"><span class="keyword">mapReduce</span></div><div class="line"><span class="keyword">populate</span></div><div class="line"><span class="keyword">remove</span></div><div class="line"><span class="keyword">replaceOne</span></div><div class="line"><span class="keyword">translateAliases</span></div><div class="line"><span class="keyword">update</span></div><div class="line"><span class="keyword">updateMany</span></div><div class="line"><span class="keyword">updateOne</span></div><div class="line"><span class="keyword">where</span></div><div class="line"><span class="keyword">$where</span></div><div class="line"><span class="keyword">base</span></div><div class="line"><span class="keyword">baseModelName</span></div><div class="line"><span class="keyword">collection</span></div><div class="line"><span class="keyword">db</span></div><div class="line"><span class="keyword">discriminators</span></div><div class="line"><span class="keyword">modelName</span></div><div class="line"><span class="keyword">schema</span></div></pre></td></tr></table></figure></blockquote>
+
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="/2016/11/28/mongose中间件/" data-id="cj6x2vu79002af8wq13dkg6te" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+        <a href="/2016/11/28/mongose中间件/#comments" class="article-comment-link">评论</a>
+    
+
+        </footer>
+    </div>
+    
+</article>
+
+
+
+    <article id="post-vue.生命周期" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            
+	
+		<a href="/2016/11/15/vue.生命周期/" itemprop="url">
+            <img src="http://st3.originoo.cn/3591429/12987/i/950/depositphotos_129873842-stock-photo-best-friends-in-amusement-park.jpg" class="article-banner" />
+        </a>
+	
+
+
+
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/2016/11/15/vue.生命周期/">Vue 生命周期</a>
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2016/11/15/vue.生命周期/">
+            <time datetime="2016-11-14T16:00:00.000Z" itemprop="datePublished">2016-11-15</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/前端/">前端</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/Vue/">Vue</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>  在使用vue一个多礼拜后，感觉现在还停留在初级阶段，虽然知道怎么和后端做数据交互，但是对于mounted这个挂载还不是很清楚的。放大之，对vue的生命周期不甚了解。只知道简单的使用，而不知道为什么，这对后面的踩坑是相当不利的。</p>
+<p>因为我们有时候会在几个钩子函数里做一些事情，什么时候做，在哪个函数里做，我们不清楚。</p>
+<h1 id="vue生命周期简介"><a href="#vue生命周期简介" class="headerlink" title="vue生命周期简介"></a>vue生命周期简介</h1><p><img src="vuelife.png" alt="vue生命周期"><br><img src="vuelife2.png" alt="vue生命周期"></p>
+<h1 id="生命周期探究"><a href="#生命周期探究" class="headerlink" title="生命周期探究"></a>生命周期探究</h1><p>&gt;<br><figure class="highlight django"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div></pre></td><td class="code"><pre><div class="line"><span class="xml"><span class="meta">&lt;!DOCTYPE html&gt;</span></span></div><div class="line"><span class="xml"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span></div><div class="line"><span class="xml"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span></div><div class="line"><span class="xml">    <span class="tag">&lt;<span class="name">title</span>&gt;</span><span class="tag">&lt;/<span class="name">title</span>&gt;</span></span></div><div class="line"><span class="xml">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span> <span class="attr">src</span>=<span class="string">"https://cdn.jsdelivr.net/vue/2.1.3/vue.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></div><div class="line"><span class="xml"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span></div><div class="line"><span class="xml"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span></div><div class="line"><span class="xml"></span></div><div class="line"><span class="xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"app"</span>&gt;</span></span></div><div class="line"><span class="xml">     <span class="tag">&lt;<span class="name">p</span>&gt;</span></span><span class="template-variable">&#123;&#123; message &#125;&#125;</span><span class="xml"><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></div><div class="line"><span class="xml"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></div><div class="line"><span class="xml"></span></div><div class="line"><span class="xml"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span><span class="undefined"></span></span></div><div class="line"><span class="xml">    </span></div><div class="line"><span class="xml">  var app = new Vue(&#123;</span></div><div class="line"><span class="xml">      el: '#app',</span></div><div class="line"><span class="xml">      data: &#123;</span></div><div class="line"><span class="xml">          message : "xuxiao is boy" </span></div><div class="line"><span class="xml">      &#125;,</span></div><div class="line"><span class="xml">       beforeCreate: function () &#123;</span></div><div class="line"><span class="xml">                console.group('beforeCreate 创建前状态===============》');</span></div><div class="line"><span class="xml">               console.log("%c%s", "color:red" , "el     : " + this.$el); //undefined</span></div><div class="line"><span class="xml">               console.log("%c%s", "color:red","data   : " + this.$data); //undefined </span></div><div class="line"><span class="xml">               console.log("%c%s", "color:red","message: " + this.message)  </span></div><div class="line"><span class="xml">        &#125;,</span></div><div class="line"><span class="xml">        created: function () &#123;</span></div><div class="line"><span class="xml">            console.group('created 创建完毕状态===============》');</span></div><div class="line"><span class="xml">            console.log("%c%s", "color:red","el     : " + this.$el); //undefined</span></div><div class="line"><span class="xml">               console.log("%c%s", "color:red","data   : " + this.$data); //已被初始化 </span></div><div class="line"><span class="xml">               console.log("%c%s", "color:red","message: " + this.message); //已被初始化</span></div><div class="line"><span class="xml">        &#125;,</span></div><div class="line"><span class="xml">        beforeMount: function () &#123;</span></div><div class="line"><span class="xml">            console.group('beforeMount 挂载前状态===============》');</span></div><div class="line"><span class="xml">            console.log("%c%s", "color:red","el     : " + (this.$el)); //已被初始化</span></div><div class="line"><span class="xml">            console.log(this.$el);</span></div><div class="line"><span class="xml">               console.log("%c%s", "color:red","data   : " + this.$data); //已被初始化  </span></div><div class="line"><span class="xml">               console.log("%c%s", "color:red","message: " + this.message); //已被初始化  </span></div><div class="line"><span class="xml">        &#125;,</span></div><div class="line"><span class="xml">        mounted: function () &#123;</span></div><div class="line"><span class="xml">            console.group('mounted 挂载结束状态===============》');</span></div><div class="line"><span class="xml">            console.log("%c%s", "color:red","el     : " + this.$el); //已被初始化</span></div><div class="line"><span class="xml">            console.log(this.$el);    </span></div><div class="line"><span class="xml">               console.log("%c%s", "color:red","data   : " + this.$data); //已被初始化</span></div><div class="line"><span class="xml">               console.log("%c%s", "color:red","message: " + this.message); //已被初始化 </span></div><div class="line"><span class="xml">        &#125;,</span></div><div class="line"><span class="xml">        beforeUpdate: function () &#123;</span></div><div class="line"><span class="xml">            console.group('beforeUpdate 更新前状态===============》');</span></div><div class="line"><span class="xml">            console.log("%c%s", "color:red","el     : " + this.$el);</span></div><div class="line"><span class="xml">            console.log(this.$el);   </span></div><div class="line"><span class="xml">               console.log("%c%s", "color:red","data   : " + this.$data); </span></div><div class="line"><span class="xml">               console.log("%c%s", "color:red","message: " + this.message); </span></div><div class="line"><span class="xml">        &#125;,</span></div><div class="line"><span class="xml">        updated: function () &#123;</span></div><div class="line"><span class="xml">            console.group('updated 更新完成状态===============》');</span></div><div class="line"><span class="xml">            console.log("%c%s", "color:red","el     : " + this.$el);</span></div><div class="line"><span class="xml">            console.log(this.$el); </span></div><div class="line"><span class="xml">               console.log("%c%s", "color:red","data   : " + this.$data); </span></div><div class="line"><span class="xml">               console.log("%c%s", "color:red","message: " + this.message); </span></div><div class="line"><span class="xml">        &#125;,</span></div><div class="line"><span class="xml">        beforeDestroy: function () &#123;</span></div><div class="line"><span class="xml">            console.group('beforeDestroy 销毁前状态===============》');</span></div><div class="line"><span class="xml">            console.log("%c%s", "color:red","el     : " + this.$el);</span></div><div class="line"><span class="xml">            console.log(this.$el);    </span></div><div class="line"><span class="xml">               console.log("%c%s", "color:red","data   : " + this.$data);</span></div></pre></td></tr></table></figure></p>
+<h2 id="create-和-mounted-相关"><a href="#create-和-mounted-相关" class="headerlink" title="create 和 mounted 相关"></a>create 和 mounted 相关</h2><blockquote>
+<p>beforecreated：el 和 data 并未初始化<br>created:完成了 data 数据的初始化，el没有<br>beforeMount：完成了 el 和 data 初始化<br>mounted ：完成挂载</p>
+</blockquote>
+<h2 id="生命周期总结"><a href="#生命周期总结" class="headerlink" title="生命周期总结"></a>生命周期总结</h2><blockquote>
+<p>beforecreate : 举个栗子：可以在这加个loading事件<br>created ：在这结束loading，还做一些初始化，实现函数自执行<br>mounted ： 在这发起后端请求，拿回数据，配合路由钩子做一些事情<br>beforeDestory： 你确认删除XX吗？ destoryed ：当前组件已被删除，清空相关内容</p>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><p>  <a href="https://segmentfault.com/q/10" target="_blank" rel="external">https://segmentfault.com/q/10</a>…<br>    <a href="http://www.cnblogs.com/gagag/" target="_blank" rel="external">http://www.cnblogs.com/gagag/</a>…</p>
+</blockquote>
+
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="/2016/11/15/vue.生命周期/" data-id="cj6x2vu790023f8wq85xm2k4h" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+        <a href="/2016/11/15/vue.生命周期/#comments" class="article-comment-link">评论</a>
+    
+
+        </footer>
+    </div>
+    
+</article>
+
+
+
+    <article id="post-vue loading组件" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            
+	
+		<a href="/2016/11/02/vue loading组件/" itemprop="url">
+            <img src="http://www.gratisography.com/pictures/433_1.jpg" class="article-banner" />
+        </a>
+	
+
+
+
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/2016/11/02/vue loading组件/">Vue loading加载动画组件</a>
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2016/11/02/vue loading组件/">
+            <time datetime="2016-11-01T16:00:00.000Z" itemprop="datePublished">2016-11-02</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/前端/">前端</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/Vue/">Vue</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <blockquote>
+<h2 id="实现效果"><a href="#实现效果" class="headerlink" title="实现效果"></a>实现效果</h2><pre><code>实现了加载是颜色的变化以及进度条的变化
+</code></pre><p>下面是代码实现</p>
+<ol>
+<li>html页面测试</li>
+</ol>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="undefined"></span></div><div class="line"><span class="css">  <span class="selector-class">.spinner</span> &#123;</span></div><div class="line"><span class="undefined">    transform-origin: center;</span></div><div class="line"><span class="undefined">    animation: rotator 6s linear infinite;</span></div><div class="line"><span class="css">	<span class="selector-tag">background-color</span>:<span class="selector-id">#cccccc</span>;</span></div><div class="line"><span class="css">	<span class="selector-tag">width</span><span class="selector-pseudo">:150px</span>;</span></div><div class="line"><span class="css">	<span class="selector-tag">height</span><span class="selector-pseudo">:150px</span>;</span></div><div class="line"><span class="undefined">  &#125;</span></div><div class="line"><span class="css">  @<span class="keyword">keyframes</span> rotator &#123;</span></div><div class="line"><span class="css">    0% &#123; <span class="attribute">transform</span>: <span class="built_in">rotate</span>(0deg); &#125;</span></div><div class="line"><span class="css">    100% &#123; <span class="attribute">transform</span>: <span class="built_in">rotate</span>(270deg); &#125;</span></div><div class="line"><span class="undefined">  &#125;</span></div><div class="line"><span class="css">  <span class="selector-class">.path</span> &#123;</span></div><div class="line"><span class="undefined">    stroke-dasharray: 187;</span></div><div class="line"><span class="undefined">    stroke-dashoffset: 0;</span></div><div class="line"><span class="undefined">    transform-origin: center;</span></div><div class="line"><span class="undefined">    animation: dash 2s ease-in-out infinite, colors 4s ease-in-out infinite;</span></div><div class="line"><span class="undefined">  &#125;</span></div><div class="line"><span class="undefined"></span></div><div class="line"><span class="css">  @<span class="keyword">keyframes</span> colors &#123;</span></div><div class="line"><span class="css">    0% &#123; <span class="attribute">stroke</span>: <span class="number">#4285F4</span>; &#125;</span></div><div class="line"><span class="css">    25% &#123; <span class="attribute">stroke</span>: <span class="number">#DE3E35</span>; &#125;</span></div><div class="line"><span class="css">    50% &#123; <span class="attribute">stroke</span>: <span class="number">#F7C223</span>; &#125;</span></div><div class="line"><span class="css">    75% &#123; <span class="attribute">stroke</span>: <span class="number">#1B9A59</span>; &#125;</span></div><div class="line"><span class="css">    100% &#123; <span class="attribute">stroke</span>: <span class="number">#4285F4</span>; &#125;</span></div><div class="line"><span class="undefined">  &#125;</span></div><div class="line"><span class="css">  @<span class="keyword">keyframes</span> dash &#123;</span></div><div class="line"><span class="css">    0% &#123; <span class="attribute">stroke-dashoffset</span>: <span class="number">187</span>; &#125;</span></div><div class="line"><span class="undefined">    50% &#123;</span></div><div class="line"><span class="css">      <span class="selector-tag">stroke-dashoffset</span>: 93<span class="selector-class">.5</span>;</span></div><div class="line"><span class="undefined">    &#125;</span></div><div class="line"><span class="undefined">    100% &#123;</span></div><div class="line"><span class="undefined">      stroke-dashoffset: 0;</span></div><div class="line"><span class="undefined">    &#125;</span></div><div class="line"><span class="undefined">  &#125;</span></div><div class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line"> <span class="tag">&lt;<span class="name">svg</span> <span class="attr">class</span>=<span class="string">"spinner"</span> <span class="attr">xmlns</span>=<span class="string">"http://www.w3.org/2000/svg"</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">circle</span> <span class="attr">class</span>=<span class="string">"path"</span>  <span class="attr">stroke</span>=<span class="string">"red"</span> <span class="attr">fill</span>=<span class="string">"none"</span> <span class="attr">stroke-width</span>=<span class="string">"6"</span>  <span class="attr">cx</span>=<span class="string">"75"</span> <span class="attr">cy</span>=<span class="string">"75"</span> <span class="attr">r</span>=<span class="string">"30"</span>&gt;</span><span class="tag">&lt;/<span class="name">circle</span>&gt;</span></div><div class="line"> <span class="tag">&lt;/<span class="name">svg</span>&gt;</span></div><div class="line"> </div><div class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure>
+</blockquote>
+<p><img src="/2017/02/01/vue loading组件/Video_2017-08-19_213646.gif"></p>
+<blockquote>
+<ol>
+<li>vue Loading组件</li>
+</ol>
+<figure class="highlight arduino"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div></pre></td><td class="code"><pre><div class="line">&lt;<span class="keyword">template</span>&gt;</div><div class="line">  &lt;div class=<span class="string">"loading-component"</span>&gt;</div><div class="line">    &lt;svg class=<span class="string">"spinner"</span> :style=<span class="string">"loadingSize"</span> viewBox=<span class="string">"0 0 66 66"</span> xmlns=<span class="string">"http://www.w3.org/2000/svg"</span>&gt;</div><div class="line">      &lt;<span class="built_in">circle</span> class=<span class="string">"path"</span> :style=<span class="string">"loadingColor"</span> <span class="built_in">fill</span>=<span class="string">"none"</span> :<span class="built_in">stroke</span>-<span class="built_in">width</span>=<span class="string">"stroke"</span>  cx=<span class="string">"33"</span> cy=<span class="string">"33"</span> r=<span class="string">"30"</span>&gt;&lt;/<span class="built_in">circle</span>&gt;</div><div class="line">    &lt;/svg&gt;</div><div class="line">  &lt;/div&gt;</div><div class="line">&lt;/<span class="keyword">template</span>&gt;</div><div class="line"></div><div class="line">&lt;script type=<span class="string">"text/ecmascript-6"</span>&gt;</div><div class="line">  <span class="keyword">export</span> <span class="built_in">default</span> &#123;</div><div class="line">    props: &#123;</div><div class="line">      <span class="built_in">size</span>: &#123;</div><div class="line">        type: Number,</div><div class="line">        <span class="built_in">default</span>: <span class="number">50</span></div><div class="line">      &#125;,</div><div class="line">      <span class="built_in">stroke</span>: &#123;</div><div class="line">        type: Number,</div><div class="line">        <span class="built_in">default</span>: <span class="number">3.5</span></div><div class="line">      &#125;,</div><div class="line">      color: &#123;</div><div class="line">        type: <span class="keyword">String</span>,</div><div class="line">        <span class="built_in">default</span>: <span class="string">'#ed424b'</span></div><div class="line">      &#125;</div><div class="line">    &#125;,</div><div class="line">    computed: &#123;</div><div class="line">      loadingSize() &#123;</div><div class="line">        <span class="keyword">const</span> newSize = <span class="keyword">this</span>.<span class="built_in">size</span> + <span class="string">'px'</span></div><div class="line">        <span class="built_in">return</span> &#123;</div><div class="line">          <span class="built_in">width</span>: newSize,</div><div class="line">          <span class="built_in">height</span>: newSize</div><div class="line">        &#125;</div><div class="line">      &#125;,</div><div class="line">      loadingColor() &#123;</div><div class="line">        <span class="built_in">return</span> &#123;</div><div class="line">          <span class="built_in">stroke</span>: <span class="keyword">this</span>.color</div><div class="line">        &#125;</div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&lt;/script&gt;</div><div class="line"></div><div class="line">&lt;style lang=<span class="string">"less"</span> type=<span class="string">"text/less"</span>&gt;</div><div class="line"></div><div class="line">  .loading-component &#123;</div><div class="line">    <span class="built_in">display</span>: <span class="keyword">inline</span>-block;</div><div class="line">    pointer-events: none;</div><div class="line">    will-change: transform, opacity;</div><div class="line">    <span class="built_in">position</span>: fixed;</div><div class="line">    left: <span class="number">50</span>%;</div><div class="line">    top: <span class="number">50</span>%;</div><div class="line">    transform: translate(<span class="number">-50</span>%, <span class="number">-50</span>%);</div><div class="line">  &#125;</div><div class="line">  <span class="comment">//2 * pi * r = 188.4</span></div><div class="line">  @offset: <span class="number">187</span>;</div><div class="line">  @duration: <span class="number">1.4</span>s;</div><div class="line">  <span class="comment">//设置外层旋转形成加载的效果</span></div><div class="line">  .spinner &#123;</div><div class="line">    transform-origin: center;</div><div class="line">    animation: rotator @duration linear infinite;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  @keyframes rotator &#123;</div><div class="line">    <span class="number">0</span>% &#123; transform: rotate(<span class="number">0</span>deg); &#125;</div><div class="line">    <span class="number">100</span>% &#123; transform: rotate(<span class="number">270</span>deg); &#125;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  .path &#123;</div><div class="line">    <span class="built_in">stroke</span>-dasharray: @offset;</div><div class="line">    <span class="built_in">stroke</span>-dashoffset: <span class="number">0</span>;</div><div class="line">    transform-origin: center;</div><div class="line">    <span class="comment">// 设置颜色变化以及dash长度的变化</span></div><div class="line">    animation: dash @duration ease-in-out infinite, colors @duration ease-in-out infinite;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  @keyframes colors &#123;</div><div class="line">    <span class="number">0</span>% &#123; <span class="built_in">stroke</span>: #<span class="number">4285</span>F4; &#125;</div><div class="line">    <span class="number">25</span>% &#123; <span class="built_in">stroke</span>: #DE3E35; &#125;</div><div class="line">    <span class="number">50</span>% &#123; <span class="built_in">stroke</span>: #F7C223; &#125;</div><div class="line">    <span class="number">75</span>% &#123; <span class="built_in">stroke</span>: #<span class="number">1</span>B9A59; &#125;</div><div class="line">    <span class="number">100</span>% &#123; <span class="built_in">stroke</span>: #<span class="number">4285</span>F4; &#125;</div><div class="line">  &#125;</div><div class="line"> <span class="comment">//让空白部分慢慢减少</span></div><div class="line">  @keyframes dash &#123;</div><div class="line">    <span class="number">0</span>% &#123; <span class="built_in">stroke</span>-dashoffset: @offset; &#125;</div><div class="line">    <span class="number">50</span>% &#123;</div><div class="line">      <span class="built_in">stroke</span>-dashoffset: @offset/<span class="number">4</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="number">100</span>% &#123;</div><div class="line">      <span class="built_in">stroke</span>-dashoffset: @offset;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&lt;/style&gt;</div></pre></td></tr></table></figure></blockquote>
+
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="/2016/11/02/vue loading组件/" data-id="cj6x2vu6t001lf8wqv54gn7lv" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+        <a href="/2016/11/02/vue loading组件/#comments" class="article-comment-link">评论</a>
+    
+
+        </footer>
+    </div>
+    
+</article>
+
+
+
+    <article id="post-v-model" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            
+	
+		<a href="/2016/10/25/v-model/" itemprop="url">
+            <img src="http://www.gratisography.com/pictures/410_1.jpg" class="article-banner" />
+        </a>
+	
+
+
+
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/2016/10/25/v-model/">v-model本质（以底部导航切换为例子）</a>
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2016/10/25/v-model/">
+            <time datetime="2016-10-24T16:00:00.000Z" itemprop="datePublished">2016-10-25</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/前端/">前端</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/Vue/">Vue</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <h1 id="v-model"><a href="#v-model" class="headerlink" title="v-model"></a>v-model</h1><h3 id="v-model本质是"><a href="#v-model本质是" class="headerlink" title="v-model本质是"></a>v-model本质是</h3><figure class="highlight routeros"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;input <span class="attribute">type</span>=<span class="string">"text"</span> v-bind:<span class="attribute">value</span>=<span class="string">"dataA"</span> v-on:<span class="attribute">input</span>=<span class="string">"dataA = <span class="variable">$event</span>.target.value"</span> /&gt;</div></pre></td></tr></table></figure>
+<h2 id="1-Index页面"><a href="#1-Index页面" class="headerlink" title="1.Index页面"></a>1.Index页面</h2><h3 id="该页面包含了m-tabbar和m-tabbar-item组件，目的是实现底部tab切换"><a href="#该页面包含了m-tabbar和m-tabbar-item组件，目的是实现底部tab切换" class="headerlink" title="该页面包含了m-tabbar和m-tabbar-item组件，目的是实现底部tab切换"></a>该页面包含了m-tabbar和m-tabbar-item组件，目的是实现底部tab切换</h3><h3 id="m-tabbar传入-v-mode-”select”实际上是v-bind-value-”select”-v-on-input-”select-event-target-value”"><a href="#m-tabbar传入-v-mode-”select”实际上是v-bind-value-”select”-v-on-input-”select-event-target-value”" class="headerlink" title="m-tabbar传入 v-mode:”select”实际上是v-bind:value=”select” v-on:input=”select = $event.target.value”"></a>m-tabbar传入 v-mode:”select”实际上是v-bind:value=”select” v-on:input=”select = $event.target.value”</h3><h4 id="v-bind-value-”select”传入的props-父-gt-子"><a href="#v-bind-value-”select”传入的props-父-gt-子" class="headerlink" title="v-bind:value=”select”传入的props(父-&gt;子)"></a>v-bind:value=”select”传入的props(父-&gt;子)</h4><h4 id="v-on-input-”select-event-target-value”-监听-emit-‘input’-…"><a href="#v-on-input-”select-event-target-value”-监听-emit-‘input’-…" class="headerlink" title="v-on:input=”select = $event.target.value” 监听$emit(‘input’,…)"></a>v-on:input=”select = $event.target.value” 监听$emit(‘input’,…)</h4><h4 id="v-model-数据双向绑定"><a href="#v-model-数据双向绑定" class="headerlink" title="v-model 数据双向绑定"></a>v-model 数据双向绑定</h4><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">div</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">m-tabbar</span> <span class="attr">v-model</span>=<span class="string">"select"</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">m-tabbar-item</span> <span class="attr">id</span>=<span class="string">'tab1'</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"../assets/images/ic_tab_home_normal.png"</span> <span class="attr">alt</span>=<span class="string">""</span> <span class="attr">slot</span>=<span class="string">"icon-normal"</span>&gt;</span> </div><div class="line">        <span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"../assets/images/ic_tab_home_active.png"</span> <span class="attr">alt</span>=<span class="string">""</span> <span class="attr">slot</span>=<span class="string">"icon-active"</span>&gt;</span></div><div class="line">        首页</div><div class="line">      <span class="tag">&lt;/<span class="name">m-tabbar-item</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">m-tabbar-item</span> <span class="attr">id</span>=<span class="string">'tab2'</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"../assets/images/ic_tab_subject_normal.png"</span> <span class="attr">alt</span>=<span class="string">""</span> <span class="attr">slot</span>=<span class="string">"icon-normal"</span>&gt;</span> </div><div class="line">        <span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"../assets/images/ic_tab_subject_active.png"</span> <span class="attr">alt</span>=<span class="string">""</span> <span class="attr">slot</span>=<span class="string">"icon-active"</span>&gt;</span> </div><div class="line">        书影音</div><div class="line">      <span class="tag">&lt;/<span class="name">m-tabbar-item</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">m-tabbar-item</span> <span class="attr">id</span>=<span class="string">'tab3'</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"../assets/images/ic_tab_status_normal.png"</span> <span class="attr">alt</span>=<span class="string">""</span> <span class="attr">slot</span>=<span class="string">"icon-normal"</span>&gt;</span> </div><div class="line">        <span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"../assets/images/ic_tab_status_active.png"</span> <span class="attr">alt</span>=<span class="string">""</span> <span class="attr">slot</span>=<span class="string">"icon-active"</span>&gt;</span> </div><div class="line">        广播</div><div class="line">      <span class="tag">&lt;/<span class="name">m-tabbar-item</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">m-tabbar-item</span> <span class="attr">id</span>=<span class="string">'tab4'</span>&gt;</span></div><div class="line">          <span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"../assets/images/ic_tab_group_normal.png"</span> <span class="attr">alt</span>=<span class="string">""</span> <span class="attr">slot</span>=<span class="string">"icon-normal"</span>&gt;</span> </div><div class="line">          <span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"../assets/images/ic_tab_group_active.png"</span> <span class="attr">alt</span>=<span class="string">""</span> <span class="attr">slot</span>=<span class="string">"icon-active"</span>&gt;</span> </div><div class="line">        小组</div><div class="line">      <span class="tag">&lt;/<span class="name">m-tabbar-item</span>&gt;</span></div><div class="line">       <span class="tag">&lt;<span class="name">m-tabbar-item</span> <span class="attr">id</span>=<span class="string">'tab5'</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"../assets/images/ic_tab_profile_normal.png"</span> <span class="attr">alt</span>=<span class="string">""</span> <span class="attr">slot</span>=<span class="string">"icon-normal"</span>&gt;</span> </div><div class="line">        <span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"../assets/images/ic_tab_profile_active.png"</span> <span class="attr">alt</span>=<span class="string">""</span> <span class="attr">slot</span>=<span class="string">"icon-active"</span>&gt;</span> </div><div class="line">        我的</div><div class="line">      <span class="tag">&lt;/<span class="name">m-tabbar-item</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">m-tabbar</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined"></span></div><div class="line"><span class="javascript">  <span class="keyword">import</span> mTabbar <span class="keyword">from</span> <span class="string">'../components/tabbar'</span></span></div><div class="line"><span class="javascript">  <span class="keyword">import</span> mTabbarItem <span class="keyword">from</span> <span class="string">'../components/tabbar-item'</span></span></div><div class="line"><span class="javascript">  <span class="keyword">export</span> <span class="keyword">default</span> &#123;</span></div><div class="line"><span class="actionscript">    name: <span class="string">'index'</span>,</span></div><div class="line"><span class="undefined">    components: &#123;</span></div><div class="line"><span class="undefined">      mTabbar,</span></div><div class="line"><span class="undefined">      mTabbarItem</span></div><div class="line"><span class="undefined">    &#125;,</span></div><div class="line"><span class="undefined">    data()&#123;</span></div><div class="line"><span class="actionscript">        <span class="keyword">return</span>&#123;</span></div><div class="line"><span class="actionscript">            select:<span class="string">'tab1'</span></span></div><div class="line"><span class="undefined">        &#125;</span></div><div class="line"><span class="undefined">    &#125;,</span></div><div class="line"><span class="undefined">    watch:&#123;</span></div><div class="line"><span class="actionscript">        select:<span class="function"><span class="keyword">function</span><span class="params">()</span></span>&#123;</span></div><div class="line"><span class="javascript">            <span class="built_in">console</span>.log(<span class="keyword">this</span>.select);</span></div><div class="line"><span class="undefined">        &#125;</span></div><div class="line"><span class="undefined">    &#125;</span></div><div class="line"><span class="undefined">  &#125;</span></div><div class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div></pre></td></tr></table></figure>
+<h2 id="1-父组件"><a href="#1-父组件" class="headerlink" title="1.父组件"></a>1.父组件</h2><h3 id="接收v-bind-value属性"><a href="#接收v-bind-value属性" class="headerlink" title="接收v-bind:value属性"></a>接收v-bind:value属性</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"m-tabbar"</span>&gt;</span></div><div class="line">       <span class="tag">&lt;<span class="name">slot</span>&gt;</span><span class="tag">&lt;/<span class="name">slot</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined"></span></div><div class="line"><span class="undefined"></span></div><div class="line"><span class="javascript"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span></div><div class="line"><span class="actionscript">    props:[<span class="string">'value'</span>]</span></div><div class="line"><span class="undefined">&#125;</span></div><div class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">style</span> <span class="attr">lang</span>=<span class="string">"less"</span>&gt;</span><span class="undefined"></span></div><div class="line"><span class="css"><span class="selector-class">.m-tabbar</span>&#123;</span></div><div class="line"><span class="undefined">    display: flex;</span></div><div class="line"><span class="undefined">    flex-direction: row;</span></div><div class="line"><span class="undefined">    position: fixed;</span></div><div class="line"><span class="undefined">    bottom: 0;</span></div><div class="line"><span class="undefined">    left: 0;</span></div><div class="line"><span class="undefined">    right: 0;</span></div><div class="line"><span class="undefined">    width: 100%;</span></div><div class="line"><span class="undefined">    overflow: hidden;</span></div><div class="line"><span class="undefined">    height: 50px;</span></div><div class="line"><span class="css">    <span class="selector-tag">background</span>: <span class="selector-id">#fff</span>;</span></div><div class="line"><span class="css">    <span class="selector-tag">border-top</span>: 1<span class="selector-tag">px</span> <span class="selector-tag">solid</span> <span class="selector-id">#e4e4e4</span>;</span></div><div class="line"><span class="undefined">&#125;</span></div><div class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></div></pre></td></tr></table></figure>
+<h2 id="2-子组件"><a href="#2-子组件" class="headerlink" title="2.子组件"></a>2.子组件</h2><h3 id="接收id属性值，通过-parent-emit-‘input’-id-向父组件传递当前点击id的值，父组件由on来接收"><a href="#接收id属性值，通过-parent-emit-‘input’-id-向父组件传递当前点击id的值，父组件由on来接收" class="headerlink" title="接收id属性值，通过$parent.$emit(‘input’,id)向父组件传递当前点击id的值，父组件由on来接收"></a>接收id属性值，通过$parent.$emit(‘input’,id)向父组件传递当前点击id的值，父组件由on来接收</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></div><div class="line">     <span class="tag">&lt;<span class="name">a</span> <span class="attr">class</span>=<span class="string">"m-tabbar-item"</span> <span class="attr">:class</span>=<span class="string">"&#123;'is-active':isActive&#125;"</span> @<span class="attr">click</span>=<span class="string">"$parent.$emit('input',id)"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"m-tabbar-item-icon"</span> <span class="attr">v-show</span>=<span class="string">"!isActive"</span>&gt;</span><span class="tag">&lt;<span class="name">slot</span> <span class="attr">name</span>=<span class="string">"icon-normal"</span>&gt;</span><span class="tag">&lt;/<span class="name">slot</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"m-tabbar-item-icon"</span> <span class="attr">v-show</span>=<span class="string">"isActive"</span>&gt;</span><span class="tag">&lt;<span class="name">slot</span> <span class="attr">name</span>=<span class="string">"icon-active"</span>&gt;</span><span class="tag">&lt;/<span class="name">slot</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"m-tabbar-item-text"</span>&gt;</span><span class="tag">&lt;<span class="name">slot</span>&gt;</span><span class="tag">&lt;/<span class="name">slot</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">a</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined"></span></div><div class="line"><span class="javascript"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span></div><div class="line"><span class="actionscript">  props:[<span class="string">'id'</span>],</span></div><div class="line"><span class="undefined">  computed: &#123;</span></div><div class="line"><span class="undefined">    isActive()&#123;</span></div><div class="line"><span class="actionscript">      <span class="keyword">if</span>(<span class="keyword">this</span>.$parent.value===<span class="keyword">this</span>.id)&#123;</span></div><div class="line"><span class="actionscript">        <span class="keyword">return</span> <span class="literal">true</span>;</span></div><div class="line"><span class="undefined">      &#125;</span></div><div class="line"><span class="undefined">    &#125;</span></div><div class="line"><span class="undefined">  &#125;</span></div><div class="line"><span class="undefined">&#125;</span></div><div class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">style</span> <span class="attr">lang</span>=<span class="string">"less"</span>&gt;</span><span class="undefined"></span></div><div class="line"><span class="css"><span class="selector-class">.m-tabbar-item</span>&#123;</span></div><div class="line"><span class="undefined">    flex: 1;</span></div><div class="line"><span class="undefined">    text-align: center;</span></div><div class="line"><span class="css">    <span class="selector-class">.m-tabbar-item-icon</span>&#123;</span></div><div class="line"><span class="undefined">        display: block;</span></div><div class="line"><span class="undefined">        padding-top: 2px;</span></div><div class="line"><span class="undefined">        img&#123;</span></div><div class="line"><span class="undefined">            width: 28px;</span></div><div class="line"><span class="undefined">            height: 28px;</span></div><div class="line"><span class="undefined">        &#125;</span></div><div class="line"><span class="undefined"></span></div><div class="line"><span class="undefined">    &#125;</span></div><div class="line"><span class="css">    <span class="selector-class">.m-tabbar-item-text</span>&#123;</span></div><div class="line"><span class="undefined">        display: block;</span></div><div class="line"><span class="undefined">        font-size: 10px;</span></div><div class="line"><span class="css">        <span class="selector-tag">color</span>:<span class="selector-id">#949494</span>;</span></div><div class="line"><span class="undefined">    &#125;</span></div><div class="line"><span class="css">    &amp;<span class="selector-class">.is-active</span>&#123;</span></div><div class="line"><span class="css">        <span class="selector-class">.m-tabbar-item-text</span>&#123;</span></div><div class="line"><span class="css">            <span class="selector-tag">color</span>: <span class="selector-id">#42bd56</span>;</span></div><div class="line"><span class="undefined">        &#125;</span></div><div class="line"><span class="undefined">    &#125;</span></div><div class="line"><span class="undefined">&#125;</span></div><div class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></div></pre></td></tr></table></figure>
+
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="/2016/10/25/v-model/" data-id="cj6x2vu79002ef8wqayregthr" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+        <a href="/2016/10/25/v-model/#comments" class="article-comment-link">评论</a>
+    
+
+        </footer>
+    </div>
+    
+</article>
+
+
+
+    <article id="post-iis部署" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            
+	
+		<a href="/2016/10/03/iis部署/" itemprop="url">
+            <img src="http://www.gratisography.com/pictures/313_1.jpg" class="article-banner" />
+        </a>
+	
+
+
+
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/2016/10/03/iis部署/">IIS部署</a>
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2016/10/03/iis部署/">
+            <time datetime="2016-10-02T16:00:00.000Z" itemprop="datePublished">2016-10-03</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/服务器/">服务器</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/代理/">代理</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <h3 id="IIS"><a href="#IIS" class="headerlink" title="IIS"></a>IIS</h3><h4 id="名词介绍"><a href="#名词介绍" class="headerlink" title="名词介绍"></a>名词介绍</h4><h5 id="1-IIS简介"><a href="#1-IIS简介" class="headerlink" title="1.IIS简介"></a>1.IIS简介</h5><blockquote>
+<p>Internet Information Service</p>
+<p>微软服务器，windows系统都自带这个功能</p>
+</blockquote>
+<h5 id="2-互联网相关名词介绍"><a href="#2-互联网相关名词介绍" class="headerlink" title="2.互联网相关名词介绍"></a>2.互联网相关名词介绍</h5><blockquote>
+<p>服务器Server;通常是指服务器硬件。还有服务器软件（程序）<br>  服务器软件是运行在电脑上的程序，电脑也可以当做一个服务器</p>
+<p>URL：统一资源定位符 <a href="https://timgsa.baidu.com/timg?image&amp;quality=80&amp;size=b9999_10000&amp;sec=1492594445597&amp;di=1b28e8ff63505088aff8a1f3567bd44e&amp;imgtype=0&amp;src=http%3A%2F%2Fmvimg2.meitudata.com%2F55713dd0165c89055.jpg" target="_blank" rel="external">https://timgsa.baidu.com/timg?image&amp;quality=80&amp;size=b9999_10000&amp;sec=1492594445597&amp;di=1b28e8ff63505088aff8a1f3567bd44e&amp;imgtype=0&amp;src=http%3A%2F%2Fmvimg2.meitudata.com%2F55713dd0165c89055.jpg</a></p>
+<p>域名domain name address: www.baidu.com</p>
+<p>ip地址：命令提示符 –&gt; ipconfig 使用ping www.baidu.com可以把域名转换成ip地址</p>
+<p>DNS： Domain name system域名解析服务</p>
+</blockquote>
+<h4 id="开启IIS服务器"><a href="#开启IIS服务器" class="headerlink" title="开启IIS服务器"></a>开启IIS服务器</h4><figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="bullet">* </span>1.打开控制面板--&gt;程序--&gt;启用或关闭windows功能--&gt;internet information service--&gt;全部勾选</div><div class="line"><span class="bullet">* </span>2.使用localhost或者127.0.0.1访问本地服务器</div><div class="line"><span class="bullet">* </span>3.默认站点，IIS服务器默认站点在c:\inetpub\wwwroot文件夹下</div><div class="line"><span class="bullet">* </span>4.默认文档，打开服务器的时候加载显示的页面。可以上移提高优先级，也可以添加自己想要显示的页面。</div><div class="line"><span class="bullet">* </span>5.注意浏览器缓存，可能会加载以前缓存的页面，而没有加载自己添加的页面</div><div class="line"><span class="bullet">* </span>6.目录浏览，把服务器下的文件以目录的形式展示，这种方式很不安全，因为会把所有文件暴露出来</div><div class="line"><span class="bullet">* </span>7.开启目录浏览，需要把默认文档关掉或者删除所有的默认文档</div><div class="line"><span class="bullet">* </span>8.如果被人通过ip地址访问你的电脑。需要把防火墙关闭</div><div class="line"><span class="bullet">* </span>9.添加站点，端口需要改，要指定路径，如果不能访问，没有权限，需要修改权限</div><div class="line"><span class="bullet">* </span>10.文件夹--&gt;右键属性--&gt;安全--&gt;编辑--&gt;添加--&gt;everyone--&gt;全部控制--&gt;应用</div><div class="line"><span class="bullet">* </span>11.ftp文件传输协议，上传下载文件</div><div class="line"><span class="bullet">* </span>12.http超文本传输协议</div></pre></td></tr></table></figure>
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="/2016/10/03/iis部署/" data-id="cj6x2vu6r001if8wq0emfxv9t" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+        <a href="/2016/10/03/iis部署/#comments" class="article-comment-link">评论</a>
+    
+
+        </footer>
+    </div>
+    
+</article>
+
+
+
+    <article id="post-深入理解HTTP协议（转）" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            
+	
+		<a href="/2016/09/21/深入理解HTTP协议（转）/" itemprop="url">
+            <img src="http://static8.originoo.cn/1149789/1043/i/950/depositphotos_10430797-stock-photo-vintage-paper-texture.jpg" class="article-banner" />
+        </a>
+	
+
+
+
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/2016/09/21/深入理解HTTP协议（转）/">深入理解HTTP协议（转）</a>
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2016/09/21/深入理解HTTP协议（转）/">
+            <time datetime="2016-09-20T16:00:00.000Z" itemprop="datePublished">2016-09-21</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/Http/">Http</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/页面请求/">页面请求</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <h3 id="从浏览器地址栏输入url到显示页面的步骤-以HTTP为例"><a href="#从浏览器地址栏输入url到显示页面的步骤-以HTTP为例" class="headerlink" title="从浏览器地址栏输入url到显示页面的步骤(以HTTP为例)"></a>从浏览器地址栏输入url到显示页面的步骤(以HTTP为例)</h3><ol>
+<li>在浏览器地址栏输入URL</li>
+<li>浏览器查看<strong>缓存</strong>，如果请求资源在缓存中并且新鲜，跳转到转码步骤<ol>
+<li>如果资源未缓存，发起新请求</li>
+<li>如果已缓存，检验是否足够新鲜，足够新鲜直接提供给客户端，否则与服务器进行验证。</li>
+<li>检验新鲜通常有两个HTTP头进行控制<code>Expires</code>和<code>Cache-Control</code>：<ul>
+<li>HTTP1.0提供Expires，值为一个绝对时间表示缓存新鲜日期</li>
+<li>HTTP1.1增加了Cache-Control: max-age=,值为以秒为单位的最大新鲜时间</li>
+</ul>
+</li>
+</ol>
+</li>
+<li>浏览器<strong>解析URL</strong>获取协议，主机，端口，path</li>
+<li>浏览器<strong>组装一个HTTP（GET）请求报文</strong></li>
+<li>浏览器<strong>获取主机ip地址</strong>，过程如下：<ol>
+<li>浏览器缓存</li>
+<li>本机缓存</li>
+<li>hosts文件</li>
+<li>路由器缓存</li>
+<li>ISP DNS缓存</li>
+<li>DNS递归查询（可能存在负载均衡导致每次IP不一样）</li>
+</ol>
+</li>
+<li><strong>打开一个socket与目标IP地址，端口建立TCP链接</strong>，三次握手如下：<ol>
+<li>客户端发送一个TCP的<strong>SYN=1，Seq=X</strong>的包到服务器端口</li>
+<li>服务器发回<strong>SYN=1， ACK=X+1， Seq=Y</strong>的响应包</li>
+<li>客户端发送<strong>ACK=Y+1， Seq=Z</strong></li>
+</ol>
+</li>
+<li>TCP链接建立后<strong>发送HTTP请求</strong></li>
+<li>服务器接受请求并解析，将请求转发到服务程序，如虚拟主机使用HTTP Host头部判断请求的服务程序</li>
+<li>服务器检查<strong>HTTP请求头是否包含缓存验证信息</strong>如果验证缓存新鲜，返回<strong>304</strong>等对应状态码</li>
+<li>处理程序读取完整请求并准备HTTP响应，可能需要查询数据库等操作</li>
+<li>服务器将<strong>响应报文通过TCP连接发送回浏览器</strong></li>
+<li>浏览器接收HTTP响应，然后根据情况选择<strong>关闭TCP连接或者保留重用，关闭TCP连接的四次握手如下</strong>：<ol>
+<li>主动方发送<strong>Fin=1， Ack=Z， Seq= X</strong>报文</li>
+<li>被动方发送<strong>ACK=X+1， Seq=Z</strong>报文</li>
+<li>被动方发送<strong>Fin=1， ACK=X， Seq=Y</strong>报文</li>
+<li>主动方发送<strong>ACK=Y， Seq=X</strong>报文</li>
+</ol>
+</li>
+<li>浏览器检查响应状态吗：是否为1XX，3XX， 4XX， 5XX，这些情况处理与2XX不同</li>
+<li>如果资源可缓存，<strong>进行缓存</strong></li>
+<li>对响应进行<strong>解码</strong>（例如gzip压缩）</li>
+<li>根据资源类型决定如何处理（假设资源为HTML文档）</li>
+<li><strong>解析HTML文档，构件DOM树，下载资源，构造CSSOM树，执行js脚本</strong>，这些操作没有严格的先后顺序，以下分别解释</li>
+<li><strong>构建DOM树</strong>：<ol>
+<li><strong>Tokenizing</strong>：根据HTML规范将字符流解析为标记</li>
+<li><strong>Lexing</strong>：词法分析将标记转换为对象并定义属性和规则</li>
+<li><strong>DOM construction</strong>：根据HTML标记关系将对象组成DOM树</li>
+</ol>
+</li>
+<li>解析过程中遇到图片、样式表、js文件，<strong>启动下载</strong></li>
+<li>构建<strong>CSSOM树</strong>：<ol>
+<li><strong>Tokenizing</strong>：字符流转换为标记流</li>
+<li><strong>Node</strong>：根据标记创建节点</li>
+<li><strong>CSSOM</strong>：节点创建CSSOM树</li>
+</ol>
+</li>
+<li><strong><a href="https://developers.google.com/web/fundamentals/performance/critical-rendering-path/render-tree-construction" target="_blank" rel="external">根据DOM树和CSSOM树构建渲染树</a></strong>:<ol>
+<li>从DOM树的根节点遍历所有<strong>可见节点</strong>，不可见节点包括：1）<code>script</code>,<code>meta</code>这样本身不可见的标签。2)被css隐藏的节点，如<code>display: none</code></li>
+<li>对每一个可见节点，找到恰当的CSSOM规则并应用</li>
+<li>发布可视节点的内容和计算样式</li>
+</ol>
+</li>
+<li><strong>js解析如下</strong>：<ol>
+<li>浏览器创建Document对象并解析HTML，将解析到的元素和文本节点添加到文档中，此时<strong>document.readystate为loading</strong></li>
+<li>HTML解析器遇到<strong>没有async和defer的script时</strong>，将他们添加到文档中，然后执行行内或外部脚本。这些脚本会同步执行，并且在脚本下载和执行时解析器会暂停。这样就可以用document.write()把文本插入到输入流中。<strong>同步脚本经常简单定义函数和注册事件处理程序，他们可以遍历和操作script和他们之前的文档内容</strong></li>
+<li>当解析器遇到设置了<strong>async</strong>属性的script时，开始下载脚本并继续解析文档。脚本会在它<strong>下载完成后尽快执行</strong>，但是<strong>解析器不会停下来等它下载</strong>。异步脚本<strong>禁止使用document.write()</strong>，它们可以访问自己script和之前的文档元素</li>
+<li>当文档完成解析，document.readState变成interactive</li>
+<li>所有<strong>defer</strong>脚本会<strong>按照在文档出现的顺序执行</strong>，延迟脚本<strong>能访问完整文档树</strong>，禁止使用document.write()</li>
+<li>浏览器<strong>在Document对象上触发DOMContentLoaded事件</strong></li>
+<li>此时文档完全解析完成，浏览器可能还在等待如图片等内容加载，等这些<strong>内容完成载入并且所有异步脚本完成载入和执行</strong>，document.readState变为complete,window触发load事件</li>
+</ol>
+</li>
+<li><strong>显示页面</strong>（HTML解析过程中会逐步显示页面）</li>
+</ol>
+
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="/2016/09/21/深入理解HTTP协议（转）/" data-id="cj6x2vu7o002uf8wqbmoce3o8" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+        <a href="/2016/09/21/深入理解HTTP协议（转）/#comments" class="article-comment-link">评论</a>
+    
+
+        </footer>
+    </div>
+    
+</article>
+
+
+
     <article id="post-批处理HTTP模块SuperAgent" class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
@@ -360,7 +1723,7 @@ superagent也支持复合请求,比如你想上传一个带有你的姓名和邮
 
 </div>
 
-    <a data-url="/2016/09/10/批处理HTTP模块SuperAgent/" data-id="cj6vxopur001t2kwqlzbl3qas" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="/2016/09/10/批处理HTTP模块SuperAgent/" data-id="cj6x2vu790027f8wqvaunt4ug" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -511,7 +1874,7 @@ superagent也支持复合请求,比如你想上传一个带有你的姓名和邮
 
 </div>
 
-    <a data-url="/2016/09/05/懒加载/" data-id="cj6vxopuv001w2kwqh15nn8oe" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="/2016/09/05/懒加载/" data-id="cj6x2vuaq003yf8wqv2y8rtf2" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -589,583 +1952,8 @@ superagent也支持复合请求,比如你想上传一个带有你的姓名和邮
 
 
 
-    <article id="post-解决https请求下发送http请求问题 " class="article article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
-        
-            
-	
-		<a href="/2016/08/25/解决https请求下发送http请求问题 /" itemprop="url">
-            <img src="http://st2.originoo.cn/3840453/5472/i/950/depositphotos_54728161-stock-photo-musical-instrument-detail-of-a.jpg" class="article-banner" />
-        </a>
-	
-
-
-
-        
-        
-            <header class="article-header">
-                
-    
-        <h1 itemprop="name">
-            <a class="article-title" href="/2016/08/25/解决https请求下发送http请求问题 /">解决https请求下发送http请求问题</a>
-        </h1>
-    
-
-                
-                    <div class="article-meta">
-                        
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/2016/08/25/解决https请求下发送http请求问题 /">
-            <time datetime="2016-08-24T16:00:00.000Z" itemprop="datePublished">2016-08-25</time>
-        </a>
-    </div>
-
-
-                        
-    <div class="article-category">
-    	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/categories/Http/">Http</a>
-    </div>
-
-                        
-    <div class="article-tag">
-        <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/跨域/">跨域</a>
-    </div>
-
-                    </div>
-                
-            </header>
-        
-        
-        <div class="article-entry" itemprop="articleBody">
-        
-            
-            <p>在https页面下的带有相对路径的请求都会与页面的协议保持一致。如果想在https页面下发送http的请求，如果只把链接写死成为http的绝对路径是不够的，这样会导致http的请求与总页面https的请求的session不一致。</p>
-<p>为什么呢？原因是https的请求中服务器发回的cookie是标记为”secure”的，而http的请求时非”secure”,”由于在服务器端secure”的cookie不会兼容非”secure”的，所以当http的请求携带着同一jsessionid的cookie到达服务器时，服务器拒绝非”secure”，进而返回的结果是一个新的非”secure”的cookie，于是两个session就不同了。</p>
-<p> 怎么解决呢？由原因分析可知，两个session不同，更具体说是cookie的状态不同。那么办法是，在接收到第一个https请求的响应后 到 发送下面的http请求之前，将cookie去”secure”状态，但是又要保证jsessionid不变。具体操作可以新建一个cookie(新建的是非”secure”状态)，然后赋予同一个jessionid，然后加入response中。</p>
-<p> 代码如下：<br> <figure class="highlight pony"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="type">Cookie</span> cookie = <span class="function"><span class="keyword">new</span> <span class="title">Cookie</span>("<span class="type">JSESSIONID</span>", req.getSession().<span class="title">getId</span>());</span></div><div class="line"><span class="function"><span class="title">cookie</span>.<span class="title">setPath</span>(req.getContextPath());</span></div><div class="line"><span class="function"><span class="title">resp</span>.<span class="title">addCookie</span>(cookie);</span></div></pre></td></tr></table></figure></p>
-<p>本文转载自<a href="http://blog.csdn.NET/songgeabc/article/details/18192057" target="_blank" rel="external">http://blog.csdn.NET/songgeabc/article/details/18192057</a></p>
-
-        
-        </div>
-        <footer class="article-footer">
-            <div class="share-container">
-
-
-
-</div>
-
-    <a data-url="/2016/08/25/解决https请求下发送http请求问题 /" data-id="cj6vxopv200232kwq31l3l0m2" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
-<script>
-    (function ($) {
-        // Prevent duplicate binding
-        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
-            __SHARE_BUTTON_BINDED__ = true;
-        } else {
-            return;
-        }
-        $('body').on('click', function() {
-            $('.article-share-box.on').removeClass('on');
-        }).on('click', '.article-share-link', function(e) {
-            e.stopPropagation();
-
-            var $this = $(this),
-                url = $this.attr('data-url'),
-                encodedUrl = encodeURIComponent(url),
-                id = 'article-share-box-' + $this.attr('data-id'),
-                offset = $this.offset(),
-                box;
-
-            if ($('#' + id).length) {
-                box = $('#' + id);
-
-                if (box.hasClass('on')){
-                    box.removeClass('on');
-                    return;
-                }
-            } else {
-                var html = [
-                    '<div id="' + id + '" class="article-share-box">',
-                        '<input class="article-share-input" value="' + url + '">',
-                        '<div class="article-share-links">',
-                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
-                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
-                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
-                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
-                        '</div>',
-                    '</div>'
-                ].join('');
-
-              box = $(html);
-
-              $('body').append(box);
-            }
-
-            $('.article-share-box.on').hide();
-
-            box.css({
-                top: offset.top + 25,
-                left: offset.left
-            }).addClass('on');
-
-        }).on('click', '.article-share-box', function (e) {
-            e.stopPropagation();
-        }).on('click', '.article-share-box-input', function () {
-            $(this).select();
-        }).on('click', '.article-share-box-link', function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-
-            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
-        });
-    })(jQuery);
-</script>
-
-            
-    
-        <a href="/2016/08/25/解决https请求下发送http请求问题 /#comments" class="article-comment-link">评论</a>
-    
-
-        </footer>
-    </div>
-    
-</article>
-
-
-
-    <article id="post-闭包" class="article article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
-        
-            
-	
-		<a href="/2016/08/20/闭包/" itemprop="url">
-            <img src="http://st2.originoo.cn/1008768/8238/i/950/depositphotos_82386882-stock-photo-work-versus-life-road-sign.jpg" class="article-banner" />
-        </a>
-	
-
-
-
-        
-        
-            <header class="article-header">
-                
-    
-        <h1 itemprop="name">
-            <a class="article-title" href="/2016/08/20/闭包/">JavaScript深入之闭包(转)</a>
-        </h1>
-    
-
-                
-                    <div class="article-meta">
-                        
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/2016/08/20/闭包/">
-            <time datetime="2016-08-19T16:00:00.000Z" itemprop="datePublished">2016-08-20</time>
-        </a>
-    </div>
-
-
-                        
-    <div class="article-category">
-    	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/categories/前端/">前端</a>
-    </div>
-
-                        
-    <div class="article-tag">
-        <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/js/">js</a>
-    </div>
-
-                    </div>
-                
-            </header>
-        
-        
-        <div class="article-entry" itemprop="articleBody">
-        
-            
-            <h1 id="JavaScript深入之闭包"><a href="#JavaScript深入之闭包" class="headerlink" title="JavaScript深入之闭包"></a>JavaScript深入之闭包</h1><blockquote>
-<p>介绍理论上的闭包和实践上的闭包，以及从作用域链的角度解析经典的闭包题。</p>
-</blockquote>
-<h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><h3 id="MDN-对闭包的定义为："><a href="#MDN-对闭包的定义为：" class="headerlink" title="MDN 对闭包的定义为："></a>MDN 对闭包的定义为：</h3><blockquote>
-<p>闭包是指那些能够访问自由变量的函数。</p>
-</blockquote>
-<h2 id="那什么是自由变量呢？"><a href="#那什么是自由变量呢？" class="headerlink" title="那什么是自由变量呢？"></a>那什么是自由变量呢？</h2><blockquote>
-<p>自由变量是指在函数中使用的，但既不是函数参数也不是函数的局部变量的变量。</p>
-</blockquote>
-<p>由此，我们可以看出闭包共有两部分组成：</p>
-<blockquote>
-<p>闭包 = 函数 + 函数能够访问的自由变量</p>
-</blockquote>
-<h2 id="举个例子"><a href="#举个例子" class="headerlink" title="举个例子"></a>举个例子</h2><figure class="highlight delphi"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> a = <span class="number">1</span>;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span><span class="params">()</span> <span class="comment">&#123;</span></span></div><div class="line"><span class="function"><span class="comment">    console.log(a);</span></span></div><div class="line"><span class="function"><span class="comment">&#125;</span></span></div><div class="line"><span class="function"></span></div><div class="line"><span class="function"><span class="title">foo</span><span class="params">()</span>;</span></div></pre></td></tr></table></figure>
-<p>foo 函数可以访问变量 a，但是 a 既不是 foo 函数的局部变量，也不是 foo 函数的参数，所以 a 就是自由变量。</p>
-<p>那么，函数 foo + foo 函数访问的自由变量 a 不就是构成了一个闭包嘛……</p>
-<p>还真是这样的！</p>
-<p>所以在《JavaScript权威指南》中就讲到：从技术的角度讲，所有的JavaScript函数都是闭包。</p>
-<p>咦，这怎么跟我们平时看到的讲到的闭包不一样呢！？</p>
-<p>别着急，这是理论上的闭包，其实还有一个实践角度上的闭包，让我们看看汤姆大叔翻译的关于闭包的文章中的定义：</p>
-<p>ECMAScript中，闭包指的是：</p>
-<blockquote>
-<p>1.从理论角度：所有的函数。因为它们都在创建的时候就将上层上下文的数据保存起来了。哪怕是简单的全局变量也是如此，因为函数中访问全局变量就相当于是在访问自由变量，这个时候使用最外层的作用域。<br>  2.从实践角度：以下函数才算是闭包：<br>        (1).即使创建它的上下文已经销毁，它仍然存在（比如，内部函数从父函数中返回）<br>        (2).在代码中引用了自由变量</p>
-</blockquote>
-<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><figure class="highlight actionscript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> scope = <span class="string">"global scope"</span>;</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">checkscope</span><span class="params">()</span></span>&#123;</div><div class="line">    <span class="keyword">var</span> scope = <span class="string">"local scope"</span>;</div><div class="line">    <span class="function"><span class="keyword">function</span> <span class="title">f</span><span class="params">()</span></span>&#123;</div><div class="line">        <span class="keyword">return</span> scope;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> f;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">var</span> foo = checkscope();</div><div class="line">foo();</div></pre></td></tr></table></figure>
-<blockquote>
-<p>首先我们要分析一下这段代码中执行上下文栈和执行上下文的变化情况。</p>
-</blockquote>
-<p>另一个与这段代码相似的例子，在《JavaScript深入之执行上下文》中有着非常详细的分析。如果看不懂以下的执行过程，建议先阅读这篇文章。</p>
-<p>这里直接给出简要的执行过程：</p>
-<pre><code>进入全局代码，创建全局执行上下文，全局执行上下文压入执行上下文栈
-全局执行上下文初始化
-执行 checkscope 函数，创建 checkscope 函数执行上下文，checkscope 执行上下文被压入执行上下文栈
-checkscope 执行上下文初始化，创建变量对象、作用域链、this等
-checkscope 函数执行完毕，checkscope 执行上下文从执行上下文栈中弹出
-执行 f 函数，创建 f 函数执行上下文，f 执行上下文被压入执行上下文栈
-f 执行上下文初始化，创建变量对象、作用域链、this等
-f 函数执行完毕，f 函数上下文从执行上下文栈中弹出
-</code></pre><p>了解到这个过程，我们应该思考一个问题，那就是：</p>
-<p>当 f 函数执行的时候，checkscope 函数上下文已经被销毁了啊(即从执行上下文栈中被弹出)，怎么还会读取到 checkscope 作用域下的 scope 值呢？</p>
-<p>以上的代码，要是转换成 PHP，就会报错，因为在 PHP 中，f 函数只能读取到自己作用域和全局作用域里的值，所以读不到 checkscope 下的 scope 值。(这段我问的PHP同事……)</p>
-<p>然而 JavaScript 却是可以的！</p>
-<h2 id="必刷题"><a href="#必刷题" class="headerlink" title="必刷题"></a>必刷题</h2><figure class="highlight haskell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="title">var</span> <span class="class"><span class="keyword">data</span> = [];</span></div><div class="line"></div><div class="line"><span class="title">for</span> (var i = <span class="number">0</span>; i &lt; <span class="number">3</span>; i++) &#123;</div><div class="line">  <span class="class"><span class="keyword">data</span>[i] = function () &#123;</span></div><div class="line"><span class="class">    <span class="title">console</span>.<span class="title">log</span>(<span class="title">i</span>);</span></div><div class="line"><span class="class">  &#125;;</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">data</span>[0]();</span></div><div class="line"><span class="class"><span class="keyword">data</span>[1]();</span></div><div class="line"><span class="class"><span class="keyword">data</span>[2]();</span></div></pre></td></tr></table></figure>
-<p>答案是都是 3，让我们分析一下原因：</p>
-<p>当执行到 data[0] 函数之前，此时全局上下文的 VO 为：<br><figure class="highlight dts"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">globalContext = &#123;</div><div class="line"><span class="symbol">    VO:</span> &#123;</div><div class="line"><span class="symbol">        data:</span> [...],</div><div class="line"><span class="symbol">        i:</span> <span class="number">3</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>当执行 data[0] 函数的时候，data[0] 函数的作用域链为：<br><figure class="highlight haskell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">data</span>[0]<span class="type">Context</span> = &#123;</span></div><div class="line"><span class="class">    <span class="type">Scope</span>: [<span class="type">AO</span>, <span class="title">globalContext</span>.<span class="type">VO</span>]</span></div><div class="line"><span class="class">&#125;</span></div></pre></td></tr></table></figure></p>
-<p>data[0]Context 的 AO 并没有 i 值，所以会从 globalContext.VO 中查找，i 为 3，所以打印的结果就是 3。</p>
-<p>data[1] 和 data[2] 是一样的道理。</p>
-<p>所以让我们改成闭包看看：<br><figure class="highlight haskell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="title">var</span> <span class="class"><span class="keyword">data</span> = [];</span></div><div class="line"></div><div class="line"><span class="title">for</span> (var i = <span class="number">0</span>; i &lt; <span class="number">3</span>; i++) &#123;</div><div class="line">  <span class="class"><span class="keyword">data</span>[i] = (<span class="title">function</span> (<span class="title">i</span>) &#123;</span></div><div class="line"><span class="class">        <span class="title">return</span> <span class="title">function</span>()&#123;</span></div><div class="line"><span class="class">            <span class="title">console</span>.<span class="title">log</span>(<span class="title">i</span>);</span></div><div class="line"><span class="class">        &#125;</span></div><div class="line">  &#125;)(i);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">data</span>[0]();</span></div><div class="line"><span class="class"><span class="keyword">data</span>[1]();</span></div><div class="line"><span class="class"><span class="keyword">data</span>[2]();</span></div></pre></td></tr></table></figure></p>
-<p>当执行到 data[0] 函数之前，此时全局上下文的 VO 为：<br><figure class="highlight dts"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">globalContext = &#123;</div><div class="line"><span class="symbol">    VO:</span> &#123;</div><div class="line"><span class="symbol">        data:</span> [...],</div><div class="line"><span class="symbol">        i:</span> <span class="number">3</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>跟没改之前一模一样。</p>
-<p>当执行 data[0] 函数的时候，data[0] 函数的作用域链发生了改变：<br><figure class="highlight haskell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">data</span>[0]<span class="type">Context</span> = &#123;</span></div><div class="line"><span class="class">    <span class="type">Scope</span>: [<span class="type">AO</span>, 匿名函数<span class="type">Context</span>.<span class="type">AO</span> <span class="title">globalContext</span>.<span class="type">VO</span>]</span></div><div class="line"><span class="class">&#125;</span></div></pre></td></tr></table></figure></p>
-<p>匿名函数执行上下文的 AO 为：<br><figure class="highlight dts"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">匿名函数Context = &#123;</div><div class="line"><span class="symbol">    AO:</span> &#123;</div><div class="line"><span class="symbol">        arguments:</span> &#123;</div><div class="line">            <span class="number">0</span>: <span class="number">0</span>,</div><div class="line"><span class="symbol">            length:</span> <span class="number">1</span></div><div class="line">        &#125;,</div><div class="line"><span class="symbol">        i:</span> <span class="number">0</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>data[0]Context 的 AO 并没有 i 值，所以会沿着作用域链从匿名函数 Context.AO 中查找，这时候就会找 i 为 0，找到了就不会往 globalContext.VO 中查找了，即使 globalContext.VO 也有 i 的值(值为3)，所以打印的结果就是 0。</p>
-<p>data[1] 和 data[2] 是一样的道理。</p>
-<h2 id="转自-https-juejin-im-post-590159d8a22b9d0065c2d918"><a href="#转自-https-juejin-im-post-590159d8a22b9d0065c2d918" class="headerlink" title="转自 https://juejin.im/post/590159d8a22b9d0065c2d918"></a>转自 <a href="https://juejin.im/post/590159d8a22b9d0065c2d918" target="_blank" rel="external">https://juejin.im/post/590159d8a22b9d0065c2d918</a></h2>
-        
-        </div>
-        <footer class="article-footer">
-            <div class="share-container">
-
-
-
-</div>
-
-    <a data-url="/2016/08/20/闭包/" data-id="cj6vxopv600282kwqdjkztm59" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
-<script>
-    (function ($) {
-        // Prevent duplicate binding
-        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
-            __SHARE_BUTTON_BINDED__ = true;
-        } else {
-            return;
-        }
-        $('body').on('click', function() {
-            $('.article-share-box.on').removeClass('on');
-        }).on('click', '.article-share-link', function(e) {
-            e.stopPropagation();
-
-            var $this = $(this),
-                url = $this.attr('data-url'),
-                encodedUrl = encodeURIComponent(url),
-                id = 'article-share-box-' + $this.attr('data-id'),
-                offset = $this.offset(),
-                box;
-
-            if ($('#' + id).length) {
-                box = $('#' + id);
-
-                if (box.hasClass('on')){
-                    box.removeClass('on');
-                    return;
-                }
-            } else {
-                var html = [
-                    '<div id="' + id + '" class="article-share-box">',
-                        '<input class="article-share-input" value="' + url + '">',
-                        '<div class="article-share-links">',
-                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
-                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
-                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
-                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
-                        '</div>',
-                    '</div>'
-                ].join('');
-
-              box = $(html);
-
-              $('body').append(box);
-            }
-
-            $('.article-share-box.on').hide();
-
-            box.css({
-                top: offset.top + 25,
-                left: offset.left
-            }).addClass('on');
-
-        }).on('click', '.article-share-box', function (e) {
-            e.stopPropagation();
-        }).on('click', '.article-share-box-input', function () {
-            $(this).select();
-        }).on('click', '.article-share-box-link', function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-
-            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
-        });
-    })(jQuery);
-</script>
-
-            
-    
-        <a href="/2016/08/20/闭包/#comments" class="article-comment-link">评论</a>
-    
-
-        </footer>
-    </div>
-    
-</article>
-
-
-
-    <article id="post-git远程操作" class="article article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
-        
-            
-	
-		<a href="/2016/08/15/git远程操作/" itemprop="url">
-            <img src="http://st2.originoo.cn/3591429/5246/i/950/depositphotos_52469051-stock-photo-businessman-working-by-beach.jpg" class="article-banner" />
-        </a>
-	
-
-
-
-        
-        
-            <header class="article-header">
-                
-    
-        <h1 itemprop="name">
-            <a class="article-title" href="/2016/08/15/git远程操作/">git远程操作</a>
-        </h1>
-    
-
-                
-                    <div class="article-meta">
-                        
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/2016/08/15/git远程操作/">
-            <time datetime="2016-08-14T16:00:00.000Z" itemprop="datePublished">2016-08-15</time>
-        </a>
-    </div>
-
-
-                        
-    <div class="article-category">
-    	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/categories/版本管理/">版本管理</a>
-    </div>
-
-                        
-    <div class="article-tag">
-        <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/git/">git</a>
-    </div>
-
-                    </div>
-                
-            </header>
-        
-        
-        <div class="article-entry" itemprop="articleBody">
-        
-            
-            <h4 id="git远程操作"><a href="#git远程操作" class="headerlink" title="git远程操作"></a>git远程操作</h4><blockquote>
-<p>在开源中国的码云平台做代码的远程提交</p>
-</blockquote>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">码云地址:https://git.oschina.net</div><div class="line">登录注册:此步骤省略</div><div class="line">具体操作步骤</div><div class="line">true1. 在平台上通过新建项目创建一个代码仓库</div><div class="line">true2. 把远程仓库的代码<span class="built_in">clone</span>到本地</div><div class="line">truetrue在本地电脑上创建一个文件夹(通过<span class="built_in">cd</span>命令进入此文件夹)，执行以下命令</div><div class="line">truetruegit <span class="built_in">clone</span> https://.... <span class="comment"># 通过clone命令把代码clone到本地</span></div><div class="line">true3. 使用编辑器打开文件夹,对内容做修改</div><div class="line">true4. 修改之后对代码做本地的缓存和提交</div><div class="line">truetruegit add . <span class="comment">#把文件加入缓存区</span></div><div class="line">truetruegit commit -m <span class="string">'提交信息'</span> <span class="comment">#把代码提交到本地仓库</span></div><div class="line">true5. 把本地代码push(推送)到远程服务器</div><div class="line">truetruegit push</div></pre></td></tr></table></figure>
-<p>git客户端gui工具  </p>
-<ol>
-<li>tortoisegit</li>
-<li>sourcetree</li>
-</ol>
-<hr>
-<h4 id="github上创建个人主页"><a href="#github上创建个人主页" class="headerlink" title="github上创建个人主页"></a>github上创建个人主页</h4><blockquote>
-<p>在github上创建一个项目名为 xxx.github.io的仓库<br>此仓库中放置的静态html文件可以直接通过外网地址进行访问</p>
-</blockquote>
-<p>创建个人github主页的步骤为</p>
-<figure class="highlight markdown"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="bullet">1. </span>打开github,登陆个人账号</div><div class="line"><span class="bullet">2. </span>创建项目,项目名为 用户名.github.io</div><div class="line"><span class="bullet">3. </span>在此项目中提交一些可以直接访问的静态html文件</div></pre></td></tr></table></figure>
-<h1 id="查看、添加、提交、删除、找回，重置修改文件"><a href="#查看、添加、提交、删除、找回，重置修改文件" class="headerlink" title="查看、添加、提交、删除、找回，重置修改文件"></a>查看、添加、提交、删除、找回，重置修改文件</h1><p>git help <command> # 显示command的help</p>
-<p>git show # 显示某次提交的内容 git show $id</p>
-<p>git co – <file> # 抛弃工作区修改</file></p>
-<p>git co . # 抛弃工作区修改</p>
-<p>git add <file> # 将工作文件修改提交到本地暂存区</file></p>
-<p>git add . # 将所有修改过的工作文件提交暂存区</p>
-<p>git rm <file> # 从版本库中删除文件</file></p>
-<p>git rm <file> –cached # 从版本库中删除文件，但不删除文件</file></p>
-<p>git reset <file> # 从暂存区恢复到工作文件</file></p>
-<p>git reset – . # 从暂存区恢复到工作文件</p>
-<p>git reset –hard # 恢复最近一次提交过的状态，即放弃上次提交后的所有本次修改</p>
-<p>git ci <file> git ci . git ci -a # 将git add, git rm和git ci等操作都合并在一起做　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　git ci -am “some comments”</file></p>
-<p>git ci –amend # 修改最后一次提交记录</p>
-<p>git revert &lt;$id&gt; # 恢复某次提交的状态，恢复动作本身也创建次提交对象</p>
-<p>git revert HEAD # 恢复最后一次提交的状态</p>
-<h1 id="查看文件diff"><a href="#查看文件diff" class="headerlink" title="查看文件diff"></a>查看文件diff</h1><p>git diff <file> # 比较当前文件和暂存区文件差异 git diff</file></p>
-<p>git diff &lt; </p>
-<p>id2&gt; # 比较两次提交之间的差异</p>
-<p>git diff <branch1>..<branch2> # 在两个分支之间比较</branch2></branch1></p>
-<p>git diff –staged # 比较暂存区和版本库差异</p>
-<p>git diff –cached # 比较暂存区和版本库差异</p>
-<p>git diff –stat # 仅仅比较统计信息</p>
-<h1 id="查看提交记录"><a href="#查看提交记录" class="headerlink" title="查看提交记录"></a>查看提交记录</h1><p>git log git log <file> # 查看该文件每次提交记录</file></p>
-<p>git log -p <file> # 查看每次详细修改内容的diff</file></p>
-<p>git log -p -2 # 查看最近两次详细修改内容的diff</p>
-<p>git log –stat #查看提交统计信息</p>
-<p>tig</p>
-<p>Mac上可以使用tig代替diff和log，brew install tig</p>
-<p>Git 本地分支管理</p>
-<h1 id="查看、切换、创建和删除分支"><a href="#查看、切换、创建和删除分支" class="headerlink" title="查看、切换、创建和删除分支"></a>查看、切换、创建和删除分支</h1><p>git br -r # 查看远程分支</p>
-<p>git br <new_branch> # 创建新的分支</new_branch></p>
-<p>git br -v # 查看各个分支最后提交信息</p>
-<p>git br –merged # 查看已经被合并到当前分支的分支</p>
-<p>git br –no-merged # 查看尚未被合并到当前分支的分支</p>
-<p>git co <branch> # 切换到某个分支</branch></p>
-<p>git co -b <new_branch> # 创建新的分支，并且切换过去</new_branch></p>
-<p>git co -b <new_branch> <branch> # 基于branch创建新的new_branch</branch></new_branch></p>
-<p>git co $id # 把某次历史提交记录checkout出来，但无分支信息，切换到其他分支会自动删除</p>
-<p>git co $id -b <new_branch> # 把某次历史提交记录checkout出来，创建成一个分支</new_branch></p>
-<p>git br -d <branch> # 删除某个分支</branch></p>
-<p>git br -D <branch> # 强制删除某个分支 (未被合并的分支被删除的时候需要强制)</branch></p>
-<h1 id="分支合并和rebase"><a href="#分支合并和rebase" class="headerlink" title="分支合并和rebase"></a>分支合并和rebase</h1><p>git merge <branch> # 将branch分支合并到当前分支</branch></p>
-<p>git merge origin/master –no-ff # 不要Fast-Foward合并，这样可以生成merge提交</p>
-<p>git rebase master <branch> # 将master rebase到branch，相当于： git co <branch> &amp;&amp; git rebase master &amp;&amp; git co master &amp;&amp; git merge <branch></branch></branch></branch></p>
-<p> Git补丁管理(方便在多台机器上开发同步时用)</p>
-<p>git diff &gt; ../sync.patch # 生成补丁</p>
-<p>git apply ../sync.patch # 打补丁</p>
-<p>git apply –check ../sync.patch #测试补丁能否成功</p>
-<h1 id="Git暂存管理"><a href="#Git暂存管理" class="headerlink" title="Git暂存管理"></a>Git暂存管理</h1><p>git stash # 暂存</p>
-<p>git stash list # 列所有stash</p>
-<p>git stash apply # 恢复暂存的内容</p>
-<p>git stash drop # 删除暂存区</p>
-<h1 id="Git远程分支管理"><a href="#Git远程分支管理" class="headerlink" title="Git远程分支管理"></a>Git远程分支管理</h1><p>git pull # 抓取远程仓库所有分支更新并合并到本地</p>
-<p>git pull –no-ff # 抓取远程仓库所有分支更新并合并到本地，不要快进合并</p>
-<p>git fetch origin # 抓取远程仓库更新</p>
-<p>git merge origin/master # 将远程主分支合并到本地当前分支</p>
-<p>git co –track origin/branch # 跟踪某个远程分支创建相应的本地分支</p>
-<p>git co -b <local_branch> origin/<remote_branch> # 基于远程分支创建本地分支，功能同上</remote_branch></local_branch></p>
-<p>git push # push所有分支</p>
-<p>git push origin master # 将本地主分支推到远程主分支</p>
-<p>git push -u origin master # 将本地主分支推到远程(如无远程主分支则创建，用于初始化远程仓库)</p>
-<p>git push origin <local_branch> # 创建远程分支， origin是远程仓库名</local_branch></p>
-<p>git push origin <local_branch>:<remote_branch> # 创建远程分支</remote_branch></local_branch></p>
-<p>git push origin :<remote_branch> #先删除本地分支(git br -d <branch>)，然后再push删除远程分支</branch></remote_branch></p>
-<h1 id="Git远程仓库管理"><a href="#Git远程仓库管理" class="headerlink" title="Git远程仓库管理"></a>Git远程仓库管理</h1><h1 id="GitHub"><a href="#GitHub" class="headerlink" title="GitHub"></a>GitHub</h1><p>git remote -v # 查看远程服务器地址和仓库名称</p>
-<p>git remote show origin # 查看远程服务器仓库状态</p>
-<p>git remote add origin git@ github:robbin/robbin_site.git # 添加远程仓库地址</p>
-<p>git remote set-url origin git@ github.com:robbin/robbin_site.git # 设置远程仓库地址(用于修改远程仓库地址) git remote rm <repository> # 删除远程仓库</repository></p>
-<h1 id="创建远程仓库"><a href="#创建远程仓库" class="headerlink" title="创建远程仓库"></a>创建远程仓库</h1><p>git clone –bare robbin_site robbin_site.git # 用带版本的项目创建纯版本仓库</p>
-<p>scp -r my_project.git git@ git.csdn.net:~ # 将纯仓库上传到服务器上</p>
-<p>mkdir robbin_site.git &amp;&amp; cd robbin_site.git &amp;&amp; git –bare init # 在服务器创建纯仓库</p>
-<p>git remote add origin git@ github.com:robbin/robbin_site.git # 设置远程仓库地址</p>
-<p>git push -u origin master # 客户端首次提交</p>
-<p>git push -u origin develop # 首次将本地develop分支提交到远程develop分支，并且track</p>
-<p>git remote set-head origin master # 设置远程仓库的HEAD指向master分支</p>
-<h1 id="也可以命令设置跟踪远程库和本地库"><a href="#也可以命令设置跟踪远程库和本地库" class="headerlink" title="也可以命令设置跟踪远程库和本地库"></a>也可以命令设置跟踪远程库和本地库</h1><p>git branch –set-upstream master origin/master</p>
-<p>git branch –set-upstream develop origin/develop</p>
-
-        
-        </div>
-        <footer class="article-footer">
-            <div class="share-container">
-
-
-
-</div>
-
-    <a data-url="/2016/08/15/git远程操作/" data-id="cj6vxops000002kwqbk2ek68u" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
-<script>
-    (function ($) {
-        // Prevent duplicate binding
-        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
-            __SHARE_BUTTON_BINDED__ = true;
-        } else {
-            return;
-        }
-        $('body').on('click', function() {
-            $('.article-share-box.on').removeClass('on');
-        }).on('click', '.article-share-link', function(e) {
-            e.stopPropagation();
-
-            var $this = $(this),
-                url = $this.attr('data-url'),
-                encodedUrl = encodeURIComponent(url),
-                id = 'article-share-box-' + $this.attr('data-id'),
-                offset = $this.offset(),
-                box;
-
-            if ($('#' + id).length) {
-                box = $('#' + id);
-
-                if (box.hasClass('on')){
-                    box.removeClass('on');
-                    return;
-                }
-            } else {
-                var html = [
-                    '<div id="' + id + '" class="article-share-box">',
-                        '<input class="article-share-input" value="' + url + '">',
-                        '<div class="article-share-links">',
-                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
-                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
-                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
-                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
-                        '</div>',
-                    '</div>'
-                ].join('');
-
-              box = $(html);
-
-              $('body').append(box);
-            }
-
-            $('.article-share-box.on').hide();
-
-            box.css({
-                top: offset.top + 25,
-                left: offset.left
-            }).addClass('on');
-
-        }).on('click', '.article-share-box', function (e) {
-            e.stopPropagation();
-        }).on('click', '.article-share-box-input', function () {
-            $(this).select();
-        }).on('click', '.article-share-box-link', function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-
-            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
-        });
-    })(jQuery);
-</script>
-
-            
-    
-        <a href="/2016/08/15/git远程操作/#comments" class="article-comment-link">评论</a>
-    
-
-        </footer>
-    </div>
-    
-</article>
-
-
-
     <nav id="page-nav">
-        <a class="extend prev" rel="prev" href="/page/2/">&laquo; 上一页</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span>
+        <a class="extend prev" rel="prev" href="/page/2/">&laquo; 上一页</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/4/">下一页 &raquo;</a>
     </nav>
 </section>
             
@@ -1181,29 +1969,29 @@ f 函数执行完毕，f 函数上下文从执行上下文栈中弹出
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/2017/02/20/link和import/" class="thumbnail">
+                            <a href="/2017/08/29/js原型链和继承/" class="thumbnail">
     
     
-        <span style="background-image:url(http://www.gratisography.com/pictures/88_1.jpg)" alt="link和import" class="thumbnail-image"></span>
+        <span class="thumbnail-image thumbnail-none"></span>
     
 </a>
 
                         </div>
                         
                         <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/前端/">前端</a></p>
-                            <p class="item-title"><a href="/2017/02/20/link和import/" class="title">link和import</a></p>
-                            <p class="item-date"><time datetime="2017-02-19T16:00:00.000Z" itemprop="datePublished">2017-02-20</time></p>
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2017/08/29/js原型链和继承/" class="title"></a></p>
+                            <p class="item-date"><time datetime="2017-08-29T04:13:21.509Z" itemprop="datePublished">2017-08-29</time></p>
                         </div>
                     </li>
                 
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/2017/02/15/元素竖向的百分比设定/" class="thumbnail">
+                            <a href="/2017/05/01/js跨域/" class="thumbnail">
     
     
-        <span style="background-image:url(http://www.gratisography.com/pictures/188_1.jpg)" alt="元素竖向的百分比设定" class="thumbnail-image"></span>
+        <span style="background-image:url(http://www.gratisography.com/pictures/77_1.jpg)" alt="跨域请求" class="thumbnail-image"></span>
     
 </a>
 
@@ -1211,18 +1999,18 @@ f 函数执行完毕，f 函数上下文从执行上下文栈中弹出
                         
                         <div class="item-inner">
                             <p class="item-category"><a class="article-category-link" href="/categories/前端/">前端</a></p>
-                            <p class="item-title"><a href="/2017/02/15/元素竖向的百分比设定/" class="title">元素竖向的百分比设定</a></p>
-                            <p class="item-date"><time datetime="2017-02-14T16:00:00.000Z" itemprop="datePublished">2017-02-15</time></p>
+                            <p class="item-title"><a href="/2017/05/01/js跨域/" class="title">跨域请求</a></p>
+                            <p class="item-date"><time datetime="2017-04-30T16:00:00.000Z" itemprop="datePublished">2017-05-01</time></p>
                         </div>
                     </li>
                 
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/2017/02/06/css兼容/" class="thumbnail">
+                            <a href="/2017/04/21/vw、vh兼容/" class="thumbnail">
     
     
-        <span style="background-image:url(http://www.gratisography.com/pictures/288_1.jpg)" alt="CSS兼容" class="thumbnail-image"></span>
+        <span style="background-image:url(http://www.gratisography.com/pictures/341_1.jpg)" alt="vw、vh兼容" class="thumbnail-image"></span>
     
 </a>
 
@@ -1230,18 +2018,18 @@ f 函数执行完毕，f 函数上下文从执行上下文栈中弹出
                         
                         <div class="item-inner">
                             <p class="item-category"><a class="article-category-link" href="/categories/前端/">前端</a></p>
-                            <p class="item-title"><a href="/2017/02/06/css兼容/" class="title">CSS兼容</a></p>
-                            <p class="item-date"><time datetime="2017-02-05T16:00:00.000Z" itemprop="datePublished">2017-02-06</time></p>
+                            <p class="item-title"><a href="/2017/04/21/vw、vh兼容/" class="title">vw、vh兼容</a></p>
+                            <p class="item-date"><time datetime="2017-04-20T16:00:00.000Z" itemprop="datePublished">2017-04-21</time></p>
                         </div>
                     </li>
                 
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/2017/02/05/去除inline-block元素间间距的N种方法/" class="thumbnail">
+                            <a href="/2017/04/06/meta标签和作用/" class="thumbnail">
     
     
-        <span style="background-image:url(http://www.gratisography.com/pictures/404_1.jpg)" alt="去除inline-block元素间间距的N种方法(转)" class="thumbnail-image"></span>
+        <span style="background-image:url(http://www.gratisography.com/pictures/351_1.jpg)" alt="meta标签和作用（转）" class="thumbnail-image"></span>
     
 </a>
 
@@ -1249,18 +2037,18 @@ f 函数执行完毕，f 函数上下文从执行上下文栈中弹出
                         
                         <div class="item-inner">
                             <p class="item-category"><a class="article-category-link" href="/categories/前端/">前端</a></p>
-                            <p class="item-title"><a href="/2017/02/05/去除inline-block元素间间距的N种方法/" class="title">去除inline-block元素间间距的N种方法(转)</a></p>
-                            <p class="item-date"><time datetime="2017-02-04T16:00:00.000Z" itemprop="datePublished">2017-02-05</time></p>
+                            <p class="item-title"><a href="/2017/04/06/meta标签和作用/" class="title">meta标签和作用（转）</a></p>
+                            <p class="item-date"><time datetime="2017-04-05T16:00:00.000Z" itemprop="datePublished">2017-04-06</time></p>
                         </div>
                     </li>
                 
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/2017/02/05/DIV+CSS 与不同 IE 版本等的兼容性/" class="thumbnail">
+                            <a href="/2017/04/05/viewport的深入理解/" class="thumbnail">
     
     
-        <span style="background-image:url(http://www.gratisography.com/pictures/413_1.jpg)" alt="DIV+CSS 与不同 IE 版本等的兼容性" class="thumbnail-image"></span>
+        <span style="background-image:url(http://www.gratisography.com/pictures/706_1.jpg)" alt="viewport的深入理解" class="thumbnail-image"></span>
     
 </a>
 
@@ -1268,8 +2056,8 @@ f 函数执行完毕，f 函数上下文从执行上下文栈中弹出
                         
                         <div class="item-inner">
                             <p class="item-category"><a class="article-category-link" href="/categories/前端/">前端</a></p>
-                            <p class="item-title"><a href="/2017/02/05/DIV+CSS 与不同 IE 版本等的兼容性/" class="title">DIV+CSS 与不同 IE 版本等的兼容性</a></p>
-                            <p class="item-date"><time datetime="2017-02-04T16:00:00.000Z" itemprop="datePublished">2017-02-05</time></p>
+                            <p class="item-title"><a href="/2017/04/05/viewport的深入理解/" class="title">viewport的深入理解</a></p>
+                            <p class="item-date"><time datetime="2017-04-04T16:00:00.000Z" itemprop="datePublished">2017-04-05</time></p>
                         </div>
                     </li>
                 
@@ -1282,7 +2070,7 @@ f 函数执行完毕，f 函数上下文从执行上下文栈中弹出
     <div class="widget-wrap">
         <h3 class="widget-title">分类</h3>
         <div class="widget">
-            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Http/">Http</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Node/">Node</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Node/爬虫/">爬虫</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/js/">js</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端/">前端</a><span class="category-list-count">17</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据库/">数据库</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/服务器/">服务器</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/版本管理/">版本管理</a><span class="category-list-count">1</span></li></ul>
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Http/">Http</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Node/">Node</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Node/爬虫/">爬虫</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/js/">js</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端/">前端</a><span class="category-list-count">24</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据库/">数据库</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/服务器/">服务器</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/版本管理/">版本管理</a><span class="category-list-count">1</span></li></ul>
         </div>
     </div>
 
@@ -1291,7 +2079,7 @@ f 函数执行完毕，f 函数上下文从执行上下文栈中弹出
     <div class="widget-wrap">
         <h3 class="widget-title">归档</h3>
         <div class="widget">
-            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">十二月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a><span class="archive-list-count">3</span></li></ul>
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">八月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">四月 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">十二月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a><span class="archive-list-count">3</span></li></ul>
         </div>
     </div>
 
@@ -1300,7 +2088,7 @@ f 函数执行完毕，f 函数上下文从执行上下文栈中弹出
     <div class="widget-wrap">
         <h3 class="widget-title">标签</h3>
         <div class="widget">
-            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue/">Vue</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cheerio/">cheerio</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html/">html</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http请求/">http请求</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/">js</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lazyload/">lazyload</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongodb/">mongodb</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/中间件/">中间件</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/代理/">代理</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/存储/">存储</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/懒加载/">懒加载</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/爬虫/">爬虫</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/跨域/">跨域</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/页面请求/">页面请求</a><span class="tag-list-count">1</span></li></ul>
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue/">Vue</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cheerio/">cheerio</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html/">html</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http请求/">http请求</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/">js</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lazyload/">lazyload</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/meta/">meta</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongodb/">mongodb</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/中间件/">中间件</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/代理/">代理</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/存储/">存储</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/懒加载/">懒加载</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/爬虫/">爬虫</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/跨域/">跨域</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/页面请求/">页面请求</a><span class="tag-list-count">1</span></li></ul>
         </div>
     </div>
 
@@ -1309,7 +2097,7 @@ f 函数执行完毕，f 函数上下文从执行上下文栈中弹出
     <div class="widget-wrap">
         <h3 class="widget-title">标签云</h3>
         <div class="widget tagcloud">
-            <a href="/tags/Vue/" style="font-size: 13.33px;">Vue</a> <a href="/tags/cheerio/" style="font-size: 10px;">cheerio</a> <a href="/tags/css/" style="font-size: 16.67px;">css</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/html/" style="font-size: 13.33px;">html</a> <a href="/tags/http请求/" style="font-size: 10px;">http请求</a> <a href="/tags/js/" style="font-size: 20px;">js</a> <a href="/tags/lazyload/" style="font-size: 10px;">lazyload</a> <a href="/tags/mongodb/" style="font-size: 10px;">mongodb</a> <a href="/tags/中间件/" style="font-size: 10px;">中间件</a> <a href="/tags/代理/" style="font-size: 10px;">代理</a> <a href="/tags/存储/" style="font-size: 10px;">存储</a> <a href="/tags/懒加载/" style="font-size: 10px;">懒加载</a> <a href="/tags/爬虫/" style="font-size: 10px;">爬虫</a> <a href="/tags/跨域/" style="font-size: 10px;">跨域</a> <a href="/tags/页面请求/" style="font-size: 10px;">页面请求</a>
+            <a href="/tags/Vue/" style="font-size: 12.5px;">Vue</a> <a href="/tags/cheerio/" style="font-size: 10px;">cheerio</a> <a href="/tags/css/" style="font-size: 17.5px;">css</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/html/" style="font-size: 15px;">html</a> <a href="/tags/http请求/" style="font-size: 10px;">http请求</a> <a href="/tags/js/" style="font-size: 20px;">js</a> <a href="/tags/lazyload/" style="font-size: 10px;">lazyload</a> <a href="/tags/meta/" style="font-size: 12.5px;">meta</a> <a href="/tags/mongodb/" style="font-size: 10px;">mongodb</a> <a href="/tags/中间件/" style="font-size: 10px;">中间件</a> <a href="/tags/代理/" style="font-size: 10px;">代理</a> <a href="/tags/存储/" style="font-size: 10px;">存储</a> <a href="/tags/懒加载/" style="font-size: 10px;">懒加载</a> <a href="/tags/爬虫/" style="font-size: 10px;">爬虫</a> <a href="/tags/跨域/" style="font-size: 10px;">跨域</a> <a href="/tags/页面请求/" style="font-size: 10px;">页面请求</a>
         </div>
     </div>
 
