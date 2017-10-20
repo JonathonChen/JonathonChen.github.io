@@ -154,7 +154,7 @@
         </div>
         <div class="article-info profile-block">
             <div class="article-info-block">
-                33
+                35
                 <span>文章</span>
             </div>
             <div class="article-info-block">
@@ -207,6 +207,383 @@
 
             
             <section id="main">
+    <article id="post-js作用域和作用域链" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            
+	
+		<a href="/2017/01/13/js作用域和作用域链/" itemprop="url">
+            <img src="http://www.gratisography.com/pictures/299_1.jpg" class="article-banner" />
+        </a>
+	
+
+
+
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/2017/01/13/js作用域和作用域链/">js作用域和作用域链</a>
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2017/01/13/js作用域和作用域链/">
+            <time datetime="2017-01-12T16:00:00.000Z" itemprop="datePublished">2017-01-13</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/前端/">前端</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/js/">js</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <h1 id="一、先抛出一个笔试题目"><a href="#一、先抛出一个笔试题目" class="headerlink" title="一、先抛出一个笔试题目"></a>一、先抛出一个笔试题目</h1><figure class="highlight delphi"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> a = <span class="number">100</span>;</div><div class="line"> <span class="function"><span class="keyword">function</span> <span class="title">fn</span><span class="params">()</span> <span class="comment">&#123;</span></span></div><div class="line"><span class="function"><span class="comment">     alert(a);//undefined</span></span></div><div class="line"><span class="function"><span class="comment">     var a = 200;</span></span></div><div class="line"><span class="function"><span class="comment">     alert(a);//200</span></span></div><div class="line"><span class="function"><span class="comment"> &#125;</span></span></div><div class="line"><span class="function"> <span class="title">fn</span><span class="params">()</span>;</span></div><div class="line"> alert(a);<span class="comment">//100</span></div><div class="line"> <span class="keyword">var</span> a;</div><div class="line"> alert(a);<span class="comment">//100</span></div><div class="line"> <span class="keyword">var</span> a = <span class="number">300</span>;</div><div class="line"> alert(a);<span class="comment">//300</span></div></pre></td></tr></table></figure>
+<h2 id="知识点1-变量的提升"><a href="#知识点1-变量的提升" class="headerlink" title="知识点1 变量的提升"></a>知识点1 变量的提升</h2><blockquote>
+<p>上面的代码实际的执行顺序如下<br><figure class="highlight abnf"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">var a<span class="comment">;//全局作用域范围内，此时只是声明，并没有赋值</span></div><div class="line"><span class="attribute">a</span> = <span class="number">100</span><span class="comment">;</span></div><div class="line">function fn()&#123;</div><div class="line">    var a<span class="comment">;</span></div><div class="line">    alert(a)<span class="comment">;//undefined</span></div><div class="line">    a = <span class="number">200</span><span class="comment">;</span></div><div class="line">    alert(a)<span class="comment">;//200</span></div><div class="line">&#125;</div><div class="line">fn()<span class="comment">;</span></div><div class="line">alert(a)<span class="comment">;//100</span></div><div class="line">alert(a)<span class="comment">;//100</span></div><div class="line"><span class="attribute">a</span> = <span class="number">300</span><span class="comment">;</span></div><div class="line">alert(a)<span class="comment">;//300</span></div></pre></td></tr></table></figure></p>
+</blockquote>
+<h2 id="知识点2-函数的提升"><a href="#知识点2-函数的提升" class="headerlink" title="知识点2 函数的提升"></a>知识点2 函数的提升</h2><blockquote>
+<p>　　js中创建函数有两种方式：函数声明式和函数字面量式。只有函数声明才存在函数提升！如:<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">console</span>.log(f1); <span class="comment">// function f1() &#123;&#125;   </span></div><div class="line"><span class="built_in">console</span>.log(f2); <span class="comment">// undefined  </span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">f1</span>(<span class="params"></span>) </span>&#123;&#125;</div><div class="line"><span class="keyword">var</span> f2 = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;&#125;</div></pre></td></tr></table></figure></p>
+</blockquote>
+<p>只所以会有以上的打印结果，是由于js中的函数提升导致代码实际上是按照以下来执行的：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">f1</span>(<span class="params"></span>) </span>&#123;&#125; <span class="comment">// 函数提升，整个代码块提升到文件的最开始</span></div><div class="line"><span class="built_in">console</span>.log(f1);   </div><div class="line"><span class="built_in">console</span>.log(f2);   </div><div class="line"><span class="keyword">var</span> f2 = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;&#125;</div></pre></td></tr></table></figure></p>
+<p>结语：基本上就是这样，要熟练掌握的话可以多做些练习，test:<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">console</span>.log(f1); </div><div class="line"><span class="built_in">console</span>.log(f2);   </div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">f1</span>(<span class="params"></span>) </span>&#123;<span class="built_in">console</span>.log(<span class="string">'aa'</span>)&#125;</div><div class="line"><span class="keyword">var</span> f2 = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;&#125;</div></pre></td></tr></table></figure></p>
+<figure class="highlight scheme"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">(<span class="name">function</span>() &#123;</div><div class="line">　　console.log(<span class="name">a</span>)<span class="comment">;//undefined</span></div><div class="line">　　a = <span class="symbol">'aaa</span>'<span class="comment">;</span></div><div class="line">　　var a = <span class="symbol">'bbb</span>'<span class="comment">;</span></div><div class="line">　　console.log(<span class="name">a</span>)<span class="comment">;//bbb</span></div><div class="line">&#125;)()<span class="comment">;</span></div></pre></td></tr></table></figure>
+
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="/2017/01/13/js作用域和作用域链/" data-id="cj8zdqotu000rxgwq7ntvjojy" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+        <a href="/2017/01/13/js作用域和作用域链/#comments" class="article-comment-link">评论</a>
+    
+
+        </footer>
+    </div>
+    
+</article>
+
+
+
+    <article id="post-js你所不知道的预编译" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            
+	
+		<a href="/2016/12/29/js你所不知道的预编译/" itemprop="url">
+            <img src="http://st2.originoo.cn/2332949/5930/i/950/depositphotos_59309355-stock-photo-laptop-on-wooden-table-blue.jpg" class="article-banner" />
+        </a>
+	
+
+
+
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/2016/12/29/js你所不知道的预编译/">js你说不知道的编译</a>
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2016/12/29/js你所不知道的预编译/">
+            <time datetime="2016-12-28T16:00:00.000Z" itemprop="datePublished">2016-12-29</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/前端/">前端</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/js/">js</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <h1 id="JavaScript三部曲"><a href="#JavaScript三部曲" class="headerlink" title="JavaScript三部曲"></a>JavaScript三部曲</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><ol>
+<li>在JavaScript中变量和函数的声明会提升到最顶部执行。</li>
+<li>函数的提升高于变量的提升。</li>
+<li>函数内部如果用var声明了相同名称的外部变量，函数将不再向上寻找。</li>
+<li>匿名函数不会提升。</li>
+<li>不同script脚本块中的函数互不影响。<h2 id="脚本执行引擎都做了什么"><a href="#脚本执行引擎都做了什么" class="headerlink" title="脚本执行引擎都做了什么"></a>脚本执行引擎都做了什么</h2><blockquote>
+</blockquote>
+</li>
+<li>语法分析</li>
+<li>预编译</li>
+<li>解释执行</li>
+</ol>
+<p>通俗讲就是</p>
+<blockquote>
+<p>在执行代码前，还有两个步骤</p>
+<ol>
+<li>语法分析很简单，就是引擎检查你的代码有没有什么低级的语法错误</li>
+<li>解释执行顾名思义便是执行代码了</li>
+</ol>
+</blockquote>
+<p>预编译简单理解就是在<strong>内存</strong>中开辟一些空间，存放一些<strong>变量</strong>与<strong>函数</strong><br>理解了预编译对大家理解作用域同样有帮助</p>
+<h2 id="JS预编译什么时候发生"><a href="#JS预编译什么时候发生" class="headerlink" title="JS预编译什么时候发生"></a>JS预编译什么时候发生</h2><blockquote>
+<ul>
+<li>我当初思维误区也发生在这里<ul>
+<li>预编译到底什么时候发生</li>
+<li>希望大家不要让上面的运行过程让你产生误会，</li>
+<li>误以为预编译仅仅发生在script内代码块执行前</li>
+<li>这倒并没有错</li>
+<li>预编译确确实实在script代码内执行前发生了</li>
+<li>但是它大部分会发生在函数执行前<h2 id="JS预编译实例"><a href="#JS预编译实例" class="headerlink" title="JS预编译实例"></a>JS预编译实例</h2>几个概念</li>
+</ul>
+</li>
+</ul>
+<ol>
+<li>变量声明 关键词<strong>var</strong></li>
+<li>函数声明 关键词<strong>function</strong><br>注意函数声明和函数表达是的区别<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"> &lt;script&gt;</div><div class="line">  <span class="keyword">var</span> a = <span class="number">1</span>;<span class="comment">// 变量声明</span></div><div class="line">  <span class="function"><span class="keyword">function</span> <span class="title">b</span>(<span class="params">y</span>)</span>&#123;<span class="comment">//函数声明</span></div><div class="line">      <span class="keyword">var</span> x = <span class="number">1</span>;</div><div class="line">      <span class="built_in">console</span>.log(<span class="string">'so easy'</span>);</div><div class="line">  &#125;;</div><div class="line">  <span class="keyword">var</span> c = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;<span class="comment">//是变量声明而不是函数声明！！</span></div><div class="line">      <span class="comment">//...</span></div><div class="line">  &#125;</div><div class="line">  b(<span class="number">100</span>);</div><div class="line">&lt;<span class="regexp">/script&gt;</span></div><div class="line"><span class="regexp">&lt;script&gt;</span></div><div class="line"><span class="regexp">  var d = 0;</span></div><div class="line"><span class="regexp">&lt;/</span>script&gt;</div></pre></td></tr></table></figure>
+</li>
+</ol>
+</blockquote>
+<p>让我们看看引擎对这段代码做了什么吧</p>
+<ul>
+<li>页面产生便创建了GO全局对象（Global Object）（也就是大家熟悉的window对象）</li>
+<li>第一个脚本文件加载</li>
+<li>脚本加载完毕后，分析语法是否合法</li>
+<li>开始预编译 <blockquote>
+<ul>
+<li>查找变量声明，作为GO属性，值赋予undefined</li>
+<li>查找函数声明，作为GO属性，值赋予函数体<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">  <span class="comment">//伪代码</span></div><div class="line">GO/<span class="built_in">window</span> = &#123;</div><div class="line">    <span class="comment">//页面加载创建GO同时，创建了document、navigator、screen等等属性，此处省略</span></div><div class="line">    a: <span class="literal">undefined</span>,</div><div class="line">    c: <span class="literal">undefined</span>，</div><div class="line">    b: <span class="function"><span class="keyword">function</span>(<span class="params">y</span>)</span>&#123;</div><div class="line">        <span class="keyword">var</span> x = <span class="number">1</span>;</div><div class="line">        <span class="built_in">console</span>.log(<span class="string">'so easy'</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+</blockquote>
+</li>
+</ul>
+<p>解释执行代码（直到执行函数b）<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//伪代码</span></div><div class="line">GO/<span class="built_in">window</span> = &#123;</div><div class="line">    <span class="comment">//变量随着执行流得到初始化</span></div><div class="line">    a: <span class="number">1</span>,</div><div class="line">    c: <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">        <span class="comment">//...</span></div><div class="line">    &#125;,</div><div class="line">    b: <span class="function"><span class="keyword">function</span>(<span class="params">y</span>)</span>&#123;</div><div class="line">        <span class="keyword">var</span> x = <span class="number">1</span>;</div><div class="line">        <span class="built_in">console</span>.log(<span class="string">'so easy'</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>执行函数b之前，发生预编译</p>
+<blockquote>
+<ul>
+<li>创建AO活动对象（Active Object）</li>
+<li>查找形参和变量声明，值赋予undefined</li>
+<li>实参值赋给形参</li>
+<li>查找函数声明，值赋予函数体<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//伪代码</span></div><div class="line">AO = &#123;</div><div class="line">  <span class="comment">//创建AO同时，创建了arguments等等属性，此处省略</span></div><div class="line">  y: <span class="number">100</span>,</div><div class="line">  x: <span class="literal">undefined</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<ul>
+<li>解释执行函数中代码</li>
+<li>第一个脚本文件执行完毕，加载第二个脚本文件<br><strong>注意每个script是独立的,不会预编译下一个scipt</strong></li>
+<li>第二个脚本文件加载完毕后，进行语法分析</li>
+<li>语法分析完毕，开始预编译</li>
+<li>重复最开始的预编译步骤……</li>
+</ul>
+</blockquote>
+<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>预编译阶段发生变量声明和函数声明，没有初始化行为（赋值），匿名函数不<br>参与预编译<br><br>只有在解释执行阶段才会进行变量初始化</p>
+<p>预编译(函数执行前)※</p>
+<ol>
+<li>创建AO对象（Active Object）</li>
+<li>查找函数形参及函数内变量声明，形参名及变量名作为AO对象的属性，值为undefined</li>
+<li>实参形参相统一，实参值赋给形参</li>
+<li>查找函数声明，函数名作为AO对象的属性，值为函数引用</li>
+</ol>
+<p>预编译(脚本代码块script执行前)</p>
+<ol>
+<li>查找全局变量声明（包括隐式全局变量声明，省略var声明），变量名作全局对象的属性，值为undefined</li>
+<li>查找函数声明，函数名作为全局对象的属性，值为函数引用</li>
+</ol>
+<p>理解了预编译对理解提升行为，this指向，作用域及性能等问题都有很大帮助</p>
+
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="/2016/12/29/js你所不知道的预编译/" data-id="cj8zdqotw000txgwq7be5nc9b" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+        <a href="/2016/12/29/js你所不知道的预编译/#comments" class="article-comment-link">评论</a>
+    
+
+        </footer>
+    </div>
+    
+</article>
+
+
+
     <article id="post-Node.js的学习--使用cheerio抓取网页数据" class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
@@ -280,7 +657,7 @@
 
 </div>
 
-    <a data-url="/2016/12/18/Node.js的学习--使用cheerio抓取网页数据/" data-id="cj6x3evsx0006eowqjacjf0g7" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="/2016/12/18/Node.js的学习--使用cheerio抓取网页数据/" data-id="cj8zdqoty000wxgwq74e9pa92" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -524,7 +901,7 @@
 
 </div>
 
-    <a data-url="/2016/12/02/js深入理解JavaScript执行上下文、函数堆栈、提升的概念 /" data-id="cj6x3evuc0015eowqko23gfns" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="/2016/12/02/js深入理解JavaScript执行上下文、函数堆栈、提升的概念 /" data-id="cj8zdqova0022xgwqkwudhj30" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -670,7 +1047,7 @@
 
 </div>
 
-    <a data-url="/2016/11/28/mongose中间件/" data-id="cj6x3evuw001qeowqi39j4tby" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="/2016/11/28/mongose中间件/" data-id="cj8zdqov7001zxgwqvr2ulsgt" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -822,7 +1199,7 @@
 
 </div>
 
-    <a data-url="/2016/11/15/vue.生命周期/" data-id="cj6x3evvf0029eowqe8u40rh2" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="/2016/11/15/vue.生命周期/" data-id="cj8zdqovc0026xgwqczrfb7aq" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -977,7 +1354,7 @@
 
 </div>
 
-    <a data-url="/2016/11/02/vue loading组件/" data-id="cj6x3evv80022eowq2srkmtxa" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="/2016/11/02/vue loading组件/" data-id="cj8zdqov1001vxgwq59ihfy8z" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -1122,7 +1499,7 @@
 
 </div>
 
-    <a data-url="/2016/10/25/v-model/" data-id="cj6x3evv0001ueowqseuvjund" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="/2016/10/25/v-model/" data-id="cj8zdqovh002dxgwqd0t6slv6" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -1274,7 +1651,7 @@
 
 </div>
 
-    <a data-url="/2016/10/03/iis部署/" data-id="cj6x3evte000eeowq92y1m3gw" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="/2016/10/03/iis部署/" data-id="cj8zdqoup001jxgwq9xvdy20k" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -1492,7 +1869,7 @@
 
 </div>
 
-    <a data-url="/2016/09/21/深入理解HTTP协议（转）/" data-id="cj6x3evvx002qeowqxtnb7ej4" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="/2016/09/21/深入理解HTTP协议（转）/" data-id="cj8zdqp10003ixgwq8ifqy93e" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -1570,388 +1947,6 @@
 
 
 
-    <article id="post-批处理HTTP模块SuperAgent" class="article article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
-        
-            
-	
-		<a href="/2016/09/10/批处理HTTP模块SuperAgent/" itemprop="url">
-            <img src="http://st2.originoo.cn/1729220/8289/i/950/depositphotos_82898848-stock-photo-woman-playing-with-pet.jpg" class="article-banner" />
-        </a>
-	
-
-
-
-        
-        
-            <header class="article-header">
-                
-    
-        <h1 itemprop="name">
-            <a class="article-title" href="/2016/09/10/批处理HTTP模块SuperAgent/">SUPERAGENT</a>
-        </h1>
-    
-
-                
-                    <div class="article-meta">
-                        
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/2016/09/10/批处理HTTP模块SuperAgent/">
-            <time datetime="2016-09-09T16:00:00.000Z" itemprop="datePublished">2016-09-10</time>
-        </a>
-    </div>
-
-
-                        
-    <div class="article-category">
-    	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/categories/Node/">Node</a>
-    </div>
-
-                        
-    <div class="article-tag">
-        <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/http请求/">http请求</a>, <a class="tag-link" href="/tags/中间件/">中间件</a>
-    </div>
-
-                    </div>
-                
-            </header>
-        
-        
-        <div class="article-entry" itemprop="articleBody">
-        
-            
-            <p>最近在写爬虫，看了下node里面有啥关于ajax的模块,发现superagent这个模块灰常的好用。好东西要和大家分享，话不多说，开始吧～</p>
-<h2 id="什么是SuperAgent"><a href="#什么是SuperAgent" class="headerlink" title="什么是SuperAgent"></a>什么是SuperAgent</h2><p>superagent它是一个强大并且可读性很好的轻量级ajaxAPI，是一个关于HTTP方面的一个库，而且它可以将链式写法玩的出神入化。<br><figure class="highlight lua"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">var superagent = <span class="built_in">require</span>(<span class="string">'superagent'</span>); superagent .post(<span class="string">'/api'</span>) .send(&#123; <span class="string">'key'</span>: <span class="string">'value'</span> &#125;) .set(<span class="string">'header_key'</span>, <span class="string">'header_value'</span>) .<span class="keyword">end</span>(<span class="function"><span class="keyword">function</span><span class="params">(err, res)</span></span> &#123; <span class="keyword">if</span> (err) &#123; //<span class="keyword">do</span> something &#125; <span class="keyword">else</span> &#123; //<span class="keyword">do</span> something &#125; &#125;)</div></pre></td></tr></table></figure></p>
-<p>接下来，让我们逐一的对SuperAgent的一些特性进行分析吧～🚀</p>
-<pre><code>设置请求头
-
-这一点在写爬虫的时候十分的有用,因为有些网站可能设置了一些限制条件,比如它会去匹配你的请求头里面的一些字段, 像User-Agent Referer等,如果你没有设置这些请求头的话，可能就抓取不到数据咯～
-
-SuperAgent里面设置请求头很简单,通过使用set()方法就可以设置了，有两种方式
-
-    单个单个的设置
-</code></pre><figure class="highlight haxe"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">superagent</div><div class="line">    .<span class="keyword">get</span>(<span class="string">'/api'</span>)</div><div class="line">    .<span class="keyword">set</span>(<span class="string">'Referer'</span>,<span class="string">'https://www.google.com'</span>)</div><div class="line">    .<span class="keyword">set</span>(<span class="string">'Accept'</span>,<span class="string">'image/webp,image/*,*/*;q=0.8'</span>)</div><div class="line">    .end(<span class="function"><span class="keyword">function</span></span>(req,res)&#123;</div><div class="line">        <span class="comment">//do something</span></div><div class="line">    &#125;)</div><div class="line"></div><div class="line">  放在一起设置</div><div class="line"></div><div class="line">  superagent</div><div class="line"></div><div class="line">      .<span class="keyword">get</span>(<span class="string">'/api'</span>)</div><div class="line">      .<span class="keyword">set</span>(&#123;</div><div class="line">          <span class="string">'Referer'</span>,<span class="string">'https://www.google.com'</span>,</div><div class="line">          <span class="string">'Accept'</span>,<span class="string">'image/webp,image/*,*/*;q=0.8'</span></div><div class="line">      &#125;)</div><div class="line">       .end(<span class="function"><span class="keyword">function</span></span>(req,res)&#123;</div><div class="line">          <span class="comment">//do something</span></div><div class="line">      &#125;)</div></pre></td></tr></table></figure>
-<pre><code>GET请求方式
-
-我相信大家都一定见过这样类型的URL:http://localhost:8080/api和http://localhost:8080/api?id=1&amp;price=10,就是GET方式可以带上参数,也可以不带上参数。不带参数的就不说了,相信大家都会,在superagent中我们可以通过query()方法给URL后面带上参数,有4种写法
-</code></pre><figure class="highlight less"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//接下来所形成的URL为/api?name=An&amp;age=20&amp;sex=male</span></div><div class="line"><span class="comment">//第一种</span></div><div class="line"><span class="selector-tag">superagent</span></div><div class="line">    <span class="selector-class">.get</span>(/api)</div><div class="line">    <span class="selector-class">.query</span>(&#123;<span class="attribute">name</span>:<span class="string">'An'</span>&#125;)</div><div class="line">    <span class="selector-class">.query</span>(&#123;<span class="attribute">age</span>:<span class="number">20</span>&#125;)</div><div class="line">    <span class="selector-class">.query</span>(&#123;<span class="attribute">sex</span>:<span class="string">'male'</span>&#125;)</div><div class="line">    <span class="selector-class">.end</span>(cb)</div><div class="line"><span class="comment">//第二种</span></div><div class="line"><span class="selector-tag">superagent</span></div><div class="line">    <span class="selector-class">.get</span>(/api)</div><div class="line">    <span class="selector-class">.query</span>(&#123;<span class="attribute">name</span>:<span class="string">'An'</span>,<span class="attribute">age</span>:<span class="number">20</span>,<span class="attribute">sex</span>:<span class="string">'male'</span>&#125;)</div><div class="line">    <span class="selector-class">.end</span>(cb)</div><div class="line"><span class="comment">//第三种 </span></div><div class="line"><span class="selector-tag">superagent</span></div><div class="line">    <span class="selector-class">.get</span>(/api)</div><div class="line">    <span class="selector-class">.query</span>(<span class="string">'name=An&amp;age=20&amp;sex=male'</span>)</div><div class="line">    <span class="selector-class">.end</span>(cb)</div><div class="line"><span class="comment">//第四种</span></div><div class="line">    <span class="selector-tag">superagent</span></div><div class="line">        <span class="selector-class">.get</span>(/api)</div><div class="line">        <span class="selector-class">.query</span>(<span class="string">'name=An'</span>)</div><div class="line">        <span class="selector-class">.query</span>(<span class="string">'age=20'</span>)</div><div class="line">        <span class="selector-class">.query</span>(<span class="string">'sex=male'</span>)</div><div class="line">        <span class="selector-class">.end</span>(cb)</div></pre></td></tr></table></figure>
-<pre><code>head请求
-
-head请求也可以通过query()的方式进行传递参数,大家可以参考👆的GET请求
-
-POST/PUT请求
-
-这两种请求，一般是要给服务端发送数据，现在文本数据的方式一般都以json的方式传递。我们可以在请求头里设置Accept=application/json，从而服务器可以根据请求头来生成json数据(在java开发后台时可以这样)
-
-在superagent里面，默认的数据传递格式是json，所以下面几种种方式是相同的。
-</code></pre><figure class="highlight less"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">superagent</span></div><div class="line">    <span class="selector-class">.post</span>(<span class="string">'/api'</span>)</div><div class="line">    <span class="selector-class">.set</span>(<span class="string">'Accept'</span>,<span class="string">'application/json'</span>)</div><div class="line">    <span class="selector-class">.send</span>(<span class="string">'&#123;"name":"An","age":20,"sex":"male"&#125;'</span>)</div><div class="line">    <span class="selector-class">.end</span>(cb)</div><div class="line"><span class="comment">//等价于 ==&gt;</span></div><div class="line"><span class="selector-tag">superagent</span></div><div class="line">    <span class="selector-class">.post</span>(<span class="string">'/api'</span>)</div><div class="line">    <span class="selector-class">.send</span>(&#123;<span class="attribute">name</span>:<span class="string">"An"</span>,<span class="attribute">age</span>:<span class="number">20</span>,<span class="attribute">sex</span>:<span class="string">"male"</span>&#125;)</div><div class="line">    <span class="selector-class">.end</span>(cb)</div><div class="line"><span class="comment">//等价于 ==&gt;</span></div><div class="line"><span class="selector-tag">superagent</span></div><div class="line">    <span class="selector-class">.post</span>(<span class="string">'/api'</span>)</div><div class="line">    <span class="selector-class">.send</span>(&#123;<span class="attribute">name</span>:<span class="string">"An"</span>&#125;)</div><div class="line">    <span class="selector-class">.send</span>(&#123;<span class="attribute">age</span>:<span class="number">20</span>&#125;)</div><div class="line">    <span class="selector-class">.sex</span>(&#123;<span class="attribute">sex</span>:<span class="string">'male'</span>&#125;)</div><div class="line">    <span class="selector-class">.end</span>(cb)</div></pre></td></tr></table></figure>
-<pre><code>当然，除了json的形式去传递，我们还有一种很常见的表单提交，在superagent里，也实现了模拟表单的提交数据类型application/x-www-form-urlencoded， 我们可以通过type(&apos;form&apos;)方法进行转换
-</code></pre><figure class="highlight less"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">superagent</span></div><div class="line">    <span class="selector-class">.post</span>(<span class="string">'/api'</span>)</div><div class="line">    <span class="selector-class">.type</span>(<span class="string">'form'</span>)</div><div class="line">    <span class="selector-class">.send</span>(&#123;<span class="attribute">name</span>:<span class="string">'An'</span>,<span class="attribute">age</span>:<span class="number">20</span>&#125;) <span class="comment">// name=An&amp;age=20</span></div><div class="line">    <span class="selector-class">.end</span>(cb)</div></pre></td></tr></table></figure>
-<pre><code>有时候，我们也会在POST请求时，将一些参数放在URL上面，那这个时候还是可以用query()方法
-
-设置Content-Type的两种快速方式
-    type()方法
-
-    accept()方法
-
-    这两种方法都可以接受规范的MIME格式,以及图片和xml等这些格式的数据。
-</code></pre><figure class="highlight less"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">superagent</span></div><div class="line"></div><div class="line">  <span class="selector-class">.post</span>(<span class="string">'/api'</span>)</div><div class="line">  <span class="selector-class">.type</span>(<span class="string">'application/json'</span>)</div><div class="line">  <span class="selector-class">.type</span>(<span class="string">'png'</span>)</div><div class="line"></div><div class="line"><span class="comment">// 等价于==&gt;</span></div><div class="line"><span class="selector-tag">superagent</span></div><div class="line"></div><div class="line">  <span class="selector-class">.post</span>(<span class="string">'/api'</span>)</div><div class="line">  <span class="selector-class">.accept</span>(<span class="string">'application/json'</span>)</div><div class="line">  <span class="selector-class">.accept</span>(<span class="string">'png'</span>)</div></pre></td></tr></table></figure>
-<pre><code>分析处理response body
-
-superagent可以帮你解析返回的数据,当前支持三种类型的数据application/x-www-form-urlencoded application/json 和multipart/form-data
-
-    JSON/Urlencoded
-    解析后的数据会以对象的形式存在,可以通过res.body来得到。
-
-      &apos;{&quot;name&quot;:&quot;An&quot;}&apos; //JSON String
-      //解析 ==&gt;
-      {
-          name:&quot;An&quot;    //JSON Object
-      }
-
-    Multipart
-    这种格式的数据的处理，superagent是通过Formidable模块，它是主要处理文件上传的模块，大家可以去了解下，也是Node里面十分常用的模块，也很简单易上手。上传的文件的信息可以在res.files去查看，当然，我觉得这个属性用的比较少，这只是个人观点了～
-
-Response的属性
-
-    res.text包含为被解析的响应数据
-
-    res.body上文提到了，包含解析的数据，但是目前只支持三种格式
-
-    res.header响应头,是一个Object
-
-    res.type &amp; res.charset 类型和编码格式
-
-    res.status状态码
-
-终止请求 req.abort() 暂停请求 req.timeout(ms) ms表示毫秒为单位的时间
-
-Basic Access Authentication
-
-首先先简单的介绍下Basic Access Authenication，它是在web应用中，通过直接提供用户名、密码来进行验证身份的一种优化的解决方案。
-
-原理是将用户名和密码通过:连接,形成username:password然后再进行base64加密，发送到服务器后再进行解密得到用户名和密码,进行进一步的匹配验证。参考文章:HTTP Basic Authentication认证。
-
-在superagent里，有两种方式进行验证
-</code></pre><figure class="highlight less"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">superagent</span></div><div class="line">    <span class="selector-class">.get</span>(<span class="string">'http://username:password@localhost'</span>)</div><div class="line">    <span class="selector-class">.end</span>(cb)</div><div class="line"><span class="comment">//等价于 ==&gt;</span></div><div class="line"><span class="selector-tag">superagent</span></div><div class="line">    <span class="selector-class">.get</span>(<span class="string">'http://localhost'</span>)</div><div class="line">    <span class="selector-class">.auth</span>(<span class="string">'username'</span>,<span class="string">'password'</span>)</div><div class="line">    <span class="selector-class">.end</span>(cb)</div></pre></td></tr></table></figure>
-<pre><code>可以通过pipe管道流入流出数据
-
-我想大家应该知道node里面有个核心特性就是stream，如果不知道的，可以参考:nodejs中流(stream)的理解,举两个栗子：
-</code></pre><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//第一个例子</span></div><div class="line"><span class="keyword">var</span> fs = <span class="built_in">require</span>(<span class="string">'fs'</span>);</div><div class="line"><span class="keyword">var</span> request = <span class="built_in">require</span>(<span class="string">'superagent'</span>);</div><div class="line"><span class="keyword">var</span> postJson = fs.createReadStream(<span class="string">'./postDataJson'</span>);</div><div class="line"><span class="keyword">var</span> req= request.post(<span class="string">'/api'</span>);</div><div class="line">req.accept(<span class="string">'json'</span>);</div><div class="line">stream.pipe(req);</div><div class="line"></div><div class="line"><span class="comment">//第二个例子</span></div><div class="line"><span class="keyword">var</span> fs = <span class="built_in">require</span>(<span class="string">'fs'</span>);</div><div class="line"><span class="keyword">var</span> request = <span class="built_in">require</span>(<span class="string">'superagent'</span>);</div><div class="line"><span class="keyword">var</span> getData = fs.createWriteStream(<span class="string">'./getData'</span>);</div><div class="line"><span class="keyword">var</span> res= request.get(<span class="string">'/api'</span>);</div><div class="line">res.pipe(getData);</div></pre></td></tr></table></figure>
-<pre><code>添加多个附件
-
-superagent也提供了一些高级的API，如果你想添加多个附件可以使用attach(name,[path],[filename]),其中你可以通过filename来自定义上传后文件的文件名
-</code></pre><figure class="highlight less"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">request</span></div><div class="line">    <span class="selector-class">.post</span>(<span class="string">'/upload'</span>)</div><div class="line">    <span class="selector-class">.attach</span>(<span class="string">'avator'</span>,<span class="string">'/path/a.png'</span>,<span class="string">'An.png'</span>)</div><div class="line">    <span class="selector-class">.attach</span>(<span class="string">'photo'</span>,<span class="string">'/path/b.png'</span>)</div><div class="line">    <span class="selector-class">.end</span>(cb)</div></pre></td></tr></table></figure>
-<pre><code>复合请求
-
-superagent也支持复合请求,比如你想上传一个带有你的姓名和邮箱的图片，那可以通过field(name,value)方法
-</code></pre><figure class="highlight less"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">request</span></div><div class="line">    <span class="selector-class">.post</span>(<span class="string">'/upload'</span>)</div><div class="line">    <span class="selector-class">.field</span>(<span class="string">'name'</span>,<span class="string">'An'</span>)</div><div class="line">    <span class="selector-class">.field</span>(<span class="string">'age'</span>:<span class="number">20</span>)</div><div class="line">    <span class="selector-class">.attach</span>(<span class="string">'avator'</span>,<span class="string">'/path/a.png'</span>,<span class="string">'An.png'</span>)</div><div class="line">    <span class="selector-class">.end</span>(cb)</div></pre></td></tr></table></figure>
-<pre><code>错误处理
-
-有时候我们可能会因为不同的原因得到4XX或者5XX的错误，这个时候我们确实是可以从end(function(err,res){...})里的err得到错误信息,比如er.status错误的状态码啥的，但是有些时候我们想去处理这些错误，重新发送一个别的请求啥的，那么这个时候我们可以通过on(&apos;error&apos;,handleFn)去处理了
-</code></pre><figure class="highlight less"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">request</span></div><div class="line">    <span class="selector-class">.post</span>(<span class="string">'/api'</span>)</div><div class="line">    <span class="selector-class">.send</span>(data)</div><div class="line">    <span class="selector-class">.on</span>(<span class="string">'error'</span>,handleFn)</div><div class="line">    <span class="selector-class">.end</span>(cb);</div></pre></td></tr></table></figure>
-
-        
-        </div>
-        <footer class="article-footer">
-            <div class="share-container">
-
-
-
-</div>
-
-    <a data-url="/2016/09/10/批处理HTTP模块SuperAgent/" data-id="cj6x3evvo002jeowqeaeyqucb" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
-<script>
-    (function ($) {
-        // Prevent duplicate binding
-        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
-            __SHARE_BUTTON_BINDED__ = true;
-        } else {
-            return;
-        }
-        $('body').on('click', function() {
-            $('.article-share-box.on').removeClass('on');
-        }).on('click', '.article-share-link', function(e) {
-            e.stopPropagation();
-
-            var $this = $(this),
-                url = $this.attr('data-url'),
-                encodedUrl = encodeURIComponent(url),
-                id = 'article-share-box-' + $this.attr('data-id'),
-                offset = $this.offset(),
-                box;
-
-            if ($('#' + id).length) {
-                box = $('#' + id);
-
-                if (box.hasClass('on')){
-                    box.removeClass('on');
-                    return;
-                }
-            } else {
-                var html = [
-                    '<div id="' + id + '" class="article-share-box">',
-                        '<input class="article-share-input" value="' + url + '">',
-                        '<div class="article-share-links">',
-                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
-                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
-                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
-                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
-                        '</div>',
-                    '</div>'
-                ].join('');
-
-              box = $(html);
-
-              $('body').append(box);
-            }
-
-            $('.article-share-box.on').hide();
-
-            box.css({
-                top: offset.top + 25,
-                left: offset.left
-            }).addClass('on');
-
-        }).on('click', '.article-share-box', function (e) {
-            e.stopPropagation();
-        }).on('click', '.article-share-box-input', function () {
-            $(this).select();
-        }).on('click', '.article-share-box-link', function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-
-            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
-        });
-    })(jQuery);
-</script>
-
-            
-    
-        <a href="/2016/09/10/批处理HTTP模块SuperAgent/#comments" class="article-comment-link">评论</a>
-    
-
-        </footer>
-    </div>
-    
-</article>
-
-
-
-    <article id="post-懒加载" class="article article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
-        
-            
-	
-		<a href="/2016/09/05/懒加载/" itemprop="url">
-            <img src="http://static5.originoo.cn/1038117/462/i/950/depositphotos_4621883-stock-photo-field-of-daisy-flowers.jpg" class="article-banner" />
-        </a>
-	
-
-
-
-        
-        
-            <header class="article-header">
-                
-    
-        <h1 itemprop="name">
-            <a class="article-title" href="/2016/09/05/懒加载/">懒加载原理</a>
-        </h1>
-    
-
-                
-                    <div class="article-meta">
-                        
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/2016/09/05/懒加载/">
-            <time datetime="2016-09-04T16:00:00.000Z" itemprop="datePublished">2016-09-05</time>
-        </a>
-    </div>
-
-
-                        
-    <div class="article-category">
-    	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/categories/前端/">前端</a>
-    </div>
-
-                        
-    <div class="article-tag">
-        <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/lazyload/">lazyload</a>, <a class="tag-link" href="/tags/懒加载/">懒加载</a>
-    </div>
-
-                    </div>
-                
-            </header>
-        
-        
-        <div class="article-entry" itemprop="articleBody">
-        
-            
-            <h1 id="懒加载的原理"><a href="#懒加载的原理" class="headerlink" title="懒加载的原理"></a>懒加载的原理</h1><blockquote>
-<p>原理：先将img标签中的src链接设为同一张图片（空白图片），将其真正的图片地址存储再img标签的自定义属性中（比如data-src）。当js监听到该图片元素进入可视窗口时，即将自定义属性中的地址存储到src属性中，达到懒加载的效果。<br>    这样做能防止页面一次性向服务器响应大量请求导致服务器响应慢，页面卡顿或崩溃等问题。</p>
-<p>代码实现</p>
-</blockquote>
-<pre><code>既然懒加载的原理是基于判断元素是否出现在窗口可视范围内，首先我们写一个函数判断元素是否出现在可视范围内：
-</code></pre><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">isVisible</span>(<span class="params">$node</span>)</span>&#123;</div><div class="line">    <span class="keyword">var</span> winH = $(<span class="built_in">window</span>).height(),</div><div class="line">        scrollTop = $(<span class="built_in">window</span>).scrollTop(),</div><div class="line">        offSetTop = $(<span class="built_in">window</span>).offSet().top;</div><div class="line">    <span class="keyword">if</span> (offSetTop &lt; winH + scrollTop) &#123;</div><div class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<pre><code>再添加上浏览器的事件监听函数，让浏览器每次滚动就检查元素是否出现在窗口可视范围内：
-</code></pre><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">$(<span class="built_in">window</span>).on(<span class="string">"scroll"</span>, <span class="function"><span class="keyword">function</span></span>&#123;</div><div class="line">    <span class="keyword">if</span> (isVisible($node))&#123;</div><div class="line">        <span class="built_in">console</span>.log(<span class="literal">true</span>);</div><div class="line">    &#125;</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
-<pre><code>我们已经很接近了，现在我们要做的是，让元素只在第一次被检查到时打印true，之后就不再打印了
-</code></pre><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> hasShowed = <span class="literal">false</span>;</div><div class="line">$(<span class="built_in">window</span>).on(<span class="string">"sroll"</span>,<span class="function"><span class="keyword">function</span></span>&#123;</div><div class="line">    <span class="keyword">if</span> (hasShowed) &#123;</div><div class="line">        <span class="keyword">return</span>;</div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line">        <span class="keyword">if</span> (isVisible($node)) &#123;</div><div class="line">            hasShowed = !hasShowed;</div><div class="line">            <span class="built_in">console</span>.log(<span class="literal">true</span>);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
-
-        
-        </div>
-        <footer class="article-footer">
-            <div class="share-container">
-
-
-
-</div>
-
-    <a data-url="/2016/09/05/懒加载/" data-id="cj6x3evvr002meowqkygda2gk" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
-<script>
-    (function ($) {
-        // Prevent duplicate binding
-        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
-            __SHARE_BUTTON_BINDED__ = true;
-        } else {
-            return;
-        }
-        $('body').on('click', function() {
-            $('.article-share-box.on').removeClass('on');
-        }).on('click', '.article-share-link', function(e) {
-            e.stopPropagation();
-
-            var $this = $(this),
-                url = $this.attr('data-url'),
-                encodedUrl = encodeURIComponent(url),
-                id = 'article-share-box-' + $this.attr('data-id'),
-                offset = $this.offset(),
-                box;
-
-            if ($('#' + id).length) {
-                box = $('#' + id);
-
-                if (box.hasClass('on')){
-                    box.removeClass('on');
-                    return;
-                }
-            } else {
-                var html = [
-                    '<div id="' + id + '" class="article-share-box">',
-                        '<input class="article-share-input" value="' + url + '">',
-                        '<div class="article-share-links">',
-                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
-                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
-                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
-                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
-                        '</div>',
-                    '</div>'
-                ].join('');
-
-              box = $(html);
-
-              $('body').append(box);
-            }
-
-            $('.article-share-box.on').hide();
-
-            box.css({
-                top: offset.top + 25,
-                left: offset.left
-            }).addClass('on');
-
-        }).on('click', '.article-share-box', function (e) {
-            e.stopPropagation();
-        }).on('click', '.article-share-box-input', function () {
-            $(this).select();
-        }).on('click', '.article-share-box-link', function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-
-            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
-        });
-    })(jQuery);
-</script>
-
-            
-    
-        <a href="/2016/09/05/懒加载/#comments" class="article-comment-link">评论</a>
-    
-
-        </footer>
-    </div>
-    
-</article>
-
-
-
     <nav id="page-nav">
         <a class="extend prev" rel="prev" href="/page/2/">&laquo; 上一页</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/4/">下一页 &raquo;</a>
     </nav>
@@ -1965,6 +1960,44 @@ superagent也支持复合请求,比如你想上传一个带有你的姓名和邮
         <h3 class="widget-title">最新文章</h3>
         <div class="widget">
             <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2017/10/19/1个div实现太极图/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://www.gratisography.com/pictures/555_1.jpg)" alt="1个div实现太极图" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/前端/">前端</a></p>
+                            <p class="item-title"><a href="/2017/10/19/1个div实现太极图/" class="title">1个div实现太极图</a></p>
+                            <p class="item-date"><time datetime="2017-10-18T16:00:00.000Z" itemprop="datePublished">2017-10-19</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2017/10/19/正常实现太极图/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://www.gratisography.com/pictures/444_1.jpg)" alt="正常实现太极图（使用三个div）" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/前端/">前端</a></p>
+                            <p class="item-title"><a href="/2017/10/19/正常实现太极图/" class="title">正常实现太极图（使用三个div）</a></p>
+                            <p class="item-date"><time datetime="2017-10-18T16:00:00.000Z" itemprop="datePublished">2017-10-19</time></p>
+                        </div>
+                    </li>
                 
                     <li>
                         
@@ -2023,44 +2056,6 @@ superagent也支持复合请求,比如你想上传一个带有你的姓名和邮
                         </div>
                     </li>
                 
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2017/04/06/meta标签和作用/" class="thumbnail">
-    
-    
-        <span style="background-image:url(http://www.gratisography.com/pictures/351_1.jpg)" alt="meta标签和作用（转）" class="thumbnail-image"></span>
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/前端/">前端</a></p>
-                            <p class="item-title"><a href="/2017/04/06/meta标签和作用/" class="title">meta标签和作用（转）</a></p>
-                            <p class="item-date"><time datetime="2017-04-05T16:00:00.000Z" itemprop="datePublished">2017-04-06</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2017/04/05/viewport的深入理解/" class="thumbnail">
-    
-    
-        <span style="background-image:url(http://www.gratisography.com/pictures/317_1.jpg)" alt="viewport的深入理解" class="thumbnail-image"></span>
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/前端/">前端</a></p>
-                            <p class="item-title"><a href="/2017/04/05/viewport的深入理解/" class="title">viewport的深入理解</a></p>
-                            <p class="item-date"><time datetime="2017-04-04T16:00:00.000Z" itemprop="datePublished">2017-04-05</time></p>
-                        </div>
-                    </li>
-                
             </ul>
         </div>
     </div>
@@ -2070,7 +2065,7 @@ superagent也支持复合请求,比如你想上传一个带有你的姓名和邮
     <div class="widget-wrap">
         <h3 class="widget-title">分类</h3>
         <div class="widget">
-            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Http/">Http</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Node/">Node</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Node/爬虫/">爬虫</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/js/">js</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端/">前端</a><span class="category-list-count">25</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据库/">数据库</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/服务器/">服务器</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/版本管理/">版本管理</a><span class="category-list-count">1</span></li></ul>
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Http/">Http</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Node/">Node</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Node/爬虫/">爬虫</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/js/">js</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端/">前端</a><span class="category-list-count">27</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据库/">数据库</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/服务器/">服务器</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/版本管理/">版本管理</a><span class="category-list-count">1</span></li></ul>
         </div>
     </div>
 
@@ -2079,7 +2074,7 @@ superagent也支持复合请求,比如你想上传一个带有你的姓名和邮
     <div class="widget-wrap">
         <h3 class="widget-title">归档</h3>
         <div class="widget">
-            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">四月 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">十二月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a><span class="archive-list-count">3</span></li></ul>
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">十月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">四月 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">十二月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a><span class="archive-list-count">3</span></li></ul>
         </div>
     </div>
 
@@ -2088,7 +2083,7 @@ superagent也支持复合请求,比如你想上传一个带有你的姓名和邮
     <div class="widget-wrap">
         <h3 class="widget-title">标签</h3>
         <div class="widget">
-            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue/">Vue</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cheerio/">cheerio</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html/">html</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http请求/">http请求</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/">js</a><span class="tag-list-count">11</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lazyload/">lazyload</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/meta/">meta</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongodb/">mongodb</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/中间件/">中间件</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/代理/">代理</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/存储/">存储</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/懒加载/">懒加载</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/爬虫/">爬虫</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/跨域/">跨域</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/页面请求/">页面请求</a><span class="tag-list-count">1</span></li></ul>
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue/">Vue</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cheerio/">cheerio</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html/">html</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http请求/">http请求</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/">js</a><span class="tag-list-count">11</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lazyload/">lazyload</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/meta/">meta</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongodb/">mongodb</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/中间件/">中间件</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/代理/">代理</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/存储/">存储</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/懒加载/">懒加载</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/爬虫/">爬虫</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/跨域/">跨域</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/页面请求/">页面请求</a><span class="tag-list-count">1</span></li></ul>
         </div>
     </div>
 
